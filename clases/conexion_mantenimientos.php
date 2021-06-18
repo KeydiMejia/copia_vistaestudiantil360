@@ -1,7 +1,7 @@
 <?php
 require_once "global.php";
-
 $conexion = new mysqli('localhost', 'root', '', 'informat_automatizacion');
+
 
 mysqli_query($conexion, 'SET NAMES "' . DB_ENCODE . '"');
 
