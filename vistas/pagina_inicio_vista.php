@@ -350,7 +350,29 @@ if (session_status() === PHP_SESSION_NONE) {
                   </a>
                 </li>
               </ul>
+            </li><!------------------------ AÑADIENDO MAS SUDMENUS AL MENU LATERAL----------------------------->
+              <!-- ----------------------------------------------------------------------------------------->
+              <!-- AGREGANDO PERFIL 360 ESTUDIANTIL -->
+            <li class="nav-item has-treeview" style="display:<?php echo $_SESSION['btn_perfil_estudiantil'] ?>">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file-signature"></i>
+                <p>
+                  Estudiantes
+                  <i class="fas fa-angle-left right"></i>
+                  <span class="badge badge-info right"></span>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+              <!-- Actualizar o modificarrrrrrrrr -->
+                <li class="nav-item" style="display:<?php echo $_SESSION['perfil360_vista'] ?>">
+                  <a href="../vistas/menu_perfil360_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Perfil 360 Estudiantil </p>
+                  </a>
+                </li>
+              </ul>
             </li>
+          <!-- ----------------------------------------------------------------------------------------->
             <!---- Ayuda ----->
 
             <li class="nav-item has-treeview" style="display:<?php echo $_SESSION['btn_ayuda'] ?>">
@@ -434,8 +456,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </li>
               </ul>
 
-              <!---- ----->
-
+              
 
 
           </ul>
