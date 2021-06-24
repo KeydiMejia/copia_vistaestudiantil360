@@ -1,50 +1,53 @@
 <?php
+ob_start();
+session_start();
+ 
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
+require_once('../clases/conexion_mantenimientos.php');
 
 
-if (permiso_ver('49') == '1') {
+if (permiso_ver('117') == '1') {
 
-  $_SESSION['menu_perfil360_vista'] = "...";
+  $_SESSION['menu perfil360'] = "...";
 } else {
-  $_SESSION['menu_perfil360_vista'] = "No 
+  $_SESSION['menu perfil360'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('50') == '1') {
+if (permiso_ver('118') == '1') {
 
-  $_SESSION['registro_perfil360_vista'] = "...";
+  $_SESSION['realizar_nueva_solicitud_vista'] = "...";
 } else {
-  $_SESSION['registro_perfil360_vista'] = "No 
+  $_SESSION['realizar_nueva_solicitud_vista'] = "No 
+  tiene permisos para realizar esta accion";
+}
+
+if (permiso_ver('119') == '1') {
+
+  $_SESSION['historial_clases_vista'] = "...";
+} else {
+  $_SESSION['historial_clases_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('51') == '1') {
+if (permiso_ver('120') == '1') {
 
-  $_SESSION['gestion_perfil360_vista'] = "...";
+  $_SESSION['asignaturas_aprobadas_vista'] = "...";
 } else {
-  $_SESSION['gestion_perfil360_vista'] = "No 
+  $_SESSION['asignaturas_aprobadas_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('52') == '1') {
+if (permiso_ver('121') == '1') {
 
-  $_SESSION['comisiones_actividades_perfil360_vista'] = "...";
+  $_SESSION['asignaturas_por_aprobar_vista'] = "...";
 } else {
-  $_SESSION['comisiones_actividades_perfil360_vista'] = "No 
+  $_SESSION['asignaturas_por_aprobar_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-
-
-if (permiso_ver('54') == '1') {
-
-  $_SESSION['perfil_perfil360_vista'] = "...";
-} else {
-  $_SESSION['perfil_perfil360_vista'] = "No 
-  tiene permisos para visualizar";
-}
 
 
 ?>
@@ -276,12 +279,12 @@ footer{
               <div class="small-box bg-primary" style="margin-right: 8%;">
                 <div class="inner">
                   <h4>Realizar nueva solicitud </h4>
-                  <p><?php echo $_SESSION['registro_docentes_vista']; ?></p>
+                  <p><?php echo $_SESSION['realizar_nueva_solicitud_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-plus"></i>
                 </div>
-                <a href="../vistas/registro_docentes_vista.php" class="small-box-footer">
+                <a href="../vistas/realizar_nueva_solicitud_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -290,12 +293,12 @@ footer{
               <div class="small-box bg-primary" style="margin-left: 5%;">
                 <div class="inner">
                   <h4>Historial de clases </h4>
-                  <p><?php echo $_SESSION['perfil_docentes_vista']; ?></p>
+                  <p><?php echo $_SESSION['historial_clases_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/perfil_docentes_vista.php" class="small-box-footer">
+                <a href="../vistas/historial_clases_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -316,12 +319,12 @@ footer{
               <div class="small-box bg-warning" style="margin-right: 8%;">
                 <div class="inner">
                   <h4>Asignaturas aprobadas </h4>
-                  <p><?php echo $_SESSION['registro_docentes_vista']; ?></p>
+                  <p><?php echo $_SESSION['asignaturas_aprobadas_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-plus"></i>
                 </div>
-                <a href="../vistas/registro_docentes_vista.php" class="small-box-footer">
+                <a href="../vistas/asignaturas_aprobadas_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -330,12 +333,12 @@ footer{
               <div class="small-box bg-warning" style="margin-left: 5%;">
                 <div class="inner">
                   <h4>Asignaturas por aprobar </h4>
-                  <p><?php echo $_SESSION['perfil_docentes_vista']; ?></p>
+                  <p><?php echo $_SESSION['asignaturas_por_aprobar_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/perfil_docentes_vista.php" class="small-box-footer">
+                <a href="../vistas/asignaturas_por_aprobar_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
