@@ -357,7 +357,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file-signature"></i>
                 <p>
-                  Estudiantes
+                  Perfil 360 Estudiantil
                   <i class="fas fa-angle-left right"></i>
                   <span class="badge badge-info right"></span>
                 </p>

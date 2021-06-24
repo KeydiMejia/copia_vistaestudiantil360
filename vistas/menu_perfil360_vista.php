@@ -3,6 +3,7 @@ require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
 
+
 if (permiso_ver('49') == '1') {
 
   $_SESSION['menu_perfil360_vista'] = "...";
@@ -47,7 +48,8 @@ if (permiso_ver('54') == '1') {
 
 
 ?>
-<!DOCTYPE html>
+
+</html><!DOCTYPE html>
 <html>
 
 <head>
@@ -55,39 +57,88 @@ if (permiso_ver('54') == '1') {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  
+<style>
+  body{
+    
+}
+.content-wrapper{
+    width: 82%;
+    margin: 0px auto;
+    border: 1px solid black;
+    
+}
+header{
+  background: gray;
+  color: white;
+  margin-left:0%;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  line-height: 100px;
 
+}
+.clearfix{
+  clear:both;
+}
+
+#content{
+  float:left;
+  margin-left:1%;
+  width: 40%;
+  height:100%;
+  background: white;
+}
+
+aside{
+  float:left;
+  height: 70%;
+  width: 58%;
+  margin:0px;
+  background: white;
+  min-height: 500px;
+  padding: 10px;
+}
+
+footer{
+  background: lightblue;
+  color: black;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+
+</style>
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-  <div class="wrapper">
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Perfil 360 Estudiantil </h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Perfil 360 estudiantil</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header ----->
+<body>
+  
+<div class="wrapper">
+<div class="content-wrapper">
+  <header>
+    <h1>Perfil 360 Estudiantil</h1>
+  </header>
+<div class="clearfix"></div>
 
-<!------------------------- Main content ----------------------------->
-<section class="content">
-      <div class="container-fluid">
-      <div class="row">
-			<div class="col">
+    <section id="content"> <!--------- INICIO DE LA SECCION------->
+
+    <article class="article" style="margin-top: 5%;">
+      <h4>Buscar estudiante<h4>
+        <form> 
+            <input type="text">
             
-				<table class="table table-responsive table-striped table-hover">
+            <button type="button" class="btn btn-success">Buscar</button>
+            
+        </form>
+      </article>
+
+      <p>                             </p>
+      <p>                             </p>
+
+      <article class="article">
+      <table class="table table-responsive table-striped table-hover">
 					<thead>
 						<tr>
                         <tr class="bg-primary">
@@ -140,41 +191,173 @@ if (permiso_ver('54') == '1') {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-    <!--------- Info boxes ----------->
-    <div class="row" style="  display: flex;">
+      </article>
+      
+      <article class="article"> 
+      <table class="table table-responsive table-striped table-hover" style="margin-left: 15%; margin-top: 8%; width: 1000px;">
+      
+      
+					<thead>
+						<tr>
+                        <tr class="bg-primary">
+							<th COLSPAN=2>Solicitudes realizadas</th>
+                            
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Examen de suficiencia:</th>
+							<td>0</td>
+							
+						</tr>
+                        <tr>
+							<th>Reactivacion de cuenta:</th>
+							<td>2</td>
+							
+						</tr>
+						<tr>
+							<th>cambio de carrera:</th>
+							<td>0</td>
+							
+						</tr>
+						<tr>
+							<th>Practica profesional:</th>
+							<td>0</td>
+							
+						</tr>
+                        <tr>
+							<th>Cancelacion de clases:</th>
+							<td>3</td>
+							
+						</tr>
+                        <tr>
+							<th>Servicio comunitario:</th>
+							<td>1</td>
+							
+						</tr>
+                        <tr>
+							<th>Equivalencias:</th>
+							<td>0</td>
+							
+						</tr>
+            </tr>
+                        <tr>
+							<th>Carta de egresado:</th>
+							<td>0</td>
+							
+						</tr>
+            </tr>
+                        <tr>
+							<th>Expediente de graduacion:</th>
+							<td>0</td>
+							
+						</tr>
+					</tbody>
+				</table>
+<p>                  
+               </p>
+
+      </article>
+<p>               
+                    </p>
+    </section>
+<!----------------Fin de seccion---------------->
+    
+<aside class="Content">
+
+      <article>
+      <div class="container-fluid">
+          <!-- Info boxes -->
+          <div class="row" style="  display: flex;
+    align-items: center; justify-content: center; margin-top: 15%; margin-bottom:5%;">
 
             <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-success">
+              <div class="small-box bg-primary" style="margin-right: 8%;">
                 <div class="inner">
-                  <h4>Solicitud nueva </h4>
-                  <p><?php echo $_SESSION['registro_perfil360_vista']; ?></p>
+                  <h4>Realizar nueva solicitud </h4>
+                  <p><?php echo $_SESSION['registro_docentes_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-plus"></i>
                 </div>
-                <a href="../vistas/registro_perfil360_vista.php" class="small-box-footer">
+                <a href="../vistas/registro_docentes_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
-
-          
-
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-
-
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="small-box bg-primary" style="margin-left: 5%;">
+                <div class="inner">
+                  <h4>Historial de clases </h4>
+                  <p><?php echo $_SESSION['perfil_docentes_vista']; ?></p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-user-edit"></i>
+                </div>
+                <a href="../vistas/perfil_docentes_vista.php" class="small-box-footer">
+                  Ir <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
             </div>
 
             <!-- /.row -->
           </div>
           <!--/. container-fluid -->
         </div>
-      </section>
-      <!-- /.content -->
-    </div>
+</article>
+<div class="container-fluid">
+          <!-- Info boxes -->
+          <div class="row" style="  display: flex;
+    align-items: center;
+    justify-content: center; margin-top: 5%; margin-bottom:10%;">
 
-  </div>
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="small-box bg-warning" style="margin-right: 8%;">
+                <div class="inner">
+                  <h4>Asignaturas aprobadas </h4>
+                  <p><?php echo $_SESSION['registro_docentes_vista']; ?></p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-user-plus"></i>
+                </div>
+                <a href="../vistas/registro_docentes_vista.php" class="small-box-footer">
+                  Ir <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="small-box bg-warning" style="margin-left: 5%;">
+                <div class="inner">
+                  <h4>Asignaturas por aprobar </h4>
+                  <p><?php echo $_SESSION['perfil_docentes_vista']; ?></p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-user-edit"></i>
+                </div>
+                <a href="../vistas/perfil_docentes_vista.php" class="small-box-footer">
+                  Ir <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- /.row -->
+          </div>
+          <!--/. container-fluid -->
+        </div>
+</article>
+
+    </aside>
+<!-----------Fin de barra lateral----------->
+<div class="clearfix"></div>
+<footer>
+  Este es el pie de pagina &copy; 2021 Departamento de Informatica Administrativa
+
+</footer>
+<!-----------Fin del pie de pagina----------->
+
+
+</div>
 
 </body>
 
