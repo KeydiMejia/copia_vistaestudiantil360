@@ -343,6 +343,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p>Cancelacion de clases</p>
                   </a>
                 </li>
+                
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_examensuficiencia'] ?>">
                   <a href="../vistas/examen_suficiencia_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
