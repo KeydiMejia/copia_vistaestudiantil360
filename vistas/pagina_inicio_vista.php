@@ -325,18 +325,33 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p> Cambio de Carrera </p>
                   </a>
                 </li>
+
+                <!-- ? le toca a liz -->
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_carta_egresado'] ?>">
                   <a href="../vistas/carta_egresado_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Carta de Egresado</p>
                   </a>
                 </li>
+
+
+                <!--? le toca a liz  -->
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_equivalencias'] ?>">
                   <a href="../vistas/equivalencias_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Equivalencias </p>
                   </a>
                 </li>
+
+                  <!--le toca a liz  -->
+                <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_equivalencias'] ?>">
+                  <a href="../vistas/expediente_graduacion_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Expediente Graduación</p>
+                  </a>
+                </li>
+
+
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_cancelar_clases'] ?>">
                   <a href="../vistas/cancelar_clases_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -351,7 +366,7 @@ if (session_status() === PHP_SESSION_NONE) {
                   </a>
                 </li>
               </ul>
-            </li>
+            </li><!------------------------ AÑADIENDO MAS SUDMENUS AL MENU LATERAL----------------------------->
               <!-- ----------------------------------------------------------------------------------------->
               <!-- AGREGANDO PERFIL 360 ESTUDIANTIL -->
             <li class="nav-item has-treeview" style="display:<?php echo $_SESSION['btn_perfil_estudiantil'] ?>">
@@ -364,6 +379,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </p>
               </a>
               <ul class="nav nav-treeview">
+              <!-- Actualizar o modificarrrrrrrrr -->
                 <li class="nav-item" style="display:<?php echo $_SESSION['perfil360_vista'] ?>">
                   <a href="../vistas/menu_perfil360_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

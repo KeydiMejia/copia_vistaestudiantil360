@@ -23,8 +23,9 @@ if($visualizacion==0){
    </script>'; 
 }
 if (isset($_GET['alumno'])){
+  // $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
 
-    $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents("http://localhost:8008/copia_vistaestudiantil360/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
     bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION CARTA DE EGRESADO ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
@@ -94,7 +95,11 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
+                  
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor']  ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                  
+                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['Id_carta']  ?>" type="text"  name="Id_carta">
+
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -136,9 +141,11 @@ ob_end_flush();
                 
                 <div class="col-md-12">
                       <div class="form-group">
-                        
-                            <a class="badge-warning btn-sm text-center form-group" href="http://informaticaunah.com/automatizacion/pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['documento'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a>
-                        
+
+                      <!-- <a class="badge-warning btn-sm text-center form-group" href="http://informaticaunah.com/automatizacion/pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['id_persona'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a> -->
+
+                            <a class="badge-warning btn-sm text-center form-group" href="http://localhost:8008/copia_vistaestudiantil360/pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['id_persona'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a>
+                              
                       </div>
                 </div>
             </div>

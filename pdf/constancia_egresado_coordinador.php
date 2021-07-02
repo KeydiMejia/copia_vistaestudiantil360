@@ -30,9 +30,14 @@ function Footer()
 require_once ('../clases/Conexion.php');
 $cuenta= $_GET['cuenta'];
 
-$consulta = "SELECT * FROM tbl_personas WHERE documento='$cuenta'";
+// $consulta = "SELECT * FROM tbl_personas WHERE documento='$cuenta'";
+
+$consulta = "SELECT * FROM tbl_personas WHERE id_persona='$cuenta'";
 $resultado = $mysqli->query($consulta);
 $row = $resultado->fetch_assoc();
+
+
+
 $monthNum  = date("m");
 
 switch($monthNum)
@@ -79,8 +84,8 @@ switch($monthNum)
     break;
 }
 
-$nombre= $row['nombre'];
-
+// $nombre= $row['nombre'];
+$nombre= $row['nombres'].' '.$row['apellidos'];
 
 $pdf = new PDF();
 $pdf->AddPage('portraid','letter');//*horientacion,tamaño y se le puede agregar una rotacion
@@ -90,7 +95,8 @@ $pdf->Ln(20);
 $pdf->SetFont('Arial','',11);
 $pdf->SetMargins(30, 25 , 30); 
 $pdf->Ln(5);
-$pdf->MultiCell(160,4,utf8_decode("El Suscrito Coordinador (a) de la Carrera de Informática Administrativa, hace constar que el (a) joven ''".ucwords($nombre)."'', con número de cuenta ".$row['documento'].", matriculado(a) en la carrera de Informatica Administrativa a la fecha ha aprobado un total de XX asignaturas del Plan de Estudios, haciendo un total de  en letras (XX en números) unidades valorativas, contemplando el 100% del plan de estudio correspondiente.
+// $pdf->MultiCell(160,4,utf8_decode("El Suscrito Coordinador (a) de la Carrera de Informática Administrativa, hace constar que el (a) joven ''".ucwords($nombre)."'', con número de cuenta ".$row['documento'].", matriculado(a) en la carrera de Informatica Administrativa a la fecha ha aprobado un total de XX asignaturas del Plan de Estudios, haciendo un total de  en letras (XX en números) unidades valorativas, contemplando el 100% del plan de estudio correspondiente.
+$pdf->MultiCell(160,4,utf8_decode("El Suscrito Coordinador (a) de la Carrera de Informática Administrativa, hace constar que el (a) joven ''".ucwords($nombre)."'', con número de cuenta ".$row['identidad'].", matriculado(a) en la carrera de Informatica Administrativa a la fecha ha aprobado un total de XX asignaturas del Plan de Estudios, haciendo un total de  en letras (XX en números) unidades valorativas, contemplando el 100% del plan de estudio correspondiente.
 
 Por tanto, se autoriza a la Secretaría Académica de esta Facultad, emitir la carta de egresado.
 
@@ -112,7 +118,8 @@ $pdf->SetFont('Arial','U',14);//tipo de letra,estilo(b negrita,u subrayado) y ta
 $pdf->Cell(0,0,'CONSTANCIA DE EGRESADO',0,0,'C',0);
 $pdf->Ln(20);
 $pdf->SetFont('Arial','',11);
-$pdf->MultiCell(160,4,utf8_decode("La suscrita Secretaria de la Facultad de Ciencias Económicas, Administrativa y Contable, de la Universidad Nacional Autónoma de Honduras (UNAH), por este medio hace constar que: el alumno (a) ".ucwords($nombre)." matriculado (a) en la carrera de Informática Administrativa, en el periodo XX- XX, con número de cuenta ".$row['documento'].", ha completado todas sus asignatura y unidades valorativas del plan de estudio correspondiente. Por lo tanto, se le extiende la presente Constancia de Egresado, de conformidad a la solicitud presentada a esta secretaria por el (a) Master XX, Coordinador de la carrera de Informática Administrativa.
+// $pdf->MultiCell(160,4,utf8_decode("La suscrita Secretaria de la Facultad de Ciencias Económicas, Administrativa y Contable, de la Universidad Nacional Autónoma de Honduras (UNAH), por este medio hace constar que: el alumno (a) ".ucwords($nombre)." matriculado (a) en la carrera de Informática Administrativa, en el periodo XX- XX, con número de cuenta ".$row['documento'].", ha completado todas sus asignatura y unidades valorativas del plan de estudio correspondiente. Por lo tanto, se le extiende la presente Constancia de Egresado, de conformidad a la solicitud presentada a esta secretaria por el (a) Master XX, Coordinador de la carrera de Informática Administrativa.
+$pdf->MultiCell(160,4,utf8_decode("La suscrita Secretaria de la Facultad de Ciencias Económicas, Administrativa y Contable, de la Universidad Nacional Autónoma de Honduras (UNAH), por este medio hace constar que: el alumno (a) ".ucwords($nombre)." matriculado (a) en la carrera de Informática Administrativa, en el periodo XX- XX, con número de cuenta ".$row['identidad'].", ha completado todas sus asignatura y unidades valorativas del plan de estudio correspondiente. Por lo tanto, se le extiende la presente Constancia de Egresado, de conformidad a la solicitud presentada a esta secretaria por el (a) Master XX, Coordinador de la carrera de Informática Administrativa.
 
 Dado en la ciudad universitaria a los ".date("d")." días del mes de ".$monthNameSpanish." del ".date("Y").". Dicha constancia tiene una vigencia de seis (6) meses.
 "));

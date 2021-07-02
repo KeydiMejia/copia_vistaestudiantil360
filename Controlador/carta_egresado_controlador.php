@@ -3,6 +3,7 @@
 require_once ('../clases/Conexion.php');
 
 if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuenta']!=="" && $_POST['txt_correo']!==""){ 
+   
     if($_FILES['txt_finalizacion']['name']!=null && $_FILES['txt_certificado']['name']!=null
         && $_FILES['txt_comunitario']['name']!=null && $_FILES['txt_identidad']['name']!=null){
             
@@ -10,6 +11,7 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
             $correo = $_POST['txt_correo'];
             $verificado1 = $_POST['txt_verificado1'];
             $verificado2 = $_POST['txt_verificado2'];
+            $id_persona = $_POST['id_persona'];
 
             $sql="SELECT p.nombres,p.apellidos,pe.valor
                   FROM tbl_personas p, tbl_personas_extendidas pe
@@ -46,16 +48,24 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                     $direccion[]= $ruta;
                 }
                 $documento = json_encode($direccion);
+                
+                // ? revisar este bloque de codigo y encontrar la relacion entre tablas persona_extendida y personas
 
-                if($verificado1!=="" && $verificado2!==""){
-                    $insertanombre ="call upd_nombre('$ncuenta','$verificado1','$verificado2')";
-                    $resultadon = $mysqli->query($insertanombre);
-                    $resultadon->free();
-                    $mysqli->next_result();
-                }
+                // if($verificado1!=="" && $verificado2!==""){
+                //     $insertanombre ="call upd_nombre('$ncuenta','$verificado1','$verificado2')";
+                //     $resultadon = $mysqli->query($insertanombre);
+                //     $resultadon->free();
+                //     $mysqli->next_result();
+                // }
 
-                $sqlp = "call ins_carta_egresado('$ncuenta','$documento','$correo')";
-                $resultadop = $mysqli->query($sqlp);
+                /** procedimiento almacenado 
+                 * ! se puede crear el procedimiento ins_carta_egresado() o mandar la consulta directa sql pasar id_persona y no 6
+                 */
+                // call ins_carta_egresado('$ncuenta','$documento','$correo')
+                $sql= "INSERT INTO tbl_carta_egresado (id_persona, observacion, Fecha_creacion, aprobado, documento, correo)
+                             VALUES ('$id_persona', 'revisión pendiente', current_timestamp(),'Nuevo', '$documento', '$correo')";
+               
+                $resultadop = $mysqli->query($sql);
                 if($resultadop == true){
                     echo '<script type="text/javascript">
                                     swal({
@@ -70,7 +80,7 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                     
                                 } 
                 else {
-                    echo "Error: " . $sqlp ;
+                    echo "Error: " . $sql ;
                     }
 
 
@@ -105,21 +115,23 @@ elseif(isset($_POST['aprobado']) && $_POST['aprobado']!==""){
     $aprobado = $_POST['aprobado'];
     $cuenta = $_POST['txt_cuenta'];
     $observacion = $_POST['txt_observacion'];
-
+    $Id_carta=$_POST['Id_carta'];
     if($observacion!==""){
-        $sqlp = "call upd_carta_egresado_observacion('$aprobado','$observacion','$cuenta')";
-        $resultadop = $mysqli->query($sqlp);
+        // $sqlp = "call upd_carta_egresado_observacion('$aprobado','$observacion','$cuenta')";
+         
+        $sql = "UPDATE tbl_carta_egresado SET observacion='$observacion', aprobado='$aprobado'  WHERE Id_carta='$Id_carta'";
+        $resultadop = $mysqli->query($sql);
         if($resultadop == true){
 
-            $resultadop->free();
+            //$resultadop->free();
             $mysqli->next_result();
 
-            if($aprobado==="aprobado"){
-                $consulta= "call ins_himno('$cuenta')";
-                $consultar =  $mysqli->query($consulta);
-                $consultar->free();
-                $mysqli->next_result();
-            }
+            // if($aprobado==="aprobado"){
+            //     $consulta= "call ins_himno('$cuenta')";
+            //     $consultar =  $mysqli->query($consulta);
+            //     $consultar->free();
+            //     $mysqli->next_result();
+            // }
 
             echo '<script type="text/javascript">
                     swal({
@@ -139,19 +151,21 @@ elseif(isset($_POST['aprobado']) && $_POST['aprobado']!==""){
             }
        
     }else{
-        $sqlp = "call upd_carta_egresado('$aprobado','$cuenta')";
-        $resultadop = $mysqli->query($sqlp);
-        if($resultadop == true){
-            $resultadop->free();
-            $mysqli->next_result();
+        // $sqlp = "call upd_carta_egresado('$aprobado','$cuenta')";
 
-            if($aprobado==="aprobado"){
-                $consulta= "call ins_himno('$cuenta')";
-                $consultar =  $mysqli->query($consulta);
-                $consultar->free();
-                $mysqli->next_result();
+        $sql = "UPDATE tbl_carta_egresado SET  aprobado='$aprobado'  WHERE Id_carta='$Id_carta'";
+        $resultadop = $mysqli->query($sql);
+        if($resultadop == true){
+            //$resultadop->free();
+           // $mysqli->next_result();
+
+            // if($aprobado==="aprobado"){
+            //     $consulta= "call ins_himno('$cuenta')";
+            //     $consultar =  $mysqli->query($consulta);
+            //     $consultar->free();
+            //     $mysqli->next_result();
         
-                }
+            //     }
 
             echo '<script type="text/javascript">
                     swal({
@@ -167,7 +181,7 @@ elseif(isset($_POST['aprobado']) && $_POST['aprobado']!==""){
                     </script>'; 
              } 
         else {
-            echo "Error: " . $sqlp ;
+            echo "Error: " . $sql ;
             }
     }
                               

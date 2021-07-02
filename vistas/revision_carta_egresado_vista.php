@@ -25,7 +25,10 @@ if($visualizacion==0){
 }
   
 $counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
+$url="http://localhost:8008/copia_vistaestudiantil360/api/carta_egresado.php";
+// $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
+$sql_tabla = json_decode( file_get_contents($url), true );
+
 
 
 
@@ -84,17 +87,36 @@ $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automati
                 <thead>
                 <tr>
                   <th>NOMBRE</th>
-                  <th># DE CUENTA</th>
+                  <!-- <th># DE CUENTA</th> -->
+
                   <th>CORREO</th>
-                  <th>CELULAR</th>
+                  <th>OBSEVACION</th>
+                  <th>ESTADO</th>
+                  <!-- <th>CELULAR</th> -->
+                  <th>FECHA</th>
                   <th>REVISAR SOLICITUD</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
-                  while($counter < count($sql_tabla["ROWS"])) { ?>
-                <tr>
+                  while($counter < count($sql_tabla["ROWS"])) { 
+                    $estado=$sql_tabla["ROWS"][$counter]["aprobado"];
+                    
+                    if ($estado=='aprobado') {
+                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$estado</span>";
+                    }
+                    elseif($estado=='Nuevo'){
+                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$estado</span>";  
+
+                    }else{
+                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$estado</span>";  
+                    }
+
+                    ?>
+
+                      
+                <!-- <tr>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["valor"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
@@ -104,7 +126,28 @@ $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automati
                     <i class="far fa-check-circle"></i>
                     </a>
                 </td>
+               </tr> -->
+
+
+
+
+                    <!-- Cambios de liz -->
+
+                <tr>
+                
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["observacion"]  ?></td>
+                <td><?php echo $mostrarEstado ?></td> 
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["Fecha_creacion"]  ?></td>
+                <td style="text-align: center;">                    
+                    <a href="../vistas/revision_carta_egresado_unica_vista.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_carta"]; ?>" class="btn btn-primary btn-raised btn-xs">
+                    <i class="far fa-check-circle"></i>
+                    </a>
+                </td>
                </tr>
+
+
                  <?php $counter = $counter + 1; }} ?>
              </tbody>
             </table>

@@ -57,6 +57,7 @@ $resultado_permisos = $mysqli->query($sql_permisos);
    $_SESSION['plan_estudio_vista'] = 'none';
    $_SESSION['mantenimiento_plan'] = 'none';
    $_SESSION['perfil360_vista'] = 'none';
+   //$_SESSION['expediente_graduacion'] = 'none';
    
 
 
@@ -309,6 +310,9 @@ $resultado_permisos = $mysqli->query($sql_permisos);
 
         }
        }
+//cambios 
+      
+      
 
         if ($_SESSION['pantalla']=='38')
        {

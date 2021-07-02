@@ -9,7 +9,14 @@ require_once ('../clases/Conexion.php');
 
 if(isset($_GET['alumno'])){
     $alumno= $_GET['alumno'];
-    if ($R = $mysqli->query("call sel_equivalencias_unica('$alumno')")) {
+    
+    // "call sel_equivalencias_unica('$alumno')"
+
+    $sql="SELECT nombres,apellidos,valor as cuenta, correo, tbl_equivalencias.Id_equivalencia FROM tbl_equivalencias INNER JOIN tbl_personas 
+    ON tbl_equivalencias.id_persona= tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
+    ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona WHERE tbl_equivalencias.Id_equivalencia='$alumno'";
+    
+    if ($R = $mysqli->query($sql)) {
         $items = [];
 
         while ($row = $R->fetch_assoc()) {
@@ -20,9 +27,17 @@ if(isset($_GET['alumno'])){
         $result["ROWS"] = $items;
     }
     echo json_encode($result);
+
+
 }elseif(isset($_GET['tipo'])){
     $tipo = $_GET['tipo'];
-    if ($R = $mysqli->query("call sel_equivalencias_codigo('$tipo')")) {
+
+    $sql="SELECT nombres,apellidos,valor as cuenta, correo, tbl_equivalencias.Id_equivalencia FROM tbl_equivalencias INNER JOIN tbl_personas 
+    ON tbl_equivalencias.id_persona= tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
+    ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona WHERE tbl_equivalencias.tipo='$tipo'";
+    // "call sel_equivalencias_codigo('$tipo')"
+
+    if ($R = $mysqli->query($sql)) {
         $items = [];
 
         while ($row = $R->fetch_assoc()) {
@@ -35,7 +50,12 @@ if(isset($_GET['alumno'])){
     echo json_encode($result);
 }
 else{
-    if ($R = $mysqli->query("call sel_equivalencias()")) {
+
+    $sql="SELECT nombres,apellidos,valor as cuenta, correo, tbl_equivalencias.Id_equivalencia,tipo,Fecha_creacion FROM tbl_equivalencias INNER JOIN tbl_personas 
+    ON tbl_equivalencias.id_persona= tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
+    ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona";
+    // "call sel_equivalencias()"
+    if ($R = $mysqli->query($sql)) {
         $items = [];
 
         while ($row = $R->fetch_assoc()) {

@@ -25,6 +25,7 @@ if($visualizacion==0){
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD DE EQUIVALENCIAS');
 }
 
+$consulta= "SELECT nombres, apellidos, correo FROM tbl_personas INNER JOIN tbl_equivalencias ON tbl_personas.id_persona= tbl_equivalencias.id_persona";
 $sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,pe.valor
 FROM tbl_personas p, tbl_personas_extendidas pe,tbl_usuarios u
 WHERE pe.id_persona = p.id_persona

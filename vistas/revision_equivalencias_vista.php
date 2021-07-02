@@ -25,7 +25,9 @@ if($visualizacion==0){
 }
   
 $counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
+// $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
+
+$sql_tabla = json_decode( file_get_contents('http://localhost:8008/copia_vistaestudiantil360/api/equivalencias.php'), true );
 
 
 
@@ -86,21 +88,27 @@ $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automati
                   <th>NOMBRE</th>
                   <th># DE CUENTA</th>
                   <th>CORREO</th>
-                  <th>CELULAR</th>
+                  <th>FECHA</th>
                   <th>REVISAR SOLICITUD</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
+                    $tipo= "contenido";
                   while($counter < count($sql_tabla["ROWS"])) { ?>
                 <tr>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
-                <td><?php echo  $sql_tabla["ROWS"][$counter]["valor"]  ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["cuenta"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
-                <td><?php echo  $sql_tabla["ROWS"][$counter]["celular"]  ?></td> 
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["Fecha_creacion"]  ?></td>  
                 <td style="text-align: center;">                    
-                    <a href="../vistas/revision_carta_egresado_unica_vista.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"]; ?>" class="btn btn-primary btn-raised btn-xs">
+                
+                <!-- <a href="../vistas/revision_carta_egresado_unica_vista.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"]; ?>" class="btn btn-primary btn-raised btn-xs"> -->
+
+
+                    <a href="../vistas/revision_equivalencias_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_equivalencia"]; ?>&tipo=<?php echo $sql_tabla["ROWS"][$counter]["tipo"]?>" class="btn btn-primary btn-raised btn-xs">
+
                     <i class="far fa-check-circle"></i>
                     </a>
                 </td>

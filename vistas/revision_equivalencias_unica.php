@@ -24,7 +24,8 @@ if($visualizacion==0){
 }
 if (isset($_GET['alumno'])){
  
-    $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
+  // $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents("http://localhost:8008/copia_vistaestudiantil360/api/equivalencias.php?alumno=".$_GET['alumno']), true );
     bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE EQUIVALENCIAS ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
@@ -95,7 +96,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta1" name="txt_cuenta1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['cuenta'] ?>" type="text" id="txt_cuenta1" name="txt_cuenta1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -187,7 +188,7 @@ ob_end_flush();
                         <label class="control-label">Nombre Completo</label>
                         <input class="form-control" type="text"  maxlength="60" id="txt_nombre_alumno" name="txt_nombre_alumno"  value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" required style="text-transform: uppercase"   onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
                         <?php 
-                        $cuenta = $sqltabla["ROWS"][0]['valor'];
+                        $cuenta = $sqltabla["ROWS"][0]['cuenta'];
                         $tipo = $_GET['tipo'];
                          
                          $listar=null;
