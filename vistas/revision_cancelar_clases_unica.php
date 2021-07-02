@@ -24,7 +24,9 @@ if($visualizacion==0){
 }
 if (isset($_GET['alumno'])){
 
-    $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/cancelar_clases.php?alumno=".$_GET['alumno']), true );
+    //$sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/cancelar_clases.php?alumno=".$_GET['alumno']), true );
+    
+    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true );
     bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION CANCELAR CLASES ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
@@ -94,7 +96,8 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['Id_cancelar_clases']  ?>" type="text"  name="Id_cancelar_clases">
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -106,7 +109,7 @@ ob_end_flush();
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Motivo de cancelación</label>
-                            <textarea class="form-control"  id="txt_motivo" name="txt_motivo" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['motivo']; ?> </textarea>
+                            <textarea class="form-control"  id="txt_razon" name="txt_razon" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['motivo']; ?> </textarea>
                         </div>
                 </div>
                 <div class="col-md-12">
@@ -125,7 +128,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Seleccione su aprobación</label>
-                            <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();" >
+                            <select class="form-control" id="cambio" name="cambio" onchange="Mostrarlink();" >
                               <option disabled selected>Aprobar</option>
                               <option value="aprobado">SI</option>
                               <option value="desaprobar">NO</option>
@@ -135,7 +138,9 @@ ob_end_flush();
                 <div class="col-md-12">
                         <div class="form-group">
                           <p class="text-center form-group" >
-                            <a class="btn  btn-warning" href="https://registro.unah.edu.hn/co_login.aspx" id="verifica" name="verifica" target="_blank">Verificar en el sistema</a>
+                            
+                            <<a class="btn  btn-warning" href="https://registro.unah.edu.hn/co_login.aspx" id="verifica" name="verifica" target="_blank">Verificar en el sistema</a>
+                            
                           </p>
                         </div>
                 </div>

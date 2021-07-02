@@ -24,9 +24,11 @@ if($visualizacion==0){
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION LISTA CANCELAR CLASES');
 }
 
-$counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/cancelar_clases.php'), true );
 
+$counter = 0;
+//$url="http://localhost/copia_vistaestudiantil360/api/cancelar_clases.php";
+$url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php";
+$sql_tabla = json_decode( file_get_contents($url), true );
 
 
 
@@ -84,22 +86,53 @@ $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automati
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>NOMBRE</th>
-                  <th># DE CUENTA</th>
+                <th>NOMBRE</th>
+                  <th>MOTIVO</th>
                   <th>CORREO</th>
+                  <th>OBSEVACION</th>
+                  <th>ESTADO</th>
+                  <th>FECHA</th>
                   <th>REVISAR SOLICITUD</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
-                  while($counter < count($sql_tabla["ROWS"])) { ?>
-                <tr>
+                  while($counter < count($sql_tabla["ROWS"])) { 
+                    $cambio=$sql_tabla["ROWS"][$counter]["cambio"];
+                    
+                    if ($cambio=='cambio') {
+                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$cambio</span>";
+                    }
+                    elseif($cambio=='Nuevo'){
+                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$cambio</span>";  
+
+                    }else{
+                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$cambio</span>";  
+                    }
+                    
+                    
+                    ?>
+                 <!-- <tr>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["valor"] ?></td>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["correo"] ?></td>         
                 <td style="text-align: center;">                    
                     <a href="../vistas/revision_cancelar_clases_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"]; ?>" class="btn btn-primary btn-raised btn-xs">
+                    <i class="far fa-check-circle"></i>
+                    </a>
+                </td>
+                </tr> -->
+                <tr>
+                
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["motivo"]  ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["observacion"]  ?></td>
+                <td><?php echo $mostrarEstado ?></td> 
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>
+                <td style="text-align: center;">                    
+                    <a href="../vistas/revision_cancelar_clases_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cancelar_clases"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
                 </td>
