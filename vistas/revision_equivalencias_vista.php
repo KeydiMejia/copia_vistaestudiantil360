@@ -27,7 +27,7 @@ if($visualizacion==0){
 $counter = 0;
 // $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
 
-$sql_tabla = json_decode( file_get_contents('http://localhost:8008/copia_vistaestudiantil360/api/equivalencias.php'), true );
+$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php'), true );
 
 
 
