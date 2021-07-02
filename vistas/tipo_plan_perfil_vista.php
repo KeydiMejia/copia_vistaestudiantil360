@@ -12,7 +12,7 @@ require_once('../clases/conexion_mantenimientos.php');
 
 
 
-$Id_objeto = 55;
+$Id_objeto = 119;
 
 $visualizacion = permiso_ver($Id_objeto);
 
@@ -26,12 +26,12 @@ if ($visualizacion == 0) {
                                    showConfirmButton: false,
                                    timer: 3000
                                 });
-                           window.location = "../vistas/menu_carga_academica_vista.php";
+                           window.location = "../vistas/menu_perfil360_vista.php";
 
                             </script>';
 } else {
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', ' A VISUALIZAR HISTORIAL ACADEMICO');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'DESCRIPCION DEL TIPO DE PLAN');
 
     // if (permisos::permiso_modificar($Id_objeto) == '1') {
     //     $_SESSION['btn_historial'] = "";
@@ -40,13 +40,6 @@ if ($visualizacion == 0) {
     // }
 }
 
-$ahora = date("Y-m-d");
-$sql2 = $mysqli->prepare("SELECT * FROM tbl_asignaturas ORDER BY id_asignaturas DESC LIMIT 1");
-$sql2->execute();
-$resultado2 = $sql2->get_result();
-$row2 = $resultado2->fetch_array(MYSQLI_ASSOC);
-
-ob_end_flush();
 
 ?>
 

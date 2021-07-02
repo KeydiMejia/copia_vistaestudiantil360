@@ -9,7 +9,7 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 require_once('../clases/conexion_mantenimientos.php');
 
-$Id_objeto = 118;
+$Id_objeto = 120;
 
 
 $visualizacion = permiso_ver($Id_objeto);
@@ -29,7 +29,7 @@ if ($visualizacion == 0) {
                             </script>';
 } else {
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A VER ASIGNATURAS APROBADAS');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'MAS INFORMACION SOBRE CONDUCTA');
 
 
     //if (permisos::permiso_insertar($Id_objeto) == '1') {
