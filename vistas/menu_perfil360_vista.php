@@ -6,6 +6,7 @@ session_start();
  require_once ('../clases/Conexion.php');
  require_once ('../clases/funcion_visualizar.php');
  require_once ('../clases/funcion_bitacora.php');
+ require "../clases/conexion_mantenimientos.php";
 
 
 
@@ -27,17 +28,17 @@ if (permiso_ver('118') == '1') {
 
 if (permiso_ver('119') == '1') {
 
-  $_SESSION['historial_clases_vista'] = "...";
+  $_SESSION['tipo_plan_perfil_vista'] = "...";
 } else {
-  $_SESSION['historial_clases_vista'] = "No 
+  $_SESSION['tipo_plan_perfil_vista'] = "No 
   tiene permisos para visualizar";
 }
 
 if (permiso_ver('120') == '1') {
 
-  $_SESSION['asignaturas_aprobadas_vista'] = "...";
+  $_SESSION['conducta_perfil360_vista'] = "...";
 } else {
-  $_SESSION['asignaturas_aprobadas_vista'] = "No 
+  $_SESSION['conducta_perfil360_vista'] = "No 
   tiene permisos para visualizar";
 }
 
@@ -77,6 +78,67 @@ $sql->bind_param("s",$_SESSION['usuario']);
 $sql->execute();
 $resultadotabla = $sql->get_result();
 $row = $resultadotabla->fetch_array(MYSQLI_ASSOC);
+/* Manda a llamar las clases aprobadas por el id */
+$idUsuario = $_SESSION['id_persona'];
+
+$sqlaprobadas="SELECT COUNT(*) id_persona FROM tbl_asignaturas_aprobadas
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlaprobadas);
+$fila = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud de examen de suficiencia */
+$sqlsuficiencia="SELECT COUNT(*) id_persona FROM tbl_examen_suficiencia
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlsuficiencia);
+$fila1 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud de Reactivacion de cuenta */
+$sqlreactivacion="SELECT COUNT(*) id_persona FROM tbl_reactivacion_cuenta
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlreactivacion);
+$fila2 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para cambio de carrera */
+$sqlcarrera="SELECT COUNT(*) id_persona FROM tbl_cambio_carrera
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlcarrera);
+$fila3 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para practica profesional*/
+$sqlpractica="SELECT COUNT(*) id_persona FROM tbl_practica_estudiantes
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlpractica);
+$fila4 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud de cancelacion de clases */
+$sqlclases="SELECT COUNT(*) id_persona FROM tbl_cancelar_clases
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlclases);
+$fila5 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para servicio comunitario */
+$sqlservicio="SELECT COUNT(*) id_persona FROM tbl_servicio_comunitario
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlservicio);
+$fila6 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para equivalencias */
+$sqlequivalencias="SELECT COUNT(*) id_persona FROM tbl_equivalencias
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlequivalencias);
+$fila7 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para carta egresado */
+$sqlcarta="SELECT COUNT(*) id_persona FROM tbl_carta_egresado
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlcarta);
+$fila8 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud expediente graduacion */
+$sqlgraduacion="SELECT COUNT(*) id_persona FROM tbl_expediente_graduacion
+WHERE id_persona= $idUsuario ";
+$resultado = $mysqli->query($sqlgraduacion);
+$fila9 = $resultado->fetch_assoc();
 
 
     ob_end_flush();
@@ -170,7 +232,7 @@ footer{
       <h4>Buscar estudiante<h4>
         <form> 
             <input type="text">
-            <button type="button" class="btn btn-success">Buscar</button>
+            <button type="button" class="btn btn-info">Buscar</button>
             </form>
       </article>
 <p>                             </p>
@@ -180,7 +242,7 @@ footer{
 <table id="tabla15" class="table table-bordered table-striped">
       <thead>
             <tr>
-            <tr class="bg-primary">
+            <tr class="bg-basic">
 			<th COLSPAN=2>Datos Personales del estudiante</th>
             </tr>
       </thead>
@@ -205,6 +267,14 @@ footer{
       <th>fecha de Nacimiento:</th>
       <td><?php echo $row['fecha_nacimiento'] ?></td>
         </tr>
+        <tr>
+      <th>Correo:</th>
+      <td></td>
+        </tr>
+        <tr>
+      <th>Telefono:</th>
+      <td></td>
+        </tr>
                   
         </tbody>
       </table>
@@ -222,7 +292,7 @@ footer{
       
 					<thead>
 						<tr>
-                        <tr class="bg-primary">
+                        <tr class="bg-basic">
 							<th COLSPAN=2>Solicitudes realizadas</th>
             </tr>
 					</thead>
@@ -244,49 +314,49 @@ footer{
 					<tbody>
 						<tr>
 							<th>Examen de suficiencia:</th>
-              
+              <td><?php echo $fila1['id_persona'] ?></td>
 
 						</tr>
                         <tr>
 							<th>Reactivacion de cuenta:</th>
-							<td>2</td>
+							<td><?php echo $fila2['id_persona'] ?></td>
 							
 						</tr>
 						<tr>
 							<th>cambio de carrera:</th>
-							<td>0</td>
+							<td><?php echo $fila3['id_persona'] ?></td>
 							
 						</tr>
 						<tr>
 							<th>Practica profesional:</th>
-							<td>0</td>
+							<td><?php echo $fila4['id_persona'] ?></td>
 							
 						</tr>
                         <tr>
 							<th>Cancelacion de clases:</th>
-							<td>3</td>
+							<td><?php echo $fila5['id_persona'] ?></td>
 							
 						</tr>
                         <tr>
 							<th>Servicio comunitario:</th>
-							<td>1</td>
+							<td><?php echo $fila6['id_persona'] ?></td>
 							
 						</tr>
                         <tr>
 							<th>Equivalencias:</th>
-							<td>0</td>
+							<td><?php echo $fila7['id_persona'] ?></td>
 							
 						</tr>
             </tr>
                         <tr>
 							<th>Carta de egresado:</th>
-							<td>0</td>
+							<td><?php echo $fila8['id_persona'] ?></td>
 							
 						</tr>
             </tr>
                         <tr>
 							<th>Expediente de graduacion:</th>
-							<td>0</td>
+							<td><?php echo $fila9['id_persona'] ?></td>
 							
 						</tr>
 					</tbody>
@@ -311,15 +381,50 @@ footer{
 </article>
 
       <article>
+      <h3 class="mb-2">Tus Clases</h3>
       <div class="container-fluid">
+      <div class="row">
+      
+      <div class="col-md-6 col-sm-8 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-info" style="border: 2px"><i class="far fa-copy"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Aprobadas</span>
+            <span class="info-box-number"><?php echo $fila['id_persona'] ?></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-6 col-sm-8 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Por aprobar</span>
+            <span class="info-box-number"><?php echo 52 - $fila['id_persona']  ?></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+</article>
+
+
+<article>
+      <!----------- Info boxes ------------->
           <!-- Info boxes -->
           <div class="row" style="  display: flex;
-    align-items: center; justify-content: center; margin-top: 3%; margin-bottom:1%;">
+    align-items: center; margin-top: 3%; margin-bottom:1%;">
 
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-primary" style="margin-right: 8%;">
+<div class="col-md-6 col-sm-8 col-12">
+            
+            <div class="small-box bg-primary" style="margin-right: 0%;">
                 <div class="inner">
-                  <h4>Realizar nueva solicitud </h4>
+                  <h4>Nueva solicitud </h4>
                   <p><?php echo $_SESSION['realizar_nueva_solicitud_vista']; ?></p>
                 </div>
                 <div class="icon">
@@ -330,17 +435,17 @@ footer{
                 </a>
               </div>
             </div>
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-primary" style="margin-left: 5%;">
-                <div class="inner">
-                  <h4>Historial de clases </h4>
-                  <p><?php echo $_SESSION['historial_clases_vista']; ?></p>
+            <div class="col-md-6 col-sm-8 col-12">
+              <div class="small-box bg-primary" style="margin-left: 0%;">
+           <div class="inner">
+                  <h4>Tipo de plan </h4>
+                  <p><?php echo $_SESSION['tipo_plan_perfil_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/historial_clases_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
+                <a href="../vistas/tipo_plan_perfil_vista.php" class="small-box-footer">
+                  mas informacion <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
             </div>
@@ -354,12 +459,11 @@ footer{
 <div class="container-fluid">
           <!-- Info boxes -->
           <div class="row" style="  display: flex;
-    align-items: center;
-    justify-content: center; margin-top: 5%; margin-bottom:5%;">
+    align-items: center; margin-top: 3%; margin-bottom: 0%;">
 
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-warning" style="margin-right: 8%;">
-                <div class="inner">
+<div class="col-md-6 col-sm-8 col-12">
+              <div class="small-box bg-warning" style="margin-right: 0%;">
+            <div class="inner">
                   <h4>Asignaturas aprobadas </h4>
                   <p><?php echo $_SESSION['asignaturas_aprobadas_vista']; ?></p>
                 </div>
@@ -371,16 +475,16 @@ footer{
                 </a>
               </div>
             </div>
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-warning" style="margin-left: 5%;">
+            <div class="col-md-6 col-sm-8 col-12">
+              <div class="small-box bg-warning" style="margin-left: 0%;">
                 <div class="inner">
-                  <h4>Asignaturas por aprobar </h4>
-                  <p><?php echo $_SESSION['asignaturas_por_aprobar_vista']; ?></p>
+                <h4>VOAE Conducta </h4>
+                  <p><?php echo $_SESSION['conducta_perfil360_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/asignaturas_por_aprobar_vista.php" class="small-box-footer">
+                <a href="../vistas/conducta_perfil360_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -395,25 +499,25 @@ footer{
 <div class="container-fluid">
           <!-- Info boxes -->
           <div class="row" style="  display: flex;
-    align-items: center;
-    justify-content: center; margin-top: 5%; margin-bottom:5%;">
+    align-items: center; justify-content: center; margin-top: 3%; margin-bottom:0%;">
 
-<div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-warning" style="margin-right: 8%;">
+<div class="col-md-6 col-sm-8 col-12">
+              <div class="small-box bg-warning" style="margin-right: 0%;">
                 <div class="inner">
                   <h4>Asistencia a VOAE </h4>
-                  <p><?php echo $_SESSION['asignaturas_aprobadas_vista']; ?></p>
+                  <p>...</p>
                 </div>
                 <div class="icon">
-                  <i class="fas fa-user-plus"></i>
+                  <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/asignaturas_aprobadas_vista.php" class="small-box-footer">
+                <a href="../vistas/tipo_plan_perfi_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
             </div>
-            <article>
+            </article>
     </aside>
+
 <!-----------Fin de barra lateral----------->
 <div class="clearfix"></div>
 <footer>
