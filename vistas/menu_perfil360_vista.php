@@ -168,9 +168,9 @@ $fila9 = $resultado->fetch_assoc();
     
 }
 .content-wrapper{
-    width: 82%;
+    width: auto;
     margin: 0px auto;
-    border: 1px solid black;
+    
     
 }
 header{
@@ -187,24 +187,6 @@ header{
   clear:both;
 }
 
-#content{
-  float:left;
-  margin-left:1%;
-  width: 41%;
-  height:100%;
-  background: white;
-}
-
-aside{
-  float:left;
-  height: 70%;
-  width: 58%;
-  margin:0px;
-  background: white;
-  min-height: 500px;
-  padding: 10px;
-}
-
 footer{
   background: lightblue;
   color: black;
@@ -215,7 +197,6 @@ footer{
 
 
 </style>
-
 </head>
 
 <body>
@@ -227,17 +208,14 @@ footer{
   </header>
 <div class="clearfix"></div>
 
-    <section id="content"> <!--------- INICIO DE LA SECCION------->
-    <article class="article" style="margin-top: 5%;">
-      <h4>Buscar estudiante<h4>
-        <form> 
-            <input type="text">
-            <button type="button" class="btn btn-info">Buscar</button>
-            </form>
-      </article>
-<p>                             </p>
-<p>                             </p>
-      <article class="article">
+<!--------- Main content ------->
+<!----------------------------INICIO DE LA SECCION----------------------->
+    
+   <section class="content">
+   <div class="container-fluid">
+   <div class="row">
+   <div class="col-lg-7">
+
       <div class="card-body">
 <table id="tabla15" class="table table-bordered table-striped">
       <thead>
@@ -278,116 +256,29 @@ footer{
                   
         </tbody>
       </table>
-
-      <!--------------------------------------------------------------------------->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-      </article>
-      
-      <article class="article"> 
-      <table class="table table-responsive table-striped table-hover" style="margin-left: 15%; margin-top: 8%; width: 1000px;">
-      
-      
-					<thead>
-						<tr>
-                        <tr class="bg-basic">
-							<th COLSPAN=2>Solicitudes realizadas</th>
-            </tr>
-					</thead>
-
-          <?php 
-          /*$id_persona = $_POST['id_persona'];
-          $sqlexiste = ("select id_persona from tbl_cambio_carrera where id_persona= '$id_persona'");
-          $existe = mysqli_fetch_assoc($mysqli->query($sqlexiste));
-
-          if ($_POST['id_persona'] == $id_persona ) {
-          $resultado=1;
-          echo "si tiene solicitud en cambio de carrera";
-        } else {
-          echo "a es menor que b"; 
-      } */
-      ?>
+    </div><!-- /.col -->
+    </div><!-- /.container-fluid -->
 
 
-					<tbody>
-						<tr>
-							<th>Examen de suficiencia:</th>
-              <td><?php echo $fila1['id_persona'] ?></td>
-
-						</tr>
-                        <tr>
-							<th>Reactivacion de cuenta:</th>
-							<td><?php echo $fila2['id_persona'] ?></td>
-							
-						</tr>
-						<tr>
-							<th>cambio de carrera:</th>
-							<td><?php echo $fila3['id_persona'] ?></td>
-							
-						</tr>
-						<tr>
-							<th>Practica profesional:</th>
-							<td><?php echo $fila4['id_persona'] ?></td>
-							
-						</tr>
-                        <tr>
-							<th>Cancelacion de clases:</th>
-							<td><?php echo $fila5['id_persona'] ?></td>
-							
-						</tr>
-                        <tr>
-							<th>Servicio comunitario:</th>
-							<td><?php echo $fila6['id_persona'] ?></td>
-							
-						</tr>
-                        <tr>
-							<th>Equivalencias:</th>
-							<td><?php echo $fila7['id_persona'] ?></td>
-							
-						</tr>
-            </tr>
-                        <tr>
-							<th>Carta de egresado:</th>
-							<td><?php echo $fila8['id_persona'] ?></td>
-							
-						</tr>
-            </tr>
-                        <tr>
-							<th>Expediente de graduacion:</th>
-							<td><?php echo $fila9['id_persona'] ?></td>
-							
-						</tr>
-					</tbody>
-				</table>
-<p>                  
-               </p>
-
-      </article>
-<p>               
-                    </p>
-    </section>
-<!----------------Fin de seccion---------------->
-    
-<aside class="Content">
-  <article>
-  <div class="card" style="width: 15rem; margin-left:30%;">
-  <img class="card-img-top" src="../archivos/avatar1.jpg" alt="Card image cap">
-  <div class="card-body">
-    <p class="card-text">[Nombre del estudiante]</p>
+    <!--------------------- seccion de foto y asig aprobadas------------------>
+    <section class="col-lg-5">
+    <div class="card" style="width: 15rem; margin-left:20%;">
+    <img class="card-img-top" src="../dist/img/christel.jpg" alt="Card image cap">
+    <div class="card-body">
+    <p class="card-text"><?php echo $row['nombres'].' '.$row['apellidos'] ?></p>
   </div>
 </div>
-</article>
-
-      <article>
-      <h3 class="mb-2">Tus Clases</h3>
-      <div class="container-fluid">
+<h4 class="mb-2">Resumen academico</h4>
+      <!--<div class="container-fluid">-->
+      <div class="container">
       <div class="row">
       
       <div class="col-md-6 col-sm-8 col-12">
         <div class="info-box">
-          <span class="info-box-icon bg-info" style="border: 2px"><i class="far fa-copy"></i></span>
+          <span class="info-box-icon bg-primary" style="border: 2px"><i class="far fa-copy"></i></span>
 
           <div class="info-box-content">
             <span class="info-box-text">Aprobadas</span>
@@ -400,7 +291,7 @@ footer{
       <!-- /.col -->
       <div class="col-md-6 col-sm-8 col-12">
         <div class="info-box">
-          <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+          <span class="info-box-icon bg-info"><i class="far fa-copy"></i></span>
 
           <div class="info-box-content">
             <span class="info-box-text">Por aprobar</span>
@@ -411,112 +302,131 @@ footer{
         <!-- /.info-box -->
       </div>
       <!-- /.col -->
-</article>
+      </section>
+  
 
+  <!---------------------- seccion de accesos rapidos para solicitudes ----------------------->  
+<section class="col-lg-9">
+          
+          <div class="container-fluid">
+          <!--<div class="row">-->
+         <!-- <hr></hr>-->
+          <h4>Solicitudes que puedes realizar</h4>
+        <!--solicitud examen de suficiencia------>
+        <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Examen suficiencia</button>
+         
+            <!--solicitud reactivacion de cuenta------>
+            <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Reactivacion cuenta</button>
+          
+              <!--solicitud cambio carrera------>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">Cambio de carrera</button>
+          
+              <!--solicitud practica profesional------>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Practica profesional</button>
+          
+              <!--solicitud cancelar clases------>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Cancelacion de clases</button>
+         
+              <!--solicitud servicio comunitario------>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">Servicio comunitario</button>
+          
+              <!--solicitud equivalencias------>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Equivalencias</button>
+          
+              <!--solicitud expediente graduacion------>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Expediente graduacion</button>
+          
+              <!--solicitud carta egresado------>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">Carta de egresado</button>
+          
+              <!--solicitud finalizacion practica----->
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Finalizacion practica</button>
 
-<article>
-      <!----------- Info boxes ------------->
-          <!-- Info boxes -->
-          <div class="row" style="  display: flex;
-    align-items: center; margin-top: 3%; margin-bottom:1%;">
+              <!--solicitud a VOAE Asistencia---->
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">VOAE - Asistencia</button>
+              
+              <!--solicitud a VOAE conducta----->
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">VOAE - Conducta</button>
+              
 
-<div class="col-md-6 col-sm-8 col-12">
-            
-            <div class="small-box bg-primary" style="margin-right: 0%;">
-                <div class="inner">
-                  <h4>Nueva solicitud </h4>
-                  <p><?php echo $_SESSION['realizar_nueva_solicitud_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-plus"></i>
-                </div>
-                <a href="../vistas/realizar_nueva_solicitud_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-8 col-12">
-              <div class="small-box bg-primary" style="margin-left: 0%;">
-           <div class="inner">
-                  <h4>Tipo de plan </h4>
-                  <p><?php echo $_SESSION['tipo_plan_perfil_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-edit"></i>
-                </div>
-                <a href="../vistas/tipo_plan_perfil_vista.php" class="small-box-footer">
-                  mas informacion <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- /.row -->
-          </div>
-          <!--/. container-fluid -->
+         <!-- </div>-->
         </div>
-</article>
-<article>
-<div class="container-fluid">
-          <!-- Info boxes -->
-          <div class="row" style="  display: flex;
-    align-items: center; margin-top: 3%; margin-bottom: 0%;">
+ </section> <!--section del col-lg-7-->
+ <!----------------Seccion de  solicitudes realizadas TABLA------------------->
+ <section class="col-lg-3">
+      <table class="table table-responsive table-striped table-hover" style="margin-left: 5%; margin-top: 8%; width: 1000px;">
+      
+					<thead>
+						<tr>
+                        <tr class="bg-basic">
+							<th COLSPAN=2>Solicitudes realizadas</th>
+            </tr>
+					</thead>
 
-<div class="col-md-6 col-sm-8 col-12">
-              <div class="small-box bg-warning" style="margin-right: 0%;">
-            <div class="inner">
-                  <h4>Asignaturas aprobadas </h4>
-                  <p><?php echo $_SESSION['asignaturas_aprobadas_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-plus"></i>
-                </div>
-                <a href="../vistas/asignaturas_aprobadas_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-8 col-12">
-              <div class="small-box bg-warning" style="margin-left: 0%;">
-                <div class="inner">
-                <h4>VOAE Conducta </h4>
-                  <p><?php echo $_SESSION['conducta_perfil360_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-edit"></i>
-                </div>
-                <a href="../vistas/conducta_perfil360_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
+					<tbody>
+						<tr>
+							<th>Examen de suficiencia:</th>
+              <td><a href="mailto:nowhere@mozilla.org"><?php echo $fila1['id_persona'] ?></a></td>
 
-            <!-- /.row -->
-          </div>
-          <!--/. container-fluid -->
-        </div>
-</article>
-<article>
-<div class="container-fluid">
-          <!-- Info boxes -->
-          <div class="row" style="  display: flex;
-    align-items: center; justify-content: center; margin-top: 3%; margin-bottom:0%;">
+						</tr>
+                        <tr>
+							<th>Reactivacion de cuenta:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila2['id_persona'] ?></a></td>
+							
+						</tr>
+						<tr>
+							<th>cambio de carrera:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila3['id_persona'] ?></a></td>
+							
+						</tr>
+						<tr>
+							<th>Practica profesional:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila4['id_persona'] ?></a></td>
+							
+						</tr>
+                        <tr>
+							<th>Cancelacion de clases:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila5['id_persona'] ?></a></td>
+							
+						</tr>
+                        <tr>
+							<th>Servicio comunitario:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila6['id_persona'] ?></a></td>
+							
+						</tr>
+                        <tr>
+							<th>Equivalencias:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila7['id_persona'] ?></a></td>
+							
+						</tr>
+            </tr>
+                        <tr>
+							<th>Carta de egresado:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila8['id_persona'] ?></a></td>
+							
+						</tr>
+            </tr>
+                        <tr>
+							<th>Expediente de graduacion:</th>
+							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila9['id_persona'] ?></a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+        </section> <!-----Fin de seccion sol. realizadas--->
 
-<div class="col-md-6 col-sm-8 col-12">
-              <div class="small-box bg-warning" style="margin-right: 0%;">
-                <div class="inner">
-                  <h4>Asistencia a VOAE </h4>
-                  <p>...</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-edit"></i>
-                </div>
-                <a href="../vistas/tipo_plan_perfi_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            </article>
-    </aside>
+      
+ 
+        </section> <!--section de inicio - content-->
+
+      
+</div> <!-- /.content -->
+</div> <!-- ./wrapper -->
+</div> <!-- ./content- wrapper -->
+<br></br>
+        <hr></hr>
+        <br></br>
+    
 
 <!-----------Fin de barra lateral----------->
 <div class="clearfix"></div>
@@ -525,6 +435,8 @@ footer{
 
 </footer>
 <!-----------Fin del pie de pagina----------->
+
+
 
 
 </div>
