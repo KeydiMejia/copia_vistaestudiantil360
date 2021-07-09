@@ -1,11 +1,11 @@
 <?php
-session_start();
 ob_start();
-require_once('../vistas/pagina_inicio_vista.php');
-require_once('../clases/Conexion.php');
-require_once('../clases/funcion_bitacora.php');
-require_once('../clases/funcion_visualizar.php');
-require_once('../clases/funcion_permisos.php');
+session_start();
+require_once ('../vistas/pagina_inicio_vista.php');
+require_once ('../clases/Conexion.php');
+require_once ('../clases/funcion_bitacora.php');
+require_once ('../clases/funcion_visualizar.php');
+require_once ('../clases/funcion_permisos.php');
 
 //Lineas de msj al cargar pagina de acuerdo a actualizar o eliminar datos
 if (isset($_REQUEST['msj'])) {
@@ -15,7 +15,7 @@ if (isset($_REQUEST['msj'])) {
         echo '<script type="text/javascript">
     swal({
         title: "",
-        text: "Lo sentimos el área ya existe",
+        text: "Lo sentimos el edificio ya existe",
         type: "info",
         showConfirmButton: false,
         timer: 3000
@@ -29,7 +29,7 @@ if (isset($_REQUEST['msj'])) {
         echo '<script type="text/javascript">
     swal({
         title: "",
-        text: "Los datos se almacenaron correctamente",
+        text: "Los datos  se almacenaron correctamente",
         type: "success",
         showConfirmButton: false,
         timer: 3000
@@ -38,7 +38,7 @@ if (isset($_REQUEST['msj'])) {
 
 
 
-        $sqltabla = "select * FROM tbl_areas";
+        $sqltabla = "select estado, descripcion FROM tbl_estado_practica";
         $resultadotabla = $mysqli->query($sqltabla);
     }
     if ($msj == 3) {
@@ -47,7 +47,7 @@ if (isset($_REQUEST['msj'])) {
         echo '<script type="text/javascript">
     swal({
         title: "",
-        text: "Error al actualizar lo sentimos, intente de nuevo.",
+        text: "Error al actualizar lo sentimos,intente de nuevo.",
         type: "error",
         showConfirmButton: false,
         timer: 3000
@@ -57,7 +57,7 @@ if (isset($_REQUEST['msj'])) {
 }
 
 
-$Id_objeto = 93;
+$Id_objeto = 58;
 $visualizacion = permiso_ver($Id_objeto);
 
 
@@ -77,50 +77,53 @@ if ($visualizacion == 0) {
                             </script>';
 } else {
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A mantenimiento area');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A Mantenimiento Estado practica');
 
 
     if (permisos::permiso_modificar($Id_objeto) == '1') {
-        $_SESSION['btn_modificar_area'] = "";
+        $_SESSION['btn_modificar_estado_practica'] = "";
     } else {
-        $_SESSION['btn_modificar_area'] = "disabled";
+        $_SESSION['btn_modificar_estado_practica'] = "disabled";
     }
 
 
     /* Manda a llamar todos las datos de la tabla para llenar el gridview  */
-    $sqltabla = "SELECT * FROM tbl_areas";
+    $sqltabla = "select estado, descripcion FROM tbl_estado_practica";
     $resultadotabla = $mysqli->query($sqltabla);
 
 
 
     /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
-    if (isset($_GET['area'])) {
-        $sqltabla = "SELECT * FROM tbl_areas";
+    if (isset($_GET['estado'])) {
+        $sqltabla = "select estado, descripcion FROM tbl_estado_practica";
         $resultadotabla = $mysqli->query($sqltabla);
 
         /* Esta variable recibe el estado de modificar */
-        $area = $_GET['area'];
+        $estado = $_GET['estado'];
 
         /* Iniciar la variable de sesion y la crea */
         /* Hace un select para mandar a traer todos los datos de la 
  tabla donde rol sea igual al que se ingreso en el input */
-        $sql = "SELECT * FROM tbl_areas WHERE area = '$area'";
+        $sql = "select estado, descripcion FROM tbl_estado_practica WHERE estado = '$estado'";
         $resultado = $mysqli->query($sql);
         /* Manda a llamar la fila */
         $row = $resultado->fetch_array(MYSQLI_ASSOC);
 
-        /* Aqui obtengo el id_actividad de la tabla de la base el cual me sirve para enviarla a la pagina actualizar.php para usarla en el where del update   */
-        $_SESSION['id_area'] = $row['id_area'];
-        $_SESSION['area'] = $row['area'];
+        /* Aqui obtengo el id_estado_civil de la tabla de la base el cual me sirve para enviarla a la pagina actualizar.php para usarla en el where del update   */
+        $_SESSION['id_estado_practica'] = $row['id_estado_practica'];
+        $_SESSION['estado'] = $row['estado'];
+        $_SESSION['descripcion'] = $row['descripcion'];
+
+
         /*Aqui levanto el modal*/
 
-        if (isset($_SESSION['area'])) {
+        if (isset($_SESSION['estado'])) {
 
 
 ?>
             <script>
                 $(function() {
-                    $('#modal_modificar_area').modal('toggle')
+                    $('#modal_modificar_estado').modal('toggle')
 
                 })
             </script>;
@@ -143,8 +146,8 @@ ob_end_flush();
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../plugins/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
-    <link rel=" stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js">
+<link rel="stylesheet" type="text/css" href="../plugins/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel=" stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js">
     <title></title>
 </head>
 
@@ -159,15 +162,15 @@ ob_end_flush();
                     <div class="col-sm-6">
 
 
-                        <h1>Estado Practica Profesional
+                        <h1>Estado practica profesional
                         </h1>
                     </div>
 
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-                            <li class="breadcrumb-item active"><a href="../vistas/menu_mantenimiento_carga.php">Menu Mantenimiento</a></li>
-                            <li class="breadcrumb-item active"><a href="../vistas/mantenimiento_crear_estado_practica_vista.php">Crear Estado</a></li>
+                            <li class="breadcrumb-item active"><a href="../vistas/menu_mantenimiento_perfil360.php">Mantenimiento Perfil360 </a></li>
+                            <li class="breadcrumb-item active"><a href="../vistas/mantenimiento_crear_estado_practica_vista.php">Nuevo Estado</a></li>
                         </ol>
                     </div>
 
@@ -182,6 +185,7 @@ ob_end_flush();
 
         <div class="card card-default">
             <div class="card-header">
+                <h3 class="card-title">Estados parctica</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </div>
@@ -192,38 +196,37 @@ ob_end_flush();
             </div>
             <div class="card-body">
 
-                <table id="tabla16" class="table table-bordered table-striped">
+                <table id="tabla6" class="table table-bordered table-striped">
 
 
 
                     <thead>
                         <tr>
-                            <th># </th>
-                            <th>ESTADO</th>
+                            <th>NOMBRE</th>
+                            <th>DESCRIPCION</th>
                             <th>MODIFICAR</th>
                             <th>ELIMINAR</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php while ($row = $resultadotabla->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <?php while ($row = $resultadotabla->fetch_array(MYSQLI_ASSOC)) { ?>
                             <tr>
-                                <td ><?php echo $row['id_area']; ?></td>
-                                <td><?php echo $row['area']; ?></td>
-
+                                <td><?php echo $row['estado']; ?></td>
+                                <td><?php echo $row['descripcion']; ?></td>
 
                                 <td style="text-align: center;">
 
-                                    <a href="../vistas/mantenimiento_estado_practica_vista.php?area=<?php echo $row['area']; ?>" class="btn btn-primary btn-raised btn-xs">
-                                        <i class="far fa-edit" style="display:<?php echo $_SESSION['modificar_area'] ?> "></i>
+                                    <a href="../vistas/mantenimiento_estado_practica_vista.php?estado=<?php echo $row['estado']; ?>" class="btn btn-primary btn-raised btn-xs">
+                                        <i class="far fa-edit" style="display:<?php echo $_SESSION['modificar_estado'] ?> "></i>
                                     </a>
                                 </td>
 
                                 <td style="text-align: center;">
 
-                                    <form action="../Controlador/eliminar_area_controlador.php?id_area=<?php echo $row['id_area']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                                    <form action="../Controlador/eliminar_estado_practica_controlador.php?estado=<?php echo $row['estado']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                                         <button type="submit" class="btn btn-danger btn-raised btn-xs">
 
-                                            <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['eliminar_area'] ?> "></i>
+                                            <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['eliminar_estado'] ?> "></i>
                                         </button>
                                         <div class="RespuestaAjax"></div>
                                     </form>
@@ -252,65 +255,87 @@ ob_end_flush();
 
 -->
 
-<form action="../Controlador/actualizar_area_controlador.php?id_area=<?php echo $_SESSION['id_area']; ?>" method="post" data-form="update" autocomplete="off">
+    <form action="../Controlador/actualizar_estado_practica_controlador.php?id_estado=<?php echo $_SESSION['id_estado']; ?>" method="post" data-form="update" autocomplete="off">
 
 
 
-<div class="modal fade" id="modal_modificar_area">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"> Actualizar Estado</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="modal fade" id="modal_modificar_estado">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> Actualizar Estado</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
 
-            <!--Cuerpo del modal-->
-            <div class="modal-body">
+                    <!--Cuerpo del modal-->
+                    <div class="modal-body">
 
 
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Estado</label>
-                                <input class="form-control" type="text" id="area" name="area" style="text-transform: uppercase" value="<?php echo $_SESSION['area']; ?>" onkeyup="DobleEspacio(this, event); MismaLetra('area');" onkeypress="return sololetras(event)">
+
+
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                        <label>Modificar Estado</label>
+
+
+                                        <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return LetrasyNumeroos(event)" maxlength="30">
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label">Modificar Descripcion</label>
+
+                                        <input class="form-control" type="text" id="txt_descripcion" name="txt_descripcion" value="<?php echo $_SESSION['descripcion']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_descripcion');" onkeypress="return LetrasyNumeros(event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)">
+
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+
+                    </div>
+
+
+
+
+                    <!--Footer del modal-->
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado']; ?>>Guardar Cambios</button>
                     </div>
                 </div>
-
+                <!-- /.modal-content -->
             </div>
-
-            <!--Footer del modal-->
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" id="btn_modificar_area" name="btn_modificar_area" <?php echo $_SESSION['btn_modificar_area']; ?>>Guardar Cambios</button>
-            </div>
+            <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 
-<!-- /.  finaldel modal -->
+        <!-- /.  finaldel modal -->
 
-<!--mosdal crear -->
+        <!--mosdal crear -->
 
 
 
-</form>
+    </form>
 
-
-
+    <script type="text/javascript" language="javascript">
+        function ventana() {
+            window.open("../Controlador/reporte_mantenimiento_estado_practica_controlador.php", "REPORTE");
+        }
+    </script>
 
 
     <script type="text/javascript">
         $(function() {
 
-            $('#tabla16').DataTable({
+            $('#tabla6').DataTable({
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
@@ -326,76 +351,13 @@ ob_end_flush();
 </body>
 
 </html>
-<script type="text/javascript" language="javascript">
-    function ventana() {
-        window.open("../Controlador/reporte_mantenimiento_periodo_controlador.php", "REPORTE");
-    }
-</script>
-
-<script type="text/javascript" language="javascript">
-    $(document).ready(function() {
-
-        $('.select2').select2({
-            placeholder: 'Seleccione una opcion',
-            theme: 'bootstrap4',
-            tags: true,
-        });
-
-    });
-</script>
-
-<script type="text/javascript" language="javascript">
-    function MismaLetra(id_input) {
-        var valor = $('#' + id_input).val();
-        var longitud = valor.length;
-        //console.log(valor+longitud);
-        if (longitud > 2) {
-            var str1 = valor.substring(longitud - 3, longitud - 2);
-            var str2 = valor.substring(longitud - 2, longitud - 1);
-            var str3 = valor.substring(longitud - 1, longitud);
-            nuevo_valor = valor.substring(0, longitud - 1);
-            if (str1 == str2 && str1 == str3 && str2 == str3) {
-                swal('Error', 'No se permiten 3 letras consecutivamente', 'error');
-
-                $('#' + id_input).val(nuevo_valor);
-            }
-        }
-    }
-
-    function sololetras(e) {
-
-        key = e.keyCode || e.wich;
-
-        teclado = String.fromCharCode(key).toUpperCase();
-
-        letras = " ABCDEFGHIJKLMNOPQRSTUVWXYZÑ";
-
-        especiales = "8-37-38-46-164";
-
-        teclado_especial = false;
-
-        for (var i in especiales) {
-
-            if (key == especiales[i]) {
-                teclado_especial = true;
-                break;
-            }
-        }
-
-        if (letras.indexOf(teclado) == -1 && !teclado_especial) {
-            return false;
-        }
-
-    }
-</script>
-
-<script type="text/javascript" src="../js/ca2.js"></script>
-
-<script type="text/javascript" src="../js/pdf_mantenimientos.js"></script>
+<script type="text/javascript" src="../js/funciones_registro_docentes.js"></script>
+  <script type="text/javascript" src="../js/validar_registrar_docentes.js"></script>
+  <script type="text/javascript" src="../js/pdf_mantenimientos.js"></script>
 <script src="../plugins/select2/js/select2.min.js"></script>
 <!-- datatables JS -->
 <script type="text/javascript" src="../plugins/datatables/datatables.min.js"></script>
-<!-- para usar botones en datatables JS -->
+  <!-- para usar botones en datatables JS -->
 <script src="../plugins/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="../plugins/datatables/JSZip-2.5.0/jszip.min.js"></script>
 <script src="../plugins/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>

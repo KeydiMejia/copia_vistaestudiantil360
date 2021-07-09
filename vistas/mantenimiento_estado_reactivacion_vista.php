@@ -38,7 +38,7 @@ if (isset($_REQUEST['msj'])) {
 
 
 
-        $sqltabla = "select nombre, codigo FROM tbl_estado_reactivacion";
+        $sqltabla = "select estado, descripcion FROM tbl_estado_reactivacion";
         $resultadotabla = $mysqli->query($sqltabla);
     }
     if ($msj == 3) {

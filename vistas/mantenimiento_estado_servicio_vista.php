@@ -15,7 +15,7 @@ if (isset($_REQUEST['msj'])) {
         echo '<script type="text/javascript">
     swal({
         title: "",
-        text: "Lo sentimos el área ya existe",
+        text: "Lo sentimos el estado ya existe",
         type: "info",
         showConfirmButton: false,
         timer: 3000
@@ -38,7 +38,7 @@ if (isset($_REQUEST['msj'])) {
 
 
 
-        $sqltabla = "select * FROM tbl_areas";
+        $sqltabla = "select nombre, descripcion FROM tbl_estado_servicio";
         $resultadotabla = $mysqli->query($sqltabla);
     }
     if ($msj == 3) {
@@ -81,46 +81,46 @@ if ($visualizacion == 0) {
 
 
     if (permisos::permiso_modificar($Id_objeto) == '1') {
-        $_SESSION['btn_modificar_area'] = "";
+        $_SESSION['btn_modificar_servicio'] = "";
     } else {
-        $_SESSION['btn_modificar_area'] = "disabled";
+        $_SESSION['btn_modificar_servicio'] = "disabled";
     }
 
 
     /* Manda a llamar todos las datos de la tabla para llenar el gridview  */
-    $sqltabla = "SELECT * FROM tbl_areas";
+    $sqltabla = "SELECT estado, descripcion FROM tbl_estado_servicio";
     $resultadotabla = $mysqli->query($sqltabla);
 
 
 
     /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
-    if (isset($_GET['area'])) {
-        $sqltabla = "SELECT * FROM tbl_areas";
+    if (isset($_GET['estado'])) {
+        $sqltabla = "SELECT estado, descripcion FROM tbl_estado_servicio";
         $resultadotabla = $mysqli->query($sqltabla);
 
         /* Esta variable recibe el estado de modificar */
-        $area = $_GET['area'];
+        $estado= $_GET['estado'];
 
         /* Iniciar la variable de sesion y la crea */
         /* Hace un select para mandar a traer todos los datos de la 
  tabla donde rol sea igual al que se ingreso en el input */
-        $sql = "SELECT * FROM tbl_areas WHERE area = '$area'";
+        $sql = "SELECT estado, descripcion FROM tbl_estado_servicio WHERE estado = '$estado'";
         $resultado = $mysqli->query($sql);
         /* Manda a llamar la fila */
         $row = $resultado->fetch_array(MYSQLI_ASSOC);
 
         /* Aqui obtengo el id_actividad de la tabla de la base el cual me sirve para enviarla a la pagina actualizar.php para usarla en el where del update   */
-        $_SESSION['id_area'] = $row['id_area'];
-        $_SESSION['area'] = $row['area'];
+        $_SESSION['id_estado_servicio'] = $row['id_estado_servicio'];
+        $_SESSION['estado'] = $row['estado'];
         /*Aqui levanto el modal*/
 
-        if (isset($_SESSION['area'])) {
+        if (isset($_SESSION['estado'])) {
 
 
 ?>
             <script>
                 $(function() {
-                    $('#modal_modificar_area').modal('toggle')
+                    $('#modal_modificar_estado').modal('toggle')
 
                 })
             </script>;
@@ -200,6 +200,7 @@ ob_end_flush();
                         <tr>
                             <th># </th>
                             <th>ESTADO</th>
+                            <th>DESCRIPCION</th>
                             <th>MODIFICAR</th>
                             <th>ELIMINAR</th>
                         </tr>
@@ -207,23 +208,23 @@ ob_end_flush();
                     <tbody>
                     <?php while ($row = $resultadotabla->fetch_array(MYSQLI_ASSOC)) { ?>
                             <tr>
-                                <td ><?php echo $row['id_area']; ?></td>
-                                <td><?php echo $row['area']; ?></td>
+                                <td ><?php echo $row['id_estado_servicio']; ?></td>
+                                <td><?php echo $row['estado']; ?></td>
 
 
                                 <td style="text-align: center;">
 
-                                    <a href="../vistas/mantenimiento_estado_servicio_vista.php?area=<?php echo $row['area']; ?>" class="btn btn-primary btn-raised btn-xs">
-                                        <i class="far fa-edit" style="display:<?php echo $_SESSION['modificar_area'] ?> "></i>
+                                    <a href="../vistas/mantenimiento_estado_servicio_vista.php?estado=<?php echo $row['estado']; ?>" class="btn btn-primary btn-raised btn-xs">
+                                        <i class="far fa-edit" style="display:<?php echo $_SESSION['modificar_estado'] ?> "></i>
                                     </a>
                                 </td>
 
                                 <td style="text-align: center;">
 
-                                    <form action="../Controlador/eliminar_area_controlador.php?id_area=<?php echo $row['id_area']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                                    <form action="../Controlador/eliminar_estado_servicio_controlador.php?id_estado_servicio=<?php echo $row['id_estado_servicio']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                                         <button type="submit" class="btn btn-danger btn-raised btn-xs">
 
-                                            <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['eliminar_area'] ?> "></i>
+                                            <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['eliminar_estado'] ?> "></i>
                                         </button>
                                         <div class="RespuestaAjax"></div>
                                     </form>
@@ -252,15 +253,15 @@ ob_end_flush();
 
 -->
 
-<form action="../Controlador/actualizar_area_controlador.php?id_area=<?php echo $_SESSION['id_area']; ?>" method="post" data-form="update" autocomplete="off">
+<form action="../Controlador/actualizar_estado_servicio_controlador.php?id_estado_servicio=<?php echo $_SESSION['id_estado_servicio']; ?>" method="post" data-form="update" autocomplete="off">
 
 
 
-<div class="modal fade" id="modal_modificar_area">
+<div class="modal fade" id="modal_modificar_estado">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"> Actualizar Estado</h4>
+                <h4 class="modal-title"> Actualizar Estado servicio comunitario</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -275,8 +276,8 @@ ob_end_flush();
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Estado</label>
-                                <input class="form-control" type="text" id="area" name="area" style="text-transform: uppercase" value="<?php echo $_SESSION['area']; ?>" onkeyup="DobleEspacio(this, event); MismaLetra('area');" onkeypress="return sololetras(event)">
+                                <label>Estado de servicio comunitario</label>
+                                <input class="form-control" type="text" id="estado" name="estado" style="text-transform: uppercase" value="<?php echo $_SESSION['estado']; ?>" onkeyup="DobleEspacio(this, event); MismaLetra('estado');" onkeypress="return sololetras(event)">
                             </div>
                         </div>
                     </div>
@@ -287,7 +288,7 @@ ob_end_flush();
             <!--Footer del modal-->
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" id="btn_modificar_area" name="btn_modificar_area" <?php echo $_SESSION['btn_modificar_area']; ?>>Guardar Cambios</button>
+                <button type="submit" class="btn btn-primary" id="btn_modificar_servicio" name="btn_modificar_servicio" <?php echo $_SESSION['btn_modificar_servicio']; ?>>Guardar Cambios</button>
             </div>
         </div>
         <!-- /.modal-content -->

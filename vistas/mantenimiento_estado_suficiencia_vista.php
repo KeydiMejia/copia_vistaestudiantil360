@@ -104,7 +104,7 @@ if ($visualizacion == 0) {
         /* Iniciar la variable de sesion y la crea */
         /* Hace un select para mandar a traer todos los datos de la 
  tabla donde rol sea igual al que se ingreso en el input */
-        $sql = "select * FROM tbl_estado_suficiencia WHERE estado = '$estado'";
+        $sql = "select estado, descripcion FROM tbl_estado_suficiencia WHERE estado = '$estado'";
         $resultado = $mysqli->query($sql);
         /* Manda a llamar la fila */
         $row = $resultado->fetch_array(MYSQLI_ASSOC);
