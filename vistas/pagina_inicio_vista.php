@@ -1,5 +1,6 @@
 <?php
 
+
 require_once('../clases/Conexion.php');
 require_once('../clases/permisos_usuario.php');
 
@@ -448,7 +449,12 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p> Mantenimientos Plan de Estudios</p>
                   </a>
                 </li>
-
+                <li class="nav-item" style="display:<?php echo $_SESSION['mantenimiento_perfil360'] ?>">
+                  <a href="../vistas/menu_mantenimiento_perfil360.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Mantenimientos Perfil360 Estudiantil</p>
+                  </a>
+                </li>
               </ul>
 
             </li>
