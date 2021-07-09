@@ -76,6 +76,6 @@ header("location: ../contenidos/editarRoles-view.php?msj=1&Rol=$Rol2 ");*/
         }
     } else {
         /*header("location: ../contenidos/editarRoles-view.php?msj=3&Rol=$Rol2 ");*/
-        header("location:../vistas/mantenimiento_edificio_vista.php?msj=3");
+        header("location:../vistas/mantenimiento_estado_reactivacion_vista.php?msj=3");
     }
 }
