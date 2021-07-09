@@ -103,6 +103,7 @@ ob_end_flush();
                         <div class="form-group">
                             <label>Verifiqué su Nombre</label>
                             <input class="form-control" type="text" id="txt_apellido" name="txt_verificado1"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los nombres si los lleva">
+                            <input class="form-control d-none " type="text" value="<?php echo $row['id_persona'] ?>" name="id_persona">
                         </div>
                 </div>
                 <div class="col-md-6">

@@ -3,6 +3,7 @@
 require_once ('../clases/Conexion.php');
 
 if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuenta']!=="" && $_POST['txt_correo']!=="" && $_POST['txt_razon']!==""){ 
+    
     if($_FILES['txt_solicitud']['name']!=null && $_FILES['txt_constancia']['name']!=null
         && $_FILES['txt_forma']['name']!=null && $_FILES['txt_identidad']['name']!=null){
             
@@ -11,7 +12,6 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
             $motivo = $_POST['txt_razon'];
             $verificado1 = $_POST['txt_verificado1'];
             $verificado2 = $_POST['txt_verificado2'];
-           
             $id_persona = $_POST['id_persona'];
 
             $sql="SELECT p.nombres,p.apellidos,pe.valor
@@ -57,7 +57,7 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                     //$mysqli->next_result();
                 //}
 
-                //$sqlp = "call ins_carta_egresado('$ncuenta','$documento','$correo')";
+                //$sqlp = "call ins_cancelar_clases('$ncuenta','$documento','$correo', id_persona)";
                 $sql= "INSERT INTO tbl_cancelar_clases (id_persona, motivo, fecha_creacion, documento, cambio, observacion, correo)
                 VALUES ('$id_persona', '$motivo', current_timestamp(),'$documento', 'Nuevo', 'revision pendiente','$correo')";
                 
