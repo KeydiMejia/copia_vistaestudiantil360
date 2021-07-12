@@ -11,7 +11,7 @@ if (isset($_GET['estado'])) {
     $estado = $_GET['estado'];
 }
 
-$Id_objeto=154;
+$Id_objeto=155;
 
 if (permisos::permiso_eliminar($Id_objeto)=='0') {
 
@@ -64,5 +64,6 @@ else
                                     });
                                      $(".FormularioAjax")[0].reset();
                                 </script>';
+                                
                         }
 }

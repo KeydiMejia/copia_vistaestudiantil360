@@ -1,11 +1,11 @@
 <?php
 session_start();
 ob_start();
-require_once('../vistas/pagina_inicio_vista.php');
-require_once('../clases/Conexion.php');
-require_once('../clases/funcion_bitacora.php');
-require_once('../clases/funcion_visualizar.php');
-require_once('../clases/funcion_permisos.php');
+require_once ('../vistas/pagina_inicio_vista.php');
+require_once ('../clases/Conexion.php');
+require_once ('../clases/funcion_bitacora.php');
+require_once ('../clases/funcion_visualizar.php');
+require_once ('../clases/funcion_permisos.php');
 
 //Lineas de msj al cargar pagina de acuerdo a actualizar o eliminar datos
 if (isset($_REQUEST['msj'])) {
@@ -38,7 +38,7 @@ if (isset($_REQUEST['msj'])) {
 
 
 
-        $sqltabla = "select nombre, descripcion FROM tbl_estado_servicio";
+        $sqltabla = "select estado, descripcion FROM tbl_estado_servicio";
         $resultadotabla = $mysqli->query($sqltabla);
     }
     if ($msj == 3) {
@@ -57,7 +57,7 @@ if (isset($_REQUEST['msj'])) {
 }
 
 
-$Id_objeto = 93;
+$Id_objeto = 162;
 $visualizacion = permiso_ver($Id_objeto);
 
 
@@ -77,13 +77,13 @@ if ($visualizacion == 0) {
                             </script>';
 } else {
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A mantenimiento area');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A mantenimiento Estado Servicio');
 
 
     if (permisos::permiso_modificar($Id_objeto) == '1') {
-        $_SESSION['btn_modificar_servicio'] = "";
+        $_SESSION['btn_modificar_estado_servicio'] = "";
     } else {
-        $_SESSION['btn_modificar_servicio'] = "disabled";
+        $_SESSION['btn_modificar_estado_servicio'] = "disabled";
     }
 
 
@@ -104,7 +104,8 @@ if ($visualizacion == 0) {
         /* Iniciar la variable de sesion y la crea */
         /* Hace un select para mandar a traer todos los datos de la 
  tabla donde rol sea igual al que se ingreso en el input */
-        $sql = "SELECT estado, descripcion FROM tbl_estado_servicio WHERE estado = '$estado'";
+        //$sql = "SELECT * FROM tbl_estado_servicio WHERE estado = '$estado'";
+        $sql = "select * FROM tbl_estado_servicio WHERE estado = '$estado'";
         $resultado = $mysqli->query($sql);
         /* Manda a llamar la fila */
         $row = $resultado->fetch_array(MYSQLI_ASSOC);
@@ -112,6 +113,7 @@ if ($visualizacion == 0) {
         /* Aqui obtengo el id_actividad de la tabla de la base el cual me sirve para enviarla a la pagina actualizar.php para usarla en el where del update   */
         $_SESSION['id_estado_servicio'] = $row['id_estado_servicio'];
         $_SESSION['estado'] = $row['estado'];
+        $_SESSION['descripcion'] = $row['descripcion'];
         /*Aqui levanto el modal*/
 
         if (isset($_SESSION['estado'])) {
@@ -198,7 +200,6 @@ ob_end_flush();
 
                     <thead>
                         <tr>
-                            <th># </th>
                             <th>ESTADO</th>
                             <th>DESCRIPCION</th>
                             <th>MODIFICAR</th>
@@ -208,8 +209,9 @@ ob_end_flush();
                     <tbody>
                     <?php while ($row = $resultadotabla->fetch_array(MYSQLI_ASSOC)) { ?>
                             <tr>
-                                <td ><?php echo $row['id_estado_servicio']; ?></td>
+                        
                                 <td><?php echo $row['estado']; ?></td>
+                                <td><?php echo $row['descripcion']; ?></td>
 
 
                                 <td style="text-align: center;">
@@ -221,7 +223,7 @@ ob_end_flush();
 
                                 <td style="text-align: center;">
 
-                                    <form action="../Controlador/eliminar_estado_servicio_controlador.php?id_estado_servicio=<?php echo $row['id_estado_servicio']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                                    <form action="../Controlador/eliminar_estado_servicio_controlador.php?estado=<?php echo $row['estado']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                                         <button type="submit" class="btn btn-danger btn-raised btn-xs">
 
                                             <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['eliminar_estado'] ?> "></i>
@@ -261,39 +263,58 @@ ob_end_flush();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"> Actualizar Estado servicio comunitario</h4>
+                <h4 class="modal-title"> Actualizar Estado servicio </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
 
-            <!--Cuerpo del modal-->
-            <div class="modal-body">
+                <!--Cuerpo del modal-->
+                <div class="modal-body">
 
 
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Estado de servicio comunitario</label>
-                                <input class="form-control" type="text" id="estado" name="estado" style="text-transform: uppercase" value="<?php echo $_SESSION['estado']; ?>" onkeyup="DobleEspacio(this, event); MismaLetra('estado');" onkeypress="return sololetras(event)">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+
+                <label>Modificar Estado</label>
+
+
+                <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return LetrasyNumeroos(event)" maxlength="30">
 
             </div>
 
-            <!--Footer del modal-->
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" id="btn_modificar_servicio" name="btn_modificar_servicio" <?php echo $_SESSION['btn_modificar_servicio']; ?>>Guardar Cambios</button>
+
+            <div class="form-group">
+                <label class="control-label">Modificar Descripcion</label>
+
+                <input class="form-control" type="text" id="txt_descripcion" name="txt_descripcion" value="<?php echo $_SESSION['descripcion']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_descripcion');" onkeypress="return LetrasyNumeros(event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)">
+
             </div>
+
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
+</div>
+
+</div>
+
+
+
+
+<!--Footer del modal-->
+<div class="modal-footer justify-content-between">
+<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+<button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado_servicio']; ?>>Guardar Cambios</button>
+</div>
+</div>
+<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 </div>
 
 <!-- /.  finaldel modal -->
@@ -303,7 +324,6 @@ ob_end_flush();
 
 
 </form>
-
 
 
 

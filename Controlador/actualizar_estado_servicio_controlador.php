@@ -26,16 +26,16 @@ header("location: ../contenidos/editarRoles-view.php?msj=1&Rol=$Rol2 ");*/
     header("location:../vistas/mantenimiento_estado_servicio_vista.php?msj=1");
 } else {
 
-    $sql="UPDATE `tbl_estado_servicio` SET `estado`='$estado',`descripcion`='$descripcion',`id_estado_servicio`='$id_estado'";
-    //$sql = "call proc_actualizar_estado_reactivacion('$estado','$descripcion','$id_estado' )";
+    //$sql="UPDATE `tbl_estado_servicio` SET `estado`='$estado',`descripcion`='$descripcion',`id_estado_servicio`='$id_estado_servicio'";
+    $sql = "call proc_actualizar_estado_servicio('$estado','$descripcion','$id_estado' )";
     $valor = "select estado, descripcion from tbl_estado_servicio WHERE id_estado_servicio= '$id_estado'";
     $result_valor = $mysqli->query($valor);
     $valor_viejo = $result_valor->fetch_array(MYSQLI_ASSOC);
 
     if ($valor_viejo['estado'] <> $estado and $valor_viejo['descripcion'] <> $descripcion) {
 
-        $Id_objeto = 58;
-        bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'MODIFICO', ' EL EDIFICIO ' . $valor_viejo['nombre'] . 'Y POR ' . $edificio . ', EL CODIGO DEL EDIFICIO ' . $edificio . ' ');
+        $Id_objeto = 161;
+        bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'MODIFICO', ' EL ESTADO ' . $valor_viejo['estado'] . ' POR:  ' . $estado .' ');
 
 
 
@@ -49,8 +49,8 @@ header("location: ../contenidos/editarRoles-view.php?msj=1&Rol=$Rol2 ");*/
         }
     } elseif ($valor_viejo['estado'] <> $estado) {
 
-        $Id_objeto = 58;
-        bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'MODIFICO', 'EL EDIFICIO ' . $valor_viejo['nombre'] . ' POR ' . $edificio . ' ');
+        $Id_objeto = 161;
+        bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'MODIFICO', 'EL ESTADO ' . $valor_viejo['estado'] . ' POR:  ' . $estado . ' ');
         /* Hace el query para que actualize*/
 
         $resultado = $mysqli->query($sql);
@@ -63,8 +63,8 @@ header("location: ../contenidos/editarRoles-view.php?msj=1&Rol=$Rol2 ");*/
     } elseif ($valor_viejo['descripcion'] <> $descripcion) 
     {
 
-        $Id_objeto = 58;
-        bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'MODIFICO', ' EL CODIGO DEL EDIFICIO  ' . $edificio . ' ');
+        $Id_objeto = 161;
+        bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'MODIFICO', ' LA DESCRIPCION '. $valor_viejo['descripcion'] . ' POR:  ' . $descripcion . ' ');
         /* Hace el query para que actualize*/
 
         $resultado = $mysqli->query($sql);
@@ -76,6 +76,6 @@ header("location: ../contenidos/editarRoles-view.php?msj=1&Rol=$Rol2 ");*/
         }
     } else {
         /*header("location: ../contenidos/editarRoles-view.php?msj=3&Rol=$Rol2 ");*/
-        header("location:../vistas/mantenimiento_edificio_vista.php?msj=3");
+        header("location:../vistas/mantenimiento_estado_servicio_vista.php?msj=3");
     }
 }

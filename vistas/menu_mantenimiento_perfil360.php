@@ -3,82 +3,85 @@ require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
 
+if (permiso_ver('155') == '1') {
 
-if (permiso_ver('55') == '1') {
-
-    $_SESSION['mantenimiento_periodo_vista'] = "...";
+    $_SESSION['mantenimiento_estado_reactivacion_vista'] = "...";
 } else {
-    $_SESSION['mantenimiento_periodo_vista'] = "No 
+    $_SESSION['mantenimiento_estado_reactivacion_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('63') == '1') {
+if (permiso_ver('157') == '1') {
 
-    $_SESSION['mantenimiento_crear_periodo_vista'] = "...";
+    $_SESSION['mantenimiento_estado_expediente_vista'] = "...";
 } else {
-    $_SESSION['mantenimiento_crear_periodo_vista'] = "No 
+    $_SESSION['mantenimiento_estado_expediente_vista'] = "No 
   tiene permisos para visualizar";
 }
 
 
-if (permiso_ver('85') == '1') {
+if (permiso_ver('159') == '1') {
 
-    $_SESSION['mantenimiento_horario_docente_vista'] = "...";
+    $_SESSION['mantenimiento_estado_suficiencia_vista'] = "...";
 } else {
-    $_SESSION['mantenimiento_horario_docente_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('86') == '1') {
-
-    $_SESSION['mantenimiento_crear_horario_docente_vista'] = "...";
-} else {
-    $_SESSION['mantenimiento_crear_horario_docente_vista'] = "No 
+    $_SESSION['mantenimiento_estado_suficiencia_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('58') == '1') {
+if (permiso_ver('161') == '1') {
 
-    $_SESSION['mantenimiento_edificio_vista'] = "...";
+    $_SESSION['mantenimiento_estado_servicio_vista'] = "...";
 } else {
-    $_SESSION['mantenimiento_edificio_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('83') == '1') {
-
-    $_SESSION['mantenimiento_crear_edificio_vista'] = "...";
-} else {
-    $_SESSION['mantenimiento_crear_edificio_vista'] = "No 
+    $_SESSION['mantenimiento_estado_servicio_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('60') == '1') {
+if (permiso_ver('163') == '1') {
 
-    $_SESSION['mantenimiento_aula_vista'] = "...";
+    $_SESSION['mantenimiento_estado_practica_vista'] = "...";
 } else {
-    $_SESSION['mantenimiento_aula_vista'] = "No 
+    $_SESSION['mantenimiento_estado_practica_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('82') == '1') {
+if (permiso_ver('156') == '1') {
 
-    $_SESSION['mantenimiento_crear_aula_vista'] = "...";
+    $_SESSION['mantenimiento_crear_estado_reactivacion_vista'] = "...";
 } else {
-    $_SESSION['mantenimiento_crear_aula_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('93') == '1') {
-
-    $_SESSION['mantenimiento_crear_areas'] = "...";
-} else {
-    $_SESSION['mantenimiento_crear_areas'] = "No 
+    $_SESSION['mantenimiento_crear_estado_reactivacion_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('93') == '1') {
+if (permiso_ver('158') == '1') {
 
-    $_SESSION['mantenimiento_area_vista'] = "...";
+    $_SESSION['mantenimiento_crear_estado_expediente_vista'] = "...";
 } else {
-    $_SESSION['mantenimiento_area_vista'] = "No 
+    $_SESSION['mantenimiento_crear_estado_expediente_vista'] = "No 
+  tiene permisos para visualizar";
+}
+
+
+if (permiso_ver('160') == '1') {
+
+    $_SESSION['mantenimiento_crear_estado_suficiencia_vista'] = "...";
+} else {
+    $_SESSION['mantenimiento_crear_estado_suficiencia_vista'] = "No 
+  tiene permisos para visualizar";
+}
+
+if (permiso_ver('162') == '1') {
+
+    $_SESSION['mantenimiento_crear_estado_servicio_vista'] = "...";
+} else {
+    $_SESSION['mantenimiento_crear_estado_servicio_vista'] = "No 
+  tiene permisos para visualizar";
+}
+
+if (permiso_ver('164') == '1') {
+
+    $_SESSION['mantenimiento_crear_estado_practica_vista'] = "...";
+} else {
+    $_SESSION['mantenimiento_crear_estado_practica_vista'] = "No 
   tiene permisos para visualizar";
 }
 
@@ -375,7 +378,7 @@ if (permiso_ver('93') == '1') {
                                                     <i class="fas fa-edit"></i>
                                                 </div>
 
-                                                <a href="../vistas/mantenimiento__vista.php" class="small-box-footer">
+                                                <a href="../vistas/mantenimiento_estado_practica_vista.php" class="small-box-footer">
                                                     Ir <i class="fas fa-arrow-circle-right"></i>
                                                 </a>
                                             </div>

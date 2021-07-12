@@ -38,7 +38,7 @@ if (isset($_REQUEST['msj'])) {
 
 
 
-        $sqltabla = "select estado, descripcion  FROM tbl_estado_suficiencia";
+        $sqltabla = "select nombre, codigo FROM tbl_estado_suficiencia";
         $resultadotabla = $mysqli->query($sqltabla);
     }
     if ($msj == 3) {
@@ -57,7 +57,7 @@ if (isset($_REQUEST['msj'])) {
 }
 
 
-$Id_objeto = 58;
+$Id_objeto = 159;
 $visualizacion = permiso_ver($Id_objeto);
 
 
@@ -104,7 +104,7 @@ if ($visualizacion == 0) {
         /* Iniciar la variable de sesion y la crea */
         /* Hace un select para mandar a traer todos los datos de la 
  tabla donde rol sea igual al que se ingreso en el input */
-        $sql = "select estado, descripcion FROM tbl_estado_suficiencia WHERE estado = '$estado'";
+        $sql = "select * FROM tbl_estado_suficiencia WHERE estado = '$estado'";
         $resultado = $mysqli->query($sql);
         /* Manda a llamar la fila */
         $row = $resultado->fetch_array(MYSQLI_ASSOC);
@@ -255,7 +255,7 @@ ob_end_flush();
 
 -->
 
-    <form action="../Controlador/actualizar_estado_suficiencia_controlador.php?id_estado=<?php echo $_SESSION['id_estado']; ?>" method="post" data-form="update" autocomplete="off">
+    <form action="../Controlador/actualizar_estado_suficiencia_controlador.php?id_estado_suficiencia=<?php echo $_SESSION['id_estado_suficiencia']; ?>" method="post" data-form="update" autocomplete="off">
 
 
 
@@ -309,7 +309,7 @@ ob_end_flush();
                     <!--Footer del modal-->
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado']; ?>>Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado_suficiencia']; ?>>Guardar Cambios</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

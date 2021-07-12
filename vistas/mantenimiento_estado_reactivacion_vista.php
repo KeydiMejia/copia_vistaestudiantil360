@@ -57,7 +57,7 @@ if (isset($_REQUEST['msj'])) {
 }
 
 
-$Id_objeto = 58;
+$Id_objeto = 155;
 $visualizacion = permiso_ver($Id_objeto);
 
 
@@ -228,6 +228,7 @@ ob_end_flush();
 
                                             <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['eliminar_estado'] ?> "></i>
                                         </button>
+                                        
                                         <div class="RespuestaAjax"></div>
                                     </form>
                                 </td>
@@ -255,7 +256,7 @@ ob_end_flush();
 
 -->
 
-    <form action="../Controlador/actualizar_estado_reactivacion_controlador.php?id_estado=<?php echo $_SESSION['id_estado']; ?>" method="post" data-form="update" autocomplete="off">
+    <form action="../Controlador/actualizar_estado_reactivacion_controlador.php?id_estado_reactivacion=<?php echo $_SESSION['id_estado_reactivacion']; ?>" method="post" data-form="update" autocomplete="off">
 
 
 
@@ -309,7 +310,7 @@ ob_end_flush();
                     <!--Footer del modal-->
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado']; ?>>Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado_reactivacion']; ?>>Guardar Cambios</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

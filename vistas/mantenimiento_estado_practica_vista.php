@@ -57,7 +57,7 @@ if (isset($_REQUEST['msj'])) {
 }
 
 
-$Id_objeto = 58;
+$Id_objeto = 163;
 $visualizacion = permiso_ver($Id_objeto);
 
 
@@ -255,7 +255,7 @@ ob_end_flush();
 
 -->
 
-    <form action="../Controlador/actualizar_estado_practica_controlador.php?id_estado=<?php echo $_SESSION['id_estado']; ?>" method="post" data-form="update" autocomplete="off">
+    <form action="../Controlador/actualizar_estado_practica_controlador.php?id_estado_practica=<?php echo $_SESSION['id_estado_practica']; ?>" method="post" data-form="update" autocomplete="off">
 
 
 
@@ -272,8 +272,6 @@ ob_end_flush();
 
                     <!--Cuerpo del modal-->
                     <div class="modal-body">
-
-
 
 
 
@@ -309,7 +307,7 @@ ob_end_flush();
                     <!--Footer del modal-->
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado']; ?>>Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary" id="btn_modificar_estado" name="btn_modificar_estado" <?php echo $_SESSION['btn_modificar_estado_practica']; ?>>Guardar Cambios</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
