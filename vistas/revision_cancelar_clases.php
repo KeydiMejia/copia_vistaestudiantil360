@@ -39,6 +39,9 @@ $sql_tabla = json_decode( file_get_contents($url), true );
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../plugins/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel=" stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js">
+  
   <title></title>
 </head>
 
@@ -79,10 +82,21 @@ $sql_tabla = json_decode( file_get_contents($url), true );
               <h3 class="card-title">Solicitudes</h3>
               <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
+              </div>
+        <br>
+        <div class=" px-12">
+          <!-- <button class="btn btn-success "> <i class="fas fa-file-pdf"></i> <a style="font-weight: bold;" onclick="ventana()">Exportar a PDF</a> </button> -->
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="dt-buttons btn-group">
+          <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla" type="buttton" onclick="ventana()" title="Exportar a PDF">
+          <i class="fas fa-file-pdf">
+</i>
+        </button>
+        </div>
+        <br></br>
+
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -170,6 +184,8 @@ $sql_tabla = json_decode( file_get_contents($url), true );
  $(function () {
    
     $('#tabla').DataTable({
+      "language": {
+        "url":"../plugins/lenguaje.json"},
       "paging": true,
       "lengthChange": true,
       "searching": true,
@@ -179,8 +195,21 @@ $sql_tabla = json_decode( file_get_contents($url), true );
       "responsive": true,
     });
   });
-
-
 </script>
+
 </body>
 </html>
+<script type="text/javascript" language="javascript">
+  function ventana() {
+    window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php", "REPORTE");
+  }
+</script>
+
+<!-- <script type="text/javascript" src="../js/funciones_mantenimientos.js"></script> -->
+
+<!-- para usar botones en datatables JS -->
+<script src="../plugins/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="../plugins/datatables/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../plugins/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../plugins/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../plugins/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>

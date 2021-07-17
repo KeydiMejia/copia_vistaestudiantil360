@@ -25,7 +25,7 @@ if($visualizacion==0){
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD CANCELAR CLASES');
 }
 
-            $sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,pe.valor
+            $sql=$mysqli->prepare("SELECT p.id_persona, p.nombres,p.apellidos,pe.valor
             FROM tbl_usuarios u, tbl_personas p,tbl_personas_extendidas pe
             WHERE u.id_persona = p.id_persona
             AND p.id_persona = pe.id_persona
@@ -44,6 +44,8 @@ ob_end_flush();
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../plugins/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+<link rel=" stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js">
   <title></title>
 </head>
 <body >
@@ -87,6 +89,8 @@ ob_end_flush();
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
             </div>
+            <br>
+                <div class=" px-12">
           </div>
 
 
@@ -168,8 +172,7 @@ ob_end_flush();
             
           </div>
         </div>
-         
-         
+
     
     <div class="RespuestaAjax"></div>
 </form>
@@ -179,6 +182,7 @@ ob_end_flush();
 
 
 </div>
+
 <script>
 $('input[type="file"]').on('change', function(){
   var ext = $( this ).val().split('.').pop();
@@ -213,3 +217,15 @@ $('input[type="file"]').on('change', function(){
 
 </body>
 </html>
+</script>
+
+<script type="text/javascript" src="../js/pdf_mantenimientos.js"></script>
+<script src="../plugins/select2/js/select2.min.js"></script>
+<!-- datatables JS -->
+<script type="text/javascript" src="../plugins/datatables/datatables.min.js"></script>
+  <!-- para usar botones en datatables JS -->
+<script src="../plugins/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="../plugins/datatables/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../plugins/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../plugins/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../plugins/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
