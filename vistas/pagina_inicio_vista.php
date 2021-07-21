@@ -233,6 +233,15 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p> Finalizacion de Practica </p>
                   </a>
                 </li>
+                <!-- AGREGADO POR LIZ -->
+                <li class="nav-item" style="display:<?php echo $_SESSION['expediente_graduacion'] ?>">
+                  <a href="../vistas/revision_expediente_graduacion.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Expediente Graduación </p>
+                  </a>
+                </li>
+
+
                 <li class="nav-item" style="display:<?php echo $_SESSION['cambio_carrera'] ?>">
                   <a href="../vistas/menu_revision_cambio.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

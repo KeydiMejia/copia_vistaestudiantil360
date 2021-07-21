@@ -57,7 +57,7 @@ $resultado_permisos = $mysqli->query($sql_permisos);
    $_SESSION['plan_estudio_vista'] = 'none';
    $_SESSION['mantenimiento_plan'] = 'none';
    $_SESSION['perfil360_vista'] = 'none';
-   //$_SESSION['expediente_graduacion'] = 'none';
+   $_SESSION['expediente_graduacion'] = 'none';
    
 
 
@@ -406,6 +406,12 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
    if ($_SESSION['pantalla'] = '117') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['perfil360_vista'] = "block";
+      }
+   } 
+//ingresado por liz
+   if ($_SESSION['pantalla'] = '131') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['expediente_graduacion'] = "block";
       }
    } 
 

@@ -20,7 +20,7 @@ $permiso_ver= mysqli_fetch_array($resultado_permisos);
 
  
 
-return $permiso_ver['Ver'];
+return $permiso_ver['Ver'] ;
 
 }
 
