@@ -130,7 +130,7 @@ ob_end_flush();
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
-                            <label>Solicitud de Equivalencias</label>
+                            <label>Solicitud de Expediente</label>
                             <input class="form-control" type="file" id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>

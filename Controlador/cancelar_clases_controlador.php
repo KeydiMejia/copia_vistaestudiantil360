@@ -108,23 +108,18 @@ elseif(isset($_POST['cambio']) && $_POST['cambio']!==""){
     $cuenta = $_POST['txt_cuenta'];
     //$motivo = $_POST['txt_razon'];
     $observacion = $_POST['txt_observacion'];
-    $Id_cancelar_clases=$_POST['Id_cancelar_clases'];
+   $Id_cancelar_clases=$_POST['Id_cancelar_clases'];
     if($observacion!==""){
-        //$sqlp = "call upd_carta_egresado_observacion('$cambio','$observacion','$cuenta')";
+    
         
         $sql = "UPDATE tbl_cancelar_clases SET observacion='$observacion', cambio='$cambio' WHERE Id_cancelar_clases='$Id_cancelar_clases'";
         $resultadop = $mysqli->query($sql);
         if($resultadop == true){
 
-            //$resultadop->free();
+            
             $mysqli->next_result();
 
-            //if($cambio==="cambio"){
-                //$consulta= "call ins_himno('$cuenta')";
-                //$consultar =  $mysqli->query($consulta);
-                //$consultar->free();
-                //$mysqli->next_result();
-            //}
+            
 
             echo '<script type="text/javascript">
                     swal({
@@ -144,21 +139,12 @@ elseif(isset($_POST['cambio']) && $_POST['cambio']!==""){
             }
        
     }else{
-        //$sqlp = "call upd_carta_egresado('$cambio','$cuenta')";
+        
         
         $sql= "UPDATE tbl_cancelar_clases SET cambio='$cambio' WHERE Id_cancelar_clases='$Id_cancelar_clases'";
         $resultadop = $mysqli->query($sql);
         if($resultadop == true){
-            //$resultadop->free();
-            //$mysqli->next_result();
-
-            //if($cambio==="cambio"){
-                //$consulta= "call ins_himno('$cuenta')";
-                //$consultar =  $mysqli->query($consulta);
-               // $consultar->free();
-               // $mysqli->next_result();
-        
-              //  }
+            
 
             echo '<script type="text/javascript">
                     swal({

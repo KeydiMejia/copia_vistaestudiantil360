@@ -62,6 +62,7 @@ $resultado_permisos = $mysqli->query($sql_permisos);
    $_SESSION['revision_servicio_comunitario'] = 'none';
    $_SESSION['mantenimiento_perfil360'] = 'none';
    $_SESSION['solicitud_examensuficiencia'] = 'none';
+   $_SESSION['reactivacion_cuenta'] = 'none';
 
 
   while ($fila = $resultado_permisos->fetch_row())
@@ -417,6 +418,49 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
          $_SESSION['expediente_graduacion'] = "block";
       }
    } 
+   if ($_SESSION['pantalla'] = '143' or $_SESSION['pantalla'] == '140' or $_SESSION['pantalla'] == '144' ) {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['solicitud_examensuficiencia'] = "block";
+      }
+   } 
+   
+   if ($_SESSION['pantalla'] = '142') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['suficiencia'] = "block";
+      }
+   }  
+   if ($_SESSION['pantalla'] = '141') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['reactivacion_cuenta'] = "block";
+      }
+   } 
+
+   if ($_SESSION['pantalla'] = '145') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['reactivacion_cuenta_unica'] = "block";
+      }
+   } 
+
+   if ($_SESSION['pantalla'] = '146') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['revision_reactivacion'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '147') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['revision_suficiencia_unica'] = "block";
+      }
+   } 
+
+
+   if ($_SESSION['pantalla']=='148')
+   {
+    if ( $_SESSION['confirmacion']=='block') 
+    {
+      $_SESSION['menu_revision_suficiencia']="block";
+
+    }
+   }
    if ($_SESSION['pantalla'] = '150') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['solicitud_servicio_comunitario'] = "block";

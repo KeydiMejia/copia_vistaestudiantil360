@@ -1,11 +1,13 @@
 <?php
 session_start();
-require_once('../clases/Conexion.php');
+require_once('../clases/conexion_mantenimientos.php');
 require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
-//require_once('../Controlador/cancelar_clases_controlador.php');
-//include("../Controlador/cancelar_clases_controlador.php");
 $instancia_conexion = new conexion();
+
+
+//$stmt = $instancia_conexion->query("SELECT tp.nombres FROM tbl_personas tp INNER JOIN tbl_usuarios us ON us.id_persona=tp.id_persona WHERE us.Id_usuario= 8");
+
 
 
 class myPDF extends FPDF
@@ -26,7 +28,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUDES DE EXAMEN SUFICIENCIA"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
@@ -45,31 +47,31 @@ class myPDF extends FPDF
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
         $this->Cell(20, 7, "ID", 1, 0, 'C');
-        $this->Cell(70, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
+        
         $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
+        $this->Cell(30, 7, "ESTADO", 1, 0, 'C');
         $this->Cell(80, 7, "OBSERVACION", 1, 0, 'C');
-        $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
+     
         $this->Cell(60, 7, "Fecha_creacion", 1, 0, 'C');
 
         $this->ln();
     }
     function viewTable()
-    {   //global $Id_cancelar_clases;
-        //$sqlp="select MAX(Id_cancelar_clases) FROM tbl_cancelar_clases";
-        //$Id_cancelar_clases= $instancia_conexion->ejecutarConsulta($sqlp);
-
+    {
         global $instancia_conexion;
-        $sql ="SELECT Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion FROM tbl_cancelar_clases WHERE Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases)";
+        $sql = "select id_suficiencia, correo, observacion, Fecha_creacion,tbl_estado_suficiencia.estado 
+        FROM tbl_examen_suficiencia inner join tbl_estado_suficiencia on tbl_estado_suficiencia.id_estado_suficiencia =tbl_examen_suficiencia.id_estado_suficiencia";;
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-            $this->Cell(20, 7, $reg['Id_cancelar_clases'], 1, 0, 'C');
-            $this->Cell(70, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
+            $this->Cell(20, 7, $reg['id_suficiencia'], 1, 0, 'C');
+            
             $this->Cell(70, 7, utf8_decode($reg['correo']), 1, 0, 'C');
+            $this->Cell(30, 7, $reg['estado'], 1, 0, 'C');
             $this->Cell(80, 7, $reg['observacion'], 1, 0, 'C');
-            $this->Cell(30, 7, $reg['cambio'], 1, 0, 'C');
+         
             $this->Cell(60, 7, $reg['Fecha_creacion'], 1, 0, 'C');
 
             $this->ln();

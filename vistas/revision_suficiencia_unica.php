@@ -7,7 +7,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=36; 
+$Id_objeto=147; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -23,13 +23,10 @@ if($visualizacion==0){
    </script>'; 
 }
 if (isset($_GET['alumno'])){
-  // $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
-
-    // $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
-   
-    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/expediente_graduacion.php?alumno=".$_GET['alumno']), true );
-
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION EPEDIENTE DE GRADUACION '.$sqltabla["ROWS"][0]['nombres'].'');
+ 
+  // $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php?alumno='.$_GET['alumno']), true );
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE SUFICIENCIA ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
 ob_end_flush();
@@ -51,7 +48,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud de Expediente de Graduación</h1>
+            <h1>Solicitud de Examen Suficiencia</h1>
           </div>
 
          
@@ -59,7 +56,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/revision_carta_egresado_vista.php">Solicitudes de Carta de Egresado</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/menu_revison_suficiencia.php">Solicitudes de Suficiencia </a></li>
             </ol>
           </div>
 
@@ -74,7 +71,7 @@ ob_end_flush();
             <div class="container-fluid">
   <!-- pantalla 1 -->
       
-<form action="../Controlador/expediente_graduacion_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
+<form action="../Controlador/examen_suficiencia_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
 
  <div class="card card-default">
           <div class="card-header">
@@ -93,64 +90,52 @@ ob_end_flush();
                         <div class="form-group">
                             <label>Nombre del Alumno</label>
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" type="text" id="txt_nombre" name="txt_nombre1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;" >
+                            <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                  
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor']  ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                  
-                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_expediente']  ?>" type="text"  name="id_expediente">
-
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta1" name="txt_cuenta1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
-                            <label>Fecha de Creación</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['fecha_creacion'] ?>" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <label>Correo Electrónico</label>
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['correo'] ?>" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeypress="return letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                         <div class="form-group">
-                        <p class="text-center form-group" style="margin-top: 20px;">
-                        <button type="button" data-toggle='modal' data-target='#modal1' class="btn btn-outline-primary">Documentos Alumno</button>
-                        </p>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group">
-                        <p class="text-center form-group" style="margin-top: 20px;">
-                        <button type="button" data-toggle='modal' data-target='#modal1' class="btn btn-outline-primary">Expediente</button>
-                        </p>
+                          <p class="text-center form-group" style="margin-top: 10px;">
+                            <button type="button" data-toggle='modal' data-target='#modal1' class="btn btn-outline-primary">Ver Documento</button>
+                          </p>
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                         <label>Observación</label>
-                        <textarea class="form-control" id="txt_observacion" name="txt_observacion" rows="2"></textarea>
+                        <textarea class="form-control" id="txt_observacion" name="txt_observacion" rows="3"></textarea>
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Seleccione su aprobación</label>
-                            <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();">
+                            <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();" >
                               <option disabled selected>Aprobar</option>
                               <option value="aprobado">SI</option>
-                              <option value="desaprobado">NO</option>
+                              <option value="desaprobar">NO</option>
                             </select>
                         </div>
                 </div>
-                
                 <div class="col-md-12">
-                      <div class="form-group">
-
-                      <!-- <a class="badge-warning btn-sm text-center form-group" href="http://informaticaunah.com/automatizacion/pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['id_persona'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a> -->
-
-                            <!-- <a class="badge-warning btn-sm text-center form-group" href="http://localhost:8008/copia_vistaestudiantil360/pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['id_persona'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a> -->
-                              
-                      </div>
+                        <div class="form-group">
+                          <p class="text-center form-group" >
+                            <a class="btn  btn-warning" href="https://registro.unah.edu.hn/co_login.aspx" id="verifica" name="verifica" target="_blank">Verificar en el sistema</a>
+                          </p>
+                        </div>
                 </div>
+                
             </div>
             <p class="text-center form-group" style="margin-top: 20px;">
                 <button type="submit" class="btn btn-primary" id="btn_guardar_cambio" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
@@ -194,7 +179,6 @@ ob_end_flush();
 
 
 
-
    <div class="card-body">
             <div class="row">
                
@@ -205,19 +189,21 @@ ob_end_flush();
                         <input class="form-control" type="text"  maxlength="60" id="txt_nombre_alumno" name="txt_nombre_alumno"  value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" required style="text-transform: uppercase"   onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
                         <?php 
                         $cuenta = $sqltabla["ROWS"][0]['valor'];
+                        $tipo = $sqltabla["ROWS"][0]['tipo'];
+                         
                          $listar=null;
-                         $directorio=opendir("../archivos/expediente_graduacion/$cuenta/");
+                         $directorio=opendir("../archivos/suficiencia/$tipo/$cuenta");
                          while ($elemento =readdir($directorio)) 
                          {
                            if ($elemento !='.' and $elemento !='..') {
                
                
-                             if (is_dir("../archivos/expediente_graduacion/$cuenta/".$elemento)) 
+                             if (is_dir("../archivos/suficiencia/$tipo/$cuenta/".$elemento)) 
                              {
-                               $listar .="<li> <a href='../archivos/expediente_graduacion/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
+                               $listar .="<li> <a href='../archivos/suficiencia/$tipo/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
                              }
                              else {
-                               $listar .="<li> <a href='../archivos/expediente_graduacion/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
+                               $listar .="<li> <a href='../archivos/suficiencia/$tipo/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
                              } 
                            }
                          }
@@ -256,8 +242,7 @@ ob_end_flush();
 <!-- fin modal--->
 
 <script type="text/javascript">
- 
- document.getElementById("documento").style.display="none";
+ document.getElementById("verifica").style.display="none";
 
  function Mostrarlink()
 {
@@ -266,14 +251,13 @@ var maestrias = document.getElementById("aprobado").value;
 
   if (maestrias == "aprobado") {
        
-    
-    document.getElementById("documento").style.display="block";
+    document.getElementById("verifica").style.display="block";
 
     }
     else {
       
-      
-      document.getElementById("documento").style.display="none";
+      document.getElementById("verifica").style.display="none";
+     
    }
 
 }

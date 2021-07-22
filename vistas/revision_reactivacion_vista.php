@@ -6,7 +6,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=38; 
+$Id_objeto=146; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -21,14 +21,14 @@ if($visualizacion==0){
 
    </script>'; 
 }else{
-  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION LISTA CANCELAR CLASES');
+  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION LISTA REACTIVACION DE CUENTAS');
 }
 
 
 $counter = 0;
 //$url="http://localhost/copia_vistaestudiantil360/api/cancelar_clases.php";
-$url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php";
-$sql_tabla = json_decode( file_get_contents($url), true );
+//$url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/reactivacion_cuenta.php";
+$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/reactivacion_cuenta.php'), true );
 
 
 
@@ -57,7 +57,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
           <div class="col-sm-6">
 
 
-            <h1>Solicitudes de Cancelacion Excepcional de Clases</h1>
+            <h1>Solicitudes de Reactivacion de Cuenta</h1>
           </div>
 
                 <div class="col-sm-6">
@@ -101,7 +101,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                 <thead>
                 <tr>
                 <th>NOMBRE</th>
-                  <th>MOTIVO</th>
+               
                   <th>CORREO</th>
                   <th>OBSEVACION</th>
                   <th>ESTADO</th>
@@ -113,31 +113,40 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
                   while($counter < count($sql_tabla["ROWS"])) { 
-                    $cambio=$sql_tabla["ROWS"][$counter]["cambio"];
+                    $estado=$sql_tabla["ROWS"][$counter]["id_reactivacion"];
                     
-                    if ($cambio=='cambio') {
-                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$cambio</span>";
+                    if ($estado=='id_reactivacion') {
+                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$estado</span>";
                     }
-                    elseif($cambio=='Nuevo'){
-                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$cambio</span>";  
+                    elseif($estado=='Nuevo'){
+                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$estado</span>";  
 
                     }else{
-                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$cambio</span>";  
+                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$estado</span>";  
                     }
                     
                     
                     ?>
-                 
+                 <!-- <tr>
+                <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
+                <td><?php echo $sql_tabla["ROWS"][$counter]["valor"] ?></td>
+                <td><?php echo $sql_tabla["ROWS"][$counter]["correo"] ?></td>         
+                <td style="text-align: center;">                    
+                    <a href="../vistas/revision_cancelar_clases_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"]; ?>" class="btn btn-primary btn-raised btn-xs">
+                    <i class="far fa-check-circle"></i>
+                    </a>
+                </td>
+                </tr> -->
                 <tr>
                 
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
-                <td><?php echo  $sql_tabla["ROWS"][$counter]["motivo"]  ?></td>
+                
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["observacion"]  ?></td>
                 <td><?php echo $mostrarEstado ?></td> 
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>
                 <td style="text-align: center;">                    
-                    <a href="../vistas/revision_cancelar_clases_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cancelar_clases"]; ?>" class="btn btn-primary btn-raised btn-xs">
+                    <a href="../vistas/revision_reactivacion_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_reactivacion"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
                 </td>
@@ -192,7 +201,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
 </html>
 <script type="text/javascript" language="javascript">
   function ventana() {
-    window.open("../Controlador/reporte_cancelar_clases_controlador.php", "REPORTE");
+    window.open("../Controlador/reporte_revision_reactivacion_controlador.php", "REPORTE");
   }
 </script>
 

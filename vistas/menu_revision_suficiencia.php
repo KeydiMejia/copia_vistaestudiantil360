@@ -4,10 +4,10 @@ require_once ('../clases/Conexion.php');
 require_once ('../clases/funcion_visualizar.php');
 
 
-if (permiso_ver('142')=='1'){
-  $_SESSION['suficiencia']="...";
+if (permiso_ver('148')=='1'){
+  $_SESSION['menu_revision_suficiencia']="...";
 }else{
-$_SESSION['suficiencia']="No 
+$_SESSION['menu_revision_suficiencia']="No 
   tiene permisos para visualizar";
 }
 
@@ -56,7 +56,7 @@ $_SESSION['suficiencia']="No
                <div class="small-box bg-light">
                   <div class="inner">
                     <h4>Por Contenido</h4>
-                    <p><?php if($_SESSION['suficiencia']==="..."){
+                    <p><?php if($_SESSION['menu_revision_suficiencia']==="..."){
                                 echo 'Estudiantes provenientes de otras carreras de la UNAH';
                         }else{
                           echo $_SESSION['suficiencia'];
@@ -66,7 +66,7 @@ $_SESSION['suficiencia']="No
                 <div class="icon">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/suficiencia_contenido.php" class="small-box-footer">
+                <a href="../vistas/revision_suficiencia_vista.php?tipo=contenido" class="small-box-footer">
                 Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
           </div>
@@ -82,7 +82,7 @@ $_SESSION['suficiencia']="No
                <div class="small-box bg-primary">
                   <div class="inner">
                     <h4>Por Código</h4>
-                    <p><?php if($_SESSION['suficiencia']==="..."){
+                    <p><?php if($_SESSION['menu_revision_suficiencia']==="..."){
                                 echo 'Estudiantes de la carrera con cuentas anteriores al Plan Actual';
                         }else{
                           echo $_SESSION['suficiencia'];
@@ -92,7 +92,7 @@ $_SESSION['suficiencia']="No
                   <div class="icon">
                     <i class="fas fa-user-edit"></i>
                   </div>
-                  <a href="../vistas/examen_suficiencia_vista.php" class="small-box-footer">
+                  <a href="../vistas/revision_suficiencia_vista.php?tipo=codigo" class="small-box-footer">
                     Ir <i class="fas fa-arrow-circle-right"></i>
                   </a>
                 </div>

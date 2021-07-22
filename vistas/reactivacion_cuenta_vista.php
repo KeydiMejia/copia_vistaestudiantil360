@@ -7,7 +7,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=143; 
+$Id_objeto=141; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -22,11 +22,12 @@ if($visualizacion==0){
 
    </script>'; 
 }else{
-  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD EXAMEN SUFICIENCIA');
+  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD DE REACTIVACION DE CUENTA');
 }
 
+$consulta= "SELECT nombres, apellidos, correo FROM tbl_personas INNER JOIN tbl_reactivacion_cuenta ON tbl_personas.id_persona= tbl_reactivacion_cuenta .id_persona";
 $sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,pe.valor
-FROM tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
+FROM tbl_personas p, tbl_personas_extendidas pe,tbl_usuarios u
 WHERE u.id_persona = p.id_persona
 AND p.id_persona = pe.id_persona
 AND u.Usuario = ?");
@@ -56,7 +57,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud Examen Suficiencia</h1>
+            <h1>Solicitud de Reactivacion de Cuenta</h1>
           </div>
 
          
@@ -64,7 +65,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/menu_suficiencia_vista.php">Examen de Suficiencia</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/reactivacion_cuenta_vista.php">Reactivacion de cuenta</a></li>
             </ol>
           </div>
 
@@ -79,11 +80,11 @@ ob_end_flush();
             <div class="container-fluid">
   <!-- pantalla 1 -->
       
-<form action="../Controlador/examen_suficiencia_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
+<form action="../Controlador/reactivacion_cuenta_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
 
  <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Examen de Suficiencia</h3>
+            <h3 class="card-title">Reactivacion</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -130,7 +131,7 @@ ob_end_flush();
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
-                            <label>Solicitud examen suficiencia</label>
+                            <label>Solicitud de Equivalencias</label>
                             <input class="form-control" type="file" id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
@@ -142,7 +143,7 @@ ob_end_flush();
                 </div>
             </div>
             <p class="text-center form-group" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" id="btn_suficiencia" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary" id="btn_reactivacion_cuenta" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
 

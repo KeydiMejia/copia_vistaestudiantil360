@@ -266,6 +266,16 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p>Cancelacion de clases</p>
                   </a>
                 </li>
+                <li class="nav-item" style="display:<?php echo $_SESSION['suficienicia'] ?>">
+                  <a href="../vistas/menu_revision_suficiencia.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Examen de Suficiencia</p>
+                  </a>
+                </li>
+                <li class="nav-item" style="display:<?php echo $_SESSION['reactivacion_cuenta'] ?>">
+                  <a href="../vistas/revision_reactivacion_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Reactivacion de Cuenta</p>
                 <li class="nav-item" style="display:<?php echo $_SESSION['revision_servicio_comunitario'] ?>">
                   <a href="../vistas/revision_servicio_comunitario_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -382,9 +392,15 @@ if (session_status() === PHP_SESSION_NONE) {
                 </li>
                 
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_examensuficiencia'] ?>">
-                  <a href="../vistas/examen_suficiencia_vista.php" class="nav-link">
+                  <a href="../vistas/menu_suficiencia_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Examen de Suficiencia </p>
+                  </a>
+                </li>
+                <li class="nav-item" style="display:<?php echo $_SESSION['reactivacion_cuenta'] ?>">
+                  <a href="../vistas/reactivacion_cuenta_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Reactivacion de Cuenta </p>
                   </a>
                 </li>
               </ul>

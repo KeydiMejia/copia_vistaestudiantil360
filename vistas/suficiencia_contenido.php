@@ -26,9 +26,9 @@ if($visualizacion==0){
 }
 
 $sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,pe.valor
-FROM tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
-WHERE u.id_persona = p.id_persona
-AND p.id_persona = pe.id_persona
+FROM tbl_personas p, tbl_personas_extendidas pe,tbl_usuarios u
+WHERE pe.id_persona = p.id_persona
+AND p.id_persona = u.id_persona
 AND u.Usuario = ?");
 $sql->bind_param("s",$_SESSION['usuario']);
 $sql->execute();
@@ -98,7 +98,7 @@ ob_end_flush();
                         <div class="form-group">
                             <label>Nombre</label>
                             <input class="form-control" value="<?php echo $row['nombres'].' '.$row['apellidos'] ?>" type="text" id="txt_nombre" name="txt_nombre" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)"  readonly onmousedown="return false;" >
-                            <input class="form-control" type="hidden" id="txt_codigo" name="txt_codigo" value="codigo">
+                            <input class="form-control" type="hidden" id="txt_contenido" name="txt_contenido" value="contenido">
                         </div>
                 </div>
 
