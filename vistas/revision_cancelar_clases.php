@@ -192,7 +192,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
 </html>
 <script type="text/javascript" language="javascript">
   function ventana() {
-    window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php", "REPORTE");
+    window.open("../Controlador/reporte_cancelar_clases_controlador.php", "REPORTE");
   }
 </script>
 

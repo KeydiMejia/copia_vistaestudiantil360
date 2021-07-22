@@ -28,7 +28,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD - CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUDES DE CANCELACION DE CLASES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
@@ -58,10 +58,8 @@ class myPDF extends FPDF
     function viewTable()
     {
         global $instancia_conexion;
-        $sql = "select p.Id_cancelar_clases, p.motivo, p.correo, p.observacion, p.cambio, p.Fecha_creacion
-        FROM tbl_cancelar_clases p, tbl_usuarios u WHERE u.id_persona = p.id_persona AND u.Usuario = ?";
-        $sql->bind_param("s",$_SESSION['usuario']);
-        $sql->execute();
+        $sql = "select Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion
+FROM tbl_cancelar_clases";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
