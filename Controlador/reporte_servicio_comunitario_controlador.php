@@ -46,31 +46,27 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(20, 7, "ID", 1, 0, 'C');
+        $this->Cell(70, 7, "ID", 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("NOMBRE PROYECTO"), 1, 0, 'C');
         $this->Cell(80, 7, "OBSERVACION", 1, 0, 'C');
-        $this->Cell(60, 7, "Fecha_creacion", 1, 0, 'C');
+        $this->Cell(60, 7, "fecha_creacion", 1, 0, 'C');
 
         $this->ln();
     }
     function viewTable()
     {
         global $instancia_conexion;
-        $sql = "select p.id_servicio_comunitario, p.nombre_proyecto, p.observacion,  p.Fecha_creacion
-        FROM tbl_servicio_comunitario p, tbl_usuarios u WHERE u.id_persona = p.id_persona AND u.Usuario = ?";
-        $sql->bind_param("s",$_SESSION['usuario']);
-        $sql->execute();
+        $sql = "select id_servicio_comunitario, nombre_proyecto, observacion,  fecha_creacion 
+        FROM tbl_servicio_comunitario";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-            $this->Cell(20, 7, $reg['id_servicio_comunitario'], 1, 0, 'C');
-            $this->Cell(70, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
-            $this->Cell(70, 7, utf8_decode($reg['correo']), 1, 0, 'C');
+            $this->Cell(70, 7, $reg['id_servicio_comunitario'], 1, 0, 'C');
+            $this->Cell(70, 7, utf8_decode($reg['nombre_proyecto']), 1, 0, 'C');
             $this->Cell(80, 7, $reg['observacion'], 1, 0, 'C');
-            $this->Cell(30, 7, $reg['nombre_proyecto'], 1, 0, 'C');
-            $this->Cell(60, 7, $reg['Fecha_creacion'], 1, 0, 'C');
+            $this->Cell(60, 7, $reg['fecha_creacion'], 1, 0, 'C');
 
             $this->ln();
         }
