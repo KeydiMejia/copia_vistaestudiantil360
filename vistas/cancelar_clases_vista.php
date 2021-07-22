@@ -25,7 +25,7 @@ if($visualizacion==0){
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD CANCELAR CLASES');
 }
 
-            $sql=$mysqli->prepare("SELECT p.id_persona, p.nombres,p.apellidos,pe.valor
+            $sql=$mysqli->prepare("SELECT p.id_persona, p.nombres, p.apellidos, pe.valor
             FROM tbl_usuarios u, tbl_personas p,tbl_personas_extendidas pe
             WHERE u.id_persona = p.id_persona
             AND p.id_persona = pe.id_persona
@@ -161,23 +161,24 @@ ob_end_flush();
             </p>
           </div>
 
+
+
           <!-- /.card-body -->
           <div class="card-footer">
             
           </div>
         </div>
+         
+         
     
     <div class="RespuestaAjax"></div>
+</form>
 
- </form>
-</div>
+  </div>
 </section>
-</div> <!-- fin ""--->
 
 
-
-
-
+</div>
 <script>
 $('input[type="file"]').on('change', function(){
   var ext = $( this ).val().split('.').pop();
