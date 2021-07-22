@@ -266,6 +266,12 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p>Cancelacion de clases</p>
                   </a>
                 </li>
+                <li class="nav-item" style="display:<?php echo $_SESSION['revision_servicio_comunitario'] ?>">
+                  <a href="../vistas/revision_servicio_comunitario_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Servicio Comunitario</p>
+                  </a>
+                </li>
                 <!-- CARGA ACADEMICA -->
                 <li class="nav-item" style="display:<?php echo $_SESSION['carga_academica_vista'] ?>">
                   <a href="../vistas/menu_carga_academica_vista.php" class="nav-link">
@@ -366,6 +372,12 @@ if (session_status() === PHP_SESSION_NONE) {
                   <a href="../vistas/cancelar_clases_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Cancelacion de clases</p>
+                  </a>
+                </li>
+                <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_servicio_comunitario'] ?>">
+                  <a href="../vistas/servicio_comunitario_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Servicio Comunitario </p>
                   </a>
                 </li>
                 
