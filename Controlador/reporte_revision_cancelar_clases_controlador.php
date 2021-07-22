@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once('../clases/conexion_mantenimientos.php');
+require_once('../clases/Conexion.php');
 require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
-//require_once('../controlador/cancelar_clases_controlador.php');//
+//require_once('../Controlador/cancelar_clases_controlador.php');
+//include("../Controlador/cancelar_clases_controlador.php");
 $instancia_conexion = new conexion();
-
 
 
 class myPDF extends FPDF
@@ -54,10 +54,12 @@ class myPDF extends FPDF
         $this->ln();
     }
     function viewTable()
-    {
+    {   //global $Id_cancelar_clases;
+        //$sqlp="select MAX(Id_cancelar_clases) FROM tbl_cancelar_clases";
+        //$Id_cancelar_clases= $instancia_conexion->ejecutarConsulta($sqlp);
+
         global $instancia_conexion;
-        $sql = "select Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion
-        FROM tbl_cancelar_clases";
+        $sql ="SELECT Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion FROM tbl_cancelar_clases WHERE Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases)";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
