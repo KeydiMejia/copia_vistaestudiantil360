@@ -50,36 +50,25 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                 }
                 $documento = json_encode($direccion);
 
-                
-                $sql= "INSERT INTO tbl_cancelar_clases (id_persona, motivo, fecha_creacion, documento, cambio, observacion, correo)
+
+                $sql= "INSERT INTO tbl_cancelar_clases (id_persona, motivo, Fecha_creacion, documento, cambio, observacion, correo)
                 VALUES ('$id_persona', '$motivo', current_timestamp(),'$documento', 'Nuevo', 'revision pendiente','$correo')";
                 
                 $resultadop = $mysqli->query($sql);
                 if($resultadop == true){
                     echo '<script type="text/javascript">
                                     swal({
-                                        title:"",
+                                        title:"¿Deseas ver reporte en PDF?",
                                         text:"Solicitud enviada...",
-                                        type: "success",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                        });
-                                        $(".FormularioAjax")[0].reset();
-                                        </script>'; 
-
-                    echo '<script type="text/javascript">
-                                        swal({
-                                        title: "¿Quieres ver el reporte?",   
-                                        text: textoAlerta,   
-                                        type: "question",   
-                                        showCancelButton: true,
-                                        timer: 1500     
+                                        type: "question",
+                                        showCancelButton: true,     
                                         confirmButtonText: "Aceptar",
                                         cancelButtonText: "Cancelar"
-                                    }).then(function ventana() {
-                                    window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php", "REPORTE");
-                                                            }
-                                        </script>'; 
+                                    }).then(function() {
+                                        window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php");
+                                    });
+                                        $(".FormularioAjax")[0].reset();
+                                       </script>'; 
                     
                                 } 
                 else {

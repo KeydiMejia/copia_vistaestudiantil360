@@ -3,10 +3,8 @@ session_start();
 require_once('../clases/conexion_mantenimientos.php');
 require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
+//require_once('../controlador/cancelar_clases_controlador.php');//
 $instancia_conexion = new conexion();
-
-
-//$stmt = $instancia_conexion->query("SELECT tp.nombres FROM tbl_personas tp INNER JOIN tbl_usuarios us ON us.id_persona=tp.id_persona WHERE us.Id_usuario= 8");
 
 
 
@@ -28,7 +26,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUDES DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
@@ -59,7 +57,7 @@ class myPDF extends FPDF
     {
         global $instancia_conexion;
         $sql = "select Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion
-FROM tbl_cancelar_clases";
+        FROM tbl_cancelar_clases";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
