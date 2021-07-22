@@ -101,6 +101,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                   <th>NOMBRE</th>
                   <th># DE CUENTA</th>
                   <th>NOMBRE PROYECTO</th>
+                  <th>CORREO</th>
                   <th>ESTADO</th>
                   <th>FECHA</th>
                   <th>REVISAR SOLICITUD</th>
@@ -135,6 +136,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                 <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["valor"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["nombre_proyecto"]  ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
                 <td><?php echo  $mostrarEstado ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>  
                 <td style="text-align: center;">                    

@@ -65,8 +65,8 @@
                 // call ins_carta_egresado('$ncuenta','$documento','$correo')
                 
                 
-                $sql= "INSERT INTO tbl_servicio_comunitario (id_persona,nombre_proyecto,fecha_creacion,documento,observacion,id_estado_servicio)
-                VALUES ('$id_persona','$proyecto', current_timestamp(), '$documento','Nuevo',1)";
+                $sql= "INSERT INTO tbl_servicio_comunitario (id_persona,nombre_proyecto,fecha_creacion,documento,observacion,id_estado_servicio,correo)
+                VALUES ('$id_persona','$proyecto', current_timestamp(), '$documento','Nuevo',1,'$correo')";
     
                 $resultadop = $mysqli->query($sql);
                 if($resultadop == true){
