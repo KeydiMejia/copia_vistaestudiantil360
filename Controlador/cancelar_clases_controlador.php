@@ -50,14 +50,7 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                 }
                 $documento = json_encode($direccion);
 
-                //if($verificado1!=="" && $verificado2!==""){
-                  //  $insertanombre ="call upd_nombre('$ncuenta','$verificado1','$verificado2')";
-                    //$resultadon = $mysqli->query($insertanombre);
-                    //$resultadon->free();
-                    //$mysqli->next_result();
-                //}
-
-                //$sqlp = "call ins_cancelar_clases('$ncuenta','$documento','$correo', id_persona)";
+                
                 $sql= "INSERT INTO tbl_cancelar_clases (id_persona, motivo, fecha_creacion, documento, cambio, observacion, correo)
                 VALUES ('$id_persona', '$motivo', current_timestamp(),'$documento', 'Nuevo', 'revision pendiente','$correo')";
                 
@@ -72,7 +65,21 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                                         timer: 1500
                                         });
                                         $(".FormularioAjax")[0].reset();
-                                       </script>'; 
+                                        </script>'; 
+
+                    echo '<script type="text/javascript">
+                                        swal({
+                                        title: "¿Quieres ver el reporte?",   
+                                        text: textoAlerta,   
+                                        type: "question",   
+                                        showCancelButton: true,
+                                        timer: 1500     
+                                        confirmButtonText: "Aceptar",
+                                        cancelButtonText: "Cancelar"
+                                    }).then(function ventana() {
+                                    window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php", "REPORTE");
+                                                            }
+                                        </script>'; 
                     
                                 } 
                 else {

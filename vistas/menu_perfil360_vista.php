@@ -68,7 +68,7 @@ if($visualizacion==0){
 }
 
 
-/* Manda a llamar todos las datos de la tabla para llenar la tabla de datos personales  */
+/* Manda a llamar datos de la tabla para llenar la tabla de datos personales  */
 $sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,p.identidad, p.fecha_nacimiento, pe.valor
 FROM tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
 WHERE pe.id_persona = p.id_persona
@@ -78,6 +78,51 @@ $sql->bind_param("s",$_SESSION['usuario']);
 $sql->execute();
 $resultadotabla = $sql->get_result();
 $row = $resultadotabla->fetch_array(MYSQLI_ASSOC);
+
+/* manda a llamar la informacion de contacto para tabla datos personales */
+$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
+FROM tbl_contactos c,  tbl_usuarios u
+WHERE u.id_persona = c.id_persona
+AND c.id_tipo_contacto = 1
+AND u.Usuario = ?");
+$sql->bind_param("s",$_SESSION['usuario']);
+$sql->execute();
+$resultadotabla = $sql->get_result();
+$rowA = $resultadotabla->fetch_array(MYSQLI_ASSOC);
+
+$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
+FROM tbl_contactos c,  tbl_usuarios u
+WHERE u.id_persona = c.id_persona
+AND c.id_tipo_contacto = 2
+AND u.Usuario = ?");
+$sql->bind_param("s",$_SESSION['usuario']);
+$sql->execute();
+$resultadotabla = $sql->get_result();
+$rowB = $resultadotabla->fetch_array(MYSQLI_ASSOC);
+
+$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
+FROM tbl_contactos c,  tbl_usuarios u
+WHERE u.id_persona = c.id_persona
+AND c.id_tipo_contacto = 3
+AND u.Usuario = ?");
+$sql->bind_param("s",$_SESSION['usuario']);
+$sql->execute();
+$resultadotabla = $sql->get_result();
+$rowC = $resultadotabla->fetch_array(MYSQLI_ASSOC);
+
+$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
+FROM tbl_contactos c,  tbl_usuarios u
+WHERE u.id_persona = c.id_persona
+AND c.id_tipo_contacto = 4
+AND u.Usuario = ?");
+$sql->bind_param("s",$_SESSION['usuario']);
+$sql->execute();
+$resultadotabla = $sql->get_result();
+$rowD = $resultadotabla->fetch_array(MYSQLI_ASSOC);
+
+
+
+
 /* Manda a llamar las clases aprobadas por el id */
 $idUsuario = $_SESSION['id_persona'];
 
@@ -246,16 +291,25 @@ footer{
       <td><?php echo $row['fecha_nacimiento'] ?></td>
         </tr>
         <tr>
-      <th>Correo:</th>
-      <td></td>
+      <th>Correo electronico:</th>
+      <td><?php echo $rowD['valor'] ?></td>
         </tr>
         <tr>
-      <th>Telefono:</th>
-      <td></td>
+      <th>Telefono fijo:</th>
+      <td><?php echo $rowB['valor'] ?></td>
         </tr>
-                  
+        <tr>
+      <th>Telefono celular:</th>
+      <td><?php echo $rowA['valor'] ?></td>
+        </tr>  
+        <tr>
+      <th>Direccion:</th>
+      <td><?php echo $rowC['valor'] ?></td>
+        </tr>   
         </tbody>
       </table>
+      <br></br>
+      
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -263,7 +317,7 @@ footer{
     </div><!-- /.container-fluid -->
 
 
-    <!--------------------- seccion de foto y asig aprobadas------------------>
+    <!-------------- seccion de foto y asig aprobadas--------------->
     <section class="col-lg-5">
     <div class="card" style="width: 15rem; margin-left:20%;">
     <img class="card-img-top" src="../dist/img/christel.jpg" alt="Card image cap">
@@ -313,34 +367,34 @@ footer{
          <!-- <hr></hr>-->
           <h4>Solicitudes que puedes realizar</h4>
         <!--solicitud examen de suficiencia------>
-        <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Examen suficiencia</button>
+        <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/examen_suficiencia_vista.php'">Examen suficiencia</button>
          
             <!--solicitud reactivacion de cuenta------>
-            <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Reactivacion cuenta</button>
+            <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/reactivacion_cuenta_vista.php'">Reactivacion cuenta</button>
           
               <!--solicitud cambio carrera------>
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">Cambio de carrera</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%" onclick="location.href='../vistas/cambio_carrera_vista.php'">Cambio de carrera</button>
           
               <!--solicitud practica profesional------>
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Practica profesional</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/examen_suficiencia_vista.php'">Practica profesional</button>
           
               <!--solicitud cancelar clases------>
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Cancelacion de clases</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/cancelar_clases_vista.php'">Cancelacion de clases</button>
          
               <!--solicitud servicio comunitario------>
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">Servicio comunitario</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%" onclick="location.href='../vistas/servicio_comunitario_vista.php'">Servicio comunitario</button>
           
               <!--solicitud equivalencias------>
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Equivalencias</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/equivalencias_vista.php'">Equivalencias</button>
           
               <!--solicitud expediente graduacion------>
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Expediente graduacion</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/expediente_graduacion_vista.php'">Expediente graduacion</button>
           
               <!--solicitud carta egresado------>
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">Carta de egresado</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%" onclick="location.href='../vistas/carta_egresado_vista.php'">Carta de egresado</button>
           
               <!--solicitud finalizacion practica----->
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">Finalizacion practica</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/finalizacion_practica_vista.php'">Finalizacion practica</button>
 
               <!--solicitud a VOAE Asistencia---->
               <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">VOAE - Asistencia</button>
@@ -366,49 +420,49 @@ footer{
 					<tbody>
 						<tr>
 							<th>Examen de suficiencia:</th>
-              <td><a href="mailto:nowhere@mozilla.org"><?php echo $fila1['id_persona'] ?></a></td>
+              <td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila1['id_persona'] ?></a></td>
 
 						</tr>
                         <tr>
 							<th>Reactivacion de cuenta:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila2['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila2['id_persona'] ?></a></td>
 							
 						</tr>
 						<tr>
 							<th>cambio de carrera:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila3['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila3['id_persona'] ?></a></td>
 							
 						</tr>
 						<tr>
 							<th>Practica profesional:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila4['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila4['id_persona'] ?></a></td>
 							
 						</tr>
                         <tr>
 							<th>Cancelacion de clases:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila5['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila5['id_persona'] ?></a></td>
 							
 						</tr>
                         <tr>
 							<th>Servicio comunitario:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila6['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila6['id_persona'] ?></a></td>
 							
 						</tr>
                         <tr>
 							<th>Equivalencias:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila7['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila7['id_persona'] ?></a></td>
 							
 						</tr>
             </tr>
                         <tr>
 							<th>Carta de egresado:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila8['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila8['id_persona'] ?></a></td>
 							
 						</tr>
             </tr>
                         <tr>
 							<th>Expediente de graduacion:</th>
-							<td><a href="mailto:nowhere@mozilla.org"><?php echo $fila9['id_persona'] ?></a></td>
+							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila9['id_persona'] ?></a></td>
 							
 						</tr>
 					</tbody>
