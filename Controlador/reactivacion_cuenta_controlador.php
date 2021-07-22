@@ -10,11 +10,8 @@ require_once ('../clases/Conexion.php');
         $verificado1 = $_POST['txt_verificado1'];
         $verificado2 = $_POST['txt_verificado2'];
        // $observacion = $_POST['txt_observacion'];
-        $id_estado_reactivacion =0;
-        for ($r = 1 ; $r < 1000; $r ++){
-            if ($r % 2 ==0) {$id_estado_reactivacion += 1; 
-            }
-        }
+       
+     
 
         $sql="SELECT p.id_persona, p.nombres,p.apellidos,pe.valor
              FROM tbl_personas p, tbl_personas_extendidas pe
@@ -67,14 +64,17 @@ require_once ('../clases/Conexion.php');
                 if($resultadop == true){
                     echo '<script type="text/javascript">
                             swal({
-                                title:"",
-                                text:"Solicitud enviada...",
-                                type: "success",
-                                showConfirmButton: false,
-                                timer: 1500
-                                });
-                                $(".FormularioAjax")[0].reset();
-                            </script>'; 
+                                title:"¿Deseas ver reporte en PDF?",
+                                        text:"Solicitud enviada...",
+                                        type: "question",
+                                        showCancelButton: true,     
+                                        confirmButtonText: "Aceptar",
+                                        cancelButtonText: "Cancelar"
+                                    }).then(function() {
+                                        window.open("../Controlador/reporte_revision_reactivacion_controlador.php");
+                                    });
+                                        $(".FormularioAjax")[0].reset();
+                                       </script>'; 
                         } 
                     else {
                         echo "Error: " . $sqlp;
@@ -205,7 +205,7 @@ require_once ('../clases/Conexion.php');
         $aprobado = $_POST['aprobado'];
         $cuenta = $_POST['txt_cuenta1'];
         $observacion = $_POST['txt_observacion'];
-        $tipo = $_POST['txt_tipo'];
+       // $tipo = $_POST['txt_tipo'];
 
         $sql=$mysqli->prepare("select p.id_persona,p.nombres,p.apellidos, pe.valor 
                                from tbl_personas p,tbl_personas_extendidas pe 
@@ -216,12 +216,13 @@ require_once ('../clases/Conexion.php');
         $resultado = $sql->get_result();
         $row = $resultado->fetch_array(MYSQLI_ASSOC);
         $id = $row['id_persona'];
-
+        
         if($observacion!==""){
            //`id_estado_reactivacion` = '$aprobado'
             $sqlp = "UPDATE `tbl_reactivacion_cuenta` 
             SET  `fecha_creacion` = now(),
             `observacion` = '$observacion'
+            
             WHERE id_persona = '$id'";
             $resultadop = $mysqli->query($sqlp);
             if($resultadop >= 1){
@@ -246,7 +247,8 @@ require_once ('../clases/Conexion.php');
             
             $sqlp = "UPDATE `tbl_reactivacion_cuenta` 
                     SET  `fecha_creacion` = now(),
-                    `observacion` = '$observacion'
+                    `observacion` = '$observacion',
+                    `id_estado_reactivacion` = '1'
                     WHERE id_persona = '$id'
                     ";
             $resultadop = $mysqli->query($sqlp);

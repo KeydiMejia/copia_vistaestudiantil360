@@ -115,7 +115,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                   while($counter < count($sql_tabla["ROWS"])) { 
                     $estado=$sql_tabla["ROWS"][$counter]["id_reactivacion"];
                     
-                    if ($estado=='aprovado') {
+                    if ($estado=='id_reactivacion') {
                       $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$estado</span>";
                     }
                     elseif($estado=='Nuevo'){
@@ -144,7 +144,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["observacion"]  ?></td>
                 <td><?php echo $mostrarEstado ?></td> 
-                <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_ creacion"]  ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>
                 <td style="text-align: center;">                    
                     <a href="../vistas/revision_reactivacion_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_reactivacion"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>

@@ -7,7 +7,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=143; 
+$Id_objeto=150; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -22,13 +22,13 @@ if($visualizacion==0){
 
    </script>'; 
 }else{
-  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD EXAMEN SUFICIENCIA');
+  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD SERVICIO COMUNITARIO');
 }
 
 $sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,pe.valor
-FROM tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
-WHERE u.id_persona = p.id_persona
-AND p.id_persona = pe.id_persona
+FROM tbl_personas p, tbl_personas_extendidas pe,tbl_usuarios u
+WHERE pe.id_persona = p.id_persona
+AND p.id_persona = u.id_persona
 AND u.Usuario = ?");
 $sql->bind_param("s",$_SESSION['usuario']);
 $sql->execute();
@@ -56,7 +56,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud Examen Suficiencia</h1>
+            <h1>Solicitud de Servicio Comunitario</h1>
           </div>
 
          
@@ -64,7 +64,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/menu_suficiencia_vista.php">Examen de Suficiencia</a></li>
+              <li class="breadcrumb-item"><a href="../pdf/requisitos_servicio_comunitario.php">Equivalencias</a></li>
             </ol>
           </div>
 
@@ -79,11 +79,11 @@ ob_end_flush();
             <div class="container-fluid">
   <!-- pantalla 1 -->
       
-<form action="../Controlador/examen_suficiencia_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
+<form action="../Controlador/servicio_comunitario_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
 
  <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Examen de Suficiencia</h3>
+            <h3 class="card-title">Servicio Comunitario</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -127,10 +127,16 @@ ob_end_flush();
                             <label>Correo Electrónico Institucional</label>
                             <input class="form-control" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
-                </div>
+                        </div>
+                <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nombre Proyecto</label>
+                            <input class="form-control" type="text" id="txt_nombre" name="txt_nombre" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                        </div>
+                        </div>
                 <div class="col-md-6">
                         <div class="form-group">
-                            <label>Solicitud examen suficiencia</label>
+                            <label>Solicitud de Servicio Comunitario</label>
                             <input class="form-control" type="file" id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
@@ -142,7 +148,7 @@ ob_end_flush();
                 </div>
             </div>
             <p class="text-center form-group" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" id="btn_suficiencia" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary" id="btn_servicio" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
 

@@ -28,8 +28,8 @@ if($visualizacion==0){
 $consulta= "SELECT nombres, apellidos, correo FROM tbl_personas INNER JOIN tbl_reactivacion_cuenta ON tbl_personas.id_persona= tbl_reactivacion_cuenta .id_persona";
 $sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,pe.valor
 FROM tbl_personas p, tbl_personas_extendidas pe,tbl_usuarios u
-WHERE pe.id_persona = p.id_persona
-AND p.id_persona = u.id_persona
+WHERE u.id_persona = p.id_persona
+AND p.id_persona = pe.id_persona
 AND u.Usuario = ?");
 $sql->bind_param("s",$_SESSION['usuario']);
 $sql->execute();

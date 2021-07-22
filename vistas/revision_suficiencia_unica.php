@@ -195,17 +195,17 @@ ob_end_flush();
                          $directorio=opendir("../archivos/suficiencia/$tipo/$cuenta");
                          while ($elemento =readdir($directorio)) 
                          {
-                           //if ($elemento !='.' and $elemento !='..') {
+                           if ($elemento !='.' and $elemento !='..') {
                
                
-                             if (!is_dir("../archivos/suficiencia/$tipo/$cuenta/".$elemento)) 
+                             if (is_dir("../archivos/suficiencia/$tipo/$cuenta/".$elemento)) 
                              {
                                $listar .="<li> <a href='../archivos/suficiencia/$tipo/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
                              }
                              else {
                                $listar .="<li> <a href='../archivos/suficiencia/$tipo/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
                              } 
-                           //}
+                           }
                          }
 
                         ?>

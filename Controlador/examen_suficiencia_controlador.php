@@ -10,7 +10,7 @@
             $correo = $_POST['txt_correo'];
             $verificado1 = $_POST['txt_verificado1'];
             $verificado2 = $_POST['txt_verificado2'];
-            $observacion = $_POST['txt_observacion'];
+          //  $observacion = $_POST['txt_observacion'];
     
             $sql="SELECT p.id_persona, p.nombres,p.apellidos,pe.valor
                  FROM tbl_personas p, tbl_personas_extendidas pe
@@ -46,25 +46,19 @@
                     }
                     $documento = json_encode($direccion);
     
-                    // if($verificado1!=="" && $verificado2!==""){
-                    //     $insertanombre ="call upd_nombre('$cuenta','$verificado1','$verificado2')";
-                    //     $resultadon = $mysqli->query($insertanombre);
-                    //    $resultadon->free();
-                    //     $mysqli->next_result();
-                    // }
-    
-                    // $sqlp = "call ins_equivalencias('$cuenta','$documento','CODIGO','$correo')";
+                     if($verificado1!=="" && $verificado2!==""){
+                  
                     $id_persona=$data['id_persona'];
                    
                    $sqlp= "INSERT INTO  tbl_examen_suficiencia (id_persona,fecha_creacion,documento ,observacion, id_estado_suficiencia,correo,tipo)
-                                                        VALUES ('$id_persona', current_timestamp(),'$documento', 'Revisión pendiente','1','$correo', 'codigo')";
+                                                        VALUES ('$id_persona', current_timestamp(),'$documento', 'Revisión pendiente','1','$correo','codigo')";
 
     
                     $resultadop = $mysqli->query($sqlp);
                     if($resultadop == true){
                         echo '<script type="text/javascript">
                                 swal({
-                                    title:"",
+                                    title:"¿Deseas ver reporte en PDF?",
                                     text:"Solicitud enviada...",
                                     type: "success",
                                     showConfirmButton: false,
@@ -100,6 +94,7 @@
                                 $(".FormularioAjax")[0];
                           </script>';
             }
+        }
     
         }elseif(isset($_POST['txt_contenido']) && $_POST['txt_contenido']!=="" && $_POST['txt_nombre']!=="" 
          && $_POST['txt_cuenta']!=="" && $_POST['txt_correo']!==""){
@@ -142,32 +137,29 @@
                     }
                     $documento = json_encode($direccion);
     
-                    // if($verificado1!=="" && $verificado2!==""){
-                    //     $insertanombre ="call upd_nombre('$cuenta','$verificado2','$verificado2')";
-                    //     $resultadon = $mysqli->query($insertanombre);
-                    //     $resultadon->free();
-                    //     $mysqli->next_result();
-                    // }
-        
-                    // $sqlp = "call ins_equivalencias('$cuenta','$documento','CONTENIDO','$correo')";
+                     if($verificado1!=="" && $verificado2!==""){
+                   
                    
                     $id_persona=$data['id_persona'];
                    
-                    $sqlp= "INSERT INTO  tbl_examen_suficiencia (id_persona,fecha_creacion,documento,observacion,id_estado_suficiencia,correo, 'tipo')
-                    VALUES ('$id_persona',current_timestamp(),'$documento', 'Revisión pendiente','1','$correo', 'contenido')";
+                    $sqlp= "INSERT INTO  tbl_examen_suficiencia (id_persona,fecha_creacion,documento,observacion,id_estado_suficiencia,correo,tipo)
+                    VALUES ('$id_persona',current_timestamp(),'$documento', 'Revisión pendiente','1','$correo','contenido')";
                     
                     $resultadop = $mysqli->query($sqlp);
                     if($resultadop == true){
                         echo '<script type="text/javascript">
                                 swal({
-                                    title:"",
+                                    title:"¿Deseas ver reporte en PDF?",
                                     text:"Solicitud enviada...",
-                                    type: "success",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                    });
+                                    type: "question",
+                                    showCancelButton: true,     
+                                    confirmButtonText: "Aceptar",
+                                    cancelButtonText: "Cancelar"
+                                }).then(function() {
+                                    window.open("../Controlador/reporte_revision_suficiencia_controlador.php");
+                                });
                                     $(".FormularioAjax")[0].reset();
-                                </script>'; 
+                                   </script>'; 
                             } 
                         else {
                             echo "Error: " . $sql ;
@@ -184,7 +176,7 @@
                                 $(".FormularioAjax")[0];
                             </script>';
                 }
-    
+            }
             }else{
                     echo '<script type="text/javascript">
                             swal({
@@ -198,7 +190,7 @@
                           </script>'; 
                 }
     
-        }else if(isset($_POST['documento']) && $_POST['documento']!==""){
+        }else if(isset($_POST['aprobado']) && $_POST['aprobado']!==""){
             $documento = $_POST['documento'];
             $cuenta = $_POST['txt_cuenta1'];
             $observacion = $_POST['txt_observacion'];
@@ -216,8 +208,8 @@
     
             if($observacion!==""){
                
-                 $sqlp = "UPDATE `tbl_examen_suficiencia 
-                SET `estado` = '$estado', 
+                 $sqlp = "UPDATE `tbl_examen_suficiencia` 
+                SET `fecha_creacion` = now(), 
                 observacion = '$observacion'
                 WHERE id_persona = '$id'
                 AND tipo = '$tipo'"; 
@@ -242,8 +234,8 @@
     
             }else{
                 
-                $sqlp = "UPDATE `tbl_examen_reactivacion 
-                SET `estado` = '$estado', 
+                $sqlp = "UPDATE `tbl_examen_suficiencia `
+                SET `fecha_creacion` = now(), 
                 observacion = '$observacion'
                 WHERE id_persona = '$id'
                 AND tipo = '$tipo'";

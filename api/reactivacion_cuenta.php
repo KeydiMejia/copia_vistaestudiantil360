@@ -30,7 +30,7 @@ if(isset($_GET['alumno'])){
     
     // "call sel_carta_egresado()"
     
-    $consulta="SELECT nombres, apellidos,tbl_personas.id_persona, observacion, documento, Fecha_creacion,correo,id_reactivacion FROM
+    $consulta="SELECT nombres, apellidos,tbl_personas.id_persona, observacion, documento, fecha_creacion,correo,id_reactivacion FROM
                      tbl_personas INNER JOIN tbl_reactivacion_cuenta ON tbl_personas.id_persona = tbl_reactivacion_cuenta.id_persona";
     if ($R = $mysqli->query($consulta)) {
         // $items = [];

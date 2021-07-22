@@ -7,7 +7,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=36; 
+$Id_objeto=152; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -27,9 +27,9 @@ if (isset($_GET['alumno'])){
 
     // $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
    
-    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/expediente_graduacion.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/servicio_comunitario.php?alumno=".$_GET['alumno']), true );
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION EPEDIENTE DE GRADUACION '.$sqltabla["ROWS"][0]['nombres'].'');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION SERVICIO COMUNITARIO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
 ob_end_flush();
@@ -51,7 +51,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud de Expediente de Graduación</h1>
+            <h1>Solicitud de Servicio Comunitario</h1>
           </div>
 
          
@@ -59,7 +59,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/revision_carta_egresado_vista.php">Solicitudes de Carta de Egresado</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/revision_servicio_comunitario_vista.php">Solicitudes de Servicio Comunitario</a></li>
             </ol>
           </div>
 
@@ -74,7 +74,7 @@ ob_end_flush();
             <div class="container-fluid">
   <!-- pantalla 1 -->
       
-<form action="../Controlador/expediente_graduacion_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
+<form action="../Controlador/servicio_comunitario_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
 
  <div class="card card-default">
           <div class="card-header">
@@ -101,7 +101,7 @@ ob_end_flush();
                   
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor']  ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                   
-                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_expediente']  ?>" type="text"  name="id_expediente">
+                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_servicio_comunitario']  ?>" type="text"  name="id_servicio_comunitario">
 
                         </div>
                 </div>
@@ -206,18 +206,18 @@ ob_end_flush();
                         <?php 
                         $cuenta = $sqltabla["ROWS"][0]['valor'];
                          $listar=null;
-                         $directorio=opendir("../archivos/expediente_graduacion/$cuenta/");
+                         $directorio=opendir("../archivos/servicio_comunitario/$cuenta/");
                          while ($elemento =readdir($directorio)) 
                          {
                            if ($elemento !='.' and $elemento !='..') {
                
                
-                             if (is_dir("../archivos/expediente_graduacion/$cuenta/".$elemento)) 
+                             if (is_dir("../archivos/servicio_comunitario/$cuenta/".$elemento)) 
                              {
-                               $listar .="<li> <a href='../archivos/expediente_graduacion/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
+                               $listar .="<li> <a href='../archivos/servicio_comunitario/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
                              }
                              else {
-                               $listar .="<li> <a href='../archivos/expediente_graduacion/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
+                               $listar .="<li> <a href='../archivos/servicio_comunitario/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
                              } 
                            }
                          }
