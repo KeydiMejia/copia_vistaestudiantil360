@@ -85,7 +85,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
               </div>
         <br>
         <div class=" px-12">
-          <!-- <button class="btn btn-success "> <i class="fas fa-file-pdf"></i> <a style="font-weight: bold;" onclick="ventana()">Exportar a PDF</a> </button> -->
+         
         </div>
       </div>
       <div class="card-body">
@@ -140,6 +140,11 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                     <a href="../vistas/revision_cancelar_clases_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cancelar_clases"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
+                                   
+                    <a href="../Controlador/reporte_revision_cancelar_clases_unica_controlador.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cancelar_clases"]; ?>" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger btn-xs" tabindex="0" aria-controls="tabla" type="buttton" title="Exportar a PDF">
+                    <i class="fas fa-file-pdf"></i>
+                  </a>
+        
                 </td>
                </tr>
                  <?php $counter = $counter + 1; }} ?>
@@ -195,6 +200,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
     window.open("../Controlador/reporte_cancelar_clases_controlador.php", "REPORTE");
   }
 </script>
+
 
 <!-- <script type="text/javascript" src="../js/funciones_mantenimientos.js"></script> -->
 
