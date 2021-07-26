@@ -77,7 +77,7 @@ class myPDF extends FPDF
         $this->Cell(50, 7, utf8_decode("NOMBRE"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("APELLIDOS"), 1, 0, 'C');
         $this->Cell(40, 7, utf8_decode("#CUENTA"), 1, 0, 'C');
-      
+        $this->Cell(50, 7, utf8_decode("IDENTIDAD"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("OBSERVACION"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("ESTADO"), 1, 0, 'C');
         $this->ln();
@@ -220,7 +220,7 @@ class myPDF extends FPDF
             $this->Cell(50, 7, utf8_decode($reg['nombres']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['apellidos']), 1, 0, 'C');
              $this->Cell(40, 7, utf8_decode($reg['valor']), 1, 0, 'C');
-          
+             $this->Cell(50, 7, utf8_decode($reg['identidad']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode('N/A'), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
 
@@ -247,9 +247,9 @@ class myPDF extends FPDF
             $this->Cell(50, 7, utf8_decode($reg['nombres']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['apellidos']), 1, 0, 'C');
              $this->Cell(40, 7, utf8_decode($reg['valor']), 1, 0, 'C');
-            $this->Cell(70, 7, utf8_decode($reg['correo']), 1, 0, 'C');
-            $this->Cell(50, 7, utf8_decode('N/A'), 1, 0, 'C');
-            $this->Cell(50, 7, utf8_decode($reg['aprobado']), 1, 0, 'C');
+             $this->Cell(50, 7, utf8_decode($reg['identidad']), 1, 0, 'C'); 
+            $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
+            $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
 
             $this->ln();
             $n++;
@@ -335,8 +335,8 @@ if (isset($_GET['ruby'])) {
     }
 }
 
-//REPORTE DE CARTA DE EGRESADO
-
+/*************REPORTES DE LESS *************** */
+//REPORTE EXPEDIENTE GRADUACION
 if (isset($_GET['scala'])) {
     if ($_GET['scala']!=='') {
         
@@ -344,34 +344,33 @@ if (isset($_GET['scala'])) {
         $buscar= base64_decode($_GET['scala']);
         
         //confeccion de la consulta para filtrar los datos 
-       $sql= "SELECT nombres, apellidos, correo,tbl_personas.id_persona, 
-                observacion, aprobado, documento, Fecha_creacion,Id_carta,valor
-                 FROM tbl_personas INNER JOIN tbl_carta_egresado 
-                 ON tbl_personas.id_persona = tbl_carta_egresado.id_persona
-                 INNER JOIN tbl_personas_extendidas 
-                 ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
+       $sql= "SELECT valor, nombres, apellidos,observacion,fecha_creacion, tbl_expediente_graduacion.id_expediente, 
+       tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion,tbl_personas.identidad
+       FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
+       INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
              WHERE
                 nombres LIKE '%".$buscar."%' OR
                 apellidos LIKE '%".$buscar."%' OR
                 valor LIKE '%".$buscar."%' OR
-                correo LIKE '%".$buscar."%' OR
-                aprobado LIKE '%".$buscar."%' OR
-                tbl_personas_extendidas.id_persona LIKE '%".$buscar."%' OR
-                tbl_personas.id_persona LIKE '%".$buscar."%'";
+                
+                observacion LIKE '%".$buscar."%' OR
+                fecha_creacion LIKE '%".$buscar."%' OR
+                identidad LIKE '%".$buscar."%' OR
+                tbl_expediente_graduacion.id_estado_expediente LIKE '%".$buscar."%'";
         //instacia de la clase 
-        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO","CARTA DE EGRESADOS",$sql);
+        $pdf = new myPDF("EXPEDIENTE DE GRADUACION"," EXPEDIENTE DE GRADUACION",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
-        $pdf->headerTable();
-        $pdf->viewTable_egresados2();
+        $pdf->headerExpediente();
+        $pdf->viewTable_expediente2();
         $pdf->SetFont('Arial', '', 15);
         $pdf->Output();
     
         return false;
     }else{
         $sql="SELECT valor, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
-        tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion
+        tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion,tbl_personas.identidad
         FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
         INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona";
     
@@ -387,7 +386,7 @@ if (isset($_GET['scala'])) {
         return false;
     }
 }
-
+//REPORTE DE CARTA DE EGRESADO
 if (isset($_GET['perl'])) {
     if ($_GET['perl']!=='') {
         
@@ -396,7 +395,7 @@ if (isset($_GET['perl'])) {
         
         //confeccion de la consulta para filtrar los datos 
        $sql= "SELECT nombres, apellidos, correo,tbl_personas.id_persona, 
-                observacion, aprobado, documento, Fecha_creacion,Id_carta,valor
+                observacion, aprobado, documento, Fecha_creacion,Id_carta,valor,Fecha_creacion
                  FROM tbl_personas INNER JOIN tbl_carta_egresado 
                  ON tbl_personas.id_persona = tbl_carta_egresado.id_persona
                  INNER JOIN tbl_personas_extendidas 
@@ -407,6 +406,7 @@ if (isset($_GET['perl'])) {
                 valor LIKE '%".$buscar."%' OR
                 correo LIKE '%".$buscar."%' OR
                 aprobado LIKE '%".$buscar."%' OR
+                Fecha_creacion LIKE '%".$buscar."%' OR
                 tbl_personas_extendidas.id_persona LIKE '%".$buscar."%' OR
                 tbl_personas.id_persona LIKE '%".$buscar."%'";
         //instacia de la clase 
@@ -441,6 +441,94 @@ if (isset($_GET['perl'])) {
     }
 }
 
+//REPORTE DE LA SOLICITUD FILTRADO POR ID
+if (isset($_GET['id_expediente'])) {
+    if ($_GET['id_expediente']!=='') {
+        
+        // decodificamos la variable pasada por get.
+        $buscar= base64_decode($_GET['id_expediente']);
+        
+        //confeccion de la consulta para filtrar los datos 
+       $sql= "SELECT valor, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
+       tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion,tbl_personas.identidad
+       FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
+       INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
+       WHERE tbl_expediente_graduacion.id_expediente='$buscar'";
+        //instacia de la clase 
+        $pdf = new myPDF("EXPEDIENTE DE GRADUACION"," EXPEDIENTE DE GRADUACION",$sql);
+        //llamamos los metodos correspondientes
+        $pdf->AliasNbPages();
+        $pdf->AddPage('C', 'Legal', 0);
+        $pdf->headerExpediente();
+        $pdf->viewTable_expediente2();
+        $pdf->SetFont('Arial', '', 15);
+        $pdf->Output();
+    
+        return false;
+    }
+}
+
+if (isset($_GET['id_carta'])) {
+    if ($_GET['id_carta']!=='') {
+        
+        // decodificamos la variable pasada por get.
+        $buscar= base64_decode($_GET['id_carta']);
+        
+        //confeccion de la consulta para filtrar los datos 
+       $sql= "SELECT nombres, apellidos, correo,tbl_personas.id_persona,
+       observacion, aprobado, documento, Fecha_creacion,Id_carta,valor
+        FROM tbl_personas INNER JOIN tbl_carta_egresado 
+        ON tbl_personas.id_persona = tbl_carta_egresado.id_persona 
+        INNER JOIN tbl_personas_extendidas 
+        ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
+       WHERE tbl_carta_egresado.Id_carta='$buscar'";
+        //instacia de la clase 
+        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO","CARTA DE EGRESADOS",$sql);
+        //llamamos los metodos correspondientes
+        $pdf->AliasNbPages();
+        $pdf->AddPage('C', 'Legal', 0);
+        $pdf->headerTable();
+        $pdf->viewTable_egresados2();
+        $pdf->SetFont('Arial', '', 15);
+        $pdf->Output();
+    
+    
+        return false;
+    }
+}
+
+if (isset($_GET['id_equivalencia'])) {
+    if ($_GET['id_equivalencia']!=='') {
+        
+        // decodificamos la variable pasada por get.
+        $buscar= base64_decode($_GET['id_equivalencia']);
+        
+        //confeccion de la consulta para filtrar los datos 
+        $sql = "SELECT nombres,apellidos,valor as cuenta, correo,aprobado,
+                tbl_equivalencias.Id_equivalencia,tipo,Fecha_creacion FROM 
+                tbl_equivalencias INNER JOIN tbl_personas 
+                ON tbl_equivalencias.id_persona= tbl_personas.id_persona 
+                INNER JOIN tbl_personas_extendidas 
+                ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona
+                WHERE tbl_equivalencias.Id_equivalencia='$buscar'"; 
+        $pdf = new myPDF("EQUIVALENCIAS FILTRADO","EQUIVALENCIAS",$sql);
+        
+        $pdf->AliasNbPages();
+        $pdf->AddPage('C', 'Legal', 0);
+        $pdf->headerTable();
+        $pdf->viewTable();
+        $pdf->SetFont('Arial', '', 15);
+        $pdf->Output();
+    
+    
+        return false;
+    }
+}
+
+/**** FIN DE REPORTES DE LESS *************** */
+
+
+/*-----------REPORTES DE SUANY------- */
 //Reporte cuando se cre una solicitud de servivicio comunitario
 if (isset($_GET['servicio'])) {
     if ($_GET['servicio']!=='') {
@@ -541,7 +629,7 @@ if (isset($_GET['php'])) {
         return false;
     }
 }
-//reporte de la solicitud de servicio comunitario filtrado
+/**-------FIN DE REPORTES DE SUANY----- */
 
 
 

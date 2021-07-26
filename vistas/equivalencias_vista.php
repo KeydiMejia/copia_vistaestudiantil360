@@ -57,7 +57,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud de Equivalencias</h1>
+            <h1>Solicitud pre-Aprobación de Equivalencias</h1>
           </div>
 
          
@@ -84,7 +84,7 @@ ob_end_flush();
 
  <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Equivalencias</h3>
+            <h3 class="card-title">Pre-Aprobación de Equivalencias</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>

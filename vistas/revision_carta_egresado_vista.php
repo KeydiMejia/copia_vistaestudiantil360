@@ -83,6 +83,10 @@ $sql_tabla = json_decode( file_get_contents($url), true );
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+                  <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger"   onclick="pdf_carta()" title="Exportar a PDF">
+                      <i class="fas fa-file-pdf">
+                      </i>
+                  </button>
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -144,6 +148,10 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                     <a href="../vistas/revision_carta_egresado_unica_vista.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_carta"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
+
+                    <a href="../Controlador/Reporte_especialidades.php?id_carta=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_carta"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                      <i class="fas fa-file-pdf    "></i>
+                    </a>
                 </td>
                </tr>
 
@@ -179,19 +187,21 @@ $sql_tabla = json_decode( file_get_contents($url), true );
 
   $(function () {
     
-     $('#tabla').DataTable({
-       "paging": true,
-       "lengthChange": true,
-       "searching": true,
-       "ordering": true,
-       "info": true,
-       "autoWidth": true,
-       "responsive": true,
-     });
-   });
+    $('#tabla').DataTable({
+        "language":{
+            "url":"../plugins/lenguaje.json"},
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "responsive": true,
+    });
+  });
  
  
  </script>
-
+<script src="../js/Reportes_solicitudes.js"></script>
 </body>
 </html>

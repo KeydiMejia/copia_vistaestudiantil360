@@ -59,16 +59,23 @@ require_once ('../clases/Conexion.php');
                
                 $resultadop = $mysqli->query($sqlp);
                 if($resultadop == true){
+                    $Ultimo_id= $mysqli->insert_id;
+                    $ultimo_id_hash= base64_encode($Ultimo_id);
                     echo '<script type="text/javascript">
-                            swal({
-                                title:"",
-                                text:"Solicitud enviada...",
-                                type: "success",
-                                showConfirmButton: false,
-                                timer: 1500
-                                });
-                                $(".FormularioAjax")[0].reset();
-                            </script>'; 
+                    swal({
+                        title:"¿Deseas ver reporte en PDF?",
+                        text:"Solicitud enviada...",
+                        type: "question",
+                        allowOutsideClick:false,
+                        showConfirmButton: true,
+                        showCancelButton: true,
+                        confirmButtonText:"Aceptar",
+                        cancelButtonText:"Cancelar",
+                        }).then(function () {
+                        window.location.href = "../Controlador/Reporte_especialidades.php?id_equivalencia='.$ultimo_id_hash.'";
+                        });
+                        $(".FormularioAjax")[0].reset();
+                    </script>'; 
                         } 
                     else {
                         echo "Error: " . $sqlp;

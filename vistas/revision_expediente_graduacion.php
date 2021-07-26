@@ -83,6 +83,13 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+
+            <div class="dt-buttons btn-group ml-4 mb-2">
+                  <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger"   onclick="pdf_expediente()" title="Exportar a PDF">
+                      <i class="fas fa-file-pdf">
+                      </i>
+                  </button>
+              </div>
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -132,6 +139,10 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 
                     <i class="far fa-check-circle"></i>
                     </a>
+
+                    <a href="../Controlador/Reporte_especialidades.php?id_expediente=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_expediente"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                      <i class="fas fa-file-pdf    "></i>
+                    </a>
                 </td>
                </tr>
                  <?php $counter = $counter + 1; }} ?>
@@ -163,21 +174,25 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
     <script type="text/javascript">
   
 
-  $(function () {
+
+   $(function () {
     
-     $('#tabla').DataTable({
-       "paging": true,
-       "lengthChange": true,
-       "searching": true,
-       "ordering": true,
-       "info": true,
-       "autoWidth": true,
-       "responsive": true,
-     });
-   });
+    $('#tabla').DataTable({
+        "language":{
+            "url":"../plugins/lenguaje.json"},
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "responsive": true,
+    });
+  });
  
  
  </script>
 
+<script src="../js/Reportes_solicitudes.js"></script>
 </body>
 </html>

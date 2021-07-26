@@ -71,17 +71,23 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!==""  && $_POST['txt_cuen
 
             $resultadop = $mysqli->query($sql);
             if($resultadop == true){
-                echo '<script type="text/javascript">
-                                swal({
-                                    title:"",
-                                    text:"Solicitud enviada...",
-                                    type: "success",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                    });
-                                    $(".FormularioAjax")[0].reset();
-                                    </script>'; 
-                
+                $Ultimo_id= $mysqli->insert_id;
+                    $ultimo_id_hash= base64_encode($Ultimo_id);
+                    echo '<script type="text/javascript">
+                    swal({
+                        title:"¿Deseas ver reporte en PDF?",
+                        text:"Solicitud enviada...",
+                        type: "question",
+                        allowOutsideClick:false,
+                        showConfirmButton: true,
+                        showCancelButton: true,
+                        confirmButtonText:"Aceptar",
+                        cancelButtonText:"Cancelar",
+                        }).then(function () {
+                        window.location.href = "../Controlador/Reporte_especialidades.php?id_expediente='.$ultimo_id_hash.'";
+                        });
+                        $(".FormularioAjax")[0].reset();
+                    </script>'; 
                 }else { 
                                 
                     // echo "Error: " . $sql ;

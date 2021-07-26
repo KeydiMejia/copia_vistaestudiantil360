@@ -75,16 +75,20 @@
                     $ultimo_id_hash= base64_encode($Ultimo_id);
                     echo '<script type="text/javascript">
                     swal({
-                        title:"Solicitud enviada",
-                        text:"Revisar tu Solicitud de servicio comunitario",
-                        type: "success",
+                        title:"¿Deseas ver reporte en PDF?",
+                        text:"Solicitud enviada...",
+                        type: "question",
                         allowOutsideClick:false,
                         showConfirmButton: true,
+                        showCancelButton: true,
+                        confirmButtonText:"Aceptar",
+                        cancelButtonText:"Cancelar",
                         }).then(function () {
                         window.location.href = "../Controlador/Reporte_especialidades.php?servicio='.$ultimo_id_hash.'";
                         });
                         $(".FormularioAjax")[0].reset();
                     </script>'; 
+                   
                     
                
                                     } 
@@ -154,6 +158,10 @@
                             });
                             $(".FormularioAjax")[0].reset();
                         </script>'; 
+
+               
+
+                       
                  } 
             else {
                 echo '<script type="text/javascript">
