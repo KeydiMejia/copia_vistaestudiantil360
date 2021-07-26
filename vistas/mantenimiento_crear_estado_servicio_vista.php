@@ -136,7 +136,7 @@ ob_end_flush();
                                 <div class="col-md-6">
                                     <div class="form-group ">
                                         <label>Ingrese el estado</label>
-                                        <input class="form-control " type="text" id="txt_estado" name="txt_estado" required style="text-transform: uppercase"  onkeyup="DobleEspacio(this, event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)">
+                                        <input class="form-control " type="text" id="txt_estado" name="txt_estado" required style="text-transform: uppercase"  onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return LetrasyNumeros(event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)" >
                                     </div>
 
                                     <div class="form-group ">

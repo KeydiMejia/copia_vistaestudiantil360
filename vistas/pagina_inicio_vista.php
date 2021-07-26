@@ -240,8 +240,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p> Expediente Graduación </p>
                   </a>
                 </li>
-
-
                 <li class="nav-item" style="display:<?php echo $_SESSION['cambio_carrera'] ?>">
                   <a href="../vistas/menu_revision_cambio.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -266,20 +264,22 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p>Cancelacion de clases</p>
                   </a>
                 </li>
-                <li class="nav-item" style="display:<?php echo $_SESSION['suficienicia'] ?>">
+                <li class="nav-item" style="display:<?php echo $_SESSION['suficiencia'] ?>">
                   <a href="../vistas/menu_revision_suficiencia.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Examen de Suficiencia</p>
                   </a>
                 </li>
-                <li class="nav-item" style="display:<?php echo $_SESSION['reactivacion_cuenta'] ?>">
-                  <a href="../vistas/revision_reactivacion_vista.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Reactivacion de Cuenta</p>
                 <li class="nav-item" style="display:<?php echo $_SESSION['revision_servicio_comunitario'] ?>">
                   <a href="../vistas/revision_servicio_comunitario_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Servicio Comunitario</p>
+                  </a>
+                </li>
+                <li class="nav-item" style="display:<?php echo $_SESSION['reactivacion_cuenta'] ?>">
+                  <a href="../vistas/revision_reactivacion_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Reactivacion de cuenta</p>
                   </a>
                 </li>
                 <!-- CARGA ACADEMICA -->
@@ -401,6 +401,12 @@ if (session_status() === PHP_SESSION_NONE) {
                   <a href="../vistas/reactivacion_cuenta_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Reactivacion de Cuenta </p>
+                  </a>
+                </li>
+                <li class="nav-item" style="display:<?php echo $_SESSION['Historial_de_solicitudes'] ?>">
+                  <a href="../vistas/historial_solicitudes_vista.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Historial solicitudes </p>
                   </a>
                 </li>
               </ul>

@@ -135,7 +135,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["observacion"]  ?></td>
                 <td><?php echo $mostrarEstado ?></td> 
-                <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["Fecha_creacion"]  ?></td>
                 <td style="text-align: center;">                    
                     <a href="../vistas/revision_cancelar_clases_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cancelar_clases"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>

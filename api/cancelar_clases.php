@@ -10,7 +10,7 @@ require_once ('../clases/Conexion.php');
 if(isset($_GET['alumno'])){
     $alumno= $_GET['alumno'];
     //"call sel_cancelar_clases_unica('$alumno')"
-    $sql="SELECT valor, nombres, apellidos, correo, motivo, observacion, tbl_cancelar_clases.Id_cancelar_clases, tbl_personas.id_persona
+    $sql="SELECT valor, nombres, apellidos, correo, motivo, observacion, cambio, Fecha_creacion, tbl_cancelar_clases.Id_cancelar_clases, tbl_personas.id_persona
     FROM tbl_cancelar_clases INNER JOIN tbl_personas
     ON tbl_cancelar_clases.id_persona=tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
     ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
@@ -29,7 +29,7 @@ if(isset($_GET['alumno'])){
     echo json_encode($result);
 }else{
     //"call sel_cancelar_clases()"
-    $consulta="SELECT nombres, apellidos, correo, tbl_personas.id_persona, motivo, observacion, cambio, documento, fecha_creacion, Id_cancelar_clases FROM 
+    $consulta="SELECT nombres, apellidos, correo, tbl_personas.id_persona, motivo, observacion, cambio, documento, Fecha_creacion, Id_cancelar_clases FROM 
     tbl_personas INNER JOIN tbl_cancelar_clases ON tbl_personas.id_persona = tbl_cancelar_clases.id_persona";
     if ($R = $mysqli->query($consulta)) {
         //$items = [];
