@@ -65,7 +65,8 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                                         confirmButtonText: "Aceptar",
                                         cancelButtonText: "Cancelar"
                                     }).then(function() {
-                                        window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php");
+                                        window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php")
+                                        windows.location("../vistas/historial_solicitudes_vista.php");
                                     });
                                         $(".FormularioAjax")[0].reset();
                                        </script>'; 

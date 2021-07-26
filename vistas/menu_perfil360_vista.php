@@ -320,7 +320,7 @@ footer{
     <!-------------- seccion de foto y asig aprobadas--------------->
     <section class="col-lg-5">
     <div class="card" style="width: 15rem; margin-left:20%;">
-    <img class="card-img-top" src="../dist/img/christel.jpg" alt="Card image cap">
+    <img class="card-img-top" src="../dist/img/christelneumann.jpg" alt="Card image cap">
     <div class="card-body">
     <p class="card-text"><?php echo $row['nombres'].' '.$row['apellidos'] ?></p>
   </div>
@@ -397,10 +397,10 @@ footer{
               <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/finalizacion_practica_vista.php'">Finalizacion practica</button>
 
               <!--solicitud a VOAE Asistencia---->
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%">VOAE - Asistencia</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/horas_voae_cve_vista.php'">VOAE - Asistencia</button>
               
               <!--solicitud a VOAE conducta----->
-              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%">VOAE - Conducta</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-top:5%" onclick="location.href='../vistas/registro_faltas_conducta_vista.php'">VOAE - Conducta</button>
               
 
          <!-- </div>-->
