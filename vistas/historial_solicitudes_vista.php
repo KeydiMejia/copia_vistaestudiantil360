@@ -84,9 +84,7 @@ AND u.Usuario = ?");
 $sql->bind_param("s",$_SESSION['usuario']);
 $sql->execute();
 $resultadotabla = $sql->get_result();
-while ($row3 = $resultadotabla->fetch_array(MYSQLI_ASSOC)){
-  $sql=$resultadotabla;
-}
+ $row3 = $resultadotabla->fetch_array(MYSQLI_ASSOC);
 
 
 /* Manda a llamar datos de la tabla para llenar la tabla historial pre-equivalencias  */
