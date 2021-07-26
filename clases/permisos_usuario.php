@@ -61,9 +61,10 @@ $resultado_permisos = $mysqli->query($sql_permisos);
    $_SESSION['solicitud_servicio_comunitario'] = 'none';
    $_SESSION['revision_servicio_comunitario'] = 'none';
    $_SESSION['mantenimiento_perfil360'] = 'none';
-   $_SESSION['solicitud_examensuficiencia'] = 'none';
+   $_SESSION['suficiencia'] = 'none';
    $_SESSION['reactivacion_cuenta'] = 'none';
-
+   $_SESSION['historial_solicitudes'] = 'none';
+   $_SESSION['cancelar_solicitud'] = 'none';
 
   while ($fila = $resultado_permisos->fetch_row())
    {
@@ -476,5 +477,14 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
          $_SESSION['mantenimiento_perfil360'] = "block";
       }
    } 
-
+   if ($_SESSION['pantalla'] = '154') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['Historial_de_solicitudes'] = "block";
+      }
+   }
+   if ($_SESSION['pantalla'] = '170') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['cancelar_solicitud'] = "block";
+      }
+   } 
 ?>
