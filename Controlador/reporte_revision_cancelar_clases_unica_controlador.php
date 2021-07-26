@@ -51,8 +51,8 @@ class myPDF extends FPDF
         $this->Cell(70, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
         $this->Cell(80, 7, "OBSERVACION", 1, 0, 'C');
-        //$this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
-        //$this->Cell(60, 7, "Fecha_creacion", 1, 0, 'C');
+        $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
+        $this->Cell(60, 7, "Fecha_creacion", 1, 0, 'C');
 
         $this->ln();
     }
@@ -74,16 +74,16 @@ class myPDF extends FPDF
             $motiv= $sqltabla["ROWS"][0]['motivo'];
             $corr= $sqltabla["ROWS"][0]['correo'];
             $observ= $sqltabla["ROWS"][0]['observacion'];
-            //$cambi= $sqltabla["ROWS"][0]['cambio'];
-            //$fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
+            $cambi= $sqltabla["ROWS"][0]['cambio'];
+            $fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
 
             $this->SetFont('Times', '', 12);
             $this->Cell(20, 7, $id_cance, 1, 0, 'C');
             $this->Cell(70, 7, $motiv, 1, 0, 'C');
             $this->Cell(70, 7, $corr, 1, 0, 'C');
             $this->Cell(80, 7, $observ, 1, 0, 'C');
-            //$this->Cell(30, 7, $cambi, 1, 0, 'C');
-            //$this->Cell(60, 7, $fechi, 1, 0, 'C');
+            $this->Cell(30, 7, $cambi, 1, 0, 'C');
+            $this->Cell(60, 7, $fechi, 1, 0, 'C');
 
             $this->ln();
         }
