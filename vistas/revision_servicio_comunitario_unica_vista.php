@@ -181,7 +181,7 @@ ob_end_flush();
           <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Documentos</h4>
+              <h4 class="modal-title"><?php echo $sqltabla["ROWS"][0]['nombre_proyecto']; ?></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -204,24 +204,26 @@ ob_end_flush();
                         <label class="control-label">Nombre Completo</label>
                         <input class="form-control" type="text"  maxlength="60" id="txt_nombre_alumno" name="txt_nombre_alumno"  value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" required style="text-transform: uppercase"   onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
                         <?php 
+                       
                         $cuenta = $sqltabla["ROWS"][0]['valor'];
+                        $proyecto=$sqltabla["ROWS"][0]['nombre_proyecto'];
                          $listar=null;
-                         $directorio=opendir("../archivos/servicio_comunitario/$cuenta/");
+                         
+                         $directorio=opendir("../archivos/servicio_comunitario/$cuenta/$proyecto/");
                          while ($elemento =readdir($directorio)) 
                          {
                            if ($elemento !='.' and $elemento !='..') {
                
                
-                             if (is_dir("../archivos/servicio_comunitario/$cuenta/".$elemento)) 
+                             if (is_dir("../archivos/servicio_comunitario/$cuenta/$proyecto/".$elemento)) 
                              {
-                               $listar .="<li> <a href='../archivos/servicio_comunitario/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
+                               $listar .="<li> <a href='../archivos/servicio_comunitario/$cuenta/$proyecto/$elemento' target='_blank'>$elemento/</a></li>";
                              }
                              else {
-                               $listar .="<li> <a href='../archivos/servicio_comunitario/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
+                               $listar .="<li> <a href='../archivos/servicio_comunitario/$cuenta/$proyecto/$elemento' target='_blank'>$elemento</a></li>";
                              } 
                            }
                          }
-
                         ?>
                           <ul>
                              <?php echo $listar ?>

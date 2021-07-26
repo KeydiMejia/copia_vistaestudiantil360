@@ -29,26 +29,26 @@
                 $documento_nombre_temporal[] = $_FILES['txt_solicitud']['tmp_name'];
                 $documento_nombre_temporal[] = $_FILES['txt_historial']['tmp_name'];
     
-                $micarpeta = '../archivos/servicio_comunitario/'.$cuenta;
+                $micarpeta = '../archivos/servicio_comunitario/'.$cuenta.'/'.$proyecto;
                     if (!file_exists($micarpeta)) {
                             mkdir($micarpeta, 0777, true);
     
-                    }else{
-                            $documento = glob('../archivos/servicio_comunitario/'.$cuenta.'/*'); // obtiene los documentos
+                    }// }else{
+                    //         $documento = glob('../archivos/servicio_comunitario/'.$cuenta.'/*'); // obtiene los documentos
                             
-                            foreach($documento as $documento){ // itera los documentos
+                    //         foreach($documento as $documento){ // itera los documentos
                                
-                                if(is_file($documento)) 
-                                unlink($documento); // borra los documentos
-                            }
-                        }
+                    //             if(is_file($documento)) 
+                    //             unlink($documento); // borra los documentos
+                    //         }
+                    //     }
                 for ($i = 0; $i <=count($documento_nombre_temporal)-1 ; $i++) {
                 
                     move_uploaded_file($documento_nombre_temporal[$i],"$micarpeta/$documento_nombre[$i]");
                     $ruta= '../archivos/servicio_comunitario/'.$cuenta.'/'.$documento_nombre[$i];
                     $direccion[]= $ruta;
                 }
-                $documento = json_encode($direccion);
+                $direccion_documento = json_encode($direccion);
                 
                 // ? revisar este bloque de codigo y encontrar la relacion entre tablas persona_extendida y personas
     
@@ -66,20 +66,25 @@
                 
                 
                 $sql= "INSERT INTO tbl_servicio_comunitario (id_persona,nombre_proyecto,fecha_creacion,documento,observacion,id_estado_servicio,correo)
-                VALUES ('$id_persona','$proyecto', current_timestamp(), '$documento','Nuevo',1,'$correo')";
+                VALUES ($id_persona,'$proyecto', current_timestamp(), '$direccion_documento','Nuevo',1,'$correo')";
     
                 $resultadop = $mysqli->query($sql);
                 if($resultadop == true){
+                    
+                    $Ultimo_id= $mysqli->insert_id;
+                    $ultimo_id_hash= base64_encode($Ultimo_id);
                     echo '<script type="text/javascript">
-                                    swal({
-                                        title:"",
-                                        text:"Solicitud enviada...",
-                                        type: "success",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                        });
-                                        $(".FormularioAjax")[0].reset();
-                                        </script>'; 
+                    swal({
+                        title:"Solicitud enviada",
+                        text:"Revisar tu Solicitud de servicio comunitario",
+                        type: "success",
+                        allowOutsideClick:false,
+                        showConfirmButton: true,
+                        }).then(function () {
+                        window.location.href = "../Controlador/Reporte_especialidades.php?servicio='.$ultimo_id_hash.'";
+                        });
+                        $(".FormularioAjax")[0].reset();
+                    </script>'; 
                     
                
                                     } 
