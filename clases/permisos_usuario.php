@@ -413,7 +413,7 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
          $_SESSION['perfil360_vista'] = "block";
       }
    } 
-//ingresado por liz
+
    if ($_SESSION['pantalla'] = '131') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['expediente_graduacion'] = "block";
@@ -470,6 +470,11 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
    if ($_SESSION['pantalla'] = '151') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['revision_servicio_comunitario'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '152') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['revision_coordinacion_servicio_comunitario'] = "block";
       }
    } 
    if ($_SESSION['pantalla'] = '154') {

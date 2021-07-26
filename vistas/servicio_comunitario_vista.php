@@ -25,7 +25,7 @@ if($visualizacion==0){
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A SOLICITUD SERVICIO COMUNITARIO');
 }
 
-$sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,pe.valor
+$sql=$mysqli->prepare("SELECT p.id_persona,p.nombres,p.apellidos,pe.valor
 FROM tbl_personas p, tbl_personas_extendidas pe,tbl_usuarios u
 WHERE pe.id_persona = p.id_persona
 AND p.id_persona = u.id_persona
@@ -98,7 +98,8 @@ ob_end_flush();
                         <div class="form-group">
                             <label>Nombre</label>
                             <input class="form-control" value="<?php echo $row['nombres'].' '.$row['apellidos'] ?>" type="text" id="txt_nombre" name="txt_nombre" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)"  readonly onmousedown="return false;" >
-                            <input class="form-control" type="hidden" id="txt_codigo" name="txt_codigo" value="codigo">
+                            <input class="d-none" value="<?php echo $row['id_persona'] ?>" type="text"  name="id_persona" >
+                            
                         </div>
                 </div>
 
@@ -131,7 +132,7 @@ ob_end_flush();
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Nombre Proyecto</label>
-                            <input class="form-control" type="text" id="txt_nombre" name="txt_nombre" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="text" id="txt_nombres" name="txt_nombre" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                         </div>
                 <div class="col-md-6">

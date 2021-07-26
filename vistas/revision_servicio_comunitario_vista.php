@@ -28,7 +28,7 @@ $counter = 0;
 // $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
 
 // $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php'), true );
-http://localhost:8008/copia_vistaestudiantil360/vistas/revision_expediente_graduacion.php
+
 $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/servicio_comunitario.php'), true );
 
 
@@ -88,13 +88,15 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
         </div>
       </div>
       <div class="card-body">
-        <div class="dt-buttons btn-group">
-          <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla" type="buttton" onclick="ventana()" title="Exportar a PDF">
-          <i class="fas fa-file-pdf">
-</i>
-        </button>
-        </div>
-        <br></br>
+       
+              <div class="dt-buttons btn-group ml-4 mb-2">
+                  <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger"   onclick="pdf_servicio()" >
+                      <i class="fas fa-file-pdf">
+                      </i>
+                  </button>
+              </div>
+
+        
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -110,11 +112,11 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                 <tbody>
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
-                    
+                  
                   while($counter < count($sql_tabla["ROWS"])) { 
                     
                     $estado=$sql_tabla["ROWS"][$counter]["id_estado_servicio"];
-                    
+                   
                     
                     if ($estado==2) {
                       $banner= "Aprobado";
@@ -148,6 +150,12 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 
                     <i class="far fa-check-circle"></i>
                     </a>
+
+                    <a href="../Controlador/Reporte_especialidades.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_servicio_comunitario"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                      <i class="fas fa-file-pdf    "></i>
+                    </a>
+
+                    
                 </td>
                </tr>
                  <?php $counter = $counter + 1; }} ?>
@@ -213,3 +221,4 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 <script src="../plugins/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
 <script src="../plugins/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
 <script src="../plugins/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+<script src="../js/Reportes_solicitudes.js"></script>
