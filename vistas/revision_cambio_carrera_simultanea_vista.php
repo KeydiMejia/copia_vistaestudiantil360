@@ -21,11 +21,11 @@ if($visualizacion==0){
 
    </script>'; 
 }else{
-  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION LISTA CAMBIO DE CARRERA');
+  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION LISTA CAMBIO DE CARRERA SIMULTANEA');
 }
 $tipo= $_GET['tipo'];
 $counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cambio_carrera.php?tipo='.$tipo), true );
+$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carrera_simultanea.php?tipo='.$tipo), true );
 
 
 ?>
@@ -50,7 +50,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
           <div class="col-sm-6">
 
 
-            <h1>Solicitudes de Cambio de Carrera</h1>
+            <h1>Solicitudes de Cambio de Carrera Simultanea</h1>
           </div>
 
                 <div class="col-sm-6">
@@ -94,26 +94,28 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                   </tr>
                 </thead>
                 <tbody>
+
                 
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
-                  while($counter< count($sql_tabla["ROWS"])) {
-                  $estado=$sql_tabla["ROWS"][$counter]["Id_cambio"];
+                  while($counter< count($sql_tabla["ROWS"])) { 
+                    
+                        $estado=$sql_tabla["ROWS"][$counter]["Id_cambio"];
                         
-                  if ($estado==2) {
-                    $banner ="Aprobado";
-                    $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$banner</span>";
-                  }
-                  elseif($estado==1){
-                    $banner ="Nuevo";
-                    $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$banner</span>";  
-
-                  }else{
-                    $banner ="Desaprobado";
-                    $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$banner</span>";  
-                  }
-                  
-                  ?>
+                        if ($estado==2) {
+                          $banner ="Aprobado";
+                          $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$banner</span>";
+                        }
+                        elseif($estado==1){
+                          $banner ="Nuevo";
+                          $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$banner</span>";  
+    
+                        }else{
+                          $banner ="Desaprobado";
+                          $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$banner</span>";  
+                        }
+                        
+                      ?>
                 <tr>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["valor"]?></td>
@@ -122,7 +124,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                 <td><?php echo $sql_tabla["ROWS"][$counter]["tipo"] ?></td>  
                 <td><?php echo $sql_tabla["ROWS"][$counter]["observacion"] ?></td>     
                 <td style="text-align: center;">                    
-                    <a href="../vistas/revision_cambio_carrera_unico_vista.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"] ?>&tipo=<?php echo $tipo?>" class="btn btn-primary btn-raised btn-xs">
+                    <a href="../vistas/revision_cambio_unico_simultanea.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"] ?>&tipo=<?php echo $tipo?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
                 </td>

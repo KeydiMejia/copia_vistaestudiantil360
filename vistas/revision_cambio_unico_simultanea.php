@@ -56,7 +56,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/revision_cambio_carrera_vista.php">Solicitudes de Cambio Carrera Simultanea</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/revision_cambio_carrera_simultanea_vista.php">Solicitudes de Cambio Carrera Simultanea</a></li>
             </ol>
           </div>
 
@@ -96,7 +96,8 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta1" name="txt_cuenta1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_cambio']  ?>" type="text"  name="id_cambio">
                         </div>
                 </div>
                 <div class="col-md-6">

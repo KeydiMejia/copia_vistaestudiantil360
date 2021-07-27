@@ -10,10 +10,14 @@ require_once ('../clases/Conexion.php');
 if(isset($_GET['alumno'])){
     $alumno= $_GET['alumno'];
     // "call sel_carta_egresado_unica('$alumno')"
-    $sql="SELECT valor, nombres, apellidos, correo, tipo, observacion, tbl_examen_suficiencia.id_suficiencia, tbl_personas.id_persona FROM tbl_examen_suficiencia INNER JOIN tbl_personas
-    ON tbl_examen_suficiencia.id_persona=tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
-    ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
-    WHERE tbl_examen_suficiencia.id_suficiencia='$alumno'";
+    $sql="SELECT tbl_personas_extendidas.valor, nombres, apellidos, correo, tipo, tbl_cambio_carrera.aprobado,
+     tbl_cambio_carrera.razon_cambio,observacion, tbl_cambio_carrera.Id_cambio, 
+     tbl_personas.id_persona, tbl_facultades.Id_facultad, tbl_centros_regionales.Id_centro_regional 
+     FROM tbl_cambio_carrera INNER JOIN tbl_personas ON tbl_cambio_carrera.id_persona=tbl_personas.id_persona 
+     INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona 
+     INNER JOIN tbl_facultades ON tbl_cambio_carrera.Id_facultad=tbl_facultades.Id_facultad 
+     INNER JOIN tbl_centros_regionales ON tbl_cambio_carrera.Id_centro_regional = tbl_centros_regionales.Id_centro_regional
+      WHERE tbl_cambio_carrera.Id_cambio='$alumno'";
 
     if ($R = $mysqli->query($sql)) {
         $items = [];
@@ -31,8 +35,13 @@ if(isset($_GET['alumno'])){
     // "call sel_carta_egresado()"
     
     
-$consulta="SELECT nombres, apellidos, correo, tbl_personas.id_persona,  observacion,  documento, fecha_creacion, id_suficiencia, id_estado_suficiencia, tipo FROM 
-tbl_personas INNER JOIN tbl_examen_suficiencia ON tbl_personas.id_persona = tbl_examen_suficiencia.id_persona";
+$consulta="select tbl_personas.id_persona, observacion, aprobado,tbl_personas.nombres, 
+tbl_personas.apellidos, tbl_personas_extendidas.valor, fecha_creacion, documento, tipo, tbl_cambio_carrera.Id_cambio,
+correo from tbl_cambio_carrera inner join tbl_personas on tbl_cambio_carrera.id_persona = 
+tbl_personas.id_persona inner join tbl_personas_extendidas on tbl_personas.id_persona = 
+tbl_personas_extendidas.id_persona where tipo = 'interno'"
+;
+
     if ($R = $mysqli->query($consulta)) {
         // $items = [];
 
