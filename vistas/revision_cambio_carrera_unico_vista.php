@@ -31,7 +31,7 @@ if (isset($_GET['alumno'])){
 ob_end_flush();
 
  ?>
-
+<?php error_reporting(0);?>
 
 <!DOCTYPE html>
 <html>
@@ -123,7 +123,7 @@ ob_end_flush();
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Razón del cambio</label>
-                            <textarea class="form-control"  id="txt_observacion" name="txt_observacion1" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['razon_cambio'] ?> </textarea>
+                            <textarea class="form-control"  id="txt_observacion" name="txt_observacion" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['razon_cambio'] ?> </textarea>
                         </div>
                 </div>
                 <?php } ?>

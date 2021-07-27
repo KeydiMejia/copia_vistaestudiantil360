@@ -28,7 +28,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUDES DE EXAMEN SUFICIENCIA"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUDES DE REACTIVACION CUENTA"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
@@ -59,14 +59,14 @@ class myPDF extends FPDF
     function viewTable()
     {
         global $instancia_conexion;
-        $sql = "select id_suficiencia, correo, observacion, Fecha_creacion,tbl_estado_suficiencia.estado 
-        FROM tbl_examen_suficiencia inner join tbl_estado_suficiencia on tbl_estado_suficiencia.id_estado_suficiencia =tbl_examen_suficiencia.id_estado_suficiencia";
+        $sql = "select id_reactivacion, correo, observacion, Fecha_creacion,tbl_estado_reactivacion.estado 
+        FROM tbl_reactivacion_cuenta inner join tbl_estado_reactivacion on tbl_reactivacion_cuenta.id_estado_reactivacion =tbl_reactivacion_cuenta.id_estado_reactivacion";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-            $this->Cell(20, 7, $reg['id_suficiencia'], 1, 0, 'C');
+            $this->Cell(20, 7, $reg['id_reactivacion'], 1, 0, 'C');
             
             $this->Cell(70, 7, utf8_decode($reg['correo']), 1, 0, 'C');
             $this->Cell(30, 7, $reg['estado'], 1, 0, 'C');

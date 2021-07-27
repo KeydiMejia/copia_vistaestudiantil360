@@ -23,16 +23,17 @@ if($visualizacion==0){
    </script>'; 
 }
 if (isset($_GET['alumno'])){
- 
+  
   // $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
-    $sqltabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carrera_simultanea.php?alumno='.$_GET['alumno']), true );
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE CAMBIO CARRERA SIMULTANEA '.$sqltabla["ROWS"][0]['nombres'].'');
+    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carrera_simultanea.php?alumno=".$_GET['alumno']), true );
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE CAMBIO CARRERA SIMULTANEA '.$sqltabla["ROWS"][0]['nombres'].'');  
 }
+
 
 ob_end_flush();
 
  ?>
-
+<?php error_reporting(0);?>
 
 <!DOCTYPE html>
 <html>
@@ -90,14 +91,14 @@ ob_end_flush();
                         <div class="form-group">
                             <label>Nombre del Alumno</label>
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" type="text" id="txt_nombre" name="txt_nombre1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;" >
-                            <!-- <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo"> -->
+                            <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo"> 
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_cambio']  ?>" type="text"  name="id_cambio">
+                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['Id_cambio']  ?>" type="text"  name="Id_cambio">
                         </div>
                 </div>
                 <div class="col-md-6">

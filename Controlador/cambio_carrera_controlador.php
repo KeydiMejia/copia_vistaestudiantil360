@@ -176,7 +176,7 @@
                     for ($i = 0; $i <=count($documento_nombre_temporal)-1 ; $i++) {
                         
                         move_uploaded_file($documento_nombre_temporal[$i],"$micarpeta/$documento_nombre[$i]");
-                        $ruta= '../archivos/scambio/simultanea/'.$cuenta."/".$documento_nombre[$i];
+                        $ruta= '../archivos/cambio/simultanea/'.$cuenta."/".$documento_nombre[$i];
                         $direccion[]= $ruta;
                     }
                     $documento = json_encode($direccion);
@@ -244,10 +244,13 @@
             
             
         else if(isset($_POST['aprobado']) && $_POST['aprobado']!==""){
-            $aprobado = $_POST['aprobado'];
+
+        $aprobado = $_POST['aprobado'];
         $cuenta = $_POST['txt_cuenta'];
         $observacion = $_POST['txt_observacion'];
-        $id_cambio=$_POST['Id_cambio'];
+        $tipo = $_POST['tipo'];
+        $id_cambio = $_POST['Id_cambio'];
+       // $tipo = $sqltabla["ROWS"][0]['tipo'];
         
         ($aprobado=="aprobado")? $estado=2:$estado=3;
     
@@ -256,10 +259,10 @@
         if($observacion!==""){
             // $sqlp = "call upd_carta_egresado_observacion('$aprobado','$observacion','$cuenta')";
              
-            $sqlp = "UPDATE `tbl_cambio_carrera` 
-            SET `aprobado` = '$aprobado', `fecha_creacion` = now(),
+            $sqlp = "UPDATE tbl_cambio_carrera 
+            SET aprobado = '$aprobado', fecha_creacion = now(),
             observacion = '$observacion'
-            WHERE id_persona = '$id_cambio'
+            WHERE Id_cambio = '$id_cambio'
             AND tipo = '$tipo'";
 
             $resultadop = $mysqli->query($sql);
