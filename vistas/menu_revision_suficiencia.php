@@ -66,7 +66,7 @@ $_SESSION['menu_revision_suficiencia']="No
                 <div class="icon">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/revision_suficiencia_vista.php?tipo=contenido" class="small-box-footer">
+                <a href="../vistas/revision_suficiencia_contenido_vista.php?tipo=contenido" class="small-box-footer">
                 Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
           </div>

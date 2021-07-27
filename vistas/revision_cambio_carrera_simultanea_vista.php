@@ -50,7 +50,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
           <div class="col-sm-6">
 
 
-            <h1>Solicitudes de Cambio de Carrera Simultanea</h1>
+            <h1>Solicitudes de Cambio de Carrera Suficiencia</h1>
           </div>
 
                 <div class="col-sm-6">

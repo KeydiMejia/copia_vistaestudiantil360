@@ -244,7 +244,7 @@
                             allowOutsideClick:false,
                             showConfirmButton: true,
                             }).then(function () {
-                            window.location.href = "revision_suficiencia_vista.php";
+                            window.location.href = "menu_revision_suficiencia.php";
                             });
                             $(".FormularioAjax")[0].reset();
                         </script>'; 

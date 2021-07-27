@@ -1,5 +1,4 @@
 <?php
-
 ob_start();
 session_start();
 require_once ('../vistas/pagina_inicio_vista.php');
@@ -8,7 +7,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=35; 
+$Id_objeto=147; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -24,14 +23,16 @@ if($visualizacion==0){
    </script>'; 
 }
 if (isset($_GET['alumno'])){
-  $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cambio_carrera.php?alumno=".$_GET['alumno']), true );
-  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION CAMBIO DE CARRERA '.$sqltabla["ROWS"][0]['nombres'].'');
+ 
+  // $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/examen_suficiencia_api.php?alumno='.$_GET['alumno']), true );
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE SUFICIENCIA ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
 ob_end_flush();
 
  ?>
-<?php error_reporting(0);?>
+
 
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud Cambio de Carrera</h1>
+            <h1>Solicitud de Examen Suficiencia por Contenido</h1>
           </div>
 
          
@@ -55,8 +56,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/menu_revision_cambio.php">Solicitudes de Cambio de Carrera</a></li>
-
+              <li class="breadcrumb-item"><a href="../vistas/menu_revison_suficiencia.php">Solicitudes de Suficiencia </a></li>
             </ol>
           </div>
 
@@ -71,7 +71,7 @@ ob_end_flush();
             <div class="container-fluid">
   <!-- pantalla 1 -->
       
-<form action="../Controlador/cambio_carrera_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
+<form action="../Controlador/examen_suficiencia_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
 
  <div class="card card-default">
           <div class="card-header">
@@ -89,44 +89,23 @@ ob_end_flush();
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Nombre del Alumno</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos']  ?>" type="text" id="txt_nombre" name="txt_nombre1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;" >
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" type="text" id="txt_nombre" name="txt_nombre1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;" >
                             <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                          
-                        <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                        <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_cambio']  ?>" type="text"  name="id_cambio">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_suficiencia']  ?>" type="text"  name="id_suficiencia">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Correo Electrónico</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['correo'] ?>" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['correo'] ?>" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeypress="return letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
-                <?php if($_GET['tipo']==="interno"){ ?>
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Centro Regional del que viene</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['centro_regional'] ?>" id="txt_centrore" name="txt_centrore" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Facultad de la que viene</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['facultad'] ?>" id="txt_facultad" name="txt_facultad" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                        </div>
-                </div>
-                <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Razón del cambio</label>
-                            <textarea class="form-control"  id="txt_observacion" name="txt_observacion" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['razon_cambio'] ?> </textarea>
-                        </div>
-                </div>
-                <?php } ?>
                 <div class="col-md-12">
                         <div class="form-group">
                           <p class="text-center form-group" style="margin-top: 10px;">
@@ -143,7 +122,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Seleccione su aprobación</label>
-                            <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();">
+                            <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();" >
                               <option disabled selected>Aprobar</option>
                               <option value="aprobado">SI</option>
                               <option value="desaprobar">NO</option>
@@ -163,6 +142,9 @@ ob_end_flush();
                 <button type="submit" class="btn btn-primary" id="btn_guardar_cambio" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
+
+
+
           <!-- /.card-body -->
           <div class="card-footer">
             
@@ -179,7 +161,6 @@ ob_end_flush();
 
 
 </div>
-
 
 <!-- modal --->
 <div class="modal fade" id="modal1">
@@ -199,7 +180,6 @@ ob_end_flush();
 
 
 
-
    <div class="card-body">
             <div class="row">
                
@@ -210,20 +190,21 @@ ob_end_flush();
                         <input class="form-control" type="text"  maxlength="60" id="txt_nombre_alumno" name="txt_nombre_alumno"  value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" required style="text-transform: uppercase"   onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
                         <?php 
                         $cuenta = $sqltabla["ROWS"][0]['valor'];
-                        $tipo = $_GET['tipo'];
+                        $tipo = $sqltabla["ROWS"][0]['tipo'];
+                         
                          $listar=null;
-                         $directorio=opendir("../archivos/cambio/$tipo/$cuenta/");
+                         $directorio=opendir("../archivos/suficiencia/$tipo/$cuenta");
                          while ($elemento =readdir($directorio)) 
                          {
                            if ($elemento !='.' and $elemento !='..') {
                
                
-                             if (is_dir("../archivos/cambio/$tipo/$cuenta/".$elemento)) 
+                             if (is_dir("../archivos/suficiencia/$tipo/$cuenta/".$elemento)) 
                              {
-                               $listar .="<li> <a href='../archivos/cambio/$tipo/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
+                               $listar .="<li> <a href='../archivos/suficiencia/$tipo/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
                              }
                              else {
-                               $listar .="<li> <a href='../archivos/cambio/$tipo/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
+                               $listar .="<li> <a href='../archivos/suficiencia/$tipo/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
                              } 
                            }
                          }
@@ -240,7 +221,10 @@ ob_end_flush();
               </div>
             </div>
           </div>
+
           
+
+
 
 
             <!--Footer del modal-->
