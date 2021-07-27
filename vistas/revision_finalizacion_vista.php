@@ -106,6 +106,9 @@ $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automati
                     <a href="../vistas/revision_finalizacion_unica_vista.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
+                    <a href="../Controlador/Reporte_reactivacion.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_servicio_comunitario"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                      <i class="fas fa-file-pdf    "></i>
+                    </a>
                 </td>
                </tr>
                <?php   $counter = $counter + 1; }} ?>

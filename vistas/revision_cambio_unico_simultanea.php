@@ -1,5 +1,4 @@
 <?php
-
 ob_start();
 session_start();
 require_once ('../vistas/pagina_inicio_vista.php');
@@ -24,8 +23,10 @@ if($visualizacion==0){
    </script>'; 
 }
 if (isset($_GET['alumno'])){
-  $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/cambio_carrera.php?alumno=".$_GET['alumno']), true );
-  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION CAMBIO DE CARRERA '.$sqltabla["ROWS"][0]['nombres'].'');
+ 
+  // $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carrera_simultanea.php?alumno='.$_GET['alumno']), true );
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE CAMBIO CARRERA SIMULTANEA '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
 ob_end_flush();
@@ -47,7 +48,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud Cambio de Carrera</h1>
+            <h1>Solicitud de Cambio Carrera Simultanea</h1>
           </div>
 
          
@@ -55,8 +56,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/menu_revision_cambio.php">Solicitudes de Cambio de Carrera</a></li>
-
+              <li class="breadcrumb-item"><a href="../vistas/revision_cambio_carrera_vista.php">Solicitudes de Cambio Carrera Simultanea</a></li>
             </ol>
           </div>
 
@@ -89,8 +89,8 @@ ob_end_flush();
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Nombre del Alumno</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos']  ?>" type="text" id="txt_nombre" name="txt_nombre1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;" >
-                            <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" type="text" id="txt_nombre" name="txt_nombre1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;" >
+                            <!-- <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo"> -->
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -105,26 +105,6 @@ ob_end_flush();
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['correo'] ?>" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
-                <?php if($_GET['tipo']==="interno"){ ?>
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Centro Regional del que viene</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['centro_regional'] ?>" id="txt_centrore" name="txt_centrore1" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Facultad de la que viene</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['facultad'] ?>" id="txt_facultad" name="txt_facultad1" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                        </div>
-                </div>
-                <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Razón del cambio</label>
-                            <textarea class="form-control"  id="txt_observacion" name="txt_observacion1" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['razon_cambio'] ?> </textarea>
-                        </div>
-                </div>
-                <?php } ?>
                 <div class="col-md-12">
                         <div class="form-group">
                           <p class="text-center form-group" style="margin-top: 10px;">
@@ -141,7 +121,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Seleccione su aprobación</label>
-                            <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();">
+                            <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();" >
                               <option disabled selected>Aprobar</option>
                               <option value="aprobado">SI</option>
                               <option value="desaprobar">NO</option>
@@ -161,6 +141,9 @@ ob_end_flush();
                 <button type="submit" class="btn btn-primary" id="btn_guardar_cambio" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
+
+
+
           <!-- /.card-body -->
           <div class="card-footer">
             
@@ -177,7 +160,6 @@ ob_end_flush();
 
 
 </div>
-
 
 <!-- modal --->
 <div class="modal fade" id="modal1">
@@ -197,12 +179,11 @@ ob_end_flush();
 
 
 
-
    <div class="card-body">
             <div class="row">
                
 
-                   <div class="col-md-12">
+            <div class="col-md-12">
                     <div class="form-group">
                         <label class="control-label">Nombre Completo</label>
                         <input class="form-control" type="text"  maxlength="60" id="txt_nombre_alumno" name="txt_nombre_alumno"  value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" required style="text-transform: uppercase"   onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
@@ -238,7 +219,10 @@ ob_end_flush();
               </div>
             </div>
           </div>
+
           
+
+
 
 
             <!--Footer del modal-->
