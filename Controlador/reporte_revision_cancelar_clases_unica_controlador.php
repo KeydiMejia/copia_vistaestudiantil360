@@ -47,12 +47,12 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(20, 7, "ID", 1, 0, 'C');
-        $this->Cell(70, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
+        $this->Cell(60, 7, "NOMBRE", 1, 0, 'C');
+        $this->Cell(50, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
-        $this->Cell(80, 7, "OBSERVACION", 1, 0, 'C');
+        $this->Cell(60, 7, "OBSERVACION", 1, 0, 'C');
         $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
-        $this->Cell(60, 7, "Fecha_creacion", 1, 0, 'C');
+        $this->Cell(50, 7, "FECHA", 1, 0, 'C');
 
         $this->ln();
     }
@@ -70,7 +70,7 @@ class myPDF extends FPDF
             $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true ); 
             }
 
-            $id_cance= $sqltabla["ROWS"][0]['Id_cancelar_clases'];
+            $nombre= $sqltabla["ROWS"][0]['nombres'];
             $motiv= $sqltabla["ROWS"][0]['motivo'];
             $corr= $sqltabla["ROWS"][0]['correo'];
             $observ= $sqltabla["ROWS"][0]['observacion'];
@@ -78,12 +78,12 @@ class myPDF extends FPDF
             $fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
 
             $this->SetFont('Times', '', 12);
-            $this->Cell(20, 7, $id_cance, 1, 0, 'C');
-            $this->Cell(70, 7, $motiv, 1, 0, 'C');
+            $this->Cell(60, 7, $nombre, 1, 0, 'C');
+            $this->Cell(50, 7, $motiv, 1, 0, 'C');
             $this->Cell(70, 7, $corr, 1, 0, 'C');
-            $this->Cell(80, 7, $observ, 1, 0, 'C');
+            $this->Cell(60, 7, $observ, 1, 0, 'C');
             $this->Cell(30, 7, $cambi, 1, 0, 'C');
-            $this->Cell(60, 7, $fechi, 1, 0, 'C');
+            $this->Cell(50, 7, $fechi, 1, 0, 'C');
 
             $this->ln();
         }

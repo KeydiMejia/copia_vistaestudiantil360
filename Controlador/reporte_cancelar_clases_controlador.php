@@ -46,31 +46,32 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(20, 7, "ID", 1, 0, 'C');
-        $this->Cell(70, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
-        $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
-        $this->Cell(80, 7, "OBSERVACION", 1, 0, 'C');
+        $this->Cell(83, 7, "NOMBRE", 1, 0, 'C');
+        $this->Cell(45, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
+        $this->Cell(65, 7, utf8_decode("CORREO"), 1, 0, 'C');
+        $this->Cell(65, 7, "OBSERVACION", 1, 0, 'C');
         $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
-        $this->Cell(60, 7, "Fecha_creacion", 1, 0, 'C');
+        $this->Cell(50, 7, "FECHA", 1, 0, 'C');
 
         $this->ln();
     }
     function viewTable()
     {
         global $instancia_conexion;
-        $sql = "select Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion
-FROM tbl_cancelar_clases";
+        $sql = "SELECT p.nombres, p.apellidos, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion
+        FROM tbl_cancelar_clases c, tbl_personas p
+        WHERE p.id_persona=c.id_persona";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-            $this->Cell(20, 7, $reg['Id_cancelar_clases'], 1, 0, 'C');
-            $this->Cell(70, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
-            $this->Cell(70, 7, utf8_decode($reg['correo']), 1, 0, 'C');
-            $this->Cell(80, 7, $reg['observacion'], 1, 0, 'C');
+            $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
+            $this->Cell(45, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
+            $this->Cell(65, 7, utf8_decode($reg['correo']), 1, 0, 'C');
+            $this->Cell(65, 7, $reg['observacion'], 1, 0, 'C');
             $this->Cell(30, 7, $reg['cambio'], 1, 0, 'C');
-            $this->Cell(60, 7, $reg['Fecha_creacion'], 1, 0, 'C');
+            $this->Cell(50, 7, $reg['Fecha_creacion'], 1, 0, 'C');
 
             $this->ln();
         }
