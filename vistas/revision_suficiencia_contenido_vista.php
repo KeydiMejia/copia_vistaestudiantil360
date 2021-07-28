@@ -30,7 +30,7 @@ $visualizacion= permiso_ver($Id_objeto);
   $counter = 0;
   //$url="http://localhost/copia_vistaestudiantil360/api/cancelar_clases.php";
   //$url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php";
-  $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php'), true );
+  $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/examen_suficiencia_api.php'), true );
   
   
   
@@ -59,7 +59,7 @@ $visualizacion= permiso_ver($Id_objeto);
             <div class="col-sm-6">
   
   
-              <h1>Solicitudes de Examenes de Suficiencia</h1>
+              <h1>Solicitudes de Examenes de Suficiencia por Contenido</h1>
             </div>
   
                   <div class="col-sm-6">
@@ -151,10 +151,10 @@ $visualizacion= permiso_ver($Id_objeto);
                   <td><?php echo $mostrarEstado ?></td> 
                   <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>
                   <td style="text-align: center;">                    
-                      <a href="../vistas/revision_suficiencia_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_suficiencia"]; ?>" class="btn btn-primary btn-raised btn-xs">
+                      <a href="../vistas/revision_suficiencia_unica_contenido.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_suficiencia"]; ?>" class="btn btn-primary btn-raised btn-xs">
                       <i class="far fa-check-circle"></i>
                       </a>
-                      <a href="../Controlador/reporte_revision_suficiencia_codigo_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                      <a href="../Controlador/reporte_revision_suficiencia_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                   </td>

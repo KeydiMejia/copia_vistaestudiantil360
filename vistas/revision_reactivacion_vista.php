@@ -105,6 +105,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                   <th>CORREO</th>
                   <th>OBSEVACION</th>
                   <th>ESTADO</th>
+                  
                   <th>FECHA</th>
                   <th>REVISAR SOLICITUD</th>
                   </tr>
@@ -113,16 +114,19 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
                   while($counter < count($sql_tabla["ROWS"])) { 
-                    $estado=$sql_tabla["ROWS"][$counter]["id_reactivacion"];
+                    $estado=$sql_tabla["ROWS"][$counter]["id_estado_reactivacion"];
                     
-                    if ($estado=='id_reactivacion') {
-                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$estado</span>";
+                    if ($estado==2) {
+                      $banner ="Aprobado";
+                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$banner</span>";
                     }
-                    elseif($estado=='Nuevo'){
-                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$estado</span>";  
+                    elseif($estado==1){
+                      $banner ="Nuevo";
+                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$banner</span>";  
 
                     }else{
-                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$estado</span>";  
+                      $banner ="Desaprobado";
+                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$banner</span>";  
                     }
                     
                     
@@ -143,12 +147,16 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                 
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["observacion"]  ?></td>
+                
                 <td><?php echo $mostrarEstado ?></td> 
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>
                 <td style="text-align: center;">                    
                     <a href="../vistas/revision_reactivacion_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_reactivacion"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
+                    <a href="../Controlador/reporte_revision_cancelar_clases_unica_controlador.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_reactivacion"]; ?>" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger btn-xs" tabindex="0" aria-controls="tabla" type="buttton" title="Exportar a PDF">
+                    <i class="fas fa-file-pdf"></i>
+                  </a>
                 </td>
                </tr>
                  <?php $counter = $counter + 1; }} ?>

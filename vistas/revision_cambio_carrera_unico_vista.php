@@ -23,18 +23,15 @@ if($visualizacion==0){
 
    </script>'; 
 }
-if(isset($_GET['tipo']) && $_GET['tipo']=="simultanea"){
-  $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/carrera_simultanea.php?alumno=".$_GET['alumno']), true );
-  bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION CAMBIO DE CARRERA '.$sqltabla["ROWS"][0]['nombres'].'');
-}else{
-  $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/cambio_carrera.php?alumno=".$_GET['alumno']), true );
+if (isset($_GET['alumno'])){
+  $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cambio_carrera.php?alumno=".$_GET['alumno']), true );
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION CAMBIO DE CARRERA '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
 ob_end_flush();
 
  ?>
-
+<?php error_reporting(0);?>
 
 <!DOCTYPE html>
 <html>
@@ -99,7 +96,9 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta1" name="txt_cuenta1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                          
+                        <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                        <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_cambio']  ?>" type="text"  name="id_cambio">
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -112,19 +111,19 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Centro Regional del que viene</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['centro_regional'] ?>" id="txt_centrore" name="txt_centrore1" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['centro_regional'] ?>" id="txt_centrore" name="txt_centrore" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Facultad de la que viene</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['facultad'] ?>" id="txt_facultad" name="txt_facultad1" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['facultad'] ?>" id="txt_facultad" name="txt_facultad" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Razón del cambio</label>
-                            <textarea class="form-control"  id="txt_observacion" name="txt_observacion1" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['razon_cambio'] ?> </textarea>
+                            <textarea class="form-control"  id="txt_observacion" name="txt_observacion" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;"><?php echo $sqltabla["ROWS"][0]['razon_cambio'] ?> </textarea>
                         </div>
                 </div>
                 <?php } ?>

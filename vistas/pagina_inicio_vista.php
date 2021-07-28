@@ -346,7 +346,7 @@ if (session_status() === PHP_SESSION_NONE) {
                   </a>
                 </li>
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_cambio_carrera'] ?>">
-                  <a href="../vistas/cambio_carrera_vista.php" class="nav-link">
+                  <a href="../vistas/menu_cambio_carrera.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Cambio de Carrera </p>
                   </a>
