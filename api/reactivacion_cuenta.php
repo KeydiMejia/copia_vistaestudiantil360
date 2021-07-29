@@ -10,7 +10,7 @@ require_once ('../clases/Conexion.php');
 if(isset($_GET['alumno'])){
     $alumno= $_GET['alumno'];
     // "call sel_carta_egresado_unica('$alumno')"
-    $sql="SELECT valor, nombres, apellidos, correo, observacion, tbl_reactivacion_cuenta.id_reactivacion, tbl_personas.id_persona FROM tbl_reactivacion_cuenta INNER JOIN tbl_personas
+    $sql="SELECT valor, nombres, apellidos, correo, observacion,fecha_creacion, id_estado_reactivacion, tbl_reactivacion_cuenta.id_reactivacion, tbl_personas.id_persona FROM tbl_reactivacion_cuenta INNER JOIN tbl_personas
     ON tbl_reactivacion_cuenta.id_persona=tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
     ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
     WHERE tbl_reactivacion_cuenta.id_reactivacion='$alumno'";
