@@ -62,11 +62,11 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                                         text:"Solicitud enviada...",
                                         type: "question",
                                         showCancelButton: true,     
-                                        confirmButtonText: "Aceptar",
-                                        cancelButtonText: "Cancelar"
+                                        confirmButtonText: "Si",
+                                        cancelButtonText: "No"
                                     }).then(function() {
                                         window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php")
-                                        windows.location("../vistas/historial_solicitudes_vista.php");
+                                        window.location.href = "../vistas/historial_solicitudes_vista.php";
                                     });
                                         $(".FormularioAjax")[0].reset();
                                        </script>'; 
