@@ -17,10 +17,10 @@ class myPDF extends FPDF
     public $sub_titulo;
     public $sql;
 
-    public function __construct($titulo='undefine',$sub_titulo='undefine',$sql='undefine') {
+    public function __construct($titulo='undefine',$sql='undefine') {
         parent::__construct();
         $this->titulo = $titulo;
-        $this->sub_titulo = $sub_titulo;
+        
         $this->sql= $sql;
     }
 
@@ -40,11 +40,11 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE DE SOLICITUD DE ". $this->titulo), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("SOLICITUD DE ". $this->titulo), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(70, 10, utf8_decode($this->sub_titulo." EXISTENTES"), 0, 0, 'C');
-        $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
+        
+        $this->Cell(420, 10, "FECHA: " . $fecha, 0, 2, 'C');
         $this->ln();
     }
 
@@ -85,15 +85,16 @@ class myPDF extends FPDF
 
     function header_Servicio_Comunitario()
     {
+        $this->ln();
         $this->SetFont('Times', 'B', 12);
-        $this->SetLineWidth(0.3);
+        $this->SetLineWidth(0.1);
         $this->Cell(10, 7, utf8_decode("N°"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("NOMBRE"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("APELLIDOS"), 1, 0, 'C');
         $this->Cell(40, 7, utf8_decode("#CUENTA"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
-        $this->Cell(40, 7, utf8_decode("PROYECTO"), 1, 0, 'C');
-        $this->Cell(50, 7, utf8_decode("ESTADO"), 1, 0, 'C');
+        $this->Cell(50, 7, utf8_decode("PROYECTO"), 1, 0, 'C');
+        $this->Cell(50, 7, utf8_decode("OBSERVACION"), 1, 0, 'C');
         $this->ln();
     }
 
@@ -256,7 +257,7 @@ class myPDF extends FPDF
         }
     }
 
-    function viewTable_Servicio_Comunitario()
+    function viewTable_Servicio_Comunitario_H()
     {
         
         
@@ -274,11 +275,60 @@ class myPDF extends FPDF
             $this->Cell(50, 7, utf8_decode($reg['nombres']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['apellidos']), 1, 0, 'C');
              $this->Cell(40, 7, utf8_decode($reg['valor']), 1, 0, 'C');
-            $this->Cell(70, 7, utf8_decode($reg['correo']), 1, 0, 'C');
-            $this->Cell(40, 7, utf8_decode($reg['nombre_proyecto']), 1, 0, 'C');
+             $this->Cell(70, 7, utf8_decode($reg['correo']), 1, 0, 'C'); 
+            $this->Cell(50, 7, utf8_decode($reg['nombre_proyecto']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
 
             $this->ln();
+            $n++;
+        }
+    }
+
+    function viewTable_Servicio_Comunitario_V()
+    {
+        
+        
+        global $instancia_conexion;
+       
+        $stmt = $instancia_conexion->ejecutarConsulta($this->sql);
+
+     
+
+        $n=1;
+        while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+
+            $this->SetFont('Times', '', 12);
+
+            
+            $this->Cell(50, 10, utf8_decode("N°"), 0, 0, 'L');
+            
+            $this->Cell(0, 10, utf8_decode($n), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("NOMBRES"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['nombres']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("APELLIDOS"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['apellidos']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("#CUENTA"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['valor']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("CORREO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['correo']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("PROYECTO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['nombre_proyecto']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("OBSERVACION"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['observacion']), 0, 2, 'L');
+            $this->ln();
+
             $n++;
         }
     }
@@ -310,7 +360,7 @@ if (isset($_GET['ruby'])) {
                 tbl_personas_extendidas.id_persona LIKE '%".$buscar."%' OR
                 tbl_personas.id_persona LIKE '%".$buscar."%'";
         //instacia de la clase 
-        $pdf = new myPDF("EQUIVALENCIAS FILTRADO","EQUIVALENCIAS",$sql);
+        $pdf = new myPDF("EQUIVALENCIAS FILTRADO",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -322,7 +372,7 @@ if (isset($_GET['ruby'])) {
         return false;
     }else{
         $sql = "SELECT nombres,apellidos,valor as cuenta, correo,aprobado, tbl_equivalencias.Id_equivalencia,tipo,Fecha_creacion FROM tbl_equivalencias INNER JOIN tbl_personas ON tbl_equivalencias.id_persona= tbl_personas.id_persona INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona"; 
-        $pdf = new myPDF("EQUIVALENCIAS GENERAL","EQUIVALENCIAS",$sql);
+        $pdf = new myPDF("EQUIVALENCIAS GENERAL",$sql);
         
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -358,7 +408,7 @@ if (isset($_GET['scala'])) {
                 identidad LIKE '%".$buscar."%' OR
                 tbl_expediente_graduacion.id_estado_expediente LIKE '%".$buscar."%'";
         //instacia de la clase 
-        $pdf = new myPDF("EXPEDIENTE DE GRADUACION"," EXPEDIENTE DE GRADUACION",$sql);
+        $pdf = new myPDF("EXPEDIENTE DE GRADUACION",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -374,7 +424,7 @@ if (isset($_GET['scala'])) {
         FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
         INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona";
     
-        $pdf = new myPDF("EXPEDIENTE DE GRADUACION"," EXPEDIENTE DE GRADUACION",$sql);
+        $pdf = new myPDF("EXPEDIENTE DE GRADUACION",$sql);
         
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -410,7 +460,7 @@ if (isset($_GET['perl'])) {
                 tbl_personas_extendidas.id_persona LIKE '%".$buscar."%' OR
                 tbl_personas.id_persona LIKE '%".$buscar."%'";
         //instacia de la clase 
-        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO","CARTA DE EGRESADOS",$sql);
+        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -428,7 +478,7 @@ if (isset($_GET['perl'])) {
               INNER JOIN tbl_personas_extendidas 
               ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona";
     
-        $pdf = new myPDF("CARTA DE EGRESADOS GENERAL","CARTA DE EGRESADOS",$sql);
+        $pdf = new myPDF("CARTA DE EGRESADOS GENERAL",$sql);
         
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -455,7 +505,7 @@ if (isset($_GET['id_expediente'])) {
        INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
        WHERE tbl_expediente_graduacion.id_expediente='$buscar'";
         //instacia de la clase 
-        $pdf = new myPDF("EXPEDIENTE DE GRADUACION"," EXPEDIENTE DE GRADUACION",$sql);
+        $pdf = new myPDF("EXPEDIENTE DE GRADUACION",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -483,7 +533,7 @@ if (isset($_GET['id_carta'])) {
         ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
        WHERE tbl_carta_egresado.Id_carta='$buscar'";
         //instacia de la clase 
-        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO","CARTA DE EGRESADOS",$sql);
+        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -511,7 +561,7 @@ if (isset($_GET['id_equivalencia'])) {
                 INNER JOIN tbl_personas_extendidas 
                 ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona
                 WHERE tbl_equivalencias.Id_equivalencia='$buscar'"; 
-        $pdf = new myPDF("EQUIVALENCIAS FILTRADO","EQUIVALENCIAS",$sql);
+        $pdf = new myPDF("EQUIVALENCIAS FILTRADO",$sql);
         
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
@@ -530,6 +580,7 @@ if (isset($_GET['id_equivalencia'])) {
 
 /*-----------REPORTES DE SUANY------- */
 //Reporte cuando se cre una solicitud de servivicio comunitario
+//ESTA FUNCION TAMBIEN GENERA EL REPORTE 
 if (isset($_GET['servicio'])) {
     if ($_GET['servicio']!=='') {
         
@@ -542,13 +593,14 @@ if (isset($_GET['servicio'])) {
        INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
        WHERE tbl_servicio_comunitario.id_servicio_comunitario=$buscar";
         //instacia de la clase 
-        $pdf = new myPDF("SERVICIO COMUNITARIO","SERVICIO COMUNITARIO",$sql);
+        $pdf = new myPDF("SERVICIO COMUNITARIO",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
-        $pdf->AddPage('C', 'Legal', 0);
-        $pdf->header_Servicio_Comunitario();
-        $pdf->viewTable_Servicio_Comunitario();
+        $pdf->AddPage('P', 'A3',0);
+        // $pdf->header_Servicio_Comunitario();
+        $pdf->viewTable_Servicio_Comunitario_V();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_SERVICIO_COMUNITARIO.PDF');
         $pdf->Output();
     
         return false;
@@ -568,12 +620,12 @@ if (isset($_GET['alumno'])) {
        INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
        WHERE tbl_servicio_comunitario.id_servicio_comunitario='$buscar'";
         //instacia de la clase 
-        $pdf = new myPDF("SERVICIO COMUNITARIO","SERVICIO COMUNITARIO",$sql);
+        $pdf = new myPDF("SERVICIO COMUNITARIO",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
         $pdf->header_Servicio_Comunitario();
-        $pdf->viewTable_Servicio_Comunitario();
+        $pdf->viewTable_Servicio_Comunitario_V();
         $pdf->SetFont('Arial', '', 15);
         $pdf->Output();
     
@@ -601,13 +653,14 @@ if (isset($_GET['php'])) {
                 observacion LIKE '%".$buscar."%' OR
                 tbl_personas.id_persona LIKE '%".$buscar."%'";
         //instacia de la clase 
-        $pdf = new myPDF("SERVICIO COMUNITARIO","SERVICIO COMUNITARIO",$sql);
+        $pdf = new myPDF("SERVICIO COMUNITARIO",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
         $pdf->header_Servicio_Comunitario();
-        $pdf->viewTable_Servicio_Comunitario();
+        $pdf->viewTable_Servicio_Comunitario_H();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_SERVICIO_COMUNITARIO.PDF');
         $pdf->Output();
     
         return false;
@@ -617,13 +670,14 @@ if (isset($_GET['php'])) {
        INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
        ";
     
-        $pdf = new myPDF("SERVICIO COMUNITARIO","SERVICIO COMUNITARIO",$sql);
+        $pdf = new myPDF("SERVICIO COMUNITARIO",$sql);
         
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
         $pdf->header_Servicio_Comunitario();
-        $pdf->viewTable_Servicio_Comunitario();
+        $pdf->viewTable_Servicio_Comunitario_H();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_SERVICIO_COMUNITARIO.PDF');
         $pdf->Output();
     
         return false;

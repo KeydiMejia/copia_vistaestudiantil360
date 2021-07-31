@@ -28,7 +28,7 @@ $counter = 0;
 // $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
 
 // $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php'), true );
-http://localhost:8008/copia_vistaestudiantil360/vistas/revision_expediente_graduacion.php
+// http://localhost:8008/copia_vistaestudiantil360/vistas/revision_expediente_graduacion.php
 $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/servicio_comunitario.php'), true );
 
 
