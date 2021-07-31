@@ -248,13 +248,11 @@
         $aprobado = $_POST['aprobado'];
         $cuenta = $_POST['txt_cuenta'];
         $observacion = $_POST['txt_observacion'];
-        $tipo = $_POST['tipo'];
         $id_cambio = $_POST['Id_cambio'];
-       // $tipo = $sqltabla["ROWS"][0]['tipo'];
-        
+       
+
         ($aprobado=="aprobado")? $estado=2:$estado=3;
-    
-        
+      
         
         if($observacion!==""){
             // $sqlp = "call upd_carta_egresado_observacion('$aprobado','$observacion','$cuenta')";
@@ -262,14 +260,16 @@
             $sqlp = "UPDATE tbl_cambio_carrera 
             SET aprobado = '$aprobado', fecha_creacion = now(),
             observacion = '$observacion'
-            WHERE Id_cambio = '$id_cambio'
-            AND tipo = '$tipo'";
-
+            WHERE Id_cambio = '$id_cambio'";
+ 
+           
             $resultadop = $mysqli->query($sql);
             
             
             if($resultadop == true){
                 $mysqli->next_result();
+
+                
     
                 echo '<script type="text/javascript">
                         swal({

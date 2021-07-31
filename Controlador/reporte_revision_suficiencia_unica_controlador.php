@@ -10,6 +10,9 @@ require_once('../Reporte/pdf/fpdf.php');
 $instancia_conexion = new conexion();
 
 
+//$sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true );
+
+
 class myPDF extends FPDF
 {
     function header()
@@ -28,7 +31,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE EXAMEN SUFICIENCIA"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
@@ -46,8 +49,9 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(83, 7, "NOMBRE", 1, 0, 'C');
-        $this->Cell(65, 7, utf8_decode("CORREO"), 1, 0, 'C');
+        $this->Cell(60, 7, "NOMBRE", 1, 0, 'C');
+        $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
+         $this->Cell(30, 7, "TIPO", 1, 0, 'C');
         $this->Cell(30, 7, "ESTADO", 1, 0, 'C');
         $this->Cell(60, 7, "OBSERVACION", 1, 0, 'C');
         $this->Cell(50, 7, "FECHA", 1, 0, 'C');
@@ -59,27 +63,34 @@ class myPDF extends FPDF
         //$sqlp="select MAX(Id_cancelar_clases) FROM tbl_cancelar_clases";
         //$Id_cancelar_clases= $instancia_conexion->ejecutarConsulta($sqlp);
 
-        global $instancia_conexion;
-     
-        $sql ="SELECT p.nombres, p.apellidos, r.correo, r.observacion, r.id_estado_reactivacion, r.fecha_creacion 
-        FROM tbl_reactivacion_cuenta r, tbl_personas p WHERE r.id_reactivacion=(SELECT MAX(id_reactivacion) FROM tbl_reactivacion_cuenta) AND p.id_persona=r.id_persona";
-      
-      $stmt = $instancia_conexion->ejecutarConsulta($sql);
+        //global $instancia_conexion;
+        //$sql ="SELECT Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion FROM tbl_cancelar_clases WHERE Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases)";
+        //$stmt = $instancia_conexion->ejecutarConsulta($sql);
 
-        while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+        //while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+            if (isset($_GET['alumno'])){
+            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/examen_suficiencia.php?alumno=".$_GET['alumno']), true ); 
+            }
+
+            $nombre= $sqltabla["ROWS"][0]['nombres'];
+            $correo= $sqltabla["ROWS"][0]['correo'];
+            $observ= $sqltabla["ROWS"][0]['observacion'];
+            $estado= $sqltabla["ROWS"][0]['id_estado_suficiencia'];
+            $fecha =$sqltabla["ROWS"][0]['fecha_creacion'];
+            $tipo =$sqltabla["ROWS"][0]['tipo'];
 
             $this->SetFont('Times', '', 12);
-           
-            $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
-            $this->Cell(65, 7, utf8_decode($reg['correo']), 1, 0, 'C');
-            $this->Cell(30, 7, $reg['id_estado_reactivacion'], 1, 0, 'C');
-            $this->Cell(60, 7, $reg['observacion'], 1, 0, 'C');
-            $this->Cell(50, 7, $reg['fecha_creacion'], 1, 0, 'C');
+            $this->Cell(60, 7, $nombre, 1, 0, 'C');
+            $this->Cell(70, 7, $correo, 1, 0, 'C');
+            $this->Cell(30, 7, $tipo, 1, 0, 'C');
+            $this->Cell(30, 7, $estado, 1, 0, 'C');
+            $this->Cell(60, 7, $observ, 1, 0, 'C');
+            $this->Cell(50, 7, $fecha, 1, 0, 'C');
 
             $this->ln();
         }
     }
-}
+
 
 
 $pdf = new myPDF();

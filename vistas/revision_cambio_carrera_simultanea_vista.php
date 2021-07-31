@@ -124,7 +124,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                 <td><?php echo $sql_tabla["ROWS"][$counter]["tipo"] ?></td>  
                 <td><?php echo $sql_tabla["ROWS"][$counter]["observacion"] ?></td>     
                 <td style="text-align: center;">                    
-                    <a href="../vistas/revision_cambio_unico_simultanea.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"] ?>&tipo=<?php echo $tipo?>" class="btn btn-primary btn-raised btn-xs">
+                    <a href="../vistas/revision_cambio_unico_simultanea.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cambio"] ?>&tipo=<?php echo $tipo?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
                 </td>
