@@ -64,18 +64,17 @@
                         title:"¿Deseas ver reporte en PDF?",
                         text:"Solicitud enviada...",
                         type: "question",
-                        allowOutsideClick:false,
-                        showConfirmButton: true,
-                        showCancelButton: true,
-                        confirmButtonText:"Aceptar",
-                        cancelButtonText:"Cancelar",
-                        }).then(function () {
-                        window.location.href = "../Controlador/reporte_revision_suficiencia_controlador.php?servicio='.$ultimo_id_hash.'";
-                        });
+                        showCancelButton: true,     
+                        confirmButtonText: "Aceptar",
+                        cancelButtonText: "Cancelar"
+                    }).then(function() {
+                        window.open("../Controlador/reporte_revision_suficiencia_controlador.php")
+                        windows.location("../vistas/historial_solicitudes_vista.php");
+                    });
                         $(".FormularioAjax")[0].reset();
-                    </script>'; 
-                   
-                    
+                       </script>'; 
+    
+                
                
                                     } 
                                     else {

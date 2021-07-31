@@ -28,10 +28,10 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUDES DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("SOLICITUDES DE CANCELACION DE CLASES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
+        $this->Cell(60, 10, utf8_decode(""), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -46,11 +46,12 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
+        $this->Cell(10, 7, utf8_decode("Nª"), 1, 0, 'C');
         $this->Cell(83, 7, "NOMBRE", 1, 0, 'C');
         $this->Cell(45, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
         $this->Cell(65, 7, utf8_decode("CORREO"), 1, 0, 'C');
         $this->Cell(65, 7, "OBSERVACION", 1, 0, 'C');
-        $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
+        $this->Cell(25, 7, "CAMBIO", 1, 0, 'C');
         $this->Cell(50, 7, "FECHA", 1, 0, 'C');
 
         $this->ln();
@@ -58,7 +59,7 @@ class myPDF extends FPDF
     function viewTable()
     {
         global $instancia_conexion;
-        $sql = "SELECT p.nombres, p.apellidos, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion
+        $sql = "SELECT row_number() OVER (ORDER BY nombres) AS NP, p.nombres, p.apellidos, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion
         FROM tbl_cancelar_clases c, tbl_personas p
         WHERE p.id_persona=c.id_persona";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
@@ -66,11 +67,12 @@ class myPDF extends FPDF
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
+            $this->Cell(10, 7, $reg['NP'], 1, 0, 'C');
             $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
             $this->Cell(45, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
             $this->Cell(65, 7, utf8_decode($reg['correo']), 1, 0, 'C');
             $this->Cell(65, 7, $reg['observacion'], 1, 0, 'C');
-            $this->Cell(30, 7, $reg['cambio'], 1, 0, 'C');
+            $this->Cell(25, 7, $reg['cambio'], 1, 0, 'C');
             $this->Cell(50, 7, $reg['Fecha_creacion'], 1, 0, 'C');
 
             $this->ln();

@@ -26,10 +26,10 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
+        $this->Cell(60, 10, utf8_decode(""), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -40,23 +40,9 @@ class myPDF extends FPDF
         $this->cell(0, 10, 'Pagina' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
-    function headerTable()
-    {
-        $this->SetFont('Times', 'B', 12);
-        $this->SetLineWidth(0.3);
-        $this->Cell(83, 7, "NOMBRE", 1, 0, 'C');
-        $this->Cell(40, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
-        $this->Cell(65, 7, utf8_decode("CORREO"), 1, 0, 'C');
-        $this->Cell(60, 7, "OBSERVACION", 1, 0, 'C');
-        $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
-        $this->Cell(50, 7, "FECHA", 1, 0, 'C');
-
-        $this->ln();
-    }
-    function viewTable()
-    {   //global $Id_cancelar_clases;
-        //$sqlp="select MAX(Id_cancelar_clases) FROM tbl_cancelar_clases";
-        //$Id_cancelar_clases= $instancia_conexion->ejecutarConsulta($sqlp);
+    
+    function view()
+    {   
 
         global $instancia_conexion;
         $sql ="SELECT p.nombres, p.apellidos, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion FROM tbl_cancelar_clases c, tbl_personas p WHERE c.Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases) AND p.id_persona=c.id_persona";
@@ -65,15 +51,36 @@ class myPDF extends FPDF
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-           
-            $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
-            $this->Cell(40, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
-            $this->Cell(65, 7, utf8_decode($reg['correo']), 1, 0, 'C');
-            $this->Cell(60, 7, $reg['observacion'], 1, 0, 'C');
-            $this->Cell(30, 7, $reg['cambio'], 1, 0, 'C');
-            $this->Cell(50, 7, $reg['Fecha_creacion'], 1, 0, 'C');
+            $this->SetXY(25, 80);
+            $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
+            $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
+//*****
+$this->SetXY(25,90);
+$this->Cell(30, 8, 'MOTIVO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['motivo']), 120, 85.5);
 
-            $this->ln();
+//*****
+$this->SetXY(25, 100);
+$this->Cell(30, 8, 'CORREO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['correo']), 120, 85.5);
+//****
+$this->SetXY(25, 110);
+$this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
+$this->Cell(20, 8, $reg['observacion'], 120, 85.5);
+
+$this->SetXY(25, 120);
+$this->Cell(30, 8, 'ESTADO:', 0, 'L');
+$this->Cell(20, 8,$reg['cambio'], 120, 85.5);
+
+$this->SetXY(25, 130);
+$this->Cell(30, 8, 'FECHA:', 0, 'L');
+$this->Cell(20, 8, $reg['Fecha_creacion'], 120, 85.5);
+           
+            // $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
+            // $this->Cell(40, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
+           
+
+            // $this->ln();
         }
     }
 }
@@ -82,8 +89,8 @@ class myPDF extends FPDF
 $pdf = new myPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('C', 'Legal', 0);
-$pdf->headerTable();
-$pdf->viewTable();
+//$pdf->headerTable();
+$pdf->view();
 
 //$pdf->viewTable2($instancia_conexion);
 $pdf->SetFont('Arial', '', 15);

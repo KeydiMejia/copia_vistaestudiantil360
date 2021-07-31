@@ -113,23 +113,25 @@ $visualizacion= permiso_ver($Id_objeto);
                   </thead>
                   <tbody>
                     <?php 
-                  if($sql_tabla["ROWS"]!=""){
-                    while($counter < count($sql_tabla["ROWS"])) { 
-                      $estado=$sql_tabla["ROWS"][$counter]["id_estado_suficiencia"];
-                      
-                      if ($estado==2) {
-                        $banner ="Aprobado";
-                        $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$banner</span>";
-                      }
-                      elseif($estado==1){
-                        $banner ="Nuevo";
-                        $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$banner</span>";  
-  
-                      }else{
-                        $banner ="Desaprobado";
-                        $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$banner</span>";  
-                      }
-                      
+                 if($sql_tabla["ROWS"]!=""){
+                  
+                  while($counter < count($sql_tabla["ROWS"])) { 
+                    
+                    $estado=$sql_tabla["ROWS"][$counter]["id_estado_suficiencia"];
+                   
+                    
+                    if ($estado==2) {
+                      $banner= "Aprobado";
+                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$banner</span>";
+                    }
+                    elseif($estado==1){
+                      $banner= "Nuevo";
+                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$banner</span>";  
+
+                    }else{
+                      $banner= "Desaprobado";
+                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$banner</span>";  
+                    }
                       ?>
                    <!-- <tr>
                   <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>

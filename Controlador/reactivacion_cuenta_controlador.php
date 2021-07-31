@@ -58,18 +58,21 @@
                 $resultadop = $mysqli->query($sql);
                 if($resultadop == true){
                     echo '<script type="text/javascript">
-                                    swal({
-                                        title:"",
-                                        text:"Solicitud enviada...",
-                                        type: "success",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                        });
-                                        $(".FormularioAjax")[0].reset();
-                                        </script>'; 
-                    
-               
-                                    } 
+                    swal({
+                        title:"¿Deseas ver reporte en PDF?",
+                        text:"Solicitud enviada...",
+                        type: "question",
+                        showCancelButton: true,     
+                        confirmButtonText: "Aceptar",
+                        cancelButtonText: "Cancelar"
+                    }).then(function() {
+                        window.open("../Controlador/reporte_revision_reactivacion_controlador.php")
+                        windows.location("../vistas/historial_solicitudes_vista.php");
+                    });
+                        $(".FormularioAjax")[0].reset();
+                       </script>'; 
+    
+                } 
                                     else {
                                         echo "Error: " . $sql ;
                                         }

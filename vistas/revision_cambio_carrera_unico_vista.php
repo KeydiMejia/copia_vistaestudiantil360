@@ -117,7 +117,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Facultad de la que viene</label>
-                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['facultad'] ?>" id="txt_facultad" name="txt_facultad" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
+                            <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombre'] ?>" id="txt_facultad" name="txt_facultad" rows="3" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
                         </div>
                 </div>
                 <div class="col-md-12">

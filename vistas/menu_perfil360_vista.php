@@ -254,7 +254,7 @@ footer{
 <div class="clearfix"></div>
 
 <!--------- Main content ------->
-<!----------------------------INICIO DE LA SECCION----------------------->
+<!-------------------------INICIO DE LA SECCION----------------------->
     
    <section class="content">
    <div class="container-fluid">
@@ -336,7 +336,8 @@ footer{
 
           <div class="info-box-content">
             <span class="info-box-text">Aprobadas</span>
-            <span class="info-box-number"><?php echo $fila['id_persona'] ?></span>
+            <button type="button" class="btn btn-link" onclick="location.href='../vistas/clases_aprobadas_vista.php'"><?php echo $fila['id_persona'] ?></button>
+            
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -349,7 +350,8 @@ footer{
 
           <div class="info-box-content">
             <span class="info-box-text">Por aprobar</span>
-            <span class="info-box-number"><?php echo 52 - $fila['id_persona']  ?></span>
+            <button type="button" class="btn btn-link" onclick="location.href='../vistas/clases_desaprobadas_vista.php'"><?php echo 52-$fila['id_persona'] ?></button>
+            
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -413,7 +415,8 @@ footer{
 					<thead>
 						<tr>
                         <tr class="bg-basic">
-							<th COLSPAN=2>Solicitudes realizadas</th>
+							<th>Solicitudes realizadas</th>
+              <td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila1['id_persona']+$fila2['id_persona']+$fila3['id_persona']+$fila4['id_persona']+$fila5['id_persona']+$fila6['id_persona']+$fila7['id_persona']+$fila8['id_persona']+$fila9['id_persona'] ?></td>
             </tr>
 					</thead>
 
