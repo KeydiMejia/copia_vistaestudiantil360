@@ -133,8 +133,9 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Solicitud de Cancelación</label>
-                            <input class="form-control" type="file" id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" >
-                        </div>
+                            <input class="form-control " type="file"  id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" >
+                            
+                          </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
@@ -157,7 +158,7 @@ ob_end_flush();
                 
             </div>
             <p class="text-center form-group" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" id="btn_cancelar_clases" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary" id="btn_cancelar_clases"><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
 
@@ -179,6 +180,13 @@ ob_end_flush();
 
 
 </div>
+
+<!-- <script type="text/javascript" language="javascript">
+                    function ventana() {
+                      window.location.href = "../vistas/historial_solicitudes_vista.php";
+                    }
+                  </script> -->
+
 <script>
 $('input[type="file"]').on('change', function(){
   var ext = $( this ).val().split('.').pop();

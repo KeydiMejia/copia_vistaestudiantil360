@@ -9,7 +9,12 @@ require_once ('../clases/Conexion.php');
 
 if(isset($_GET['alumno'])){
     $alumno= $_GET['alumno'];
-    if ($R = $mysqli->query("call examen_suficiencia'$alumno')")) {
+    $sql="SELECT valor, nombres, apellidos, correo, tipo, observacion, tbl_examen_suficiencia.id_suficiencia, tbl_personas.id_persona FROM tbl_examen_suficiencia INNER JOIN tbl_personas
+    ON tbl_examen_suficiencia.id_persona=tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
+    ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
+    WHERE tbl_examen_suficiencia.id_suficiencia='$alumno' and tbl_examen_suficiencia.tipo = 'contenido'";
+
+    if ($R = $mysqli->query($sql)) {
         $items = [];
 
         while ($row = $R->fetch_assoc()) {
@@ -22,7 +27,11 @@ if(isset($_GET['alumno'])){
     echo json_encode($result);
 }elseif(isset($_GET['tipo'])){
     $tipo = $_GET['tipo'];
-    if ($R = $mysqli->query("call sel_cambio_tipo('$tipo')")) {
+
+    $consulta="SELECT nombres, apellidos, correo, tbl_personas.id_persona,  observacion,  documento, fecha_creacion, id_suficiencia, id_estado_suficiencia, tipo FROM 
+tbl_personas INNER JOIN tbl_examen_suficiencia ON tbl_personas.id_persona = tbl_examen_suficiencia.id_persona where  tbl_examen_suficiencia.tipo = 'contenido'";  
+
+    if ($R = $mysqli->query($consulta)) {
         $items = [];
 
         while ($row = $R->fetch_assoc()) {
@@ -35,7 +44,15 @@ if(isset($_GET['alumno'])){
     echo json_encode($result);
 }
 else{
-    if ($R = $mysqli->query("call sel_cambio_carrera()")) {
+
+    $sql="SELECT tbl_personas.nombres,tbl_personas.apellidos,tbl_personas_extendidas.valor, tbl_examen_suficiencia.fecha_creacion,
+    tbl_examen_suficiencia.correo, tbl_examen_suficiencia.observacion, tbl_examen_suficiencia.tipo, 
+    tbl_examen_suficiencia.id_estado_suficiencia, tbl_examen_suficiencia.id_suficiencia,tipo,Fecha_creacion
+     FROM tbl_examen_suficiencia INNER JOIN tbl_personas ON tbl_examen_suficiencia.id_persona= tbl_personas.id_persona 
+     INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona
+      where tbl_examen_suficiencia.tipo = 'contenido'";
+    // "call sel_equivalencias()"
+    if ($R = $mysqli->query($sql)) {
         $items = [];
 
         while ($row = $R->fetch_assoc()) {

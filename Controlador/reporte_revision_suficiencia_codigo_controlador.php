@@ -1,3 +1,5 @@
+
+
 <?php
 session_start();
 require_once('../clases/Conexion.php');
@@ -29,7 +31,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE EXAMEN SUFICIENCIA"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
@@ -48,10 +50,10 @@ class myPDF extends FPDF
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
         $this->Cell(60, 7, "NOMBRE", 1, 0, 'C');
-        $this->Cell(50, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
+         $this->Cell(30, 7, "TIPO", 1, 0, 'C');
+        $this->Cell(30, 7, "ESTADO", 1, 0, 'C');
         $this->Cell(60, 7, "OBSERVACION", 1, 0, 'C');
-        $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
         $this->Cell(50, 7, "FECHA", 1, 0, 'C');
 
         $this->ln();
@@ -67,23 +69,23 @@ class myPDF extends FPDF
 
         //while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
             if (isset($_GET['alumno'])){
-            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true ); 
+            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php?alumno=".$_GET['alumno']), true ); 
             }
 
             $nombre= $sqltabla["ROWS"][0]['nombres'];
-            $motiv= $sqltabla["ROWS"][0]['motivo'];
-            $corr= $sqltabla["ROWS"][0]['correo'];
+            $correo= $sqltabla["ROWS"][0]['correo'];
             $observ= $sqltabla["ROWS"][0]['observacion'];
-            $cambi= $sqltabla["ROWS"][0]['cambio'];
-            $fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
+            $estado= $sqltabla["ROWS"][0]['id_estado_suficiencia'];
+            $fecha =$sqltabla["ROWS"][0]['fecha_creacion'];
+            $tipo =$sqltabla["ROWS"][0]['tipo'];
 
             $this->SetFont('Times', '', 12);
             $this->Cell(60, 7, $nombre, 1, 0, 'C');
-            $this->Cell(50, 7, $motiv, 1, 0, 'C');
-            $this->Cell(70, 7, $corr, 1, 0, 'C');
+            $this->Cell(70, 7, $correo, 1, 0, 'C');
+            $this->Cell(30, 7, $tipo, 1, 0, 'C');
+            $this->Cell(30, 7, $estado, 1, 0, 'C');
             $this->Cell(60, 7, $observ, 1, 0, 'C');
-            $this->Cell(30, 7, $cambi, 1, 0, 'C');
-            $this->Cell(50, 7, $fechi, 1, 0, 'C');
+            $this->Cell(50, 7, $fecha, 1, 0, 'C');
 
             $this->ln();
         }

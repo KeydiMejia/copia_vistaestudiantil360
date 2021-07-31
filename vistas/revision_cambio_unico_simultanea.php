@@ -7,7 +7,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=145; 
+$Id_objeto=35; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -23,16 +23,17 @@ if($visualizacion==0){
    </script>'; 
 }
 if (isset($_GET['alumno'])){
- 
+  
   // $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
-    $sqltabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/reactivacion_cuenta.php?alumno='.$_GET['alumno']), true );
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE SUFICIENCIA ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
+    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carrera_simultanea.php?alumno=".$_GET['alumno']), true );
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE CAMBIO CARRERA SIMULTANEA '.$sqltabla["ROWS"][0]['nombres'].'');  
 }
+
 
 ob_end_flush();
 
  ?>
-
+<?php error_reporting(0);?>
 
 <!DOCTYPE html>
 <html>
@@ -48,7 +49,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Solicitud de Reactivacion de Cuenta</h1>
+            <h1>Solicitud de Cambio Carrera Simultanea</h1>
           </div>
 
          
@@ -56,7 +57,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/revision_reactivacion_vista.php">Solicitudes de Reactivacion de Cuenta </a></li>
+              <li class="breadcrumb-item"><a href="../vistas/revision_cambio_carrera_simultanea_vista.php">Solicitudes de Cambio Carrera Simultanea</a></li>
             </ol>
           </div>
 
@@ -71,7 +72,7 @@ ob_end_flush();
             <div class="container-fluid">
   <!-- pantalla 1 -->
       
-<form action="../Controlador/reactivacion_cuenta_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
+<form action="../Controlador/cambio_carrera_controlador.php" method="post"  data-form="save" autocomplete="off" class="FormularioAjax">
 
  <div class="card card-default">
           <div class="card-header">
@@ -90,14 +91,14 @@ ob_end_flush();
                         <div class="form-group">
                             <label>Nombre del Alumno</label>
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" type="text" id="txt_nombre" name="txt_nombre1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;" >
-                            <!-- <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo"> -->
+                            <input class="form-control" value="<?php echo $_GET['tipo'] ?>" type="hidden" id="txt_tipo" name="txt_tipo"> 
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
                             <input class="form-control" value="<?php echo $sqltabla["ROWS"][0]['valor'] ?>" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly onmousedown="return false;">
-                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['id_reactivacion']  ?>" type="text"  name="id_reactivacion">
+                            <input class="form-control d-none" value="<?php echo $sqltabla["ROWS"][0]['Id_cambio']  ?>" type="text"  name="Id_cambio">
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -184,27 +185,26 @@ ob_end_flush();
             <div class="row">
                
 
-                   <div class="col-md-12">
+            <div class="col-md-12">
                     <div class="form-group">
                         <label class="control-label">Nombre Completo</label>
                         <input class="form-control" type="text"  maxlength="60" id="txt_nombre_alumno" name="txt_nombre_alumno"  value="<?php echo $sqltabla["ROWS"][0]['nombres'].' '.$sqltabla["ROWS"][0]['apellidos'] ?>" required style="text-transform: uppercase"   onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
                         <?php 
                         $cuenta = $sqltabla["ROWS"][0]['valor'];
-                        
-                         
+                        $tipo = $_GET['tipo'];
                          $listar=null;
-                         $directorio=opendir("../archivos/reactivacion_cuenta/$cuenta");
+                         $directorio=opendir("../archivos/cambio/$tipo/$cuenta/");
                          while ($elemento =readdir($directorio)) 
                          {
                            if ($elemento !='.' and $elemento !='..') {
                
                
-                             if (is_dir("../archivos/reactivacion_cuenta/$cuenta/".$elemento)) 
+                             if (is_dir("../archivos/cambio/$tipo/$cuenta/".$elemento)) 
                              {
-                               $listar .="<li> <a href='../reactivacion_cuenta/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
+                               $listar .="<li> <a href='../archivos/cambio/$tipo/$cuenta/$elemento' target='_blank'>$elemento/</a></li>";
                              }
                              else {
-                               $listar .="<li> <a href='../archivos/reactivacion_cuenta/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
+                               $listar .="<li> <a href='../archivos/cambio/$tipo/$cuenta/$elemento' target='_blank'>$elemento</a></li>";
                              } 
                            }
                          }

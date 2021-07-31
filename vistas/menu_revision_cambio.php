@@ -75,7 +75,7 @@ $_SESSION['r_cambio']="No
                 <div class="icon">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <a href="../vistas/revision_cambio_carrera_vista.php?tipo=simultanea" class="small-box-footer">
+                <a href="../vistas/revision_cambio_carrera_simultanea_vista.php?tipo=simultanea" class="small-box-footer">
                 Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
           </div>
