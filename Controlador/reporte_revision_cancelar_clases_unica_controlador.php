@@ -29,10 +29,10 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode("SOLICITUDES"), 0, 0, 'C');
+        $this->Cell(60, 10, utf8_decode(" "), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -43,49 +43,50 @@ class myPDF extends FPDF
         $this->cell(0, 10, 'Pagina' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
-    function headerTable()
-    {
-        $this->SetFont('Times', 'B', 12);
-        $this->SetLineWidth(0.3);
-        $this->Cell(60, 7, "NOMBRE", 1, 0, 'C');
-        $this->Cell(50, 7, utf8_decode("MOTIVO"), 1, 0, 'C');
-        $this->Cell(70, 7, utf8_decode("CORREO"), 1, 0, 'C');
-        $this->Cell(60, 7, "OBSERVACION", 1, 0, 'C');
-        $this->Cell(30, 7, "CAMBIO", 1, 0, 'C');
-        $this->Cell(50, 7, "FECHA", 1, 0, 'C');
-
-        $this->ln();
-    }
-    function viewTable()
-    {   //global $Id_cancelar_clases;
-        //$sqlp="select MAX(Id_cancelar_clases) FROM tbl_cancelar_clases";
-        //$Id_cancelar_clases= $instancia_conexion->ejecutarConsulta($sqlp);
-
-        //global $instancia_conexion;
-        //$sql ="SELECT Id_cancelar_clases, motivo, correo, observacion, cambio, Fecha_creacion FROM tbl_cancelar_clases WHERE Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases)";
-        //$stmt = $instancia_conexion->ejecutarConsulta($sql);
-
-        //while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+    function view()
+    {   
             if (isset($_GET['alumno'])){
             $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true ); 
             }
 
             $nombre= $sqltabla["ROWS"][0]['nombres'];
+            $apellid= $sqltabla["ROWS"][0]['apellidos'];
             $motiv= $sqltabla["ROWS"][0]['motivo'];
-            $corr= $sqltabla["ROWS"][0]['correo'];
+            //$corr= $sqltabla["ROWS"][0]['correo'];
             $observ= $sqltabla["ROWS"][0]['observacion'];
             $cambi= $sqltabla["ROWS"][0]['cambio'];
             $fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
 
-            $this->SetFont('Times', '', 12);
-            $this->Cell(60, 7, $nombre, 1, 0, 'C');
-            $this->Cell(50, 7, $motiv, 1, 0, 'C');
-            $this->Cell(70, 7, $corr, 1, 0, 'C');
-            $this->Cell(60, 7, $observ, 1, 0, 'C');
-            $this->Cell(30, 7, $cambi, 1, 0, 'C');
-            $this->Cell(50, 7, $fechi, 1, 0, 'C');
+$this->SetXY(25,90);
+$this->Cell(30, 8, 'NOMBRE:', 0, 'L');
+$this->Cell(20, 8, $nombre.$apellid, 120, 85.5);
 
-            $this->ln();
+//*****
+$this->SetXY(25, 100);
+$this->Cell(30, 8, 'MOTIVO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($motiv), 120, 85.5);
+//****
+$this->SetXY(25, 110);
+$this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
+$this->Cell(20, 8, $observ, 120, 85.5);
+
+$this->SetXY(25, 120);
+$this->Cell(30, 8, 'ESTADO:', 0, 'L');
+$this->Cell(20, 8,$cambi, 120, 85.5);
+
+$this->SetXY(25, 130);
+$this->Cell(30, 8, 'FECHA:', 0, 'L');
+$this->Cell(20, 8, $fechi, 120, 85.5);
+
+            // $this->SetFont('Times', '', 12);
+            // $this->Cell(60, 7, $nombre, 1, 0, 'C');
+            // $this->Cell(50, 7, $motiv, 1, 0, 'C');
+            // $this->Cell(70, 7, $corr, 1, 0, 'C');
+            // $this->Cell(60, 7, $observ, 1, 0, 'C');
+            // $this->Cell(30, 7, $cambi, 1, 0, 'C');
+            // $this->Cell(50, 7, $fechi, 1, 0, 'C');
+
+            // $this->ln();
         }
     }
 
@@ -94,8 +95,8 @@ class myPDF extends FPDF
 $pdf = new myPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('C', 'Legal', 0);
-$pdf->headerTable();
-$pdf->viewTable();
+//$pdf->headerTable();
+$pdf->view();
 
 //$pdf->viewTable2($instancia_conexion);
 $pdf->SetFont('Arial', '', 15);

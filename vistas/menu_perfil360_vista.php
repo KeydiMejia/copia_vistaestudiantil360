@@ -350,7 +350,7 @@ footer{
 
           <div class="info-box-content">
             <span class="info-box-text">Por aprobar</span>
-            <button type="button" class="btn btn-link" onclick="location.href='../vistas/historial_clases_vista.php'"><?php echo 52-$fila['id_persona'] ?></button>
+            <button type="button" class="btn btn-link" onclick="location.href='../vistas/clases_desaprobadas_vista.php'"><?php echo 52-$fila['id_persona'] ?></button>
             
           </div>
           <!-- /.info-box-content -->
