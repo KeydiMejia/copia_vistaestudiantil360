@@ -6,18 +6,170 @@
     
 
     if (vista[4]=='revision_servicio_comunitario_unica_vista.php') {
-        inputs_revision_servicio_comunitario_unitario();        
+        
+        inputs_revision_servicio_comunitario_unitario();  
+
     }else if(vista[4]=='servicio_comunitario_vista.php'){
         
       inputs_solicitud_servicio();
       
 
-    }else{
-        console.log('no hay vista');
-    }
-  
+    }else if(vista[4]=='equivalencias_vista.php'){
+        
+        inputs_solicitud_equivalencia();
+
+    }else if(vista[4]=='revision_equivalencias_unica.php'){
+        
+        inputs_revision_servicio_comunitario_unitario();
+
+    }else if(vista[4]=='carta_egresado_vista.php'){
+
+       inputs_solicitud_carta_egresado();
+
+    }else if(vista[4]=='revision_carta_egresado_unica_vista.php'){
+
+        inputs_revision_servicio_comunitario_unitario();
+     }else if(vista[4]=='expediente_graduacion_vista.php'){
+
+       inputs_solicitud_equivalencia();
+
+     }else if(vista[4]=='revision_expediente_graduacion_unica.php'){
+
+        inputs_revision_servicio_comunitario_unitario();
+      }
+    
 }
 
+
+
+function inputs_solicitud_carta_egresado() {
+    let cuenta = document.getElementById('cuenta');
+    let nombre = document.getElementById('txt_verificados1');
+    let apellido = document.getElementById('txt_verificados2');
+    let correo = document.getElementById('correo');
+    let btn = document.getElementById('btn_carta_egresado');
+
+    correo.addEventListener('focus',e=>{
+        copiar(correo);
+        pegar(correo);
+     })
+    
+    apellido.addEventListener('focus',e=>{
+        copiar(apellido);
+        pegar(apellido);
+     })
+    
+    nombre.addEventListener('focus',e=>{
+        copiar(nombre);
+        pegar(nombre);
+     })
+    
+    cuenta.addEventListener('focus',e=>{
+        copiar(cuenta);
+        pegar(cuenta);
+     })
+
+
+
+     btn.addEventListener('click',e=>{
+
+        let identidad=validaridentidad(),
+        finalizacion=validarfinalizacion(),
+        comunitario=validarcomunitario(),
+        certificado=validarcertificado();
+       
+        if (cuenta.value=='' || nombre.value=='' || apellido.value==''|| correo.value=='' 
+        || identidad===undefined || finalizacion===undefined || comunitario===undefined || certificado===undefined) {
+            
+            e.preventDefault();
+           message(msg.vacio,titulo.camposVacios,tipo.info); 
+
+
+        }else if(identidad==finalizacion){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(identidad==comunitario){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(identidad==certificado){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(finalizacion==certificado){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(comunitario==certificado){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(finalizacion==comunitario){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else{
+
+           
+        }
+    })
+}
+
+
+function inputs_solicitud_equivalencia() {
+    let cuenta = document.getElementById('txt_cuenta');
+    let nombre = document.getElementById('txt_verificado1');
+    let apellido = document.getElementById('txt_verificado2');
+    let correo = document.getElementById('txt_correo');
+    let btn = document.getElementById('btn_equivalencias');
+
+    correo.addEventListener('focus',e=>{
+        copiar(correo);
+        pegar(correo);
+     })
+    
+    apellido.addEventListener('focus',e=>{
+        copiar(apellido);
+        pegar(apellido);
+     })
+    
+    nombre.addEventListener('focus',e=>{
+        copiar(nombre);
+        pegar(nombre);
+     })
+    
+    cuenta.addEventListener('focus',e=>{
+        copiar(cuenta);
+        pegar(cuenta);
+     })
+
+
+
+     btn.addEventListener('click',e=>{
+
+        let resul=validarSolicitud(),
+        historial=validarHistorial();
+       
+        if (cuenta.value=='' || nombre.value=='' || apellido.value==''|| correo.value=='' 
+        || resul===undefined || historial===undefined) {
+            e.preventDefault();
+           message(msg.vacio,titulo.camposVacios,tipo.info); 
+        }else if(resul==historial){
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+        }else{
+
+          
+        }
+    })
+}
 
 function inputs_solicitud_servicio() {
     let cuenta = document.getElementById('txt_cuenta');
@@ -73,10 +225,7 @@ function inputs_solicitud_servicio() {
             e.preventDefault();
             message(msg.documentos, titulo.documento, tipo.info);
         }else{
-           setTimeout(() => {
-            location.href=('../vistas/revision_servicio_comunitario_vista.php')
-            message('listos para la redirección','REDIRECCION',tipo.succes);
-           }, 20000);
+           
         }
     })
 
@@ -131,6 +280,62 @@ function validarSolicitud() {
 
 function validarHistorial() {
     const input = document.getElementById('historial');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+
+function validaridentidad() {
+    const input = document.getElementById('identidad');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+
+function validarcomunitario() {
+    const input = document.getElementById('comunitario');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+
+function validarcertificado() {
+    const input = document.getElementById('certificado');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+
+function validarfinalizacion() {
+    const input = document.getElementById('finalizacion');
     if(input.files && input.files[0]){
         let nombre_solicitud= input.files[0].name;
         

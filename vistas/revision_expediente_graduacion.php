@@ -140,7 +140,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                     <i class="far fa-check-circle"></i>
                     </a>
 
-                    <a href="../Controlador/Reporte_especialidades.php?id_expediente=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_expediente"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                    <a href="../Controlador/Reporte_especialidades.php?id_expediente=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_expediente"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                 </td>

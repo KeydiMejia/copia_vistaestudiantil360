@@ -48,6 +48,7 @@ ob_end_flush();
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
 </head>
 <body >
 
@@ -98,58 +99,67 @@ ob_end_flush();
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Nombre del alumno</label>
-                            <input class="form-control" type="text" id="txt_nombre" name="txt_nombre" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" value="<?php echo $row['nombres'].' '.$row['apellidos'] ?>" readonly onmousedown="return false;">
+                            <input class="form-control" type="text" id="txt_nombres" name="txt_nombre" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" value="<?php echo $row['nombres'].' '.$row['apellidos'] ?>" readonly onmousedown="return false;">
                         </div>
                 </div>
 
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Nombre</label>
-                            <input class="form-control" type="text" id="txt_apellido" name="txt_verificado1"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los nombres si los lleva">
+                            <input class="form-control" type="text" id="txt_verificados1" name="txt_verificado1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los nombres si los lleva">
                             <input class="form-control d-none " type="text" value="<?php echo $row['id_persona'] ?>" name="id_persona">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Apellido</label>
-                            <input class="form-control" type="text" id="txt_apellido" name="txt_verificado2"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
+                            <input class="form-control" type="text" id="txt_verificados2" name="txt_verificado2" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
                         </div>
                 </div>
 
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                            <input class="form-control" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Numeros(event)" onkeyup="DobleEspacio(this, event)" maxlength="30">
+                            <input class="form-control" type="text" id="cuenta" name="txt_cuenta"  onkeypress="return Numeros(event)" onkeyup="DobleEspacio(this, event)" maxlength="30">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Correo Electrónico Institucional</label>
-                            <input class="form-control" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="email" id="correo" name="txt_correo" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
+
+
+                <div class="alert alert-info alert-dismissible fade show  col-12" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>NOTA:</strong> LOS DOCUMENTOS ADJUNTOS TIENEN QUE SER EXTENSION PDF.  EJEMPLO:  <span> midocumento.pdf</span>
+                </div>
+
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Carta de Finalización de Práctica</label>                   
-                            <input class="form-control" type="file" id="txt_finalizacion" name="txt_finalizacion">
+                            <input class="form-control" type="file" id="finalizacion" name="txt_finalizacion">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Certificado de Notas</label>                   
-                            <input class="form-control" type="file" id="txt_certificado" name="txt_certificado">
+                            <input class="form-control" type="file" id="certificado" name="txt_certificado">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia de Certificado de Trabajo Comunitario</label>                   
-                            <input class="form-control" type="file" id="txt_comunitario" name="txt_comunitario">
+                            <input class="form-control" type="file" id="comunitario" name="txt_comunitario">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia de Tarjeta de Identidad</label>                   
-                            <input class="form-control" type="file" id="txt_identidad" name="txt_identidad">
+                            <input class="form-control" type="file" id="identidad" name="txt_identidad">
                         </div>
                 </div>
             </div>
@@ -207,6 +217,7 @@ $('input[type="file"]').on('change', function(){
   }
 });
 </script>
-
+<script src="../plugins/toastr/toastr.min.js"></script>
+<script src="../js/Validaciones_solicitudes.js"></script>
 </body>
 </html>

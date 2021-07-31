@@ -39,6 +39,7 @@ ob_end_flush();
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
 </head>
 <body >
 
@@ -116,16 +117,16 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                         <label>Observación</label>
-                        <textarea class="form-control" id="txt_observacion" name="txt_observacion" rows="3"></textarea>
+                        <textarea class="form-control" id="observacion" name="txt_observacion" rows="3"></textarea>
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Seleccione su aprobación</label>
                             <select class="form-control" id="aprobado" name="aprobado" onchange="Mostrarlink();" >
-                              <option disabled selected>Aprobar</option>
-                              <option value="aprobado">SI</option>
-                              <option value="desaprobar">NO</option>
+                              <!-- <option disabled selected>Aprobar</option> -->
+                              <option selected value="aprobado">SI</option>
+                              <option value="desaprobado">NO</option>
                             </select>
                         </div>
                 </div>
@@ -139,7 +140,7 @@ ob_end_flush();
                 
             </div>
             <p class="text-center form-group" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" id="btn_guardar_cambio" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary" id="btn_guardar_cambio" disabled><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
 
@@ -264,6 +265,8 @@ var maestrias = document.getElementById("aprobado").value;
 }
 
 </script>
+<script src="../plugins/toastr/toastr.min.js"></script>
+<script src="../js/Validaciones_solicitudes.js"></script>
 
 </body>
 </html>

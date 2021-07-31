@@ -23,11 +23,18 @@ if($visualizacion==0){
 }else{
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION LISTA CARTA DE EGRESADO');
 }
+
+if (isset($_GET['tipo'])) {
+
+  $tipo=$_GET['tipo'];
+
+  
+  $sql_tabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php?tipo=$tipo"), true );
+}
   
 $counter = 0;
 // $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
 
-$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php'), true );
 
 
 
@@ -39,6 +46,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
 </head>
 
 
@@ -95,6 +103,9 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                   <th># DE CUENTA</th>
                   <th>CORREO</th>
                   <th>FECHA</th>
+                  <th>ESTADO</th>
+                  
+                  
                   <th>REVISAR SOLICITUD</th>
                   </tr>
                 </thead>
@@ -102,12 +113,31 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                   <?php 
                   if($sql_tabla["ROWS"]!=""){
                     $tipo= "contenido";
-                  while($counter < count($sql_tabla["ROWS"])) { ?>
+                  while($counter < count($sql_tabla["ROWS"])) { 
+                    
+                    $estado=$sql_tabla["ROWS"][$counter]["aprobado"];
+                    
+                    if ($estado=='aprobado') {
+                      $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$estado</span>";
+                    }
+                    elseif($estado=='Nueva'){
+                      $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$estado</span>";  
+
+                    }else{
+                      $mostrarEstado= "<span class='badge badge-pill badge-warning d-block'>$estado</span>";  
+                    }
+                    ?>
                 <tr>
                 <td><?php echo $sql_tabla["ROWS"][$counter]["nombres"].' '.$sql_tabla["ROWS"][$counter]["apellidos"] ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["cuenta"]  ?></td>
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["correo"]  ?></td>
-                <td><?php echo  $sql_tabla["ROWS"][$counter]["Fecha_creacion"]  ?></td>  
+                <td><?php echo  $sql_tabla["ROWS"][$counter]["Fecha_creacion"]  ?></td> 
+                <td><?php echo  $mostrarEstado ?></td> 
+                
+                
+
+                
+                
                 <td style="text-align: center;">                    
                 
                 <!-- <a href="../vistas/revision_carta_egresado_unica_vista.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["valor"]; ?>" class="btn btn-primary btn-raised btn-xs"> -->
@@ -118,7 +148,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                     <i class="far fa-check-circle"></i>
                     </a>
 
-                    <a href="../Controlador/Reporte_especialidades.php?id_equivalencia=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_equivalencia"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                    <a href="../Controlador/Reporte_especialidades.php?id_equivalencia=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_equivalencia"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                 </td>
@@ -171,6 +201,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
  
  
  </script>
-<script src="../js/Reportes_solicitudes.js"></script>
+  <script src="../js/Reportes_solicitudes.js"></script>
+ 
 </body>
 </html>
