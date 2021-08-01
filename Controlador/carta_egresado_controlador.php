@@ -78,12 +78,20 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                         allowOutsideClick:false,
                         showConfirmButton: true,
                         showCancelButton: true,
-                        confirmButtonText:"Aceptar",
-                        cancelButtonText:"Cancelar",
-                        }).then(function () {
-                        window.location.href = "../Controlador/Reporte_especialidades.php?id_carta='.$ultimo_id_hash.'";
+                        confirmButtonText:"Sí",
+                        cancelButtonText:"No",
+                        })
+        
+                        .then(function(isConfirm) {
+                            if (isConfirm)  {
+                                window.open("../Controlador/Reporte_especialidades.php?id_carta='.$ultimo_id_hash.'");
+                                window.location.href="../vistas/historial_solicitudes_vista.php";
+                              }    
+                        })
+                        .catch(function(){
+                            window.location.href="../vistas/historial_solicitudes_vista.php";
+                            $(".FormularioAjax")[0].reset();
                         });
-                        $(".FormularioAjax")[0].reset();
                     </script>'; 
 
                     // echo '<script type="text/javascript">
@@ -99,7 +107,9 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                     
                                 } 
                 else {
-                    echo "Error: " . $sql ;
+                    // echo "Error: " . $sql ;
+
+                    echo json_encode($sql); 
                     }
 
 

@@ -83,12 +83,22 @@
                         showCancelButton: true,
                         confirmButtonText:"Sí",
                         cancelButtonText:"No",
-                        }).then(function () {
+                        })
+                        .then(function(isConfirm) {
                        
-                            window.open("../Controlador/Reporte_especialidades.php?servicio='.$ultimo_id_hash.'")
+                            if (isConfirm)  {
+                               
+                                window.open("../Controlador/Reporte_especialidades.php?servicio='.$ultimo_id_hash.'")
+                                window.location.href="../vistas/historial_solicitudes_vista.php";
+
+                              }    
+                        })
+                        .catch(function(){
+                            window.location.href="../vistas/historial_solicitudes_vista.php";
+                            $(".FormularioAjax")[0].reset();
+
                         });
-                        $(".FormularioAjax")[0].reset();
-                        windows.location.href("../vistas/historial_solicitudes_vista.php"); 
+                        
                     </script>'; 
                    
                     
@@ -157,6 +167,7 @@
                             showConfirmButton: true,
                             }).then(function () {
                             window.location.href = "revision_servicio_comunitario_vista.php";
+                          
                             });
                             $(".FormularioAjax")[0].reset();
                         </script>'; 

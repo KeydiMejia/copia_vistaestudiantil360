@@ -78,7 +78,7 @@ class myPDF extends FPDF
         $this->Cell(50, 7, utf8_decode("APELLIDOS"), 1, 0, 'C');
         $this->Cell(40, 7, utf8_decode("#CUENTA"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("IDENTIDAD"), 1, 0, 'C');
-        $this->Cell(50, 7, utf8_decode("OBSERVACION"), 1, 0, 'C');
+        $this->Cell(50, 7, utf8_decode("FECHA"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("ESTADO"), 1, 0, 'C');
         $this->ln();
     }
@@ -122,6 +122,55 @@ class myPDF extends FPDF
             $this->Cell(50, 7, utf8_decode($reg['aprobado']), 1, 0, 'C');
 
             $this->ln();
+            $n++;
+        }
+    }
+
+    function viewTable_equivalencia_V()
+    {
+        
+        
+        global $instancia_conexion;
+       
+        $stmt = $instancia_conexion->ejecutarConsulta($this->sql);
+
+     
+
+        $n=1;
+        while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+
+            $this->SetFont('Times', '', 12);
+
+            
+            $this->Cell(50, 10, utf8_decode("SOLICITUD N°"), 0, 0, 'L');
+            
+            $this->Cell(0, 10, utf8_decode($reg['Id_equivalencia']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("NOMBRES"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['nombres']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("APELLIDOS"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['apellidos']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("#CUENTA"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['cuenta']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("CORREO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['correo']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("TIPO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['tipo']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("ESTADO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['aprobado']), 0, 2, 'L');
+            $this->ln();
+
             $n++;
         }
     }
@@ -180,6 +229,55 @@ class myPDF extends FPDF
         }
     }
 
+    function viewTable_egresados_V()
+    {
+        
+        
+        global $instancia_conexion;
+       
+        $stmt = $instancia_conexion->ejecutarConsulta($this->sql);
+
+     
+
+        $n=1;
+        while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+
+            $this->SetFont('Times', '', 12);
+
+            
+            $this->Cell(50, 10, utf8_decode("SOLICITUD N°"), 0, 0, 'L');
+            
+            $this->Cell(0, 10, utf8_decode($reg['Id_carta']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("NOMBRES"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['nombres']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("APELLIDOS"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['apellidos']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("#CUENTA"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['valor']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("CORREO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['correo']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("FECHA"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['Fecha_creacion']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("ESTADO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['aprobado']), 0, 2, 'L');
+            $this->ln();
+
+            $n++;
+        }
+    }
+
     function viewTable_egresados2()
     {
         
@@ -230,6 +328,55 @@ class myPDF extends FPDF
         }
     }
 
+    function viewTable_expediente_V()
+    {
+        
+        
+        global $instancia_conexion;
+       
+        $stmt = $instancia_conexion->ejecutarConsulta($this->sql);
+
+     
+
+        $n=1;
+        while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+
+            $this->SetFont('Times', '', 12);
+
+            
+            $this->Cell(50, 10, utf8_decode("SOLICITUD N°"), 0, 0, 'L');
+            
+            $this->Cell(0, 10, utf8_decode($reg['id_expediente']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("NOMBRES"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['nombres']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("APELLIDOS"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['apellidos']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("#CUENTA"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['valor']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("IDENTIDAD"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['identidad']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("FECHA"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['fecha_creacion']), 0, 2, 'L');
+            $this->ln(2);
+
+            $this->Cell(50, 10, utf8_decode("ESTADO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['observacion']), 0, 2, 'L');
+            $this->ln();
+
+            $n++;
+        }
+    }
+
     function viewTable_expediente2()
     {
         
@@ -249,7 +396,7 @@ class myPDF extends FPDF
             $this->Cell(50, 7, utf8_decode($reg['apellidos']), 1, 0, 'C');
              $this->Cell(40, 7, utf8_decode($reg['valor']), 1, 0, 'C');
              $this->Cell(50, 7, utf8_decode($reg['identidad']), 1, 0, 'C'); 
-            $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
+            $this->Cell(50, 7, utf8_decode($reg['fecha_creacion']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
 
             $this->ln();
@@ -300,9 +447,9 @@ class myPDF extends FPDF
             $this->SetFont('Times', '', 12);
 
             
-            $this->Cell(50, 10, utf8_decode("N°"), 0, 0, 'L');
+            $this->Cell(50, 10, utf8_decode("SOLICITUD N°"), 0, 0, 'L');
             
-            $this->Cell(0, 10, utf8_decode($n), 0, 2, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['id_servicio_comunitario']), 0, 2, 'L');
             $this->ln(2);
 
             $this->Cell(50, 10, utf8_decode("NOMBRES"), 0, 0, 'L');
@@ -360,12 +507,13 @@ if (isset($_GET['ruby'])) {
                 tbl_personas_extendidas.id_persona LIKE '%".$buscar."%' OR
                 tbl_personas.id_persona LIKE '%".$buscar."%'";
         //instacia de la clase 
-        $pdf = new myPDF("EQUIVALENCIAS FILTRADO",$sql);
+        $pdf = new myPDF("EQUIVALENCIAS",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
         $pdf->headerTable();
         $pdf->viewTable2();
+        $pdf->SetTitle('SOLICITUD_EQUIVALENCIA.PDF');
         $pdf->SetFont('Arial', '', 15);
         $pdf->Output();
     
@@ -378,6 +526,7 @@ if (isset($_GET['ruby'])) {
         $pdf->AddPage('C', 'Legal', 0);
         $pdf->headerTable();
         $pdf->viewTable();
+        $pdf->SetTitle('SOLICITUD_EQUIVALENCIA.PDF');
         $pdf->SetFont('Arial', '', 15);
         $pdf->Output();
     
@@ -415,6 +564,7 @@ if (isset($_GET['scala'])) {
         $pdf->headerExpediente();
         $pdf->viewTable_expediente2();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_EXPEDIENTE_DE_GRADUACION.PDF');
         $pdf->Output();
     
         return false;
@@ -429,8 +579,9 @@ if (isset($_GET['scala'])) {
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
         $pdf->headerExpediente();
-        $pdf->viewTable_expediente();
+        $pdf->viewTable_expediente2();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_EXPEDIENTE_DE_GRADUACION.PDF');
         $pdf->Output();
     
         return false;
@@ -460,13 +611,14 @@ if (isset($_GET['perl'])) {
                 tbl_personas_extendidas.id_persona LIKE '%".$buscar."%' OR
                 tbl_personas.id_persona LIKE '%".$buscar."%'";
         //instacia de la clase 
-        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO",$sql);
+        $pdf = new myPDF("CARTA DE EGRESADOS",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
         $pdf->headerTable();
         $pdf->viewTable_egresados2();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_CARTA_DE_EGRESADO.PDF');
         $pdf->Output();
     
         return false;
@@ -485,6 +637,7 @@ if (isset($_GET['perl'])) {
         $pdf->headerTable();
         $pdf->viewTable_egresados();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_CARTA_DE_EGRESADO.PDF');
         $pdf->Output();
     
         return false;
@@ -509,9 +662,10 @@ if (isset($_GET['id_expediente'])) {
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
-        $pdf->headerExpediente();
-        $pdf->viewTable_expediente2();
+        
+        $pdf->viewTable_expediente_V();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_EXPEDIENTE_DE_GRADUACION.PDF');
         $pdf->Output();
     
         return false;
@@ -533,13 +687,14 @@ if (isset($_GET['id_carta'])) {
         ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
        WHERE tbl_carta_egresado.Id_carta='$buscar'";
         //instacia de la clase 
-        $pdf = new myPDF("CARTA DE EGRESADOS FILTRADO",$sql);
+        $pdf = new myPDF("CARTA DE EGRESADOS",$sql);
         //llamamos los metodos correspondientes
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
-        $pdf->headerTable();
-        $pdf->viewTable_egresados2();
+        
+        $pdf->viewTable_egresados_v();
         $pdf->SetFont('Arial', '', 15);
+        $pdf->SetTitle('SOLICITUD_CARTA_DE_EGRESADO.PDF');
         $pdf->Output();
     
     
@@ -561,12 +716,13 @@ if (isset($_GET['id_equivalencia'])) {
                 INNER JOIN tbl_personas_extendidas 
                 ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona
                 WHERE tbl_equivalencias.Id_equivalencia='$buscar'"; 
-        $pdf = new myPDF("EQUIVALENCIAS FILTRADO",$sql);
+        $pdf = new myPDF("EQUIVALENCIAS",$sql);
         
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);
-        $pdf->headerTable();
-        $pdf->viewTable();
+        // $pdf->headerTable();
+        $pdf->SetTitle('SOLICITUD_EQUIVALENCIA.PDF');
+        $pdf->viewTable_equivalencia_V();
         $pdf->SetFont('Arial', '', 15);
         $pdf->Output();
     
@@ -588,7 +744,8 @@ if (isset($_GET['servicio'])) {
         $buscar= base64_decode($_GET['servicio']);
         
         //confeccion de la consulta para filtrar los datos 
-       $sql= "SELECT nombres, apellidos, correo, observacion,nombre_proyecto,valor FROM tbl_servicio_comunitario 
+       $sql= "SELECT nombres, apellidos, correo, observacion,nombre_proyecto,valor,
+       tbl_servicio_comunitario.id_servicio_comunitario FROM tbl_servicio_comunitario 
        INNER JOIN tbl_personas ON tbl_servicio_comunitario.id_persona=tbl_personas.id_persona
        INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
        WHERE tbl_servicio_comunitario.id_servicio_comunitario=$buscar";

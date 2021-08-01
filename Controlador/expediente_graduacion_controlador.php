@@ -81,12 +81,25 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!==""  && $_POST['txt_cuen
                         allowOutsideClick:false,
                         showConfirmButton: true,
                         showCancelButton: true,
-                        confirmButtonText:"Aceptar",
-                        cancelButtonText:"Cancelar",
-                        }).then(function () {
-                        window.location.href = "../Controlador/Reporte_especialidades.php?id_expediente='.$ultimo_id_hash.'";
+                        confirmButtonText:"Sí",
+                        cancelButtonText:"No",
+                        })
+                        
+                        .then(function(isConfirm) {
+                       
+                            if (isConfirm)  {
+                                
+                                window.open("../Controlador/Reporte_especialidades.php?id_expediente='.$ultimo_id_hash.'");
+                                window.location.href="../vistas/historial_solicitudes_vista.php";
+
+                              }    
+                        })
+                        .catch(function(){
+                            window.location.href="../vistas/historial_solicitudes_vista.php";
+                            $(".FormularioAjax")[0].reset();
+
                         });
-                        $(".FormularioAjax")[0].reset();
+                        
                     </script>'; 
                 }else { 
                                 
