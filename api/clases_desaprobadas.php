@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 require_once ('../clases/Conexion.php');
 // if(isset($_GET['alumno'])){
 //     $alumno= $_GET['alumno'];
-    $sql="SELECT row_number() OVER (ORDER BY asignatura) AS NP, a.asignatura, a.codigo, a.uv FROM tbl_asignaturas a, tbl_asignaturas_aprobadas b
+    $sql="SELECT a.asignatura, a.codigo, a.uv FROM tbl_asignaturas a, tbl_asignaturas_aprobadas b
     WHERE a.Id_asignatura != b.Id_asignatura AND b.id_persona = 6";
     
     if ($R = $mysqli->query($sql)) {

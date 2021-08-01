@@ -8,9 +8,6 @@ require_once('../Reporte/pdf/fpdf.php');
 $instancia_conexion = new conexion();
 
 
-//$sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true );
-
-
 class myPDF extends FPDF
 {
     function header()
@@ -32,7 +29,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode(" "), 0, 0, 'C');
+        $this->Cell(60, 10, utf8_decode(""), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -43,47 +40,50 @@ class myPDF extends FPDF
         $this->cell(0, 10, 'Pagina' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
+    
     function view()
     {   
-            if (isset($_GET['alumno'])){
-            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true ); 
-            }
 
-            $nombre= $sqltabla["ROWS"][0]['nombres'];
-            $apellid= $sqltabla["ROWS"][0]['apellidos'];
-            $motiv= $sqltabla["ROWS"][0]['motivo'];
-            //$corr= $sqltabla["ROWS"][0]['correo'];
-            $observ= $sqltabla["ROWS"][0]['observacion'];
-            $cambi= $sqltabla["ROWS"][0]['cambio'];
-            $fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
+        global $instancia_conexion;
+        $sql ="SELECT p.nombres, p.apellidos, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion FROM tbl_cancelar_clases c, tbl_personas p WHERE c.Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases) AND p.id_persona=c.id_persona";
+        $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
-$this->SetXY(25,90);
+        while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
+
+$this->SetFont('Times', '', 12);
+$this->SetXY(25, 80);
 $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
-$this->Cell(20, 8, $nombre.$apellid, 120, 85.5);
+$this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
+//*****
+$this->SetXY(25,90);
+$this->Cell(30, 8, 'MOTIVO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['motivo']), 120, 85.5);
 
 //*****
 $this->SetXY(25, 100);
-$this->Cell(30, 8, 'MOTIVO:', 0, 'L');
-$this->Cell(20, 8, utf8_decode($motiv), 120, 85.5);
+$this->Cell(30, 8, 'CORREO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['correo']), 120, 85.5);
 //****
 $this->SetXY(25, 110);
 $this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
-$this->Cell(20, 8, $observ, 120, 85.5);
+$this->Cell(20, 8, $reg['observacion'], 120, 85.5);
 
 $this->SetXY(25, 120);
 $this->Cell(30, 8, 'ESTADO:', 0, 'L');
-$this->Cell(20, 8,$cambi, 120, 85.5);
+$this->Cell(20, 8,$reg['cambio'], 120, 85.5);
 
 $this->SetXY(25, 130);
 $this->Cell(30, 8, 'FECHA:', 0, 'L');
-$this->Cell(20, 8, $fechi, 120, 85.5);
-
-            
+$this->Cell(20, 8, $reg['Fecha_creacion'], 120, 85.5);
+           
+            // $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
+            // $this->Cell(40, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
+           
 
             // $this->ln();
         }
     }
-
+}
 
 
 $pdf = new myPDF();

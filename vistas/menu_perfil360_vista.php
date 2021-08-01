@@ -266,7 +266,13 @@ footer{
       <thead>
             <tr>
             <tr class="bg-basic">
-			<th COLSPAN=2>Datos Personales del estudiante</th>
+			<th COLSPAN=2>
+      <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger btn-xs" tabindex="0" aria-controls="tabla" type="buttton" onclick="ventana()" title="Exportar a PDF">
+          <i class="fas fa-file-pdf">
+</i>
+        </button>
+Datos Personales del estudiante
+      </th>
             </tr>
       </thead>
         <tbody>
@@ -309,6 +315,12 @@ footer{
         </tbody>
       </table>
       <br></br>
+
+      <script type="text/javascript" language="javascript">
+  function ventana() {
+    window.open("../Controlador/reporte_perfil360_controlador.php", "REPORTE");
+  }
+</script>
       
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
