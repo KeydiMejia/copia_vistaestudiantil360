@@ -257,7 +257,7 @@
         if($observacion!==""){
             // $sqlp = "call upd_carta_egresado_observacion('$aprobado','$observacion','$cuenta')";
              
-            $sqlp = "UPDATE tbl_cambio_carrera 
+            $sql = "UPDATE tbl_cambio_carrera 
             SET aprobado = '$aprobado', fecha_creacion = now(),
             observacion = '$observacion'
             WHERE Id_cambio = '$id_cambio'";
@@ -279,7 +279,7 @@
                             allowOutsideClick:false,
                             showConfirmButton: true,
                             }).then(function () {
-                            window.location.href = "revision_suficiencia_vista.php";
+                            window.location.href = "menu_revision_cambio.php";
                             });
                             $(".FormularioAjax")[0].reset();
                         </script>'; 

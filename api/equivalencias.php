@@ -12,7 +12,7 @@ if(isset($_GET['alumno'])){
     
     // "call sel_equivalencias_unica('$alumno')"
 
-    $sql="SELECT nombres,apellidos,valor as cuenta, correo, tbl_equivalencias.Id_equivalencia FROM tbl_equivalencias INNER JOIN tbl_personas 
+    $sql="SELECT nombres,apellidos,valor as cuenta, correo,aprobado, tbl_equivalencias.Id_equivalencia FROM tbl_equivalencias INNER JOIN tbl_personas 
     ON tbl_equivalencias.id_persona= tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
     ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona WHERE tbl_equivalencias.Id_equivalencia='$alumno'";
     
@@ -32,7 +32,7 @@ if(isset($_GET['alumno'])){
 }elseif(isset($_GET['tipo'])){
     $tipo = $_GET['tipo'];
 
-    $sql="SELECT nombres,apellidos,valor as cuenta, correo, tbl_equivalencias.Id_equivalencia FROM tbl_equivalencias INNER JOIN tbl_personas 
+    $sql="SELECT nombres,apellidos,valor as cuenta, correo,Fecha_creacion,aprobado ,tipo,tbl_equivalencias.Id_equivalencia FROM tbl_equivalencias INNER JOIN tbl_personas 
     ON tbl_equivalencias.id_persona= tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
     ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona WHERE tbl_equivalencias.tipo='$tipo'";
     // "call sel_equivalencias_codigo('$tipo')"
@@ -51,7 +51,7 @@ if(isset($_GET['alumno'])){
 }
 else{
 
-    $sql="SELECT nombres,apellidos,valor as cuenta, correo, tbl_equivalencias.Id_equivalencia,tipo,Fecha_creacion FROM tbl_equivalencias INNER JOIN tbl_personas 
+    $sql="SELECT nombres,apellidos,valor as cuenta, correo,aprobado, tbl_equivalencias.Id_equivalencia,tipo,Fecha_creacion FROM tbl_equivalencias INNER JOIN tbl_personas 
     ON tbl_equivalencias.id_persona= tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
     ON tbl_personas.id_persona= tbl_personas_extendidas.id_persona";
     // "call sel_equivalencias()"

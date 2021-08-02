@@ -19,9 +19,9 @@
     
                 $resultado = $mysqli->query($sql);
                 $data= $resultado->fetch_assoc();
+                
+                if($resultado->num_rows>=1){
                 $id_persona=$data['id_persona'];
-    
-            if($resultado->num_rows>=1){
     
                 $documento_nombre[] = $_FILES['txt_solicitud']['name'];
                 $documento_nombre[] = $_FILES['txt_historial']['name'];
@@ -81,12 +81,24 @@
                         allowOutsideClick:false,
                         showConfirmButton: true,
                         showCancelButton: true,
-                        confirmButtonText:"Aceptar",
-                        cancelButtonText:"Cancelar",
-                        }).then(function () {
-                        window.location.href = "../Controlador/Reporte_especialidades.php?servicio='.$ultimo_id_hash.'";
+                        confirmButtonText:"Sí",
+                        cancelButtonText:"No",
+                        })
+                        .then(function(isConfirm) {
+                       
+                            if (isConfirm)  {
+                               
+                                window.open("../Controlador/Reporte_especialidades.php?servicio='.$ultimo_id_hash.'")
+                                window.location.href="../vistas/historial_solicitudes_vista.php";
+
+                              }    
+                        })
+                        .catch(function(){
+                            window.location.href="../vistas/historial_solicitudes_vista.php";
+                            $(".FormularioAjax")[0].reset();
+
                         });
-                        $(".FormularioAjax")[0].reset();
+                        
                     </script>'; 
                    
                     
@@ -155,6 +167,7 @@
                             showConfirmButton: true,
                             }).then(function () {
                             window.location.href = "revision_servicio_comunitario_vista.php";
+                          
                             });
                             $(".FormularioAjax")[0].reset();
                         </script>'; 

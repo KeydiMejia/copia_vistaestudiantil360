@@ -38,6 +38,7 @@ ob_end_flush();
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
 </head>
 <body >
 
@@ -125,7 +126,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                         <label>Observación</label>
-                        <textarea class="form-control" id="txt_observacion" name="txt_observacion" rows="2"></textarea>
+                        <textarea class="form-control" id="observacion" name="txt_observacion" rows="2"></textarea>
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -144,13 +145,13 @@ ob_end_flush();
 
                       <!-- <a class="badge-warning btn-sm text-center form-group" href="http://informaticaunah.com/automatizacion/pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['id_persona'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a> -->
 
-                            <a class="badge-warning btn-sm text-center form-group" href="http://localhost:8008/copia_vistaestudiantil360/pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['id_persona'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a>
+                            <a class="badge-warning btn-sm text-center form-group" href="../pdf/constancia_egresado_coordinador.php?cuenta=<?php echo $sqltabla['ROWS'][0]['id_persona'] ?>" id="documento" name="documento" target="_blank">Imprimir Documento</a>
                               
                       </div>
                 </div>
             </div>
             <p class="text-center form-group" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" id="btn_guardar_cambio" ><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary" id="btn_guardar_cambio" disabled><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
 
@@ -276,6 +277,7 @@ var maestrias = document.getElementById("aprobado").value;
 }
 
 </script>
-
+<script src="../plugins/toastr/toastr.min.js"></script>
+<script src="../js/Validaciones_solicitudes.js"></script>
 </body>
 </html>

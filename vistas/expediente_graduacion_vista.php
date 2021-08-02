@@ -46,6 +46,8 @@ ob_end_flush();
 <html>
 <head>
   <title></title>
+
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
 </head>
 <body >
 
@@ -106,13 +108,13 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Nombre</label>
-                            <input class="form-control" type="text" id="txt_verificado" name="txt_verificado1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los nombres si los lleva" >
+                            <input class="form-control" type="text" id="txt_verificado1" name="txt_verificado1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los nombres si los lleva" >
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Apellido</label>
-                            <input class="form-control" type="text" id="txt_verificado" name="txt_verificado2" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva" >
+                            <input class="form-control" type="text" id="txt_verificado2" name="txt_verificado2" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva" >
                         </div>
                 </div>
 
@@ -128,16 +130,24 @@ ob_end_flush();
                             <input class="form-control" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
+
+                <div class="alert alert-info alert-dismissible fade show  col-12" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>NOTA:</strong> LOS DOCUMENTOS ADJUNTOS TIENEN QUE SER EXTENSION PDF.  EJEMPLO:  <span> midocumento.pdf</span>
+                </div>
+
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Solicitud de Expediente</label>
-                            <input class="form-control" type="file" id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="file" id="solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Historial Académico</label>
-                            <input class="form-control" type="file" id="txt_historial" name="txt_historial" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="file" id="historial" name="txt_historial" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
             </div>
@@ -204,5 +214,8 @@ $('input[type="file"]').on('change', function(){
   }
 });
 </script>
+
+<script src="../plugins/toastr/toastr.min.js"></script>
+<script src="../js/Validaciones_solicitudes.js"></script>
 </body>
 </html>

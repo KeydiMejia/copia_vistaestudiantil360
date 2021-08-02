@@ -149,7 +149,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                     <i class="far fa-check-circle"></i>
                     </a>
 
-                    <a href="../Controlador/Reporte_especialidades.php?id_carta=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_carta"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                    <a href="../Controlador/Reporte_especialidades.php?id_carta=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_carta"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                 </td>
