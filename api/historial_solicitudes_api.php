@@ -1,4 +1,5 @@
 <?php
+session_start();
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -14,13 +15,13 @@ require_once ('../clases/Conexion.php');
     WHERE pe.id_persona = p.id_persona
     AND p.id_persona = u.id_persona
     AND s.id_persona = p.id_persona
-    AND e.id_estado_suficiencia = s.id_estado_suficiencia UNION ALL SELECT'REACTIVACION CUENTA'tipo, s.id_reactivacion,s.id_persona,s.fecha_creacion,
-    s.id_estado_reactivacion,e.descripcion,p.nombres,p.apellidos, pe.valor
-    FROM tbl_estado_reactivacion e, tbl_reactivacion_cuenta s, tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
-    WHERE pe.id_persona = p.id_persona
-    AND p.id_persona = u.id_persona
-    AND s.id_persona = p.id_persona
-    AND e.id_estado_reactivacion = s.id_estado_reactivacion UNION ALL SELECT 'CAMBIO DE CARRERA'tipo, s.id_cambio,s.id_persona,s.fecha_creacion,
+    AND e.id_estado_suficiencia = s.id_estado_suficiencia UNION ALL SELECT'REACTIVACION CUENTA'tipo, id_reactivacion,r.id_persona,r.fecha_creacion,
+    r.id_estado_reactivacion,f.descripcion,pr.nombres,pr.apellidos, per.valor
+    FROM tbl_estado_reactivacion f, tbl_reactivacion_cuenta r, tbl_personas pr, tbl_personas_extendidas per, tbl_usuarios ur
+    WHERE per.id_persona = pr.id_persona
+    AND pr.id_persona = ur.id_persona
+    AND r.id_persona = pr.id_persona
+    AND f.id_estado_reactivacion = r.id_estado_reactivacion UNION ALL SELECT 'CAMBIO DE CARRERA'tipo, s.Id_cambio,s.id_persona,s.fecha_creacion,
 s.documento,aprobado,p.nombres,p.apellidos, pe.valor
 FROM  tbl_cambio_carrera s, tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
 WHERE pe.id_persona = p.id_persona
@@ -53,6 +54,7 @@ WHERE pe.id_persona = p.id_persona
 AND p.id_persona = u.id_persona
 AND s.id_persona = p.id_persona
 AND e.id_estado_servicio = s.id_estado_servicio";
+
     
     if ($R = $mysqli->query($sql)) {
         $items = [];
