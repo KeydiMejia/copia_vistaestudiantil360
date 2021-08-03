@@ -89,6 +89,11 @@ footer{
    <div class="col-lg-7">
 
    <div class="card-body">
+   <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla" type="buttton" onclick="ventana()" title="Exportar a PDF">
+          <i class="fas fa-file-pdf">
+</i>
+        </button>
+        <br></br>
 <table id="tabla15" class="table table-bordered table-striped">
       <thead>
             <tr>
@@ -121,6 +126,11 @@ footer{
 
 
 </section>
+<script type="text/javascript" language="javascript">
+  function ventana() {
+    window.open("../Controlador/reporte_clases_por_aprobar_controlador.php", "REPORTE");
+  }
+  </script>
 </body>
 </html>
 
