@@ -62,39 +62,36 @@ class myPDF extends FPDF
 
             $this->SetFont('Times', '', 12);
 
-            $this->SetXY(25, 80);
-            $this->Cell(30, 8, 'SOLICITUD Nº:', 0, 'L');
-            $this->Cell(20, 8, $reg['Id_cancelar_clases'], 120, 85.5);
-            $this->SetXY(25, 80);
-            $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
-            $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
+$this->SetXY(25, 80);
+$this->Cell(35, 8, 'SOLICITUD Nº:', 0, 'L');
+$this->Cell(20, 8, $reg['Id_cancelar_clases'], 120, 85.5);
 //*****
-$this->SetXY(25,90);
-$this->Cell(30, 8, 'MOTIVO:', 0, 'L');
+$this->SetXY(25, 90);
+$this->Cell(35, 8, 'NOMBRE:', 0, 'L');
+$this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
+//*****
+$this->SetXY(25,100);
+$this->Cell(35, 8, 'MOTIVO:', 0, 'L');
 $this->Cell(20, 8, utf8_decode($reg['motivo']), 120, 85.5);
 
 //*****
-$this->SetXY(25, 100);
-$this->Cell(30, 8, 'CORREO:', 0, 'L');
+$this->SetXY(25, 110);
+$this->Cell(35, 8, 'CORREO:', 0, 'L');
 $this->Cell(20, 8, utf8_decode($reg['correo']), 120, 85.5);
 //****
-$this->SetXY(25, 110);
+$this->SetXY(25, 120);
 $this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
 $this->Cell(20, 8, $reg['observacion'], 120, 85.5);
 
-$this->SetXY(25, 120);
-$this->Cell(30, 8, 'ESTADO:', 0, 'L');
+$this->SetXY(25, 130);
+$this->Cell(35, 8, 'ESTADO:', 0, 'L');
 $this->Cell(20, 8,$reg['cambio'], 120, 85.5);
 
-$this->SetXY(25, 130);
-$this->Cell(30, 8, 'FECHA:', 0, 'L');
+$this->SetXY(25, 140);
+$this->Cell(35, 8, 'FECHA:', 0, 'L');
 $this->Cell(20, 8, $reg['Fecha_creacion'], 120, 85.5);
            
-            // $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
-            // $this->Cell(40, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
-           
-
-            // $this->ln();
+            
         }
     }
 }
@@ -103,10 +100,8 @@ $this->Cell(20, 8, $reg['Fecha_creacion'], 120, 85.5);
 $pdf = new myPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('C', 'Legal', 0);
-//$pdf->headerTable();
-$pdf->view();
 
-//$pdf->viewTable2($instancia_conexion);
+$pdf->view();
 $pdf->SetFont('Arial', '', 15);
 $pdf->SetTitle('SOLICITUD_CANCELAR_CLASES.PDF');
 

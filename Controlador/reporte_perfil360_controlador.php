@@ -1,10 +1,12 @@
 <?php
+ob_start();
 session_start();
 require_once('../clases/Conexion.php');
 require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
 //require_once('../Controlador/cancelar_clases_controlador.php');
 //include("../Controlador/cancelar_clases_controlador.php");
+ require "../clases/conexion_mantenimientos.php";
 $instancia_conexion = new conexion();
 
 
@@ -45,7 +47,15 @@ class myPDF extends FPDF
     {   
 
         global $instancia_conexion;
-        $sql ="SELECT p.nombres, p.apellidos, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion FROM tbl_cancelar_clases c, tbl_personas p WHERE c.Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases) AND p.id_persona=c.id_persona";
+        $sql ="SELECT p.nombres,p.apellidos,p.identidad, p.fecha_nacimiento, pe.valor
+FROM tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
+WHERE pe.id_persona = p.id_persona
+AND p.id_persona = u.id_persona
+AND u.Usuario = ?";
+$sql->bind_param("s",$_SESSION['usuario']);
+$sql->execute();
+       
+       
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
@@ -56,31 +66,27 @@ $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
 $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
 //*****
 $this->SetXY(25,90);
-$this->Cell(30, 8, 'MOTIVO:', 0, 'L');
-$this->Cell(20, 8, utf8_decode($reg['motivo']), 120, 85.5);
+$this->Cell(30, 8, 'IDENTIDAD:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['identidad']), 120, 85.5);
 
 //*****
 $this->SetXY(25, 100);
-$this->Cell(30, 8, 'CORREO:', 0, 'L');
-$this->Cell(20, 8, utf8_decode($reg['correo']), 120, 85.5);
+$this->Cell(30, 8, 'FECHA_NACIMIENTO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['fecha_nacimiento']), 120, 85.5);
 //****
 $this->SetXY(25, 110);
-$this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
-$this->Cell(20, 8, $reg['observacion'], 120, 85.5);
+$this->Cell(35, 8, 'CUENTA:', 0, 'L');
+$this->Cell(20, 8, $reg['valor'], 120, 85.5);
 
-$this->SetXY(25, 120);
-$this->Cell(30, 8, 'ESTADO:', 0, 'L');
-$this->Cell(20, 8,$reg['cambio'], 120, 85.5);
+// $this->SetXY(25, 120);
+// $this->Cell(30, 8, 'CORREO:', 0, 'L');
+// $this->Cell(20, 8,$reg2['cambio'], 120, 85.5);
 
-$this->SetXY(25, 130);
-$this->Cell(30, 8, 'FECHA:', 0, 'L');
-$this->Cell(20, 8, $reg['Fecha_creacion'], 120, 85.5);
+// $this->SetXY(25, 130);
+// $this->Cell(30, 8, 'TELEFONO:', 0, 'L');
+// $this->Cell(20, 8, $reg3['Fecha_creacion'], 120, 85.5);
            
-            // $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
-            // $this->Cell(40, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
-           
-
-            // $this->ln();
+            
         }
     }
 }

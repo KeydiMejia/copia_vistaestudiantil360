@@ -66,17 +66,17 @@ class myPDF extends FPDF
             $observ= $sqltabla["ROWS"][0]['observacion'];
             $cambi= $sqltabla["ROWS"][0]['cambio'];
             $fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
-$this->SetXY(25,90);
-$this->Cell(30, 8, 'SOLICITUD Nº:', 0, 'L');
+$this->SetXY(25,80);
+$this->Cell(35, 8, 'SOLICITUD N:', 0, 'L');
 $this->Cell(20, 8, $n, 120, 85.5);
 
 $this->SetXY(25,90);
-$this->Cell(30, 8, 'NOMBRE:', 0, 'L');
+$this->Cell(35, 8, 'NOMBRE:', 0, 'L');
 $this->Cell(20, 8, $nombre.$apellid, 120, 85.5);
 
 //*****
 $this->SetXY(25, 100);
-$this->Cell(30, 8, 'MOTIVO:', 0, 'L');
+$this->Cell(35, 8, 'MOTIVO:', 0, 'L');
 $this->Cell(20, 8, utf8_decode($motiv), 120, 85.5);
 //****
 $this->SetXY(25, 110);
@@ -84,16 +84,15 @@ $this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
 $this->Cell(20, 8, $observ, 120, 85.5);
 
 $this->SetXY(25, 120);
-$this->Cell(30, 8, 'ESTADO:', 0, 'L');
+$this->Cell(35, 8, 'ESTADO:', 0, 'L');
 $this->Cell(20, 8,$cambi, 120, 85.5);
 
 $this->SetXY(25, 130);
-$this->Cell(30, 8, 'FECHA:', 0, 'L');
+$this->Cell(35, 8, 'FECHA:', 0, 'L');
 $this->Cell(20, 8, $fechi, 120, 85.5);
 
             
 
-            // $this->ln();
         }
     }
 
