@@ -45,6 +45,7 @@ ob_end_flush();
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
 </head>
 <body >
 
@@ -102,63 +103,69 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Nombre</label>
-                            <input class="form-control" type="text" id="txt_apellido" name="txt_verificado1"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los nombres si los lleva">
+                            <input class="form-control" type="text" id="txt_verificado1" name="txt_verificado1" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los nombres si los lleva">
                             <input class="form-control d-none " type="text" value="<?php echo $row['id_persona'] ?>" name="id_persona">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Apellido</label>
-                            <input class="form-control" type="text" id="txt_apellido" name="txt_verificado2"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
+                            <input class="form-control" type="text" id="txt_verificado2" name="txt_verificado2"  style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Número de Cuenta</label>
-                            <input class="form-control" type="text" id="txt_cuenta" name="txt_cuenta" style="text-transform: uppercase" onkeypress="return Numeros(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="text" id="cuenta" name="txt_cuenta"  onkeypress="return Numeros(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Correo Electrónico Institucional</label>
-                            <input class="form-control" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="email" id="correo" name="txt_correo" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
+                </div>
+                <div class="alert alert-info alert-dismissible fade show  col-12" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>NOTA:</strong> LOS DOCUMENTOS ADJUNTOS TIENEN QUE SER EXTENSION PDF.  EJEMPLO:  <span> midocumento.pdf</span>
                 </div>
                 <div class="col-md-12">
                         <div class="form-group">
                             <label>Razón de Cancelación</label>
-                            <textarea class="form-control" type="text" id="txt_razon" name="txt_razon" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" ></textarea>
+                            <textarea class="form-control" type="text" id="razon" name="txt_razon" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" ></textarea>
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Solicitud de Cancelación</label>
-                            <input class="form-control " type="file"  id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" >
+                            <input class="form-control " type="file"  id="solicitud" name="txt_solicitud">
                             
                           </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Documento de soporte que justifica la cancelación</label>
-                            <input class="form-control" type="file" id="txt_constancia" name="txt_constancia" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" >
+                            <input class="form-control" type="file" id="constancia" name="txt_constancia">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia de tarjeta de identidad</label>
-                            <input class="form-control" type="file" id="txt_identidad" name="txt_identidad" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" >
+                            <input class="form-control" type="file" id="identidad" name="txt_identidad">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia de Forma 03</label>
-                            <input class="form-control" type="file" id="txt_forma" name="txt_forma" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" >
+                            <input class="form-control" type="file" id="forma" name="txt_forma">
                         </div>
                 </div>
                 
             </div>
             <p class="text-center form-group" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" id="btn_cancelar_clases"><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary " id="btn_cancelar_clases"><i class="zmdi zmdi-floppy"></i> Guardar</button>
             </p>
           </div>
 
@@ -218,6 +225,7 @@ $('input[type="file"]').on('change', function(){
   }
 });
 </script>
-
+<script src="../plugins/toastr/toastr.min.js"></script>
+<script src="../js/Validaciones_solicitudes.js"></script>
 </body>
 </html>

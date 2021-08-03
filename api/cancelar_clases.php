@@ -10,7 +10,7 @@ require_once ('../clases/Conexion.php');
 if(isset($_GET['alumno'])){
     $alumno= $_GET['alumno'];
     //"call sel_cancelar_clases_unica('$alumno')"
-    $sql="SELECT valor, nombres, apellidos, correo, motivo, observacion, cambio, Fecha_creacion, tbl_cancelar_clases.Id_cancelar_clases, tbl_personas.id_persona
+    $sql="SELECT valor, nombres, apellidos, correo, Id_cancelar_clases, motivo, observacion, cambio, Fecha_creacion, tbl_cancelar_clases.Id_cancelar_clases, tbl_personas.id_persona
     FROM tbl_cancelar_clases INNER JOIN tbl_personas
     ON tbl_cancelar_clases.id_persona=tbl_personas.id_persona INNER JOIN tbl_personas_extendidas
     ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
