@@ -207,11 +207,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                 <td><?php echo  $sql_tabla["ROWS"][$counter]["fecha_creacion"]  ?></td>
                 
                     <td>
-                      <!-- <button disable  type="submit" name="btn_cancelar" id="btn_cancelar" title="eliminar" class="btn btn-danger btn-raised btn-xs">
-                         <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['cancelar_solicitud'] ?> "></i>
-                      </button>   -->
-
-                      <?php echo $boton?>
+                                      <?php echo $boton?>
                     </td>
                </tr>
                  <?php $counter = $counter + 1; }} ?>
@@ -265,7 +261,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
 
 <script type="text/javascript" language="javascript">
   function ventana() {
-    window.open("../Controlador/reporte_servicio_comunitario_controlador.php", "REPORTE");
+    window.open("../Controlador/reporte_historial_solicitudes_controlador.php", "REPORTE");
   }
 </script>
 

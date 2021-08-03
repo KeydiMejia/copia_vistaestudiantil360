@@ -30,8 +30,8 @@ if (isset($_GET['python'])) {
 
         // bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'ELIMINO' , 'EL ATRIBUTO   '.ctype_upper($atributo).'');
         echo '<script type="text/javascript">
-       
-        alert("Solucitud eliminada")
+        alert("Solicitud Eliminada")
+        
         window.location="../vistas/historial_solicitudes_vista.php";
         
         </script>';
