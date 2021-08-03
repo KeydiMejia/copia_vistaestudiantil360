@@ -159,7 +159,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                     <i class="far fa-check-circle"></i>
                     </a>
                   
-                  <a href="../Controlador/reporte_revision_reactivacion_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_cambio"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
+                  <a href="../Controlador/reporte_revision_reactivacion_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_reactivacion"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                 </td>
@@ -226,3 +226,4 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 <script src="../plugins/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
 <script src="../plugins/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
 <script src="../plugins/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+

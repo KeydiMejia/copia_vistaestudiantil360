@@ -204,5 +204,7 @@ $('input[type="file"]').on('change', function(){
   }
 });
 </script>
+  <script src="../plugins/toastr/toastr.min.js"></script>
+  <script src="../js/Validaciones_solicitudes.js" ></script>
 </body>
 </html>
