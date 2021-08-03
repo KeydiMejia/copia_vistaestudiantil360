@@ -42,7 +42,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode(" "), 0, 0, 'C');
+        $this->Cell(60, 10, utf8_decode(""), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }

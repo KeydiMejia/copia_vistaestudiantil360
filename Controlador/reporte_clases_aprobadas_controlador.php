@@ -1,11 +1,13 @@
 <?php
 session_start();
-require_once('../clases/Conexion.php');
+require_once('../clases/conexion_mantenimientos.php');
 require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
-//require_once('../Controlador/cancelar_clases_controlador.php');
-//include("../Controlador/cancelar_clases_controlador.php");
 $instancia_conexion = new conexion();
+
+
+//$stmt = $instancia_conexion->query("SELECT tp.nombres FROM tbl_personas tp INNER JOIN tbl_usuarios us ON us.id_persona=tp.id_persona WHERE us.Id_usuario= 8");
+
 
 
 class myPDF extends FPDF
@@ -33,10 +35,10 @@ class myPDF extends FPDF
         $this->ln(7);
         $this->Cell(325, 10, utf8_decode("FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES"), 0, 0, 'C');
         $this->ln(7);
-        $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA ADMINITRATIVA"), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("SOLICITUD DE CANCELACION DE CLASES"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("CLASES APROBADAS"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode(""), 0, 0, 'C');
@@ -50,48 +52,35 @@ class myPDF extends FPDF
         $this->cell(0, 10, 'Pagina' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
-    
-    function view()
-    {   
+    function headerTable()
+    {
+        $this->SetFont('Times', 'B', 12);
+        $this->SetLineWidth(0.3);
+        $this->Cell(10, 7, utf8_decode("Nª"), 1, 0, 'C');
+        $this->Cell(130, 7, "ASIGNATURA", 1, 0, 'C');
+        $this->Cell(65, 7, utf8_decode("CODIGO"), 1, 0, 'C');
+        $this->Cell(65, 7, utf8_decode("UV"), 1, 0, 'C');
+        
 
+        $this->ln();
+    }
+    function viewTable()
+    {
         global $instancia_conexion;
-        $sql ="SELECT p.nombres, p.apellidos, c.Id_cancelar_clases, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion FROM tbl_cancelar_clases c, tbl_personas p WHERE c.Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases) AND p.id_persona=c.id_persona";
+        $sql = "SELECT row_number() OVER (ORDER BY asignatura) AS NP, a.asignatura, a.codigo, a.uv FROM tbl_asignaturas a, tbl_asignaturas_aprobadas b
+        WHERE a.Id_asignatura= b.Id_asignatura AND b.id_persona = 6";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-
-$this->SetXY(25, 80);
-$this->Cell(35, 8, 'SOLICITUD N.:', 0, 'L');
-$this->Cell(20, 8, $reg['Id_cancelar_clases'], 120, 85.5);
-//*****
-$this->SetXY(25, 90);
-$this->Cell(35, 8, 'NOMBRE:', 0, 'L');
-$this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
-//*****
-$this->SetXY(25,100);
-$this->Cell(35, 8, 'MOTIVO:', 0, 'L');
-$this->Cell(20, 8, utf8_decode($reg['motivo']), 120, 85.5);
-
-//*****
-$this->SetXY(25, 110);
-$this->Cell(35, 8, 'CORREO:', 0, 'L');
-$this->Cell(20, 8, utf8_decode($reg['correo']), 120, 85.5);
-//****
-$this->SetXY(25, 120);
-$this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
-$this->Cell(20, 8, $reg['observacion'], 120, 85.5);
-
-$this->SetXY(25, 130);
-$this->Cell(35, 8, 'ESTADO:', 0, 'L');
-$this->Cell(20, 8,$reg['cambio'], 120, 85.5);
-
-$this->SetXY(25, 140);
-$this->Cell(35, 8, 'FECHA:', 0, 'L');
-$this->Cell(20, 8, $reg['Fecha_creacion'], 120, 85.5);
-           
+            $this->Cell(10, 7, $reg['NP'], 1, 0, 'C');
+            $this->Cell(130, 7, utf8_decode($reg['asignatura']), 1, 0, 'C');
+            $this->Cell(65, 7, utf8_decode($reg['codigo']), 1, 0, 'C');
+            $this->Cell(65, 7, $reg['uv'], 1, 0, 'C');
             
+
+            $this->ln();
         }
     }
 }
@@ -100,10 +89,12 @@ $this->Cell(20, 8, $reg['Fecha_creacion'], 120, 85.5);
 $pdf = new myPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('C', 'Legal', 0);
+$pdf->headerTable();
+$pdf->viewTable();
 
-$pdf->view();
+//$pdf->viewTable2($instancia_conexion);
 $pdf->SetFont('Arial', '', 15);
-$pdf->SetTitle('SOLICITUD_CANCELAR_CLASES.PDF');
+$pdf->SetTitle('CLASES_APROBADAS.PDF');
 
 
 $pdf->Output();

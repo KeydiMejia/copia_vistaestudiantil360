@@ -131,6 +131,7 @@ WHERE id_persona= $idUsuario ";
 $resultado = $mysqli->query($sqlaprobadas);
 $fila = $resultado->fetch_assoc();
 
+/*tabla resumen
 /* Manda a llamar para solicitud de examen de suficiencia */
 $sqlsuficiencia="SELECT COUNT(*) id_persona FROM tbl_examen_suficiencia
 WHERE id_persona= $idUsuario ";
@@ -332,7 +333,7 @@ Datos Personales del estudiante
     <!-------------- seccion de foto y asig aprobadas--------------->
     <section class="col-lg-5">
     <div class="card" style="width: 15rem; margin-left:20%;">
-    <img class="card-img-top" src="../dist/img/christelneumann.jpg" alt="Card image cap">
+    <img class="card-img-top" src="../dist/img/christelneuman.jpg" alt="Card image cap">
     <div class="card-body">
     <p class="card-text"><?php echo $row['nombres'].' '.$row['apellidos'] ?></p>
   </div>
@@ -464,7 +465,7 @@ Datos Personales del estudiante
 							
 						</tr>
                         <tr>
-							<th>Equivalencias:</th>
+							<th>Pre Equivalencias:</th>
 							<td><a href="../vistas/historial_solicitudes_vista.php"><?php echo $fila7['id_persona'] ?></a></td>
 							
 						</tr>

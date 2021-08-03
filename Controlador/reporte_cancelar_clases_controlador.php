@@ -35,7 +35,7 @@ class myPDF extends FPDF
         $this->ln(7);
         $this->Cell(325, 10, utf8_decode("FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES"), 0, 0, 'C');
         $this->ln(7);
-        $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA ADMINISTRATIVA"), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
         $this->Cell(330, 10, utf8_decode("SOLICITUDES DE CANCELACION DE CLASES"), 0, 0, 'C');
