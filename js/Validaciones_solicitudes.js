@@ -36,6 +36,14 @@
      }else if(vista[4]=='revision_expediente_graduacion_unica.php'){
 
         inputs_revision_servicio_comunitario_unitario();
+
+    }else if(vista[4]=='cancelar_clases_vista.php'){
+        
+        inputs_solicitud_cancelar_clases();
+
+    }else if(vista[4]=='revision_cancelar_clases_unica.php'){
+
+        inputs_revision_servicio_comunitario_unitario();
       }
     
 }
@@ -257,11 +265,94 @@ function inputs_revision_servicio_comunitario_unitario() {
 
      })
 
-     
-
 
 }
+// parte de keydi .........solicitud cancelar clases...........
+function inputs_solicitud_cancelar_clases() {
+    let cuenta = document.getElementById('cuenta');
+    let nombre = document.getElementById('txt_verificado1');
+    let apellido = document.getElementById('txt_verificado2');
+    let correo = document.getElementById('correo');
+    let razon = document.getElementById('razon')
+    let btn = document.getElementById('btn_cancelar_clases');
 
+    correo.addEventListener('focus',e=>{
+        copiar(correo);
+        pegar(correo);
+     })
+    
+    apellido.addEventListener('focus',e=>{
+        copiar(apellido);
+        pegar(apellido);
+     })
+    
+    nombre.addEventListener('focus',e=>{
+        copiar(nombre);
+        pegar(nombre);
+     })
+    
+    cuenta.addEventListener('focus',e=>{
+        copiar(cuenta);
+        pegar(cuenta);
+     })
+     razon.addEventListener('focus',e=>{
+        copiar(razon);
+        pegar(razon);
+    })
+
+
+
+     btn.addEventListener('click',e=>{
+
+        let identidad=validaridentidad(),
+        forma=validarforma(),
+        constancia=validarconstancia(),
+        solicitud=validarSolicitud();
+       
+        if (cuenta.value=='' || nombre.value=='' || apellido.value==''|| correo.value=='' 
+        || identidad===undefined || forma===undefined || constancia===undefined || solicitud===undefined) {
+            
+            e.preventDefault();
+           message(msg.vacio,titulo.camposVacios,tipo.info); 
+
+
+        }else if(identidad==forma){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(identidad==constancia){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(identidad==solicitud){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(forma==solicitud){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(constancia==solicitud){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else if(forma==constancia){
+            
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+
+        }else{
+
+           
+        }
+    })
+}
+// fin.........solicitud cancelar clases...........
 
 
 function validarSolicitud() {
@@ -347,6 +438,33 @@ function validarfinalizacion() {
         return nombre_solicitud;
     }
 }
+function validarforma() {
+    const input = document.getElementById('forma');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+function validarconstancia() {
+    const input = document.getElementById('constancia');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+
 
 
 tipo={

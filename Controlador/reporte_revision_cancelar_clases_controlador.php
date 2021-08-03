@@ -10,6 +10,16 @@ $instancia_conexion = new conexion();
 
 class myPDF extends FPDF
 {
+    public $titulo;
+    public $sub_titulo;
+    public $sql;
+
+    public function __construct($titulo='undefine',$sql='undefine') {
+        parent::__construct();
+        $this->titulo = $titulo;
+        
+        $this->sql= $sql;
+    }
     function header()
     {
         //h:i:s
@@ -45,12 +55,16 @@ class myPDF extends FPDF
     {   
 
         global $instancia_conexion;
-        $sql ="SELECT p.nombres, p.apellidos, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion FROM tbl_cancelar_clases c, tbl_personas p WHERE c.Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases) AND p.id_persona=c.id_persona";
+        $sql ="SELECT p.nombres, p.apellidos, c.Id_cancelar_clases, c.motivo, c.correo, c.observacion, c.cambio, c.Fecha_creacion FROM tbl_cancelar_clases c, tbl_personas p WHERE c.Id_cancelar_clases=(SELECT MAX(Id_cancelar_clases) FROM tbl_cancelar_clases) AND p.id_persona=c.id_persona";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
+
+            $this->SetXY(25, 80);
+            $this->Cell(30, 8, 'SOLICITUD Nº:', 0, 'L');
+            $this->Cell(20, 8, $reg['Id_cancelar_clases'], 120, 85.5);
             $this->SetXY(25, 80);
             $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
             $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
@@ -94,6 +108,7 @@ $pdf->view();
 
 //$pdf->viewTable2($instancia_conexion);
 $pdf->SetFont('Arial', '', 15);
+$pdf->SetTitle('SOLICITUD_CANCELAR_CLASES.PDF');
 
 
 $pdf->Output();

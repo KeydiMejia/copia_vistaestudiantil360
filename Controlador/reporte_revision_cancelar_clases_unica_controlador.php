@@ -13,6 +13,16 @@ $instancia_conexion = new conexion();
 
 class myPDF extends FPDF
 {
+    public $titulo;
+    public $sub_titulo;
+    public $sql;
+
+    public function __construct($titulo='undefine',$sql='undefine') {
+        parent::__construct();
+        $this->titulo = $titulo;
+        
+        $this->sql= $sql;
+    }
     function header()
     {
         //h:i:s
@@ -48,7 +58,7 @@ class myPDF extends FPDF
             if (isset($_GET['alumno'])){
             $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true ); 
             }
-
+            $n= $sqltabla["ROWS"][0]['Id_cancelar_clases'];
             $nombre= $sqltabla["ROWS"][0]['nombres'];
             $apellid= $sqltabla["ROWS"][0]['apellidos'];
             $motiv= $sqltabla["ROWS"][0]['motivo'];
@@ -56,6 +66,9 @@ class myPDF extends FPDF
             $observ= $sqltabla["ROWS"][0]['observacion'];
             $cambi= $sqltabla["ROWS"][0]['cambio'];
             $fechi =$sqltabla["ROWS"][0]['Fecha_creacion'];
+$this->SetXY(25,90);
+$this->Cell(30, 8, 'SOLICITUD Nº:', 0, 'L');
+$this->Cell(20, 8, $n, 120, 85.5);
 
 $this->SetXY(25,90);
 $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
@@ -94,6 +107,7 @@ $pdf->view();
 
 //$pdf->viewTable2($instancia_conexion);
 $pdf->SetFont('Arial', '', 15);
+$pdf->SetTitle('SOLICITUD_CANCELAR_CLASES.PDF');
 
 
 $pdf->Output();

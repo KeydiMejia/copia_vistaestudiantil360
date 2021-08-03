@@ -62,14 +62,21 @@ if(isset($_POST['txt_nombre']) && $_POST['txt_nombre']!=="" && $_POST['txt_cuent
                                         text:"Solicitud enviada...",
                                         type: "question",
                                         showCancelButton: true,     
-                                        confirmButtonText: "Si",
-                                        cancelButtonText: "No"
-                                    }).then(function() {
-                                        window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php")
-                                        window.location.href = "../vistas/historial_solicitudes_vista.php";
-                                    });
-                                        $(".FormularioAjax")[0].reset();
-                                       </script>'; 
+                                        confirmButtonText:"Sí",
+                                        cancelButtonText:"No",
+                                        })
+        
+                        .then(function(isConfirm) {
+                            if (isConfirm)  {
+                                window.open("../Controlador/reporte_revision_cancelar_clases_controlador.php");
+                                window.location.href="../vistas/historial_solicitudes_vista.php";
+                              }    
+                        })
+                        .catch(function(){
+                            window.location.href="../vistas/historial_solicitudes_vista.php";
+                            $(".FormularioAjax")[0].reset();
+                        });
+                    </script>'; 
                     
                                 } 
                 else {

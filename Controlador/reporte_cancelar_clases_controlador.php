@@ -12,6 +12,16 @@ $instancia_conexion = new conexion();
 
 class myPDF extends FPDF
 {
+    public $titulo;
+    public $sub_titulo;
+    public $sql;
+
+    public function __construct($titulo='undefine',$sql='undefine') {
+        parent::__construct();
+        $this->titulo = $titulo;
+        
+        $this->sql= $sql;
+    }
     function header()
     {
         //h:i:s
@@ -89,6 +99,7 @@ $pdf->viewTable();
 
 //$pdf->viewTable2($instancia_conexion);
 $pdf->SetFont('Arial', '', 15);
+$pdf->SetTitle('SOLICITUD_CANCELAR_CLASES.PDF');
 
 
 $pdf->Output();
