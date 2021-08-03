@@ -54,31 +54,37 @@
                 $sql= "INSERT INTO tbl_examen_suficiencia(id_persona,fecha_creacion,documento,observacion,id_estado_suficiencia,tipo,correo)
                 VALUES ('$id_persona',current_timestamp(),'$documento', 'Nuevo',1,'contenido','$correo')";
     
-                $resultadop = $mysqli->query($sql);
-                if($resultadop == true){
-                  
-                    $Ultimo_id= $mysqli->insert_id;
-                    $ultimo_id_hash= base64_encode($Ultimo_id);
-                    echo '<script type="text/javascript">
-                    swal({
-                        title:"¿Deseas ver reporte en PDF?",
-                        text:"Solicitud enviada...",
-                        type: "question",
-                        showCancelButton: true,     
-                        confirmButtonText: "Aceptar",
-                        cancelButtonText: "Cancelar"
-                    }).then(function() {
-                        window.open("../Controlador/reporte_revision_suficiencia_controlador.php")
-                        windows.location("../vistas/historial_solicitudes_vista.php");
-                    });
-                        $(".FormularioAjax")[0].reset();
-                       </script>'; 
+    $resultadop = $mysqli->query($sql);
+    if($resultadop == true){
+        echo '<script type="text/javascript">
+                        swal({
+                            title:"¿Deseas ver reporte en PDF?",
+                            text:"Solicitud enviada...",
+                            type: "question",
+                            showCancelButton: true,     
+                            confirmButtonText:"Sí",
+                            cancelButtonText:"No",
+                            })
+
+            .then(function(isConfirm) {
+                if (isConfirm)  {
+                    window.open("../Controlador/reporte_revision_suficiencia_controlador.php");
+                    window.location.href="../vistas/historial_solicitudes_vista.php";
+                  }    
+            })
+            .catch(function(){
+                window.location.href="../vistas/historial_solicitudes_vista.php";
+                $(".FormularioAjax")[0].reset();
+            });
+        </script>'; 
+   
     
                 
                
                                     } 
                                     else {
-                                        echo "Error: " . $sql ;
+                                        
+                                         echo json_encode($sql); 
                                         }
     
     
@@ -157,32 +163,34 @@
                     $sql= "INSERT INTO tbl_examen_suficiencia(id_persona,fecha_creacion,documento,observacion,id_estado_suficiencia,tipo,correo)
                     VALUES ('$id_persona',current_timestamp(),'$documento', 'Nuevo',1,'codigo','$correo')";
         
-                    $resultadop = $mysqli->query($sql);
-                    if($resultadop == true){
-                      
-                 $Ultimo_id= $mysqli->insert_id;
-                        $ultimo_id_hash= base64_encode($Ultimo_id);
-                        echo '<script type="text/javascript">
-                        swal({
-                            title:"¿Deseas ver reporte en PDF?",
-                            text:"Solicitud enviada...",
-                            type: "question",
-                            allowOutsideClick:false,
-                            showConfirmButton: true,
-                            showCancelButton: true,
-                            confirmButtonText:"Aceptar",
-                            cancelButtonText:"Cancelar",
-                            }).then(function () {
-                            window.location.href = "../Controlador/reporte_revision_suficiencia_controlador.php?servicio='.$ultimo_id_hash.'";
-                            });
-                            $(".FormularioAjax")[0].reset();
-                        </script>'; 
-                       
-                        
-                   
+        $resultadop = $mysqli->query($sql);
+        if($resultadop == true){
+            echo '<script type="text/javascript">
+                            swal({
+                                title:"¿Deseas ver reporte en PDF?",
+                                text:"Solicitud enviada...",
+                                type: "question",
+                                showCancelButton: true,     
+                                confirmButtonText:"Sí",
+                                cancelButtonText:"No",
+                                })
+    
+                .then(function(isConfirm) {
+                    if (isConfirm)  {
+                        window.open("../Controlador/reporte_revision_suficiencia_codigo_controlador.php");
+                        window.location.href="../vistas/historial_solicitudes_vista.php";
+                      }    
+                })
+                .catch(function(){
+                    window.location.href="../vistas/historial_solicitudes_vista.php";
+                    $(".FormularioAjax")[0].reset();
+                });
+            </script>'; 
+       
+        
                                         } 
-                                        else {
-                                            echo "Error: " . $sql ;
+                                        else { 
+                                            echo json_encode($sql); 
                                             }
         
         

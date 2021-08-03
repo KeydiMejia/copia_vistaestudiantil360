@@ -156,7 +156,7 @@ $visualizacion= permiso_ver($Id_objeto);
                       <a href="../vistas/revision_suficiencia_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_suficiencia"]; ?>" class="btn btn-primary btn-raised btn-xs">
                       <i class="far fa-check-circle"></i>
                       </a>
-                      <a href="../Controlador/reporte_revision_suficiencia_codigo_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                      <a href="../Controlador/reporte_revision_suficiencia_unica_codigo_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                   </td>

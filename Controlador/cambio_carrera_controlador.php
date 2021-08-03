@@ -64,35 +64,35 @@
 
                 $sql = "INSERT INTO tbl_cambio_carrera( id_persona, razon_cambio, observacion, aprobado, Id_centro_regional, fecha_creacion, documento, Id_facultad, tipo, correo) 
                 VALUES ('$id_persona','$razon', 'pendiente', 'nuevo', '$centro', now(), '$documento','$facultad', 'interno','$correo');";
-
-                
               
-                $resultadop = $mysqli->query($sql);
-                if($resultadop == true){
-                  
-                    $Ultimo_id= $mysqli->insert_id;
-                    $ultimo_id_hash= base64_encode($Ultimo_id);
-                    echo '<script type="text/javascript">
-                    swal({
-                        title:"¿Deseas ver reporte en PDF?",
-                        text:"Solicitud enviada...",
-                        type: "question",
-                        allowOutsideClick:false,
-                        showConfirmButton: true,
-                        showCancelButton: true,
-                        confirmButtonText:"Aceptar",
-                        cancelButtonText:"Cancelar",
-                        }).then(function () {
-                        window.location.href = "../Controlador/reporte_revision_cambio_carrera_controlador.php?servicio='.$ultimo_id_hash.'";
-                        });
-                        $(".FormularioAjax")[0].reset();
-                    </script>'; 
-                   
-                    
+              $resultadop = $mysqli->query($sql);
+              if($resultadop == true){
+                  echo '<script type="text/javascript">
+                                  swal({
+                                      title:"¿Deseas ver reporte en PDF?",
+                                      text:"Solicitud enviada...",
+                                      type: "question",
+                                      showCancelButton: true,     
+                                      confirmButtonText:"Sí",
+                                      cancelButtonText:"No",
+                                      })
+      
+                      .then(function(isConfirm) {
+                          if (isConfirm)  {
+                              window.open("../Controlador/reporte_revision_cambio_controlador.php");
+                              window.location.href="../vistas/historial_solicitudes_vista.php";
+                            }    
+                      })
+                      .catch(function(){
+                          window.location.href="../vistas/historial_solicitudes_vista.php";
+                          $(".FormularioAjax")[0].reset();
+                      });
+                  </script>'; 
                
-                                    } 
+               } 
                                     else {
-                                        echo "Error: " . $sql ;
+                                        
+                                        echo json_encode($sql); 
                                         }
     
     
@@ -185,32 +185,35 @@
                     $sql = "INSERT INTO tbl_cambio_carrera( id_persona, razon_cambio, observacion, aprobado, Id_centro_regional, fecha_creacion, documento, Id_facultad, tipo, correo) 
                 VALUES ('$id_persona','N/A', 'pendiente', 'nuevo', 0, now(), '$documento',0, 'simultanea','$correo');";
 
-                    $resultadop = $mysqli->query($sql);
-                    if($resultadop == true){
-                      
-                 $Ultimo_id= $mysqli->insert_id;
-                        $ultimo_id_hash= base64_encode($Ultimo_id);
-                        echo '<script type="text/javascript">
-                        swal({
-                            title:"¿Deseas ver reporte en PDF?",
-                            text:"Solicitud enviada...",
-                            type: "question",
-                            allowOutsideClick:false,
-                            showConfirmButton: true,
-                            showCancelButton: true,
-                            confirmButtonText:"Aceptar",
-                            cancelButtonText:"Cancelar",
-                            }).then(function () {
-                            window.location.href = "../Controlador/reporte_revision_suficiencia_controlador.php?servicio='.$ultimo_id_hash.'";
-                            });
-                            $(".FormularioAjax")[0].reset();
-                        </script>'; 
-                       
+$resultadop = $mysqli->query($sql);
+if($resultadop == true){
+    echo '<script type="text/javascript">
+                    swal({
+                        title:"¿Deseas ver reporte en PDF?",
+                        text:"Solicitud enviada...",
+                        type: "question",
+                        showCancelButton: true,     
+                        confirmButtonText:"Sí",
+                        cancelButtonText:"No",
+                        })
+
+        .then(function(isConfirm) {
+            if (isConfirm)  {
+                window.open("../Controlador/reporte_revision_cambio_simultanea_controlador.phpp");
+                window.location.href="../vistas/historial_solicitudes_vista.php";
+              }    
+        })
+        .catch(function(){
+            window.location.href="../vistas/historial_solicitudes_vista.php";
+            $(".FormularioAjax")[0].reset();
+        });
+    </script>'; 
                         
                    
                                         } 
                                         else {
-                                            echo "Error: " . $sql ;
+                                            
+                                            echo json_encode($sql);  
                                             }
         
         

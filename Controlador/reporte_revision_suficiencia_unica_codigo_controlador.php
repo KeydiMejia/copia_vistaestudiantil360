@@ -42,7 +42,7 @@ class myPDF extends FPDF
     function view()
     {   
             if (isset($_GET['alumno'])){
-            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/examen_suficiencia_api.php?alumno=".$_GET['alumno']), true ); 
+            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php?alumno=".$_GET['alumno']), true ); 
             }
 
             $nombre= $sqltabla["ROWS"][0]['nombres'];

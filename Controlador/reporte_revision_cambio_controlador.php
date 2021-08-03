@@ -17,7 +17,6 @@ public function __construct($titulo='undefine', $sql='undefine'){
     $this ->titulo =$titulo;
     $this -> sql =$sql;
 }
-
     function header()
     {
         date_default_timezone_set("America/Tegucigalpa");
@@ -32,7 +31,7 @@ public function __construct($titulo='undefine', $sql='undefine'){
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("SOLICITUD DE REACTIVACION CUENTA"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("SOLICITUD DE CAMBIO DE CARRERA"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode(""), 0, 0, 'C');
@@ -51,38 +50,48 @@ public function __construct($titulo='undefine', $sql='undefine'){
     {   
 
         global $instancia_conexion;
-        $sql ="SELECT p.nombres, p.apellidos, s.correo, e.descripcion, x.valor, s.observacion,s.fecha_creacion
-         FROM tbl_reactivacion_cuenta s, tbl_personas p, tbl_estado_reactivacion e ,tbl_personas_extendidas x
-         WHERE s.id_reactivacion=(SELECT MAX(id_reactivacion)
-         FROM tbl_reactivacion_cuenta) AND p.id_persona=s.id_persona 
-         and s.id_estado_reactivacion = e.id_estado_reactivacion and p.id_persona= x.id_persona";
+        $sql ="SELECT p.nombres, p.apellidos, s.tipo, s.correo, x.valor, s.aprobado, s.observacion,s.fecha_creacion, c.centro_regional, f.nombre 
+        FROM tbl_cambio_carrera s, tbl_personas p, tbl_facultades f ,tbl_personas_extendidas x, tbl_centros_regionales c 
+        WHERE s.Id_cambio=(SELECT MAX(Id_cambio) FROM tbl_cambio_carrera) AND p.id_persona=s.id_persona 
+        and s.Id_centro_regional = c.Id_centro_regional and p.id_persona= x.id_persona and s.Id_facultad=f.Id_facultad";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-            $this->SetXY(25, 80);
+            $this->SetXY(25, 70);
             $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
             $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
 
-$this->SetXY(25, 90);
+$this->SetXY(25, 80);
 $this->Cell(30, 8, 'CUENTA:', 0, 'L');
 $this->Cell(20, 8,$reg['valor'], 120, 85.5);
-
 //*****
-$this->SetXY(25, 100);
+$this->SetXY(25,90);
+$this->Cell(30, 8, 'TIPO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['tipo']), 120, 85.5);
+
+$this->SetXY(25,100);
+$this->Cell(30, 8, 'CENTRO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['centro_regional']), 120, 85.5);
+
+$this->SetXY(25,110);
+$this->Cell(30, 8, 'FACULTAD:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($reg['nombre']), 120, 85.5);
+//*****
+$this->SetXY(25, 120);
 $this->Cell(30, 8, 'CORREO:', 0, 'L');
 $this->Cell(20, 8, utf8_decode($reg['correo']), 120, 85.5);
 //****
-$this->SetXY(25, 110);
+$this->SetXY(25, 130);
 $this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
 $this->Cell(20, 8, $reg['observacion'], 120, 85.5);
 
-$this->SetXY(25, 120);
+$this->SetXY(25, 140);
 $this->Cell(30, 8, 'ESTADO:', 0, 'L');
-$this->Cell(20, 8,$reg['descripcion'], 120, 85.5);
+$this->Cell(20, 8,$reg['aprobado'], 120, 85.5);
 
-$this->SetXY(25, 130);
+$this->SetXY(25, 150);
 $this->Cell(30, 8, 'FECHA:', 0, 'L');
 $this->Cell(20, 8, $reg['fecha_creacion'], 120, 85.5);
            
@@ -97,6 +106,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage('C', 'Legal', 0);
 $pdf->view();
 $pdf->SetFont('Arial', '', 15);
-$pdf->settitle('SOLICITUD_REACTIVACION_CUENTA.PDF');
+$pdf->settitle('SOLICITUD_CAMBIO_CARRERA.PDF');
+
 
 $pdf->Output();

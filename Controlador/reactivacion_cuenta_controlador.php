@@ -55,26 +55,34 @@
                 $sql= "INSERT INTO tbl_reactivacion_cuenta(id_persona,documento,fecha_creacion,observacion,id_estado_reactivacion,correo)
                 VALUES ('$id_persona','$documento',current_timestamp(), 'Nuevo',1,'$correo')";
     
-                $resultadop = $mysqli->query($sql);
-                if($resultadop == true){
-                    echo '<script type="text/javascript">
-                    swal({
-                        title:"¿Deseas ver reporte en PDF?",
-                        text:"Solicitud enviada...",
-                        type: "question",
-                        showCancelButton: true,     
-                        confirmButtonText: "Aceptar",
-                        cancelButtonText: "Cancelar"
-                    }).then(function() {
-                        window.open("../Controlador/reporte_revision_reactivacion_controlador.php")
-                        windows.location("../vistas/historial_solicitudes_vista.php");
-                    });
-                        $(".FormularioAjax")[0].reset();
-                       </script>'; 
-    
+    $resultadop = $mysqli->query($sql);
+    if($resultadop == true){
+        echo '<script type="text/javascript">
+                        swal({
+                            title:"¿Deseas ver reporte en PDF?",
+                            text:"Solicitud enviada...",
+                            type: "question",
+                            showCancelButton: true,     
+                            confirmButtonText:"Sí",
+                            cancelButtonText:"No",
+                            })
+
+            .then(function(isConfirm) {
+                if (isConfirm)  {
+                    window.open("../Controlador/reporte_revision_reactivacion_controlador.php");
+                    window.location.href="../vistas/historial_solicitudes_vista.php";
+                  }    
+            })
+            .catch(function(){
+                window.location.href="../vistas/historial_solicitudes_vista.php";
+                $(".FormularioAjax")[0].reset();
+            });
+        </script>'; 
+   
                 } 
                                     else {
-                                        echo "Error: " . $sql ;
+                                        
+                                        echo json_encode($sql); 
                                         }
     
     
