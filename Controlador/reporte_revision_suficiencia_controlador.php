@@ -64,7 +64,7 @@ public function __construct($titulo='undefine', $sql='undefine'){
             $this->SetFont('Times', '', 12);
 
             $this->SetXY(25, 60);
-            $this->Cell(30, 8, 'SOLICITUD Nº:', 0, 'L');
+            $this->Cell(30, 8, 'SOLICITUD N.:', 0, 'L');
             $this->Cell(20, 8, $reg['id_suficiencia'], 120, 85.5);
 
             $this->SetXY(25, 70);

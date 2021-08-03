@@ -209,7 +209,7 @@ $visualizacion= permiso_ver($Id_objeto);
   </html>
   <script type="text/javascript" language="javascript">
     function ventana() {
-      window.open("../Controlador/reporte_revision_suficiencia_controlador.php", "REPORTE");
+      window.open("../Controlador/reporte_revision_suficiencia_contenido_general_controlador.php", "REPORTE");
     }
   </script>
   

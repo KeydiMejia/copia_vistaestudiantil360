@@ -50,7 +50,7 @@ public function __construct($titulo='undefine', $sql='undefine'){
     {   
 
         global $instancia_conexion;
-        $sql ="SELECT p.nombres, p.apellidos, s.tipo, s.correo, x.valor, s.aprobado, s.observacion,s.fecha_creacion, c.centro_regional, f.nombre 
+        $sql ="SELECT p.nombres, p.apellidos, s.tipo, s.Id_cambio, s.correo, x.valor, s.aprobado, s.observacion,s.fecha_creacion, c.centro_regional, f.nombre 
         FROM tbl_cambio_carrera s, tbl_personas p, tbl_facultades f ,tbl_personas_extendidas x, tbl_centros_regionales c 
         WHERE s.Id_cambio=(SELECT MAX(Id_cambio) FROM tbl_cambio_carrera) AND p.id_persona=s.id_persona 
         and s.Id_centro_regional = c.Id_centro_regional and p.id_persona= x.id_persona and s.Id_facultad=f.Id_facultad";
@@ -59,6 +59,10 @@ public function __construct($titulo='undefine', $sql='undefine'){
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
+            $this->SetXY(25, 60);
+            $this->Cell(30, 8, 'SOLICITUD N.:', 0, 'L');
+            $this->Cell(20, 8, $reg['Id_cambio'], 120, 85.5);
+
             $this->SetXY(25, 70);
             $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
             $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);

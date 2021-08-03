@@ -1,14 +1,30 @@
+
+
 <?php
 session_start();
 require_once('../clases/Conexion.php');
 require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
+//require_once('../Controlador/cancelar_clases_controlador.php');
+//include("../Controlador/cancelar_clases_controlador.php");
 $instancia_conexion = new conexion();
+
 
 //$sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cancelar_clases.php?alumno=".$_GET['alumno']), true );
 
+
 class myPDF extends FPDF
 {
+    public $titulo;
+    public $sub_titulo;
+    public $sql;
+
+    public function __construct($titulo='undefine',$sql='undefine') {
+        parent::__construct();
+        $this->titulo = $titulo;
+        
+        $this->sql= $sql;
+    }
     function header()
     {
         //h:i:s
@@ -25,7 +41,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("SOLICITUD EXAMEN DE SUFICIENCIA"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("SOLICITUD EXAMEN SUFICIENCIA"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode(" "), 0, 0, 'C');
@@ -44,42 +60,56 @@ class myPDF extends FPDF
             if (isset($_GET['alumno'])){
             $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/examen_suficiencia_api.php?alumno=".$_GET['alumno']), true ); 
             }
-
+            $n= $sqltabla["ROWS"][0]['id_suficiencia'];
             $nombre= $sqltabla["ROWS"][0]['nombres'];
-            $apellido= $sqltabla["ROWS"][0]['apellidos'];
-            $cuenta= $sqltabla["ROWS"][0]['valor'];
-            $correo= $sqltabla["ROWS"][0]['correo'];
+            $apellid= $sqltabla["ROWS"][0]['apellidos'];
+            $tipo= $sqltabla["ROWS"][0]['tipo'];
+            //$corr= $sqltabla["ROWS"][0]['correo'];
             $observ= $sqltabla["ROWS"][0]['observacion'];
             $estado= $sqltabla["ROWS"][0]['id_estado_suficiencia'];
-            $fecha =$sqltabla["ROWS"][0]['fecha_creacion'];
+            $fechi =$sqltabla["ROWS"][0]['fecha_creacion'];
+$this->SetXY(25,80);
+$this->Cell(35, 8, 'SOLICITUD N:', 0, 'L');
+$this->Cell(20, 8, $n, 120, 85.5);
 
 $this->SetXY(25,90);
-$this->Cell(30, 8, 'NOMBRE:', 0, 'L');
+$this->Cell(35, 8, 'NOMBRE:', 0, 'L');
 $this->Cell(20, 8, $nombre.$apellid, 120, 85.5);
 
 //*****
 $this->SetXY(25, 100);
-$this->Cell(30, 8, 'CUENTA:', 0, 'L');
-$this->Cell(20, 8, utf8_decode($cuenta), 120, 85.5);
+$this->Cell(35, 8, 'TIPO:', 0, 'L');
+$this->Cell(20, 8, utf8_decode($tipo), 120, 85.5);
 //****
 $this->SetXY(25, 110);
 $this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
 $this->Cell(20, 8, $observ, 120, 85.5);
 
 $this->SetXY(25, 120);
-$this->Cell(30, 8, 'ESTADO:', 0, 'L');
+$this->Cell(35, 8, 'ESTADO:', 0, 'L');
 $this->Cell(20, 8,$estado, 120, 85.5);
 
 $this->SetXY(25, 130);
-$this->Cell(30, 8, 'FECHA:', 0, 'L');
-$this->Cell(20, 8, $fecha, 120, 85.5);
+$this->Cell(35, 8, 'FECHA:', 0, 'L');
+$this->Cell(20, 8, $fechi, 120, 85.5);
 
             
 
-            // $this->ln();
         }
     }
 
 
+
 $pdf = new myPDF();
 $pdf->AliasNbPages();
+$pdf->AddPage('C', 'Legal', 0);
+//$pdf->headerTable();
+$pdf->view();
+
+//$pdf->viewTable2($instancia_conexion);
+$pdf->SetFont('Arial', '', 15);
+$pdf->SetTitle('SOLICITUD_EXAMEN_SUFICIENCIA_CONTENIDO.PDF');
+
+
+$pdf->Output();
+

@@ -9,6 +9,14 @@ $instancia_conexion = new conexion();
 
 class myPDF extends FPDF
 {
+    public $titulo;
+    public $sub_titulo;
+    public $sql;
+public function __construct($titulo='undefine', $sql='undefine'){
+    parent::__construct();
+    $this ->titulo =$titulo;
+    $this -> sql =$sql;
+}
     function header()
     {
         date_default_timezone_set("America/Tegucigalpa");
@@ -42,7 +50,7 @@ class myPDF extends FPDF
     {   
 
         global $instancia_conexion;
-        $sql ="SELECT p.nombres, p.apellidos, s.tipo, s.correo, x.valor, s.aprobado, s.observacion,s.fecha_creacion 
+        $sql ="SELECT p.nombres, p.apellidos, s.tipo, s.Id_cambio, s.correo, x.valor, s.aprobado, s.observacion,s.fecha_creacion 
         FROM tbl_cambio_carrera s, tbl_personas p,tbl_personas_extendidas x 
         WHERE s.Id_cambio=(SELECT MAX(Id_cambio) FROM tbl_cambio_carrera) AND p.id_persona=s.id_persona 
         and p.id_persona= x.id_persona ";
@@ -51,6 +59,11 @@ class myPDF extends FPDF
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
+
+            $this->SetXY(25, 60);
+            $this->Cell(30, 8, 'SOLICITUD N.:', 0, 'L');
+            $this->Cell(20, 8, $reg['Id_cambio'], 120, 85.5); 
+
             $this->SetXY(25, 70);
             $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
             $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);
@@ -90,6 +103,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage('C', 'Legal', 0);
 $pdf->view();
 $pdf->SetFont('Arial', '', 15);
+$pdf->settitle('SOLICITUD_CAMBIO_CARRERA.PDF');
 
 
 $pdf->Output();

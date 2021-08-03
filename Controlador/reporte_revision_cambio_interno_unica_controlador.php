@@ -1,5 +1,4 @@
 
-
 <?php
 session_start();
 require_once('../clases/Conexion.php');
@@ -41,7 +40,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("SOLICITUD EXAMEN SUFICIENCIA"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("SOLICITUD CAMBIO CARRERA INTERNA"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
         $this->Cell(60, 10, utf8_decode(" "), 0, 0, 'C');
@@ -58,15 +57,15 @@ class myPDF extends FPDF
     function view()
     {   
             if (isset($_GET['alumno'])){
-            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php?alumno=".$_GET['alumno']), true ); 
+            $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cambio_carrera.php?alumno=".$_GET['alumno']), true ); 
             }
-            $n= $sqltabla["ROWS"][0]['id_suficiencia'];
+            $n= $sqltabla["ROWS"][0]['Id_carrera'];
             $nombre= $sqltabla["ROWS"][0]['nombres'];
             $apellid= $sqltabla["ROWS"][0]['apellidos'];
             $tipo= $sqltabla["ROWS"][0]['tipo'];
             //$corr= $sqltabla["ROWS"][0]['correo'];
             $observ= $sqltabla["ROWS"][0]['observacion'];
-            $estado= $sqltabla["ROWS"][0]['id_estado_suficiencia'];
+            $estado= $sqltabla["ROWS"][0]['aprobado'];
             $fechi =$sqltabla["ROWS"][0]['fecha_creacion'];
 $this->SetXY(25,80);
 $this->Cell(35, 8, 'SOLICITUD N:', 0, 'L');
@@ -108,7 +107,7 @@ $pdf->view();
 
 //$pdf->viewTable2($instancia_conexion);
 $pdf->SetFont('Arial', '', 15);
-$pdf->SetTitle('SOLICITUD_EXAMEN_SUFICIENCIA_CODIGO.PDF');
+$pdf->SetTitle('SOLICITUD_CAMBIO_CARRERA_INTERNO.PDF');
 
 
 $pdf->Output();

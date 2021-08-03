@@ -156,7 +156,8 @@ $visualizacion= permiso_ver($Id_objeto);
                       <a href="../vistas/revision_suficiencia_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_suficiencia"]; ?>" class="btn btn-primary btn-raised btn-xs">
                       <i class="far fa-check-circle"></i>
                       </a>
-                      <a href="../Controlador/reporte_revision_suficiencia_unica_codigo_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" class="btn btn-danger btn-raised btn-xs">
+                  
+                    <a href="../Controlador/reporte_revision_suficiencia_unica_codigo_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                   </td>
@@ -211,7 +212,7 @@ $visualizacion= permiso_ver($Id_objeto);
   </html>
   <script type="text/javascript" language="javascript">
     function ventana() {
-      window.open("../Controlador/reporte_revision_suficiencia_controlador.php", "REPORTE");
+      window.open("../Controlador/reporte_revision_suficiencia_codigo_general_controlador.php", "REPORTE");
     }
   </script>
   

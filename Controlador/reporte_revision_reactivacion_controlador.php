@@ -51,7 +51,7 @@ public function __construct($titulo='undefine', $sql='undefine'){
     {   
 
         global $instancia_conexion;
-        $sql ="SELECT p.nombres, p.apellidos, s.correo, e.descripcion, x.valor, s.observacion,s.fecha_creacion
+        $sql ="SELECT p.nombres, p.apellidos, s.correo, e.descripcion, s.id_reactivacion, x.valor, s.observacion,s.fecha_creacion
          FROM tbl_reactivacion_cuenta s, tbl_personas p, tbl_estado_reactivacion e ,tbl_personas_extendidas x
          WHERE s.id_reactivacion=(SELECT MAX(id_reactivacion)
          FROM tbl_reactivacion_cuenta) AND p.id_persona=s.id_persona 
@@ -61,6 +61,11 @@ public function __construct($titulo='undefine', $sql='undefine'){
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
+
+            $this->SetXY(25, 70);
+            $this->Cell(30, 8, 'SOLICITUD N.:', 0, 'L');
+            $this->Cell(20, 8, $reg['id_reactivacion'], 120, 85.5);
+
             $this->SetXY(25, 80);
             $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
             $this->Cell(20, 8, $reg['nombres'].$reg['apellidos'], 120, 85.5);

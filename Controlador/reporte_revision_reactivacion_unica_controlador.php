@@ -55,7 +55,7 @@ class myPDF extends FPDF
 
 $this->SetXY(25,90);
 $this->Cell(30, 8, 'NOMBRE:', 0, 'L');
-$this->Cell(20, 8, $nombre.$apellid, 120, 85.5);
+$this->Cell(20, 8, $nombre.$apellido, 120, 85.5);
 
 //*****
 $this->SetXY(25, 100);

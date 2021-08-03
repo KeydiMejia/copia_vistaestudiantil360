@@ -158,9 +158,10 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                     <a href="../vistas/revision_reactivacion_unica.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_reactivacion"]; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
-                    <a href="../Controlador/reporte_revision_reactivacion_unica_controlador.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["id_reactivacion"]; ?>" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger btn-xs" tabindex="0" aria-controls="tabla" type="buttton" title="Exportar a PDF">
-                    <i class="fas fa-file-pdf"></i>
-                  </a>
+                  
+                  <a href="../Controlador/reporte_revision_reactivacion_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_cambio"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
+                      <i class="fas fa-file-pdf    "></i>
+                    </a>
                 </td>
                </tr>
                  <?php $counter = $counter + 1; }} ?>
@@ -213,7 +214,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 </html>
 <script type="text/javascript" language="javascript">
   function ventana() {
-    window.open("../Controlador/reporte_revision_reactivacion_controlador.php", "REPORTE");
+    window.open("../Controlador/reporte_revision_reactivacion_general_controlador.php", "REPORTE");
   }
 </script>
 

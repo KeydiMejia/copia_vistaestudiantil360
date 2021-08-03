@@ -199,7 +199,7 @@ if($resultadop == true){
 
         .then(function(isConfirm) {
             if (isConfirm)  {
-                window.open("../Controlador/reporte_revision_cambio_simultanea_controlador.phpp");
+                window.open("../Controlador/reporte_revision_cambio_simultanea_controlador.php");
                 window.location.href="../vistas/historial_solicitudes_vista.php";
               }    
         })

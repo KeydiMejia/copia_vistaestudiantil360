@@ -9,6 +9,14 @@ $instancia_conexion = new conexion();
 
 class myPDF extends FPDF
 {
+    public $titulo;
+    public $sub_titulo;
+    public $sql;
+public function __construct($titulo='undefine', $sql='undefine'){
+    parent::__construct();
+    $this ->titulo =$titulo;
+    $this -> sql =$sql;
+}
     function header()
     {
         date_default_timezone_set("America/Tegucigalpa");
@@ -54,7 +62,7 @@ class myPDF extends FPDF
             $this->SetFont('Times', '', 12);
 
             $this->SetXY(25, 60);
-            $this->Cell(30, 8, 'SOLICITUD Nº:', 0, 'L');
+            $this->Cell(30, 8, 'SOLICITUD N.:', 0, 'L');
             $this->Cell(20, 8, $reg['id_suficiencia'], 120, 85.5);
 
             $this->SetXY(25, 70);
@@ -97,6 +105,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage('C', 'Legal', 0);
 $pdf->view();
 $pdf->SetFont('Arial', '', 15);
+$pdf->settitle('SOLICITUD_EXAMEN_SUFICIENCIA.PDF');
 
 
 $pdf->Output();

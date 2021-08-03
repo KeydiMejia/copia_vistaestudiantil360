@@ -50,7 +50,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
           <div class="col-sm-6">
 
 
-            <h1>Solicitudes de Cambio de Carrera Suficiencia</h1>
+            <h1>Solicitudes de Cambio de Carrera Simultanea</h1>
           </div>
 
                 <div class="col-sm-6">
@@ -77,8 +77,21 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
               <h3 class="card-title">Solicitudes</h3>
               <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            </div>
-            </div>
+            </div> <!----->
+            <br>
+          <div class=" px-12">
+            <!-- <button class="btn btn-success "> <i class="fas fa-file-pdf"></i> <a style="font-weight: bold;" onclick="ventana()">Exportar a PDF</a> </button> -->
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="dt-buttons btn-group">
+            <button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla" type="buttton" onclick="ventana()" title="Exportar a PDF">
+            <i class="fas fa-file-pdf">
+  </i>
+          </button>
+          </div>
+          <br></br>
+          <!---->
             <!-- /.card-header -->
             <div class="card-body">
               <table id="tabla" class="table table-bordered table-striped">
@@ -126,6 +139,9 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                 <td style="text-align: center;">                    
                     <a href="../vistas/revision_cambio_unico_simultanea.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cambio"] ?>&tipo=<?php echo $tipo?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
+                    </a>
+                    <a href="../Controlador/reporte_revision_cambio_simultanea_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_cambio"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
+                      <i class="fas fa-file-pdf    "></i>
                     </a>
                 </td>
                </tr>
@@ -176,3 +192,17 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 </script>
 </body>
 </html>
+<script type="text/javascript" language="javascript">
+    function ventana() {
+      window.open("../Controlador/reporte_revision_cambio_simultanea_general_controlador.php", "REPORTE");
+    }
+  </script>
+  
+  <!-- <script type="text/javascript" src="../js/funciones_mantenimientos.js"></script> -->
+  
+  <!-- para usar botones en datatables JS -->
+  <script src="../plugins/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+  <script src="../plugins/datatables/JSZip-2.5.0/jszip.min.js"></script>
+  <script src="../plugins/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
+  <script src="../plugins/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="../plugins/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>

@@ -64,7 +64,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Admisión a la Carrera</h1>
+            <h1>Admisión a Carrera Interna</h1>
           </div>
 
          
@@ -72,7 +72,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/menu_cambio_carrera.php">Admisión a la Carrera</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/menu_cambio_carrera.php">Admisión Carrera Interna</a></li>
               <li class="breadcrumb-item"><a href="../pdf/cambio_carrera.php" target="_blank">Requisitos</a></li>
             </ol>
           </div>
