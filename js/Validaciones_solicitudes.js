@@ -44,7 +44,7 @@
 
       }else if(vista[4]=='suficiencia_contenido.php'){
 
-        inputs_solicitud_suficiencia();
+        inputs_solicitud_suficiencia2();
 
       }else if(vista[4]=='revision_suficiencia_unica.php'){
 
@@ -68,7 +68,7 @@
 
          } else if(vista[4]=='carrera_simultanea.php'){
 
-            inputs_solicitud_cambio();
+            inputs_solicitud_cambio2();
 
          } else if(vista[4]=='revision_cambio_carrera_unico_vista.php'){
 
@@ -260,6 +260,53 @@ function inputs_solicitud_suficiencia() {
     })
 }
 
+function inputs_solicitud_suficiencia2() {
+    let cuenta = document.getElementById('txt_cuenta');
+    let nombre = document.getElementById('txt_verificado');
+    let apellido = document.getElementById('txt_verificado');
+    let correo = document.getElementById('txt_correo');
+    let btn = document.getElementById('btn_suficiencia');
+
+    correo.addEventListener('focus',e=>{
+        copiar(correo);
+        pegar(correo);
+     })
+    
+    apellido.addEventListener('focus',e=>{
+        copiar(apellido);
+        pegar(apellido);
+     })
+    
+    nombre.addEventListener('focus',e=>{
+        copiar(nombre);
+        pegar(nombre);
+     })
+    
+    cuenta.addEventListener('focus',e=>{
+        copiar(cuenta);
+        pegar(cuenta);
+     })
+
+
+
+     btn.addEventListener('click',e=>{
+
+        let resul=validarSolicitud(),
+        historial=validarHistorial();
+       
+        if (cuenta.value=='' || nombre.value=='' || apellido.value==''|| correo.value=='' 
+        || resul===undefined || historial===undefined) {
+            e.preventDefault();
+           message(msg.vacio,titulo.camposVacios,tipo.info); 
+        }else if(resul==historial){
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+        }else{
+
+          
+        }
+    })
+}
 
 function inputs_solicitud_reactivacion() {
     let cuenta = document.getElementById('txt_cuenta');
@@ -314,6 +361,7 @@ function inputs_solicitud_cambio() {
     let nombre = document.getElementById('txt_verificado');
     let apellido = document.getElementById('txt_verificado');
     let correo = document.getElementById('txt_correo');
+    let razon = document.getElementById('txt_razon');
     let btn = document.getElementById('btn_cambio_carrera');
 
     correo.addEventListener('focus',e=>{
@@ -335,7 +383,59 @@ function inputs_solicitud_cambio() {
         copiar(cuenta);
         pegar(cuenta);
      })
+     razon.addEventListener('focus',e=>{
+        copiar(cuenta);
+        pegar(cuenta);
+     })
 
+
+
+     btn.addEventListener('click',e=>{
+
+        let resul=validarSolicitud(),
+        historial=validarHistorial();
+       
+        if (cuenta.value=='' || nombre.value=='' || apellido.value==''|| correo.value=='' 
+        || resul===undefined || historial===undefined) {
+            e.preventDefault();
+           message(msg.vacio,titulo.camposVacios,tipo.info); 
+        }else if(resul==historial){
+            e.preventDefault();
+            message(msg.documentos, titulo.documento, tipo.info);
+        }else{
+
+          
+        }
+    })
+}
+function inputs_solicitud_cambio2() {
+    let cuenta = document.getElementById('txt_cuenta');
+    let nombre = document.getElementById('txt_verificado');
+    let apellido = document.getElementById('txt_verificado');
+    let correo = document.getElementById('txt_correo');
+  
+    let btn = document.getElementById('btn_cambio_carrera');
+
+    correo.addEventListener('focus',e=>{
+        copiar(correo);
+        pegar(correo);
+     })
+    
+    apellido.addEventListener('focus',e=>{
+        copiar(apellido);
+        pegar(apellido);
+     })
+    
+    nombre.addEventListener('focus',e=>{
+        copiar(nombre);
+        pegar(nombre);
+     })
+    
+    cuenta.addEventListener('focus',e=>{
+        copiar(cuenta);
+        pegar(cuenta);
+     })
+  
 
 
      btn.addEventListener('click',e=>{

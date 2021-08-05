@@ -125,7 +125,7 @@ $visualizacion= permiso_ver($Id_objeto);
                       $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$banner</span>";
                     }
                     elseif($estado==1){
-                      $banner= "Nuevo";
+                      $banner= "Nueva";
                       $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$banner</span>";  
 
                     }else{
@@ -157,7 +157,7 @@ $visualizacion= permiso_ver($Id_objeto);
                       <i class="far fa-check-circle"></i>
                       </a>
                   
-                    <a href="../Controlador/reporte_revision_suficiencia_unica_codigo_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
+                    <a href="../Controlador/Reporte_especialidades.php?id_suficiencia=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["id_suficiencia"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                   </td>
