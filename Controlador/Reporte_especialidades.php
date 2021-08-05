@@ -1027,8 +1027,16 @@ if (isset($_GET['Id_cambio'])) {
        // return false;
     } 
 
-   else{
-        $sql="SELECT tbl_personas_extendidas.valor, tbl_personas.nombres, tbl_facultades.nombre, tbl_personas.apellidos, tbl_centros_regionales.centro_regional, tbl_cambio_carrera.correo, tbl_cambio_carrera.tipo, tbl_cambio_carrera.aprobado, 
+}
+
+if (isset($_GET['cambio'])) {
+    if ($_GET['cambio']!=='') {
+        
+        // decodificamos la variable pasada por get.
+        $buscar= base64_decode($_GET['cambio']);
+        
+        //confeccion de la consulta para filtrar los datos 
+$sql="SELECT tbl_personas_extendidas.valor, tbl_personas.nombres, tbl_facultades.nombre, tbl_personas.apellidos, tbl_centros_regionales.centro_regional, tbl_cambio_carrera.correo, tbl_cambio_carrera.tipo, tbl_cambio_carrera.aprobado, 
         tbl_cambio_carrera.razon_cambio,observacion, tbl_cambio_carrera.Id_cambio, tbl_personas.id_persona, 
         tbl_facultades.Id_facultad, tbl_centros_regionales.Id_centro_regional FROM tbl_cambio_carrera 
         INNER JOIN tbl_personas ON tbl_cambio_carrera.id_persona=tbl_personas.id_persona 
@@ -1045,12 +1053,11 @@ if (isset($_GET['Id_cambio'])) {
         $pdf->viewTable_cambio_carrera_V();
         $pdf->SetFont('Arial', '', 15);
         $pdf->Output();
-    
+
         return false;
+    
     }
-
 }
-
 
 /***********FIN REPORTES RUDY */
 
