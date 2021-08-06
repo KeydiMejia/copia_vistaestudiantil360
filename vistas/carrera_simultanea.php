@@ -136,7 +136,12 @@ ob_end_flush();
                             <input class="form-control" type="email" id="txt_correo" name="txt_correo" style="text-transform: uppercase" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
-                
+                <div class="alert alert-info alert-dismissible fade show  col-12" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>NOTA:</strong> LOS DOCUMENTOS ADJUNTOS TIENEN QUE SER EXTENSION PDF.  EJEMPLO:  <span> midocumento.pdf</span>
+                </div>
                 <!-- legend -->
                 <div class="col-md-6">
                         <div class="form-group">

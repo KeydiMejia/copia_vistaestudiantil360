@@ -137,7 +137,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                         <label>Observación</label>
-                        <textarea class="form-control" id="txt_observacion" name="txt_observacion" rows="3"></textarea>
+                        <textarea class="form-control" id="observacion" name="txt_observacion" rows="3"></textarea>
                         </div>
                 </div>
                 <div class="col-md-6">

@@ -53,7 +53,7 @@
               
                 
                 $sql= "INSERT INTO tbl_reactivacion_cuenta(id_persona,documento,fecha_creacion,observacion,id_estado_reactivacion,correo)
-                VALUES ('$id_persona','$documento',current_timestamp(), 'Nuevo',1,'$correo')";
+                VALUES ('$id_persona','$documento',current_timestamp(), 'Nueva',1,'$correo')";
     
     $resultadop = $mysqli->query($sql);
     if($resultadop == true){

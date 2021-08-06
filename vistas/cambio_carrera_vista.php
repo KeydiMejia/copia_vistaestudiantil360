@@ -160,7 +160,12 @@ ob_end_flush();
                             <textarea class="form-control" type="text" id="txt_razon" name="txt_razon" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" ></textarea>
                         </div>
                 </div>
-
+                <div class="alert alert-info alert-dismissible fade show  col-12" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>NOTA:</strong> LOS DOCUMENTOS ADJUNTOS TIENEN QUE SER EXTENSION PDF.  EJEMPLO:  <span> midocumento.pdf</span>
+                </div>
                 <!-- legend -->
                 <div class="col-md-6">
                         <div class="form-group">

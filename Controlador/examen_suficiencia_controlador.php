@@ -52,7 +52,7 @@
               
                 
                 $sql= "INSERT INTO tbl_examen_suficiencia(id_persona,fecha_creacion,documento,observacion,id_estado_suficiencia,tipo,correo)
-                VALUES ('$id_persona',current_timestamp(),'$documento', 'Nuevo',1,'contenido','$correo')";
+                VALUES ('$id_persona',current_timestamp(),'$documento', 'Nueva',1,'contenido','$correo')";
     
     $resultadop = $mysqli->query($sql);
     if($resultadop == true){
@@ -161,7 +161,7 @@
                   
                     
                     $sql= "INSERT INTO tbl_examen_suficiencia(id_persona,fecha_creacion,documento,observacion,id_estado_suficiencia,tipo,correo)
-                    VALUES ('$id_persona',current_timestamp(),'$documento', 'Nuevo',1,'codigo','$correo')";
+                    VALUES ('$id_persona',current_timestamp(),'$documento', 'Nueva',1,'codigo','$correo')";
         
         $resultadop = $mysqli->query($sql);
         if($resultadop == true){

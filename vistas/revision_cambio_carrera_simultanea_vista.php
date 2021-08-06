@@ -120,7 +120,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                           $mostrarEstado= "<span class='badge badge-pill badge-success d-block'>$banner</span>";
                         }
                         elseif($estado==1){
-                          $banner ="Nuevo";
+                          $banner ="Nueva";
                           $mostrarEstado= "<span class='badge badge-pill badge-info d-block'>$banner</span>";  
     
                         }else{
@@ -140,7 +140,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
                     <a href="../vistas/revision_cambio_unico_simultanea.php?alumno=<?php echo $sql_tabla["ROWS"][$counter]["Id_cambio"] ?>&tipo=<?php echo $tipo?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-check-circle"></i>
                     </a>
-                    <a href="../Controlador/reporte_revision_cambio_simultanea_unica_controlador.php?alumno=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_cambio"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
+                    <a href="../Controlador/Reporte_especialidades.php?Id_cambio=<?php echo base64_encode($sql_tabla["ROWS"][$counter]["Id_cambio"]); ?>" target="_blank" class="btn btn-danger btn-raised btn-xs">
                       <i class="fas fa-file-pdf    "></i>
                     </a>
                 </td>
