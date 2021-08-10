@@ -215,7 +215,7 @@ function inputs_solicitud_equivalencia() {
 function inputs_solicitud_suficiencia() {
     let cuenta = document.getElementById('txt_cuenta');
     let nombre = document.getElementById('txt_verificado');
-    let apellido = document.getElementById('txt_verificado');
+    let apellido = document.getElementById('txt_verificado2');
     let correo = document.getElementById('txt_correo');
     let btn = document.getElementById('btn_suficiencia');
 
@@ -263,7 +263,7 @@ function inputs_solicitud_suficiencia() {
 function inputs_solicitud_suficiencia2() {
     let cuenta = document.getElementById('txt_cuenta');
     let nombre = document.getElementById('txt_verificado');
-    let apellido = document.getElementById('txt_verificado');
+    let apellido = document.getElementById('txt_verificado2');
     let correo = document.getElementById('txt_correo');
     let btn = document.getElementById('btn_suficiencia');
 
@@ -311,7 +311,7 @@ function inputs_solicitud_suficiencia2() {
 function inputs_solicitud_reactivacion() {
     let cuenta = document.getElementById('txt_cuenta');
     let nombre = document.getElementById('txt_verificado');
-    let apellido = document.getElementById('txt_verificado');
+    let apellido = document.getElementById('txt_verificado2');
     let correo = document.getElementById('txt_correo');
     let btn = document.getElementById('btn_reactivacion_cuenta');
 
@@ -359,7 +359,7 @@ function inputs_solicitud_reactivacion() {
 function inputs_solicitud_cambio() {
     let cuenta = document.getElementById('txt_cuenta');
     let nombre = document.getElementById('txt_verificado');
-    let apellido = document.getElementById('txt_verificado');
+    let apellido = document.getElementById('verificado');
     let correo = document.getElementById('txt_correo');
     let razon = document.getElementById('txt_razon');
     let btn = document.getElementById('btn_cambio_carrera');
@@ -411,7 +411,7 @@ function inputs_solicitud_cambio() {
 function inputs_solicitud_cambio2() {
     let cuenta = document.getElementById('txt_cuenta');
     let nombre = document.getElementById('txt_verificado');
-    let apellido = document.getElementById('txt_verificado');
+    let apellido = document.getElementById('verificado');
     let correo = document.getElementById('txt_correo');
   
     let btn = document.getElementById('btn_cambio_carrera');
@@ -633,7 +633,60 @@ function validarfinalizacion() {
     }
 }
 
+function validarfoto() {
+    const input = document.getElementById('foto');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
 
+function validarvoae() {
+    const input = document.getElementById('voae');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+
+function validarcarne() {
+    const input = document.getElementById('carne');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
+function validarconducta() {
+    const input = document.getElementById('conducta');
+    if(input.files && input.files[0]){
+        let nombre_solicitud= input.files[0].name;
+        
+        return nombre_solicitud;
+    
+    }else{
+        let nombre_solicitud=input.files[0];
+        
+        return nombre_solicitud;
+    }
+}
 tipo={
     info:'info',
     warning:'warning',

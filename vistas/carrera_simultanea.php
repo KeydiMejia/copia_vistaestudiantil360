@@ -119,7 +119,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Apellido</label>
-                            <input class="form-control" type="text" id="txt_verificado" name="txt_verificado2"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
+                            <input class="form-control" type="text" id="verificado" name="txt_verificado2"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
                         </div>
                 </div>
 
@@ -146,25 +146,25 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Solicitud.</label>             
-                            <input class="form-control" type="file" id="txt_solicitud" name="txt_solicitud" multiple="">
+                            <input class="form-control" type="file" id="solicitud" name="txt_solicitud" multiple="">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Historial Académico Original.</label>             
-                            <input class="form-control" type="file" id="txt_historial" name="txt_historial" multiple="">
+                            <input class="form-control" type="file" id="historial" name="txt_historial" multiple="">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia de tarjeta de identidad.</label>             
-                            <input class="form-control" type="file" id="txt_identidad" name="txt_identidad" multiple="">
+                            <input class="form-control" type="file" id="identidad" name="txt_identidad" multiple="">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia de Carné Estudiantil</label>             
-                            <input class="form-control" type="file" id="txt_carne" name="txt_carne" multiple="">
+                            <input class="form-control" type="file" id="carne" name="txt_carne" multiple="">
                         </div>
                 </div>
                 <!--fin legend-->

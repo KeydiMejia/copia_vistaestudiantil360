@@ -119,7 +119,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Apellido</label>
-                            <input class="form-control" type="text" id="txt_verificado" name="txt_verificado2"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
+                            <input class="form-control" type="text" id="verificado" name="txt_verificado2"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva">
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -170,37 +170,37 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Historial académico vigente.</label>             
-                            <input class="form-control" type="file" id="txt_historial" name="txt_historial">
+                            <input class="form-control" type="file" id="historial" name="txt_historial">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Constancia extendida por la VOAE</label>             
-                            <input class="form-control" type="file" id="txt_voae" name="txt_voae">
+                            <input class="form-control" type="file" id="voae" name="txt_voae">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia de la tarjeta de identidad.</label>             
-                            <input class="form-control" type="file" id="txt_identidad" name="txt_identidad">
+                            <input class="form-control" type="file" id="identidad" name="txt_identidad">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Fotografía tamaño carné.</label>             
-                            <input class="form-control" type="file" id="txt_foto" name="txt_foto">
+                            <input class="form-control" type="file" id="foto" name="txt_foto">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Copia del Carné Estudiantil</label>             
-                            <input class="form-control" type="file" id="txt_carne" name="txt_carne">
+                            <input class="form-control" type="file" id="carne" name="txt_carne">
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Constancia de conducta de la Carrera que cursa Actualmente.</label>             
-                            <input class="form-control" type="file" id="txt_conducta" name="txt_conducta">
+                            <input class="form-control" type="file" id="conducta" name="txt_conducta">
                         </div>
                 </div>
                 <!--fin legend-->

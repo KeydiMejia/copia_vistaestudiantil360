@@ -56,13 +56,13 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(10, 7, utf8_decode("Nª"), 1, 0, 'C');
-        $this->Cell(83, 7, "NOMBRE", 1, 0, 'C');
+        $this->Cell(9, 7, utf8_decode("Nª"), 1, 0, 'C');
+        $this->Cell(90, 7, "NOMBRE", 1, 0, 'C');
        // $this->Cell(45, 7, utf8_decode("TIPO"), 1, 0, 'C');
-        $this->Cell(65, 7, utf8_decode("CORREO"), 1, 0, 'C');
-        $this->Cell(65, 7, "OBSERVACION", 1, 0, 'C');
+        $this->Cell(80, 7, utf8_decode("CORREO"), 1, 0, 'C');
+        $this->Cell(80, 7, "OBSERVACION", 1, 0, 'C');
         $this->Cell(25, 7, "ESTADO", 1, 0, 'C');
-        $this->Cell(50, 7, "FECHA", 1, 0, 'C');
+        $this->Cell(40, 7, "FECHA", 1, 0, 'C');
 
         $this->ln();
     }
@@ -78,13 +78,13 @@ class myPDF extends FPDF
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-            $this->Cell(10, 7, $reg['NP'], 1, 0, 'C');
-            $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
+            $this->Cell(9, 7, $reg['NP'], 1, 0, 'C');
+            $this->Cell(90, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
            // $this->Cell(45, 7, utf8_decode($reg['tipo']), 1, 0, 'C');
-            $this->Cell(65, 7, utf8_decode($reg['correo']), 1, 0, 'C');
-            $this->Cell(65, 7, $reg['observacion'], 1, 0, 'C');
+            $this->Cell(80, 7, utf8_decode($reg['correo']), 1, 0, 'C');
+            $this->Cell(80, 7, $reg['observacion'], 1, 0, 'C');
             $this->Cell(25, 7, $reg['descripcion'], 1, 0, 'C');
-            $this->Cell(50, 7, $reg['fecha_creacion'], 1, 0, 'C');
+            $this->Cell(40, 7, $reg['fecha_creacion'], 1, 0, 'C');
 
             $this->ln();
         }

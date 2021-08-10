@@ -112,7 +112,7 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Verifiqué su Apellido</label>
-                            <input class="form-control" type="text" id="txt_verificado" name="txt_verificado2" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva" >
+                            <input class="form-control" type="text" id="txt_verificado2" name="txt_verificado2" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="50" placeholder="Colocar acentos en los apellidos si los lleva" >
                         </div>
                 </div>
 
@@ -137,13 +137,13 @@ ob_end_flush();
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Solicitud examen suficiencia</label>
-                            <input class="form-control" type="file" id="txt_solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="file" id="solicitud" name="txt_solicitud" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
                 <div class="col-md-6">
                         <div class="form-group">
                             <label>Historial Académico</label>
-                            <input class="form-control" type="file" id="txt_historial" name="txt_historial" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
+                            <input class="form-control" type="file" id="historial" name="txt_historial" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" maxlength="30" >
                         </div>
                 </div>
             </div>
