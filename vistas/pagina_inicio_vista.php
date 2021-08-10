@@ -255,7 +255,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['equivalencias'] ?>">
                   <a href="../vistas/menu_revison_equivalencias.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Equivalencias </p>
+                    <p>Pre Equivalencias </p>
                   </a>
                 </li>
                 <li class="nav-item" style="display:<?php echo $_SESSION['cancelar_clases'] ?>">
@@ -365,7 +365,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_equivalencias'] ?>">
                   <a href="../vistas/equivalencias_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Equivalencias </p>
+                    <p> Pre Equivalencias </p>
                   </a>
                 </li>
 

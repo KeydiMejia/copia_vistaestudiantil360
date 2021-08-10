@@ -68,123 +68,8 @@ if($visualizacion==0){
 }
 
 
-/* Manda a llamar datos de la tabla para llenar la tabla de datos personales  */
-$sql=$mysqli->prepare("SELECT p.nombres,p.apellidos,p.identidad, p.fecha_nacimiento, pe.valor
-FROM tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u
-WHERE pe.id_persona = p.id_persona
-AND p.id_persona = u.id_persona
-AND u.Usuario = ?");
-$sql->bind_param("s",$_SESSION['usuario']);
-$sql->execute();
-$resultadotabla = $sql->get_result();
-$row = $resultadotabla->fetch_array(MYSQLI_ASSOC);
-
-/* manda a llamar la informacion de contacto para tabla datos personales */
-$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
-FROM tbl_contactos c,  tbl_usuarios u
-WHERE u.id_persona = c.id_persona
-AND c.id_tipo_contacto = 1
-AND u.Usuario = ?");
-$sql->bind_param("s",$_SESSION['usuario']);
-$sql->execute();
-$resultadotabla = $sql->get_result();
-$rowA = $resultadotabla->fetch_array(MYSQLI_ASSOC);
-
-$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
-FROM tbl_contactos c,  tbl_usuarios u
-WHERE u.id_persona = c.id_persona
-AND c.id_tipo_contacto = 2
-AND u.Usuario = ?");
-$sql->bind_param("s",$_SESSION['usuario']);
-$sql->execute();
-$resultadotabla = $sql->get_result();
-$rowB = $resultadotabla->fetch_array(MYSQLI_ASSOC);
-
-$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
-FROM tbl_contactos c,  tbl_usuarios u
-WHERE u.id_persona = c.id_persona
-AND c.id_tipo_contacto = 3
-AND u.Usuario = ?");
-$sql->bind_param("s",$_SESSION['usuario']);
-$sql->execute();
-$resultadotabla = $sql->get_result();
-$rowC = $resultadotabla->fetch_array(MYSQLI_ASSOC);
-
-$sql=$mysqli->prepare("SELECT c.id_tipo_contacto, c.valor
-FROM tbl_contactos c,  tbl_usuarios u
-WHERE u.id_persona = c.id_persona
-AND c.id_tipo_contacto = 4
-AND u.Usuario = ?");
-$sql->bind_param("s",$_SESSION['usuario']);
-$sql->execute();
-$resultadotabla = $sql->get_result();
-$rowD = $resultadotabla->fetch_array(MYSQLI_ASSOC);
-
-
-
-
-/* Manda a llamar las clases aprobadas por el id */
-$idUsuario = $_SESSION['id_persona'];
-
-$sqlaprobadas="SELECT COUNT(*) id_persona FROM tbl_asignaturas_aprobadas
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlaprobadas);
-$fila = $resultado->fetch_assoc();
-
-/*tabla resumen
-/* Manda a llamar para solicitud de examen de suficiencia */
-$sqlsuficiencia="SELECT COUNT(*) id_persona FROM tbl_examen_suficiencia
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlsuficiencia);
-$fila1 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud de Reactivacion de cuenta */
-$sqlreactivacion="SELECT COUNT(*) id_persona FROM tbl_reactivacion_cuenta
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlreactivacion);
-$fila2 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud para cambio de carrera */
-$sqlcarrera="SELECT COUNT(*) id_persona FROM tbl_cambio_carrera
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlcarrera);
-$fila3 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud para practica profesional*/
-$sqlpractica="SELECT COUNT(*) id_persona FROM tbl_practica_estudiantes
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlpractica);
-$fila4 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud de cancelacion de clases */
-$sqlclases="SELECT COUNT(*) id_persona FROM tbl_cancelar_clases
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlclases);
-$fila5 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud para servicio comunitario */
-$sqlservicio="SELECT COUNT(*) id_persona FROM tbl_servicio_comunitario
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlservicio);
-$fila6 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud para equivalencias */
-$sqlequivalencias="SELECT COUNT(*) id_persona FROM tbl_equivalencias
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlequivalencias);
-$fila7 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud para carta egresado */
-$sqlcarta="SELECT COUNT(*) id_persona FROM tbl_carta_egresado
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlcarta);
-$fila8 = $resultado->fetch_assoc();
-
-/* Manda a llamar para solicitud expediente graduacion */
-$sqlgraduacion="SELECT COUNT(*) id_persona FROM tbl_expediente_graduacion
-WHERE id_persona= $idUsuario ";
-$resultado = $mysqli->query($sqlgraduacion);
-$fila9 = $resultado->fetch_assoc();
+// /* Manda a llamar las clases aprobadas por el id */
+// $idUsuario = $_SESSION['id_persona'];
 
 
     ob_end_flush();
@@ -279,10 +164,101 @@ footer{
    <div class="container-fluid">
    <div class="row">
    <div class="col-lg-7">
+       <?php
+       $busqueda = strtolower($_REQUEST['busqueda']);
+       if(empty($busqueda))
+       {
+           header("location: menu_perfil360_vista.php");
+       }
+
+
+       ?>
+
+       <?php //select
+/* Manda a llamar datos de la tabla para llenar la tabla de datos personales  */
+$sqlbusqueda="SELECT p.id_persona, p.nombres,p.apellidos,p.identidad, p.fecha_nacimiento, pe.valor FROM tbl_personas p, tbl_personas_extendidas pe, tbl_usuarios u WHERE pe.id_persona = p.id_persona AND p.id_persona = u.id_persona AND pe.valor LIKE '%$busqueda%'";
+$resultadotabla = $mysqli->query($sqlbusqueda);
+$row = $resultadotabla->fetch_assoc();
+$persona= $row['id_persona'];
+
+// /* Manda a llamar la informacion de CONTACTO para tabla datos personales */
+$sql="SELECT c.id_persona ,c.id_tipo_contacto, c.valor FROM tbl_contactos c,  tbl_usuarios u, tbl_personas_extendidas pe WHERE c.id_persona = u.id_persona AND u.id_persona = $persona AND c.id_tipo_contacto = 1 AND pe.valor LIKE '%$busqueda%'";
+$resultadotabla = $mysqli->query($sql);
+$rowA = $resultadotabla->fetch_assoc();
+
+$sql="SELECT c.id_tipo_contacto, c.valor FROM tbl_contactos c,  tbl_usuarios u, tbl_personas_extendidas pe WHERE c.id_persona = u.id_persona AND u.id_persona = $persona AND c.id_tipo_contacto = 2 AND pe.valor LIKE '%$busqueda%'";
+$resultadotabla = $mysqli->query($sql);
+$rowB = $resultadotabla->fetch_assoc();
+
+$sql="SELECT c.id_tipo_contacto, c.valor FROM tbl_contactos c,  tbl_usuarios u, tbl_personas_extendidas pe WHERE c.id_persona = u.id_persona AND u.id_persona = $persona AND c.id_tipo_contacto = 3 AND pe.valor LIKE '%$busqueda%'";
+$resultadotabla = $mysqli->query($sql);
+$rowC = $resultadotabla->fetch_assoc();
+
+$sql="SELECT c.id_tipo_contacto, c.valor FROM tbl_contactos c,  tbl_usuarios u, tbl_personas_extendidas pe WHERE c.id_persona = u.id_persona AND u.id_persona = $persona AND c.id_tipo_contacto = 4 AND pe.valor LIKE '%$busqueda%'";
+$resultadotabla = $mysqli->query($sql);
+$rowD = $resultadotabla->fetch_assoc();
+
+// /* Manda a llamar las clases aprobadas por el id */
+// $idUsuario = $_SESSION['id_persona'];
+
+$sqlaprobadas="SELECT COUNT(*) id_persona FROM tbl_asignaturas_aprobadas a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlaprobadas);
+$fila = $resultado->fetch_assoc();
+
+/*tabla resumen
+/* Manda a llamar para solicitud de examen de suficiencia */
+$sqlsuficiencia="SELECT COUNT(*) id_persona FROM tbl_examen_suficiencia a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlsuficiencia);
+$fila1 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud de Reactivacion de cuenta */
+$sqlreactivacion="SELECT COUNT(*) id_persona FROM tbl_reactivacion_cuenta a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlreactivacion);
+$fila2 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para cambio de carrera */
+$sqlcarrera="SELECT COUNT(*) id_persona FROM tbl_cambio_carrera a, tbl_personas_extendidas  pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlcarrera);
+$fila3 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para practica profesional*/
+$sqlpractica="SELECT COUNT(*) id_persona FROM tbl_practica_estudiantes a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlpractica);
+$fila4 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud de cancelacion de clases */
+$sqlclases="SELECT COUNT(*) id_persona FROM tbl_cancelar_clases a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlclases);
+$fila5 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para servicio comunitario */
+$sqlservicio="SELECT COUNT(*) id_persona FROM tbl_servicio_comunitario a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlservicio);
+$fila6 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para equivalencias */
+$sqlequivalencias="SELECT COUNT(*) id_persona FROM tbl_equivalencias a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlequivalencias);
+$fila7 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud para carta egresado */
+$sqlcarta="SELECT COUNT(*) id_persona FROM tbl_carta_egresado a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlcarta);
+$fila8 = $resultado->fetch_assoc();
+
+/* Manda a llamar para solicitud expediente graduacion */
+$sqlgraduacion="SELECT COUNT(*) id_persona FROM tbl_expediente_graduacion a, tbl_personas_extendidas pe WHERE a.id_persona= $persona AND pe.valor LIKE '%$busqueda%'"; 
+$resultado = $mysqli->query($sqlgraduacion);
+$fila9 = $resultado->fetch_assoc();
+
+       ?>
+
+
+
 
 <!-- buscador por numero de cuenta-->
-   <form action="busqueda_perfil360_vista.php" method="get" class="form_search">
-   <input type="text" name="busqueda" id="busqueda" placeholder="Numero de cuenta">
+<form action="busqueda_perfil_vista.php" method="get" class="form_search">
+   <input type="text" name="busqueda" id="busqueda" placeholder="Numero de cuenta" value="<?php echo $busqueda; ?>">
    <input type="submit" value="Buscar" class="btn_search">
 </form>
 <!--  -->
