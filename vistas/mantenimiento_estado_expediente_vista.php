@@ -202,7 +202,7 @@ ob_end_flush();
 
                     <thead>
                         <tr>
-                            <th>NOMBRE</th>
+                            <th>ESTADO</th>
                             <th>DESCRIPCION</th>
                             <th>MODIFICAR</th>
                             <th>ELIMINAR</th>
@@ -217,7 +217,7 @@ ob_end_flush();
                                 <td style="text-align: center;">
 
                                     <a href="../vistas/mantenimiento_estado_expediente_vista.php?estado=<?php echo $row['estado']; ?>" class="btn btn-primary btn-raised btn-xs">
-                                        <i class="far fa-edit" style="display:<?php echo $_SESSION['modificar_estado'] ?> "></i>
+                                        <i class="far fa-edit" style="display:<?php echo $_SESSION['mantenimiento_perfil360'] ?> "></i>
                                     </a>
                                 </td>
 
@@ -226,7 +226,7 @@ ob_end_flush();
                                     <form action="../Controlador/eliminar_estado_expediente_controlador.php?estado=<?php echo $row['estado']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                                         <button type="submit" class="btn btn-danger btn-raised btn-xs">
 
-                                            <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['eliminar_estado'] ?> "></i>
+                                            <i class="far fa-trash-alt" style="display:<?php echo $_SESSION['mantenimiento_perfil360'] ?> "></i>
                                         </button>
                                         <div class="RespuestaAjax"></div>
                                     </form>

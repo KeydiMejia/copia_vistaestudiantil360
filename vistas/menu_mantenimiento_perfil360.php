@@ -154,7 +154,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-light">
                                                 <div class="inner">
                                                     <h4>Crear Estado Reactivacion Cuenta </h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_crear_periodo_vista']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="far fa-plus-square"></i>
@@ -173,7 +173,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-primary">
                                                 <div class="inner">
                                                     <h4>Mantenimiento Estado Reactivacion Cuenta </h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_periodo_vista']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fas fa-edit"></i>
@@ -204,7 +204,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-light">
                                                 <div class="inner">
                                                     <h4>Crear Estado Expediente de Graduación</h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_crear_edificio_vista']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fas fa-plus-square"></i>
@@ -223,7 +223,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-primary">
                                                 <div class="inner">
                                                     <h4>Mantenimiento Estado Expediente de Graduación </h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_edificio_vista']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fas fa-edit"></i>
@@ -254,7 +254,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-light">
                                                 <div class="inner">
                                                     <h4>Crear Estado Examen de Suficiencia </h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_crear_horario_docente_vista']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fas fa-plus-square"></i>
@@ -273,7 +273,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-primary">
                                                 <div class="inner">
                                                     <h4>Mantenimiento Estado Examen de Suficiencia </h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_horario_docente_vista']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fas fa-edit"></i>
@@ -304,7 +304,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-light">
                                                 <div class="inner">
                                                     <h4>Crear Estado Servicio Comunitario</h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_crear_areas']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fas fa-plus-square"></i>
@@ -323,7 +323,7 @@ if (permiso_ver('164') == '1') {
                                             <div class="small-box bg-primary">
                                                 <div class="inner">
                                                     <h4>Mantenimiento Estado Servicio Comunitario </h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_area_vista']; ?></p>
+                                                    <p><?php echo $_SESSION['mantenimiento_perfil360']; ?></p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="fas fa-edit"></i>
@@ -342,54 +342,7 @@ if (permiso_ver('164') == '1') {
                                 </div>
                             </section>
 
-                                <!-- /.info-box -->
-                                <section class="content">
-                                <div class="container-fluid">
-                                    <!-- Info boxes -->
-                                    <div class="row" style="  display: flex;
-    align-items: center;
-    justify-content: center;">
-                                        <div class="col-6 col-sm-6 col-md-4">
-                                            <div class="small-box bg-light">
-                                                <div class="inner">
-                                                    <h4>Crear Estado Solicitud Practica</h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_crear_areas']; ?></p>
-                                                </div>
-                                                <div class="icon">
-                                                    <i class="fas fa-plus-square"></i>
-                                                </div>
-
-                                                <a href="../vistas/mantenimiento_crear_estado_practica_vista.php" class="small-box-footer">
-                                                    Ir <i class="fas fa-arrow-circle-right"></i>
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <!-- fix for small devices only -->
-                                        <div class="clearfix hidden-md-up"></div>
-                                        <!-- /.info-box -->
-                                        <div class="col-6 col-sm-6 col-md-4">
-                                            <div class="small-box bg-primary">
-                                                <div class="inner">
-                                                    <h4>Mantenimiento Estado Solicitud Practica </h4>
-                                                    <p><?php echo $_SESSION['mantenimiento_area_vista']; ?></p>
-                                                </div>
-                                                <div class="icon">
-                                                    <i class="fas fa-edit"></i>
-                                                </div>
-
-                                                <a href="../vistas/mantenimiento_estado_practica_vista.php" class="small-box-footer">
-                                                    Ir <i class="fas fa-arrow-circle-right"></i>
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        
-                                        <!-- /.row -->
-                                    </div>
-                                    <!--/. container-fluid -->
-                                </div>
-                            </section>
+                                
                             <!-- /.form-group -->
                         </div>
                         <!-- /.col -->

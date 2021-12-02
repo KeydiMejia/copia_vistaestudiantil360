@@ -65,6 +65,7 @@ $resultado_permisos = $mysqli->query($sql_permisos);
    $_SESSION['reactivacion_cuenta'] = 'none';
    $_SESSION['historial_solicitudes'] = 'none';
    $_SESSION['cancelar_solicitud'] = 'none';
+   
 
   while ($fila = $resultado_permisos->fetch_row())
    {
@@ -479,17 +480,24 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
    } 
    if ($_SESSION['pantalla'] = '154') {
       if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['mantenimiento_perfil360'] = "block";
+         $_SESSION['mantenimiento_perfil360'] = "";
       }
-   } 
-   if ($_SESSION['pantalla'] = '154') {
-      if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['Historial_de_solicitudes'] = "block";
-      }
+  
    }
    if ($_SESSION['pantalla'] = '170') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['cancelar_solicitud'] = "block";
       }
+   }
+   if ($_SESSION['pantalla'] = '170') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_crear_periodo_vista'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '171') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['Historial_de_solicitudes'] = "block";
+      }
+     
    } 
 ?>
