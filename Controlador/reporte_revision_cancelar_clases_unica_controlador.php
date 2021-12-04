@@ -80,7 +80,7 @@ $this->Cell(35, 8, 'MOTIVO:', 0, 'L');
 $this->Cell(20, 8, utf8_decode($motivo), 120, 85.5);
 //****
 $this->SetXY(25, 110);
-$this->Cell(35, 8, 'OBSERVACION:', 0, 'L');
+$this->Cell(35, 8, 'OBSERVACION:', 0, 'C');
 $this->Cell(20, 8, $observ, 120, 85.5);
 
 $this->SetXY(25, 120);

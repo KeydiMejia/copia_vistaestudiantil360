@@ -81,7 +81,7 @@ class myPDF extends FPDF
             $this->Cell(83, 7, $reg['nombres'].$reg['apellidos'], 1, 0, 'C');
             $this->Cell(45, 7, utf8_decode($reg['motivo']), 1, 0, 'C');
             $this->Cell(65, 7, utf8_decode($reg['correo']), 1, 0, 'C');
-            $this->Cell(65, 7, $reg['observacion'], 1, 0, 'C');
+            $this->Cell(65, 7, $reg['observacion'], 1, 0, ' C');
             $this->Cell(25, 7, $reg['cambio'], 1, 0, 'C');
             $this->Cell(50, 7, $reg['Fecha_creacion'], 1, 0, 'C');
 
