@@ -77,7 +77,7 @@ if ($visualizacion == 0) {
                             </script>';
 } else {
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A Mantenimiento Estado Reactivacion');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A Mantenimiento Estado Reactivacion');
 
 
     if (permisos::permiso_modificar($Id_objeto) == '1') {
@@ -196,7 +196,7 @@ ob_end_flush();
             </div>
             <div class="card-body">
 
-                <table id="tabla6" class="table table-bordered table-striped">
+                <table id="tabla7" class="table table-bordered table-striped">
 
 
 
@@ -286,7 +286,7 @@ ob_end_flush();
                                         <label>Modificar Estado</label>
 
 
-                                        <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return LetrasyNumeroos(event)" maxlength="30">
+                                        <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return Numeros(event)" maxlength="12">
 
                                     </div>
 
@@ -333,21 +333,26 @@ ob_end_flush();
     </script>
 
 
-    <script type="text/javascript">
-        $(function() {
-
-            $('#tabla6').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
-        });
     </script>
+<script type="text/javascript">
 
+  $(function () {
+   
+   $('#tabla7').DataTable({
+       "language":{
+           "url":"../plugins/lenguaje.json"},
+     "paging": true,
+     "lengthChange": true,
+     "searching": true,
+     "ordering": true,
+     "info": true,
+     "autoWidth": true,
+     "responsive": true,
+   });
+ });
+
+
+</script>
 
 </body>
 

@@ -15,7 +15,7 @@ if (isset($_REQUEST['msj'])) {
         echo '<script type="text/javascript">
     swal({
         title: "",
-        text: "Lo sentimos el edificio ya existe",
+        text: "Lo sentimos este estado ya existe",
         type: "info",
         showConfirmButton: false,
         timer: 3000
@@ -77,7 +77,7 @@ if ($visualizacion == 0) {
                             </script>';
 } else {
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A Mantenimiento Estado Expediente');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A Mantenimiento Estado Expediente');
 
 
     if (permisos::permiso_modificar($Id_objeto) == '1') {
@@ -196,7 +196,7 @@ ob_end_flush();
             </div>
             <div class="card-body">
 
-                <table id="tabla6" class="table table-bordered table-striped">
+                <table id="tabla10" class="table table-bordered table-striped">
 
 
 
@@ -285,7 +285,7 @@ ob_end_flush();
                                         <label>Modificar Estado</label>
 
 
-                                        <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return LetrasyNumeroos(event)" maxlength="30">
+                                        <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return Numeros(event)" maxlength="12">
 
                                     </div>
 
@@ -332,21 +332,25 @@ ob_end_flush();
     </script>
 
 
-    <script type="text/javascript">
-        $(function() {
+<script type="text/javascript">
 
-            $('#tabla6').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
-        });
-    </script>
+$(function () {
+ 
+ $('#tabla10').DataTable({
+     "language":{
+         "url":"../plugins/lenguaje.json"},
+   "paging": true,
+   "lengthChange": true,
+   "searching": true,
+   "ordering": true,
+   "info": true,
+   "autoWidth": true,
+   "responsive": true,
+ });
+});
 
+
+</script>
 
 </body>
 

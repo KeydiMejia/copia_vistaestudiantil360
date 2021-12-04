@@ -13,7 +13,7 @@ require_once('../clases/funcion_permisos.php');
 
 $Id_objeto = 157;
 
-bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A Mantenimiento/Crear estado');
+bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A Mantenimiento/Crear estado expediente');
 
 
 
@@ -47,8 +47,8 @@ if ($visualizacion == 0) {
     } else {
         $_SESSION['btn_guardar_estado'] = "disabled";
     }
-    /*
-
+    
+ 
  if (isset($_REQUEST['msj']))
  {
       $msj=$_REQUEST['msj'];
@@ -63,7 +63,7 @@ if ($visualizacion == 0) {
                   }
  }
 
-*/
+
 }
 
 
@@ -118,7 +118,7 @@ ob_end_flush();
             <div class="container-fluid ">
                 <!-- pantalla 1 -->
 
-                <form action="../Controlador/guardar_estado_expediente_controlador.php" method="post" data-form="save" class="FormularioAjax" autocomplete="off">
+                <form name="crear_estado" action="../Controlador/guardar_estado_expediente_controlador.php" method="post" data-form="save" class="FormularioAjax" autocomplete="off" onsubmit="validar_vacios() required">
 
                     <div class="card card-default ">
                         <div class="card-header center">
@@ -136,12 +136,12 @@ ob_end_flush();
                                 <div class="col-md-6">
                                     <div class="form-group ">
                                         <label>Ingrese el estado</label>
-                                        <input class="form-control " type="text" id="txt_estado" name="txt_estado" required style="text-transform: uppercase"  onkeyup="DobleEspacio(this, event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)">
+                                        <input class="form-control" type="text" id="estado" name="txt_estado"  onkeypress="return Numeros(event)" onkeyup="DobleEspacio(this, event)" maxlength="12" onkeypress="return comprobar(this.value, event, this.id)" required>
                                     </div>
 
                                     <div class="form-group ">
                                         <label>Ingrese la descripcion</label>
-                                        <input class="form-control" type="text" id="txt_descripcion" name="txt_descripcion"  required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_descripcion');" onkeypress="return LetrasyNumeros(event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)">
+                                        <input class="form-control" type="text" id="txt_descripcion" name="txt_descripcion"  required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_descripcion');" onkeypress="return LetrasyNumeros(event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)" required>
                                     </div>
 
 
@@ -161,7 +161,58 @@ ob_end_flush();
 
                         </div>
                     </div>
+                    
+                    <script type="text/javascript" language="javascript">
+    function MismaLetra(id_input) {
+        var valor = $('#' + id_input).val();
+        var longitud = valor.length;
+        //console.log(valor+longitud);
+        if (longitud > 2) {
+            var str1 = valor.substring(longitud - 3, longitud - 2);
+            var str2 = valor.substring(longitud - 2, longitud - 1);
+            var str3 = valor.substring(longitud - 1, longitud);
+            nuevo_valor = valor.substring(0, longitud - 1);
+            if (str1 == str2 && str1 == str3 && str2 == str3) {
+                swal('Error', 'No se permiten 3 caracteres iguales consecutivamente', 'error');
 
+                $('#' + id_input).val(nuevo_valor);
+            }
+        }
+    }
+
+    function sololetras(e) {
+
+        key = e.keyCode || e.wich;
+
+        teclado = String.fromCharCode(key).toUpperCase();
+
+        letras = " ABCDEFGHIJKLMNOPQRSTUVWXYZÑ";
+
+        especiales = "8-37-38-46-164";
+
+        teclado_especial = false;
+
+        for (var i in especiales) {
+
+            if (key == especiales[i]) {
+                teclado_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(teclado) == -1 && !teclado_especial) {
+            return false;
+        }
+
+    }
+    function validar_vacios() {
+  var x = document.forms["crear_estado"]["txt_estado"].value;
+  if (x == "") {
+    alert("Estado no puede estar vacio");
+    return false;
+  }
+}
+</script>
 
 
                     <div class="RespuestaAjax"></div>

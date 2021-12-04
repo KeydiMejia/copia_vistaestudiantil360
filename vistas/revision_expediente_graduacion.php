@@ -172,8 +172,6 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 
 
     <script type="text/javascript">
-  
-
 
    $(function () {
     

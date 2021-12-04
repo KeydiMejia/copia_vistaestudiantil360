@@ -77,7 +77,7 @@ if ($visualizacion == 0) {
                             </script>';
 } else {
 
-    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A mantenimiento Estado Servicio');
+    bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A mantenimiento Estado Servicio');
 
 
     if (permisos::permiso_modificar($Id_objeto) == '1') {
@@ -194,7 +194,7 @@ ob_end_flush();
             </div>
             <div class="card-body">
 
-                <table id="tabla16" class="table table-bordered table-striped">
+                <table id="tabla8" class="table table-bordered table-striped">
 
 
 
@@ -285,7 +285,7 @@ ob_end_flush();
                 <label>Modificar Estado</label>
 
 
-                <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return LetrasyNumeroos(event)" maxlength="30">
+                <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="<?php echo $_SESSION['estado']; ?>" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_estado');" onkeypress="return Numeros(event)" maxlength="30">
 
             </div>
 
@@ -327,23 +327,6 @@ ob_end_flush();
 
 
 
-
-    <script type="text/javascript">
-        $(function() {
-
-            $('#tabla16').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-            });
-        });
-    </script>
-
-
 </body>
 
 </html>
@@ -366,7 +349,7 @@ ob_end_flush();
 </script>
 
 <script type="text/javascript" language="javascript">
-    function MismaLetra(id_input) {
+    function Numeros(id_input) {
         var valor = $('#' + id_input).val();
         var longitud = valor.length;
         //console.log(valor+longitud);
@@ -376,7 +359,7 @@ ob_end_flush();
             var str3 = valor.substring(longitud - 1, longitud);
             nuevo_valor = valor.substring(0, longitud - 1);
             if (str1 == str2 && str1 == str3 && str2 == str3) {
-                swal('Error', 'No se permiten 3 letras consecutivamente', 'error');
+                swal('Error', 'No se permiten 3 caracteres iguales consecutivamente', 'error');
 
                 $('#' + id_input).val(nuevo_valor);
             }
@@ -408,6 +391,25 @@ ob_end_flush();
         }
 
     }
+</script>
+<script type="text/javascript">
+
+$(function () {
+ 
+ $('#tabla8').DataTable({
+     "language":{
+         "url":"../plugins/lenguaje.json"},
+   "paging": true,
+   "lengthChange": true,
+   "searching": true,
+   "ordering": true,
+   "info": true,
+   "autoWidth": true,
+   "responsive": true,
+ });
+});
+
+
 </script>
 
 <script type="text/javascript" src="../js/ca2.js"></script>

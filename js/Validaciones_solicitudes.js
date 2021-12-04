@@ -78,6 +78,7 @@
 
             inputs_revision_servicio_comunitario_unitario();
          }
+        
 }
 
 
@@ -456,6 +457,10 @@ function inputs_solicitud_cambio2() {
         }
     })
 }
+
+
+   
+
 function inputs_solicitud_servicio() {
     let cuenta = document.getElementById('txt_cuenta');
     let nombre = document.getElementById('txt_verificado1');

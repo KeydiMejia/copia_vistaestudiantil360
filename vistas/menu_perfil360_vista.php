@@ -18,13 +18,13 @@ if (permiso_ver('117') == '1') {
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('118') == '1') {
+// if (permiso_ver('118') == '1') {
 
-  $_SESSION['realizar_nueva_solicitud_vista'] = "...";
-} else {
-  $_SESSION['realizar_nueva_solicitud_vista'] = "No 
-  tiene permisos para realizar esta accion";
-}
+//   $_SESSION['realizar_nueva_solicitud_vista'] = "...";
+// } else {
+//   $_SESSION['realizar_nueva_solicitud_vista'] = "No 
+//   tiene permisos para realizar esta accion";
+// }
 
 if (permiso_ver('119') == '1') {
 

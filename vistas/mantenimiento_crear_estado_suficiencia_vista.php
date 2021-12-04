@@ -13,7 +13,7 @@ require_once('../clases/funcion_permisos.php');
 
 $Id_objeto = 160;
 
-bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'Ingreso', 'A Mantenimiento/Crear estado');
+bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A Mantenimiento/Crear estado suficiencia');
 
 
 
@@ -136,12 +136,12 @@ ob_end_flush();
                                 <div class="col-md-6">
                                     <div class="form-group ">
                                         <label>Ingrese el estado</label>
-                                        <input class="form-control " type="text" id="txt_estado" name="txt_estado" required style="text-transform: uppercase"  onkeyup="DobleEspacio(this, event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)">
+                                        <input class="form-control" type="text" id="estado" name="txt_estado"  onkeypress="return Numeros(event)" onkeyup="DobleEspacio(this, event)" maxlength="12" required>
                                     </div>
 
                                     <div class="form-group ">
                                         <label>Ingrese la descripcion</label>
-                                        <input class="form-control" type="text" id="txt_descripcion" name="txt_descripcion"  required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_descripcion');" onkeypress="return LetrasyNumeros(event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)">
+                                        <input class="form-control" type="text" id="txt_descripcion" name="txt_descripcion"  required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_descripcion');" onkeypress="return LetrasyNumeros(event)" maxlength="30" onkeypress="return comprobar(this.value, event, this.id)" required>
                                     </div>
 
 
