@@ -9,7 +9,6 @@ $instancia_conexion = new conexion();
 //$stmt = $instancia_conexion->query("SELECT tp.nombres FROM tbl_personas tp INNER JOIN tbl_usuarios us ON us.id_persona=tp.id_persona WHERE us.Id_usuario= 8");
 
 
-
 class myPDF extends FPDF
 {
 
@@ -77,6 +76,7 @@ class myPDF extends FPDF
         $this->Cell(50, 7, utf8_decode("NOMBRE"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("APELLIDOS"), 1, 0, 'C');
         $this->Cell(40, 7, utf8_decode("#CUENTA"), 1, 0, 'C');
+        $this->Cell(40, 7, utf8_decode("CORREO"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("IDENTIDAD"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("FECHA"), 1, 0, 'C');
         $this->Cell(50, 7, utf8_decode("ESTADO"), 1, 0, 'C');
@@ -531,6 +531,7 @@ class myPDF extends FPDF
             $this->Cell(50, 7, utf8_decode($reg['nombres']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['apellidos']), 1, 0, 'C');
              $this->Cell(40, 7, utf8_decode($reg['valor']), 1, 0, 'C');
+             $this->Cell(40, 7, utf8_decode($reg['correo']), 1, 0, 'C');
              $this->Cell(50, 7, utf8_decode($reg['identidad']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode('N/A'), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
@@ -573,6 +574,10 @@ class myPDF extends FPDF
             $this->Cell(0, 10, utf8_decode($reg['valor']), 0, 2, 'L');
             $this->ln(2);
 
+            $this->Cell(50, 10, utf8_decode("CORREO"), 0, 0, 'L');
+            $this->Cell(0, 10, utf8_decode($reg['correo']), 0, 2, 'L');
+            $this->ln(2);
+
             $this->Cell(50, 10, utf8_decode("IDENTIDAD"), 0, 0, 'L');
             $this->Cell(0, 10, utf8_decode($reg['identidad']), 0, 2, 'L');
             $this->ln(2);
@@ -607,6 +612,7 @@ class myPDF extends FPDF
             $this->Cell(50, 7, utf8_decode($reg['nombres']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['apellidos']), 1, 0, 'C');
              $this->Cell(40, 7, utf8_decode($reg['valor']), 1, 0, 'C');
+             $this->Cell(40, 7, utf8_decode($reg['correo']), 1, 0, 'C');
              $this->Cell(50, 7, utf8_decode($reg['identidad']), 1, 0, 'C'); 
             $this->Cell(50, 7, utf8_decode($reg['fecha_creacion']), 1, 0, 'C');
             $this->Cell(50, 7, utf8_decode($reg['observacion']), 1, 0, 'C');
@@ -755,7 +761,7 @@ if (isset($_GET['scala'])) {
         $buscar= base64_decode($_GET['scala']);
         
         //confeccion de la consulta para filtrar los datos 
-       $sql= "SELECT valor, nombres, apellidos,observacion,fecha_creacion, tbl_expediente_graduacion.id_expediente, 
+       $sql= "SELECT valor,correo, nombres, apellidos,observacion,fecha_creacion, tbl_expediente_graduacion.id_expediente, 
        tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion,tbl_personas.identidad
        FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
        INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
@@ -763,7 +769,7 @@ if (isset($_GET['scala'])) {
                 nombres LIKE '%".$buscar."%' OR
                 apellidos LIKE '%".$buscar."%' OR
                 valor LIKE '%".$buscar."%' OR
-                
+                correo LIKE '%".$buscar."%' OR
                 observacion LIKE '%".$buscar."%' OR
                 fecha_creacion LIKE '%".$buscar."%' OR
                 identidad LIKE '%".$buscar."%' OR
@@ -781,7 +787,7 @@ if (isset($_GET['scala'])) {
     
         return false;
     }else{
-        $sql="SELECT valor, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
+        $sql="SELECT valor, correo, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
         tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion,tbl_personas.identidad
         FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
         INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona";
@@ -864,7 +870,7 @@ if (isset($_GET['id_expediente'])) {
         $buscar= base64_decode($_GET['id_expediente']);
         
         //confeccion de la consulta para filtrar los datos 
-       $sql= "SELECT valor, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
+       $sql= "SELECT valor, correo, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
        tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion,tbl_personas.identidad
        FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
        INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
@@ -956,7 +962,7 @@ if (isset($_GET['id_suficiencia'])) {
         ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona INNER JOIN tbl_estado_suficiencia 
         ON tbl_examen_suficiencia.id_estado_suficiencia=tbl_estado_suficiencia.id_estado_suficiencia 
         WHERE tbl_examen_suficiencia.id_suficiencia='$buscar'";
-        $pdf = new myPDF("SUFICIENCIA",$sql);
+        $pdf = new myPDF(" EXAMEN SUFICIENCIA",$sql);
         
         $pdf->AliasNbPages();
         $pdf->AddPage('C', 'Legal', 0);

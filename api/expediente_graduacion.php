@@ -10,7 +10,7 @@ require_once ('../clases/Conexion.php');
 if(isset($_GET['alumno'])){
     $alumno= $_GET['alumno'];
     // "call sel_carta_egresado_unica('$alumno')"
-    $sql="SELECT valor, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, tbl_personas.id_persona,
+    $sql="SELECT valor, correo, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, tbl_personas.id_persona,
           tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion,tbl_expediente_graduacion.documento
           FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
           INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
@@ -31,7 +31,7 @@ if(isset($_GET['alumno'])){
     
     // "call sel_carta_egresado()"
     
-    $consulta="SELECT valor, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
+    $consulta="SELECT valor,correo, nombres, apellidos,observacion, tbl_expediente_graduacion.id_expediente, 
     tbl_personas.id_persona,tbl_expediente_graduacion.id_estado_expediente,tbl_expediente_graduacion.fecha_creacion
     FROM tbl_expediente_graduacion INNER JOIN tbl_personas ON tbl_expediente_graduacion.id_persona=tbl_personas.id_persona
     INNER JOIN tbl_personas_extendidas ON tbl_personas.id_persona=tbl_personas_extendidas.id_persona
