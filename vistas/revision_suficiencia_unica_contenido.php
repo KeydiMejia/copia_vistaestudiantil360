@@ -25,7 +25,7 @@ if($visualizacion==0){
 if (isset($_GET['alumno'])){
  
   // $sqltabla = json_decode( file_get_contents("http://34.203.186.135/Automatizacion/api/equivalencias.php?alumno=".$_GET['alumno']), true );
-    $sqltabla = json_decode( file_get_contents('http://localhost/api/examen_suficiencia_api.php?alumno='.$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents('http://localhost/copia_automatizacion\copia_vistaestudiantil360/api/examen_suficiencia_api.php?alumno='.$_GET['alumno']), true );
     bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION DE SUFICIENCIA ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 

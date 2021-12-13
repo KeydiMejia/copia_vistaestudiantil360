@@ -25,7 +25,7 @@ if($visualizacion==0){
 }
 $tipo= $_GET['tipo'];
 $counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://localhost/api/carrera_simultanea.php?tipo='.$tipo), true );
+$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion\copia_vistaestudiantil360/api/carrera_simultanea.php?tipo='.$tipo), true );
 
 
 ?>

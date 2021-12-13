@@ -25,7 +25,7 @@ if($visualizacion==0){
 if (isset($_GET['alumno'])){
   // $sqltabla = json_decode( file_get_contents("http://informaticaunah.com/automatizacion/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
 
-    $sqltabla = json_decode( file_get_contents("http://localhost/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion\copia_vistaestudiantil360/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
     bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION CARTA DE EGRESADO ALUMNO '.$sqltabla["ROWS"][0]['nombres'].'');
 }
 
