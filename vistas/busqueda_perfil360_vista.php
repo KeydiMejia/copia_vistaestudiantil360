@@ -49,7 +49,7 @@ if (permiso_ver('121') == '1') {
   $_SESSION['asignaturas_por_aprobar_vista'] = "No 
   tiene permisos para visualizar";
 }
-$Id_objeto=117; 
+$Id_objeto=7145; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -257,7 +257,7 @@ $fila9 = $resultado->fetch_assoc();
 
 
 <!-- buscador por numero de cuenta-->
-<form action="busqueda_perfil_vista.php" method="get" class="form_search">
+<form action="busqueda_perfil360_vista.php" method="get" class="form_search">
    <input type="text" name="busqueda" id="busqueda" placeholder="Numero de cuenta" value="<?php echo $busqueda; ?>">
    <input type="submit" value="Buscar" class="btn_search">
 </form>

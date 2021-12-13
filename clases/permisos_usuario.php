@@ -523,10 +523,20 @@ if ($_SESSION['pantalla'] = '7121') {
          $_SESSION['expediente_graduacion'] = "block";
       }
    } 
+   if ($_SESSION['pantalla'] = '7145') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['busqueda_perfil360'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '7146') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['clases_desaprobadas'] = "block";
+      }
+   } 
    
    if ($_SESSION['pantalla'] = '7147') {
       if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['revision_suficiencia_unica'] = "block";
+         $_SESSION['clases_aprobadas'] = "block";
       }
    } 
 

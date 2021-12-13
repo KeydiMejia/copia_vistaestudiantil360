@@ -9,7 +9,7 @@ session_start();
  require_once ('../clases/funcion_permisos.php');
  require "../clases/conexion_mantenimientos.php";
  
- $Id_objeto=117; 
+ $Id_objeto=7146; 
  $visualizacion= permiso_ver($Id_objeto);
  if($visualizacion==0){
    echo '<script type="text/javascript">
@@ -28,7 +28,7 @@ session_start();
  }
 
  $counter = 0;
- $url = "http://localhost/api/clases_desaprobadas.php";
+ $url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/clases_desaprobadas.php";
 $sql_tabla = json_decode( file_get_contents($url), true );
 
 ?>
