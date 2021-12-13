@@ -11,7 +11,7 @@ require_once('../clases/funcion_permisos.php');
 
 
 
-$Id_objeto = 160;
+$Id_objeto = 7137;
 
 bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A Mantenimiento/Crear estado suficiencia');
 

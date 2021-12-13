@@ -7,7 +7,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=152; 
+$Id_objeto=7130; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -27,7 +27,7 @@ if (isset($_GET['alumno'])){
 
     // $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carta_egresado.php?alumno=".$_GET['alumno']), true );
    
-    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion\copia_vistaestudiantil360/api/servicio_comunitario.php?alumno=".$_GET['alumno']), true );
+    $sqltabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/servicio_comunitario.php?alumno=".$_GET['alumno']), true );
 
     bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'],'INGRESO' , 'A REVISION SERVICIO COMUNITARIO '.$sqltabla["ROWS"][0]['nombres'].'');
 }

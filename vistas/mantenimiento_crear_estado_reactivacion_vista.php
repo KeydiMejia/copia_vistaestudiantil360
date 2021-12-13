@@ -11,7 +11,7 @@ require_once('../clases/funcion_permisos.php');
 
 
 
-$Id_objeto = 156;
+$Id_objeto = 7134;
 
 bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A Mantenimiento/Crear estado reactivacion');
 

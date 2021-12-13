@@ -29,7 +29,7 @@ $counter = 0;
 
 // $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php'), true );
 //localhost:8008/copia_vistaestudiantil360/vistas/revision_expediente_graduacion.php
-$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion\copia_vistaestudiantil360/api/expediente_graduacion.php'), true );
+$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/expediente_graduacion.php'), true );
 
 
 ?>

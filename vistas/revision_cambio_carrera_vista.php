@@ -25,7 +25,7 @@ if($visualizacion==0){
 }
 $tipo= $_GET['tipo'];
 $counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion\copia_vistaestudiantil360/api/cambio_carrera.php'), true );
+$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cambio_carrera.php'), true );
 
 
 ?>

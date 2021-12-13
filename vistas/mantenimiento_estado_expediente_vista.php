@@ -57,7 +57,7 @@ if (isset($_REQUEST['msj'])) {
 }
 
 
-$Id_objeto = 157;
+$Id_objeto = 7135;
 $visualizacion = permiso_ver($Id_objeto);
 
 

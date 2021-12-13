@@ -404,58 +404,134 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
    // }
        //--------------------------
    }
-   if ($_SESSION['pantalla'] = '117') {
-      if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['btn_perfil_estudiantil'] = "block";
-      }
-   }  
-   if ($_SESSION['pantalla'] = '117') {
+ if ($_SESSION['pantalla'] = '7115') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['perfil360_vista'] = "block";
       }
    } 
 
-   if ($_SESSION['pantalla'] = '131') {
+   if ($_SESSION['pantalla'] = '7117') {
       if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['expediente_graduacion'] = "block";
-      }
-   } 
-   if ($_SESSION['pantalla'] = '143' or $_SESSION['pantalla'] == '140' or $_SESSION['pantalla'] == '144' ) {
-      if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['solicitud_examensuficiencia'] = "block";
-      }
-   } 
-   
-   if ($_SESSION['pantalla'] = '142') {
-      if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['suficiencia'] = "block";
+         $_SESSION['btn_perfil_estudiantil'] = "block";
       }
    }  
-   if ($_SESSION['pantalla'] = '141') {
+  
+if ($_SESSION['pantalla'] = '7121') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['reactivacion_cuenta'] = "block";
       }
    } 
 
-   if ($_SESSION['pantalla'] = '145') {
+ if ($_SESSION['pantalla'] = '7122') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['suficiencia'] = "block";
+      }
+   } 
+   
+   if ($_SESSION['pantalla'] = '7123'  ) {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['solicitud_examensuficiencia'] = "block";
+      }
+   } 
+
+    if ($_SESSION['pantalla'] = '7124') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['reactivacion_cuenta_unica'] = "block";
       }
    } 
 
-   if ($_SESSION['pantalla'] = '146') {
+    if ($_SESSION['pantalla'] = '7125') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['revision_reactivacion'] = "block";
       }
+   }
+   if ($_SESSION['pantalla'] = '7126') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['revision_suficiencia_unica'] = "block";
+      }
+   }
+
+
+
+ 
+  
+  if ($_SESSION['pantalla'] = '7128') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['solicitud_servicio_comunitario'] = "block";
+      }
    } 
-   if ($_SESSION['pantalla'] = '147') {
+   if ($_SESSION['pantalla'] = '7129') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['revision_servicio_comunitario'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '7130') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['revision_coordinacion_servicio_comunitario'] = "block";
+     
+       if ($_SESSION['pantalla'] = '7131') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['expediente_graduacion'] = "block";
+      }
+   }     
+
+   if ($_SESSION['pantalla'] = '7133') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_reactivacion'] = "block";
+      }
+   }  
+   if ($_SESSION['pantalla'] = '7134') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_crear_estado_reactivacion'] = "block";
+      }
+   } 
+
+   if ($_SESSION['pantalla'] = '7135') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_expediente'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '7136') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_crear_estado_expediente'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '7137') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_suficiencia'] = "block";
+      }
+   } 
+
+   if ($_SESSION['pantalla'] = '7138') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_crear_estado_suficiencia'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '7139') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_servicio_comunitario'] = "block";
+      }
+   } 
+   if ($_SESSION['pantalla'] = '7140') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['mantenimiento_crear_estado_servicio_comunitario'] = "block";
+      }
+   } 
+
+   if ($_SESSION['pantalla'] = '7144') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['expediente_graduacion'] = "block";
+      }
+   } 
+   
+   if ($_SESSION['pantalla'] = '7147') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['revision_suficiencia_unica'] = "block";
       }
    } 
 
 
-   if ($_SESSION['pantalla']=='148')
+   if ($_SESSION['pantalla']=='7148')
    {
     if ( $_SESSION['confirmacion']=='block') 
     {
@@ -463,20 +539,7 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
 
     }
    }
-   if ($_SESSION['pantalla'] = '150') {
-      if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['solicitud_servicio_comunitario'] = "block";
-      }
-   } 
-   if ($_SESSION['pantalla'] = '151') {
-      if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['revision_servicio_comunitario'] = "block";
-      }
-   } 
-   if ($_SESSION['pantalla'] = '152') {
-      if ($_SESSION['confirmacion'] == 'block') {
-         $_SESSION['revision_coordinacion_servicio_comunitario'] = "block";
-      }
+  }
    } 
    if ($_SESSION['pantalla'] = '154') {
       if ($_SESSION['confirmacion'] == 'block') {
@@ -503,7 +566,7 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
 
    // boton de perfil360 */
 //** las pantallas son el id de la tbl_objetos */
-if ($_SESSION['pantalla']>='117' and $_SESSION['pantalla']<='117' )
+if ($_SESSION['pantalla']>='7117' and $_SESSION['pantalla']<='117' )
 {
  if ( $_SESSION['confirmacion']=='block') 
  {

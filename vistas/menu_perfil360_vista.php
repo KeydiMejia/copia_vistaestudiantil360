@@ -49,7 +49,7 @@ if (permiso_ver('121') == '1') {
   $_SESSION['asignaturas_por_aprobar_vista'] = "No 
   tiene permisos para visualizar";
 }
-$Id_objeto=117; 
+$Id_objeto=7115; 
 $visualizacion= permiso_ver($Id_objeto);
 if($visualizacion==0){
   echo '<script type="text/javascript">
@@ -407,7 +407,7 @@ Datos Personales del estudiante
          <!-- <hr></hr>-->
           <h4>Solicitudes que puedes realizar</h4>
         <!--solicitud examen de suficiencia------>
-        <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/menu_suficiencia_vista.php'">Examen suficiencia</button>
+        <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/examen_suficiencia_vista.php'">Examen suficiencia</button>
          
             <!--solicitud reactivacion de cuenta------>
             <button type="button" class="btn btn-outline-primary btn-lg" style="width: 30%; line-height:290%; margin-right:3%; margin-top:5%" onclick="location.href='../vistas/reactivacion_cuenta_vista.php'">Reactivacion cuenta</button>

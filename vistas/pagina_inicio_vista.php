@@ -265,7 +265,7 @@ if (session_status() === PHP_SESSION_NONE) {
                   </a>
                 </li>
                 <li class="nav-item" style="display:<?php echo $_SESSION['suficiencia'] ?>">
-                  <a href="../vistas/menu_revision_suficiencia.php" class="nav-link">
+                  <a href="../vistas/revision_suficiencia_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Examen de Suficiencia</p>
                   </a>
@@ -392,7 +392,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </li>
                 
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_examensuficiencia'] ?>">
-                  <a href="../vistas/menu_suficiencia_vista.php" class="nav-link">
+                  <a href="../vistas/examen_suficiencia_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Examen de Suficiencia </p>
                   </a>

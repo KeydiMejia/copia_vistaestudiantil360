@@ -6,7 +6,7 @@ require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=142; 
+$Id_objeto=7122; 
 $visualizacion= permiso_ver($Id_objeto);
 
 
@@ -30,7 +30,7 @@ $visualizacion= permiso_ver($Id_objeto);
   $counter = 0;
   //$url="http://localhost/copia_vistaestudiantil360/api/cancelar_clases.php";
   //$url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php";
-  $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion\copia_vistaestudiantil360/api/suficiencia.php'), true );
+  $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php'), true );
   
   
   
