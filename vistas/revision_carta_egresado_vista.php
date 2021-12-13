@@ -25,7 +25,7 @@ if($visualizacion==0){
 }
   
 $counter = 0;
-$url="http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carta_egresado.php";
+$url="http://localhost/api/carta_egresado.php";
 // $sql_tabla = json_decode( file_get_contents('http://informaticaunah.com/automatizacion/api/carta_egresado.php'), true );
 $sql_tabla = json_decode( file_get_contents($url), true );
 

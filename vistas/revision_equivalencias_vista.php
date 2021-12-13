@@ -29,7 +29,7 @@ if (isset($_GET['tipo'])) {
   $tipo=$_GET['tipo'];
 
   
-  $sql_tabla = json_decode( file_get_contents("http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php?tipo=$tipo"), true );
+  $sql_tabla = json_decode( file_get_contents("http://localhost/api/equivalencias.php?tipo=$tipo"), true );
 }
   
 $counter = 0;

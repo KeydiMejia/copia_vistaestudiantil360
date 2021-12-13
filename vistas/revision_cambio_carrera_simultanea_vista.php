@@ -25,7 +25,7 @@ if($visualizacion==0){
 }
 $tipo= $_GET['tipo'];
 $counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/carrera_simultanea.php?tipo='.$tipo), true );
+$sql_tabla = json_decode( file_get_contents('http://localhost/api/carrera_simultanea.php?tipo='.$tipo), true );
 
 
 ?>
@@ -94,7 +94,7 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
           <!---->
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="tabla" class="table table-bordered table-striped">
+              <table id="tablas" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>NOMBRE</th>
@@ -171,13 +171,33 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
     </form>
 
 
+    <script type="text/javascript">
+  
+
+  $(function () {
+    
+    $('#tablas').DataTable({
+        "language":{
+            "url":"../plugins/lenguaje.json"},
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "responsive": true,
+    });
+  });
+ 
+ 
+ </script>
 
 <script type="text/javascript">
   
 
  $(function () {
    
-    $('#tabla').DataTable({
+    $('#tablas').DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,

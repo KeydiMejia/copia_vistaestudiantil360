@@ -30,7 +30,7 @@ $visualizacion= permiso_ver($Id_objeto);
   $counter = 0;
   //$url="http://localhost/copia_vistaestudiantil360/api/cancelar_clases.php";
   //$url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php";
-  $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php'), true );
+  $sql_tabla = json_decode( file_get_contents('http://localhost/api/suficiencia.php'), true );
   
   
   
@@ -99,7 +99,7 @@ $visualizacion= permiso_ver($Id_objeto);
           </div>
           <br></br>
   
-                <table id="tabla" class="table table-bordered table-striped">
+                <table id="tabla20" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                   <th>NOMBRE</th>
@@ -194,7 +194,7 @@ $visualizacion= permiso_ver($Id_objeto);
   
    $(function () {
      
-      $('#tabla').DataTable({
+      $('#tabla6').DataTable({
         "language": {
           "url":"../plugins/lenguaje.json"},
         "paging": true,

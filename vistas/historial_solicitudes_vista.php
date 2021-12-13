@@ -30,7 +30,7 @@ $counter = 0;
 // $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/equivalencias.php'), true );
 
 $counter = 0;
- $url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/historial_solicitudes_api.php";
+ $url = "http://localhost/api/historial_solicitudes_api.php";
 $sql_tabla = json_decode( file_get_contents($url), true );
 
 ?>
@@ -94,7 +94,7 @@ $sql_tabla = json_decode( file_get_contents($url), true );
                 </button>
                 </div>
                 <br></br>
-                    <table id="tabla" class="table table-bordered table-striped">
+                    <table id="tabla1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                     <tr class="bg-basic">

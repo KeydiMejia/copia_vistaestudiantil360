@@ -30,7 +30,7 @@ $visualizacion= permiso_ver($Id_objeto);
   $counter = 0;
   //$url="http://localhost/copia_vistaestudiantil360/api/cancelar_clases.php";
   //$url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/suficiencia.php";
-  $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/examen_suficiencia_api.php'), true );
+  $sql_tabla = json_decode( file_get_contents('http://localhost/api/examen_suficiencia_api.php'), true );
   
   
   

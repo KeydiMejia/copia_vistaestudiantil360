@@ -25,7 +25,7 @@ if($visualizacion==0){
 }
 $tipo= $_GET['tipo'];
 $counter = 0;
-$sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/cambio_carrera.php'), true );
+$sql_tabla = json_decode( file_get_contents('http://localhost/api/cambio_carrera.php'), true );
 
 
 ?>
@@ -189,6 +189,27 @@ $sql_tabla = json_decode( file_get_contents('http://localhost/copia_automatizaci
 
 
 </script>
+
+<script type="text/javascript">
+  
+
+  $(function () {
+    
+    $('#tabla').DataTable({
+        "language":{
+            "url":"../plugins/lenguaje.json"},
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "responsive": true,
+    });
+  });
+ 
+ 
+ </script>
 </body>
 </html>
 <script type="text/javascript" language="javascript">

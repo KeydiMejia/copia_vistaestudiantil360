@@ -500,4 +500,15 @@ if ($_SESSION['pantalla']>='34' and $_SESSION['pantalla']<='38' )
       }
      
    } 
+
+   // boton de perfil360 */
+//** las pantallas son el id de la tbl_objetos */
+if ($_SESSION['pantalla']>='117' and $_SESSION['pantalla']<='117' )
+{
+ if ( $_SESSION['confirmacion']=='block') 
+ {
+  $_SESSION['btn_perfil_estudiantil']="block";
+
+ }
+}
 ?>

@@ -28,7 +28,7 @@ session_start();
  }
 
  $counter = 0;
- $url = "http://localhost/copia_automatizacion/copia_vistaestudiantil360/api/clases_aprobadas.php";
+ $url = "http://localhost/api/clases_aprobadas.php";
 $sql_tabla = json_decode( file_get_contents($url), true );
 
 ?>
